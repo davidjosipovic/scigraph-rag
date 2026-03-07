@@ -1,0 +1,10 @@
+2026-03-07 16:24:00.116 | INFO     | backend.api.routes:ask_question:41 - Received question: Which papers compare CNN and SVM?
+2026-03-07 16:24:00.116 | INFO     | backend.kg.sparql_client:__init__:39 - Using remote ORKG SPARQL endpoint: https://orkg.org/triplestore
+2026-03-07 16:24:00.116 | INFO     | backend.llm.ollama_client:__init__:90 - OllamaClient initialized: model=llama3, url=http://localhost:11434
+2026-03-07 16:24:00.117 | INFO     | backend.rag.pipeline:ask:78 - Processing question: Which papers compare CNN and SVM?
+2026-03-07 16:24:00.118 | INFO     | backend.rag.pipeline:ask:82 - Query classified as: topic_search
+2026-03-07 16:24:00.119 | INFO     | backend.rag.pipeline:ask:86 - Extracted keywords: ['CNN', 'SVM']
+2026-03-07 16:24:00.621 | INFO     | backend.kg.sparql_client:_query_remote:72 - Remote query returned 1 results.
+2026-03-07 16:24:00.622 | INFO     | backend.rag.pipeline:ask:94 - KG retrieval returned 1 results
+2026-03-07 16:24:04.613 | INFO     | backend.llm.ollama_client:generate:134 - LLM generation complete: 851 chars, model=llama3
+2026-03-07 16:24:04.613 | INFO     | backend.rag.pipeline:ask:104 - LLM generated answer (851 chars)

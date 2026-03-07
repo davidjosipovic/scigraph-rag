@@ -1,0 +1,31 @@
+2026-03-07 17:29:09.442 | INFO     | backend.api.routes:ask_question:49 - Received question: Which papers compare CNN and SVM?
+2026-03-07 17:29:09.442 | INFO     | backend.kg.sparql_client:__init__:54 - Using remote ORKG SPARQL endpoint: https://orkg.org/triplestore
+2026-03-07 17:29:09.442 | INFO     | backend.llm.ollama_client:__init__:182 - OllamaClient initialized: model=llama3, url=http://localhost:11434
+2026-03-07 17:29:09.442 | INFO     | backend.rag.pipeline:ask:107 - Processing question: Which papers compare CNN and SVM?
+2026-03-07 17:29:09.443 | INFO     | backend.rag.pipeline:ask:111 - Step 1 — Query type: method_comparison
+2026-03-07 17:29:09.447 | INFO     | backend.rag.pipeline:ask:115 - Step 2 — Entities: methods=['cnn', 'svm'], datasets=[], tasks=[], fields=[], metrics=[]
+2026-03-07 17:29:09.447 | INFO     | backend.rag.pipeline:ask:123 - Step 3 — Normalization: method_variants={'cnn': ['convolutional neural network', 'dcnn', 'deep convolutional network', 'convnet'], 'svm': ['support vector machine', 'support vector machines']}, dataset_variants={}
+2026-03-07 17:29:09.697 | INFO     | backend.kg.sparql_client:_query_remote:105 - Remote query returned 10 results.
+2026-03-07 17:29:09.785 | INFO     | backend.kg.sparql_client:_query_remote:105 - Remote query returned 10 results.
+2026-03-07 17:29:10.034 | INFO     | backend.kg.sparql_client:_query_remote:105 - Remote query returned 10 results.
+2026-03-07 17:29:10.072 | INFO     | backend.kg.sparql_client:_query_remote:105 - Remote query returned 10 results.
+2026-03-07 17:29:19.554 | WARNING  | backend.kg.sparql_client:_query_remote:109 - SPARQL query timed out after 10s.
+  Query (truncated): PREFIX orkgc: <http://orkg.org/orkg/class/>
+PREFIX orkgp: <http://orkg.org/orkg/predicate/>
+PREFIX orkgr: <http://orkg.o...
+2026-03-07 17:29:19.560 | WARNING  | backend.kg.sparql_client:_query_remote:109 - SPARQL query timed out after 10s.
+  Query (truncated): PREFIX orkgc: <http://orkg.org/orkg/class/>
+PREFIX orkgp: <http://orkg.org/orkg/predicate/>
+PREFIX orkgr: <http://orkg.o...
+2026-03-07 17:29:19.561 | WARNING  | backend.rag.query_builder:retrieve_async:174 - Timeout on comparison(cnn,svm) — falling back to title search
+2026-03-07 17:29:19.748 | INFO     | backend.kg.sparql_client:_query_remote:105 - Remote query returned 10 results.
+2026-03-07 17:29:19.748 | WARNING  | backend.rag.query_builder:retrieve_async:174 - Timeout on comparison_variant(convolutional neural network,svm) — falling back to title search
+2026-03-07 17:29:19.898 | INFO     | backend.kg.sparql_client:_query_remote:105 - Remote query returned 10 results.
+2026-03-07 17:29:19.899 | INFO     | backend.rag.query_builder:retrieve_async:208 - Async retrieval complete: 60 total results from 6 queries (strategies: ['timeout_fallback(comparison(cnn,svm))', 'timeout_fallback(comparison_variant(convolutional neural network,svm))', 'method(cnn)', 'method(convolutional neural network)', 'method(svm)', 'method(support vector machine)'])
+2026-03-07 17:29:19.899 | INFO     | backend.rag.pipeline:ask:131 - Step 4 — Retrieval: 60 results from 6 queries
+2026-03-07 17:29:19.900 | INFO     | backend.rag.pipeline:ask:138 - Step 5 — Ranking: 60 rows, top score=3
+2026-03-07 17:29:19.900 | INFO     | backend.rag.pipeline:ask:145 - Step 6 — Hard filter: 60 → 60 rows (dropped 0 noise rows)
+2026-03-07 17:29:19.900 | INFO     | backend.rag.pipeline:ask:152 - Step 7 — Truncation: top 8 papers
+2026-03-07 17:29:32.693 | INFO     | backend.llm.ollama_client:generate:226 - LLM generation complete: 1610 chars, model=llama3
+2026-03-07 17:29:32.693 | INFO     | backend.rag.pipeline:ask:164 - Step 9 — Answer: 1610 chars
+2026-03-07 17:29:32.850 | INFO     | backend.kg.sparql_client:_query_remote:105 - Remote query returned 1 results.

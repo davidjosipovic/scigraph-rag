@@ -1,0 +1,22 @@
+2026-03-07 16:44:49.870 | INFO     | backend.api.routes:ask_question:48 - Received question: Which papers use CNN on MNIST?
+2026-03-07 16:44:49.870 | INFO     | backend.kg.sparql_client:__init__:39 - Using remote ORKG SPARQL endpoint: https://orkg.org/triplestore
+2026-03-07 16:44:49.870 | INFO     | backend.llm.ollama_client:__init__:155 - OllamaClient initialized: model=llama3, url=http://localhost:11434
+2026-03-07 16:44:49.870 | INFO     | backend.rag.pipeline:ask:85 - Processing question: Which papers use CNN on MNIST?
+2026-03-07 16:44:49.871 | INFO     | backend.rag.pipeline:ask:89 - Step 1 — Query type: topic_search
+2026-03-07 16:44:49.875 | INFO     | backend.rag.pipeline:ask:93 - Step 2 — Entities: methods=['cnn'], datasets=['mnist'], tasks=[], fields=[], metrics=[]
+2026-03-07 16:44:50.154 | INFO     | backend.kg.sparql_client:_query_remote:72 - Remote query returned 10 results.
+2026-03-07 16:44:50.731 | INFO     | backend.kg.sparql_client:_query_remote:72 - Remote query returned 10 results.
+2026-03-07 16:44:50.732 | INFO     | backend.rag.query_builder:retrieve:107 - Retrieval complete: 20 total results from 2 queries (strategies: ['method(cnn)', 'dataset(mnist)'])
+2026-03-07 16:44:50.732 | INFO     | backend.rag.pipeline:ask:101 - Step 3 — Retrieval: 20 results from 2 queries
+2026-03-07 16:44:59.607 | INFO     | backend.llm.ollama_client:generate:199 - LLM generation complete: 1290 chars, model=llama3
+2026-03-07 16:44:59.607 | INFO     | backend.rag.pipeline:ask:115 - Step 5 — Answer: 1290 chars
+2026-03-07 16:45:00.102 | INFO     | backend.api.routes:ask_question:48 - Received question: Which papers use CNN on MNIST?
+2026-03-07 16:45:00.102 | INFO     | backend.rag.pipeline:ask:85 - Processing question: Which papers use CNN on MNIST?
+2026-03-07 16:45:00.102 | INFO     | backend.rag.pipeline:ask:89 - Step 1 — Query type: topic_search
+2026-03-07 16:45:00.103 | INFO     | backend.rag.pipeline:ask:93 - Step 2 — Entities: methods=['cnn'], datasets=['mnist'], tasks=[], fields=[], metrics=[]
+2026-03-07 16:45:00.335 | INFO     | backend.kg.sparql_client:_query_remote:72 - Remote query returned 10 results.
+2026-03-07 16:45:00.882 | INFO     | backend.kg.sparql_client:_query_remote:72 - Remote query returned 10 results.
+2026-03-07 16:45:00.882 | INFO     | backend.rag.query_builder:retrieve:107 - Retrieval complete: 20 total results from 2 queries (strategies: ['method(cnn)', 'dataset(mnist)'])
+2026-03-07 16:45:00.882 | INFO     | backend.rag.pipeline:ask:101 - Step 3 — Retrieval: 20 results from 2 queries
+2026-03-07 16:45:07.943 | INFO     | backend.llm.ollama_client:generate:199 - LLM generation complete: 1932 chars, model=llama3
+2026-03-07 16:45:07.944 | INFO     | backend.rag.pipeline:ask:115 - Step 5 — Answer: 1932 chars
