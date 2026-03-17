@@ -30,30 +30,46 @@ def build_context(results: list[dict[str, Any]], query_type: str) -> str:
 
     Dispatches to the appropriate builder based on query type.
     """
+    papers = _group_by_paper(results)
     if query_type == "claim_verification":
-        return build_evidence_context(results)
+        return _build_evidence_context_from_papers(papers)
+    return _build_paper_context_from_papers(papers)
+
+
+def build_context_and_sources(
+    results: list[dict[str, Any]], query_type: str
+) -> tuple[str, list[dict[str, Any]]]:
+    """
+    Build LLM context and format sources in a single pass.
+
+    Calls ``_group_by_paper`` once instead of twice, halving the
+    grouping work done by ``build_context`` + ``format_sources``.
+
+    Returns:
+        (context_string, sources_list)
+    """
+    papers = _group_by_paper(results)
+    if query_type == "claim_verification":
+        context = _build_evidence_context_from_papers(papers)
     else:
-        return build_paper_context(results)
+        context = _build_paper_context_from_papers(papers)
+    sources = _format_sources_from_papers(papers)
+    return context, sources
 
 
 def build_paper_context(results: list[dict[str, Any]]) -> str:
-    """
-    Build structured context grouped by paper.
+    """Build structured context grouped by paper (public API)."""
+    return _build_paper_context_from_papers(_group_by_paper(results))
 
-    Produces a clean block per paper with Title, Method, Dataset, DOI.
-    Papers are identified by title (not numbers) so the LLM can
-    reference them accurately without hallucinating citation indices.
 
-    Args:
-        results: Merged SPARQL results from multi-strategy retrieval.
+def build_evidence_context(results: list[dict[str, Any]]) -> str:
+    """Build structured evidence context for claim verification (public API)."""
+    return _build_evidence_context_from_papers(_group_by_paper(results))
 
-    Returns:
-        Formatted context string.
-    """
-    if not results:
+
+def _build_paper_context_from_papers(papers: dict[str, dict]) -> str:
+    if not papers:
         return "No relevant papers were found in the knowledge graph."
-
-    papers = _group_by_paper(results)
 
     blocks: list[str] = []
     for uri, info in papers.items():
@@ -69,7 +85,6 @@ def build_paper_context(results: list[dict[str, Any]]) -> str:
         if info["tasks"]:
             lines.append(f"Task: {', '.join(sorted(info['tasks']))}")
 
-        # ── Triples section: specific entity relationships ──
         triples: list[str] = []
         if info["methods"]:
             for m in sorted(info["methods"]):
@@ -77,15 +92,12 @@ def build_paper_context(results: list[dict[str, Any]]) -> str:
         if info["datasets"]:
             for d in sorted(info["datasets"]):
                 triples.append(f"  Dataset: {d}")
-
-        # Contribution-level triples (from claim_evidence / enrichment)
         if info["contributions"]:
             for contrib_name, props in info["contributions"].items():
                 for pred, value in props:
                     triple = f"  {pred}: {value}"
                     if triple not in triples:
                         triples.append(triple)
-
         if triples:
             lines.append("Triples:")
             lines.extend(triples)
@@ -96,17 +108,9 @@ def build_paper_context(results: list[dict[str, Any]]) -> str:
     return header + "\n\n".join(blocks)
 
 
-def build_evidence_context(results: list[dict[str, Any]]) -> str:
-    """
-    Build structured evidence context for claim verification.
-
-    Groups by paper and shows contribution details as evidence,
-    referencing papers by title.
-    """
-    if not results:
+def _build_evidence_context_from_papers(papers: dict[str, dict]) -> str:
+    if not papers:
         return "No evidence was found in the knowledge graph for this claim."
-
-    papers = _group_by_paper(results)
 
     blocks: list[str] = []
     for uri, info in papers.items():
@@ -133,17 +137,14 @@ def build_evidence_context(results: list[dict[str, Any]]) -> str:
 
 
 def format_sources(results: list[dict[str, Any]]) -> list[dict[str, str]]:
-    """
-    Extract unique source references from retrieval results.
+    """Extract unique source references from retrieval results (public API)."""
+    return _format_sources_from_papers(_group_by_paper(results))
 
-    Returns a deduplicated list of source dicts with title, URI, DOI,
-    and any associated methods/datasets.
-    """
-    papers = _group_by_paper(results)
+
+def _format_sources_from_papers(papers: dict[str, dict]) -> list[dict[str, Any]]:
     sources = []
-
     for uri, info in papers.items():
-        source = {
+        source: dict[str, Any] = {
             "title": info["title"],
             "uri": uri,
             "doi": info["doi"],
@@ -154,7 +155,6 @@ def format_sources(results: list[dict[str, Any]]) -> list[dict[str, str]]:
         if info["datasets"]:
             source["datasets"] = list(info["datasets"])
         sources.append(source)
-
     return sources
 
 

@@ -6,6 +6,8 @@ Endpoints:
   GET  /health  — Check system component health
 """
 
+import asyncio
+
 from fastapi import APIRouter, HTTPException
 from loguru import logger
 
@@ -75,12 +77,14 @@ async def ask_question(request: AskRequest) -> AskResponse:
 
 
 @router.get("/health", response_model=HealthResponse)
-def health_check() -> HealthResponse:
+async def health_check() -> HealthResponse:
     """
     Check the health of all system components.
 
-    Returns the status of the LLM, SPARQL endpoint, and overall pipeline.
+    Runs the blocking health-check (HTTP + SPARQL) in a thread-pool
+    executor so the event loop is not blocked during the probe.
     """
     pipeline = get_pipeline()
-    status = pipeline.health_check()
+    loop = asyncio.get_running_loop()
+    status = await loop.run_in_executor(None, pipeline.health_check)
     return HealthResponse(**status)

@@ -29,7 +29,7 @@ from backend.rag.entity_extractor import extract_keywords
 from backend.rag.entity_normalization import expand_entities, ExpandedEntities
 from backend.rag.query_builder import retrieve_async, RetrievalResult
 from backend.rag.ranking import rank_results, hard_filter, soft_filter, truncate_to_top_papers
-from backend.rag.context_builder import build_context, format_sources
+from backend.rag.context_builder import build_context_and_sources
 from backend.kg.sparql_client import SPARQLClient
 from backend.llm.ollama_client import OllamaClient, ollama_client, get_prompt_template
 
@@ -173,8 +173,8 @@ class RAGPipeline:
             f"Step 7 — Truncation: top {settings.max_context_papers} papers"
         )
 
-        # ── Step 8: Build context (includes scores) ──
-        context = build_context(truncated, query_type.value)
+        # ── Steps 8 + 10: Build context and format sources in one pass ──
+        context, sources = build_context_and_sources(truncated, query_type.value)
         logger.debug(f"Step 8 — Context: {len(context)} chars")
 
         # ── Step 9: LLM generation (run in executor to avoid blocking event loop) ──
@@ -182,9 +182,6 @@ class RAGPipeline:
         prompt = prompt_template.format(context=context, question=question)
         answer = await loop.run_in_executor(None, self.llm.generate, prompt)
         logger.info(f"Step 9 — Answer: {len(answer)} chars")
-
-        # ── Step 10: Format sources ──
-        sources = format_sources(truncated)
 
         return {
             "question": question,

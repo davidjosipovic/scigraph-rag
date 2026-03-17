@@ -179,8 +179,17 @@ class OllamaClient:
         self.base_url = (base_url or settings.ollama_base_url).rstrip("/")
         self.model = model or settings.ollama_model
         self.timeout = timeout or settings.ollama_timeout
+        # Persistent client — reuses TCP connections across requests (connection pooling).
+        # httpx.Client is thread-safe so it can be shared across run_in_executor calls.
+        self._http = httpx.Client(timeout=self.timeout)
 
         logger.info(f"OllamaClient initialized: model={self.model}, url={self.base_url}")
+
+    def __del__(self) -> None:
+        try:
+            self._http.close()
+        except Exception:
+            pass
 
     def generate(
         self,
@@ -218,9 +227,8 @@ class OllamaClient:
         logger.debug(f"Sending request to Ollama ({self.model})...")
 
         try:
-            with httpx.Client(timeout=self.timeout) as client:
-                response = client.post(url, json=payload)
-                response.raise_for_status()
+            response = self._http.post(url, json=payload)
+            response.raise_for_status()
 
             result = response.json()
             text = result.get("response", "")
@@ -249,17 +257,16 @@ class OllamaClient:
     def is_available(self) -> bool:
         """Check if the Ollama server is reachable and the model is loaded."""
         try:
-            with httpx.Client(timeout=5) as client:
-                resp = client.get(f"{self.base_url}/api/tags")
-                resp.raise_for_status()
-                models = [m["name"] for m in resp.json().get("models", [])]
-                available = any(self.model in m for m in models)
-                if not available:
-                    logger.warning(
-                        f"Model '{self.model}' not found. "
-                        f"Available models: {models}"
-                    )
-                return available
+            resp = self._http.get(f"{self.base_url}/api/tags", timeout=5)
+            resp.raise_for_status()
+            models = [m["name"] for m in resp.json().get("models", [])]
+            available = any(self.model in m for m in models)
+            if not available:
+                logger.warning(
+                    f"Model '{self.model}' not found. "
+                    f"Available models: {models}"
+                )
+            return available
         except Exception as e:
             logger.error(f"Ollama health check failed: {e}")
             return False

@@ -20,11 +20,14 @@ from backend.rag.entity_normalization import (
     expand_entities,
     get_method_variants,
     get_dataset_variants,
+    TASK_SYNONYMS,
+    FIELD_SYNONYMS,
 )
 from backend.rag.ranking import rank_results, hard_filter, soft_filter, truncate_to_top_papers
 from backend.rag.context_builder import (
     build_paper_context,
     build_evidence_context,
+    build_context_and_sources,
     format_sources,
 )
 
@@ -232,6 +235,53 @@ class TestEntityNormalization:
         forms = expanded.all_dataset_forms("mnist")
         assert "mnist" in forms
         assert "benchmark mnist" in forms
+
+    # ── Task synonyms ────────────────────────────────────────────
+    def test_ner_expands_to_named_entity_recognition(self):
+        entities = ExtractedEntities(tasks=["NER"])
+        expanded = expand_entities(entities)
+        forms = expanded.all_task_forms("NER")
+        assert "NER" in forms
+        assert "named entity recognition" in forms
+        assert "entity recognition" in forms
+
+    def test_mt_expands_to_machine_translation(self):
+        entities = ExtractedEntities(tasks=["MT"])
+        expanded = expand_entities(entities)
+        forms = expanded.all_task_forms("MT")
+        assert "machine translation" in forms
+
+    def test_qa_expands_to_question_answering(self):
+        entities = ExtractedEntities(tasks=["QA"])
+        expanded = expand_entities(entities)
+        forms = expanded.all_task_forms("QA")
+        assert "question answering" in forms
+
+    def test_unknown_task_returns_only_canonical(self):
+        entities = ExtractedEntities(tasks=["some unknown task xyz"])
+        expanded = expand_entities(entities)
+        assert expanded.all_task_forms("some unknown task xyz") == ["some unknown task xyz"]
+
+    # ── Field synonyms ───────────────────────────────────────────
+    def test_nlp_expands_to_natural_language_processing(self):
+        entities = ExtractedEntities(fields=["NLP"])
+        expanded = expand_entities(entities)
+        forms = expanded.all_field_forms("NLP")
+        assert "NLP" in forms
+        assert "natural language processing" in forms
+
+    def test_robotics_expands_to_variants(self):
+        entities = ExtractedEntities(fields=["robotics"])
+        expanded = expand_entities(entities)
+        forms = expanded.all_field_forms("robotics")
+        assert "robot learning" in forms
+        assert "autonomous systems" in forms
+
+    def test_task_synonyms_dict_not_empty(self):
+        assert len(TASK_SYNONYMS) >= 10
+
+    def test_field_synonyms_dict_not_empty(self):
+        assert len(FIELD_SYNONYMS) >= 5
 
 
 # ── Ranking ───────────────────────────────────────────────────────
@@ -497,6 +547,50 @@ class TestContextBuilder:
         assert "CNN" in sources[0]["methods"]
         assert "MNIST" in sources[0]["datasets"]
 
+    # ── Year validation ──────────────────────────────────────────
+    def test_valid_year_preserved(self):
+        results = [{"paper": "http://example.org/R1", "title": "A",
+                    "doi": "N/A", "year": "2021"}]
+        sources = format_sources(results)
+        assert sources[0]["year"] == "2021"
+
+    def test_invalid_year_month_value_becomes_none(self):
+        """Single/double digit values like '9' or '12' are months, not years."""
+        for bad in ["9", "12", "7", "0", "99"]:
+            results = [{"paper": "http://example.org/R1", "title": "A",
+                        "doi": "N/A", "year": bad}]
+            sources = format_sources(results)
+            assert sources[0]["year"] is None, f"Expected None for year={bad!r}"
+
+    def test_year_missing_becomes_none(self):
+        results = [{"paper": "http://example.org/R1", "title": "A", "doi": "N/A"}]
+        sources = format_sources(results)
+        assert sources[0]["year"] is None
+
+    def test_year_shown_in_paper_context(self):
+        results = [{"paper": "http://example.org/R1", "title": "A",
+                    "doi": "N/A", "year": "2019"}]
+        context = build_paper_context(results)
+        assert "Year: 2019" in context
+
+    # ── build_context_and_sources ────────────────────────────────
+    def test_build_context_and_sources_returns_both(self):
+        results = [{"paper": "http://example.org/R1", "title": "Paper A",
+                    "doi": "10.1/a", "methodLabel": "CNN", "year": "2020"}]
+        context, sources = build_context_and_sources(results, "method_usage")
+        assert "Paper A" in context
+        assert len(sources) == 1
+        assert sources[0]["title"] == "Paper A"
+        assert sources[0]["year"] == "2020"
+
+    def test_build_context_and_sources_claim_type(self):
+        results = [{"paper": "http://example.org/R1", "title": "Claim Paper",
+                    "doi": "N/A", "contribLabel": "C1",
+                    "predLabel": "Has method", "valueLabel": "BERT"}]
+        context, sources = build_context_and_sources(results, "claim_verification")
+        assert "Evidence" in context
+        assert len(sources) == 1
+
 
 # ── Prompt Templates ──────────────────────────────────────────────
 
@@ -610,3 +704,137 @@ class TestErrorHandling:
         err = SPARQLTimeoutError("test timeout")
         assert isinstance(err, Exception)
         assert "test timeout" in str(err)
+
+
+# ── Integration: full pipeline.ask() with mocks ───────────────────
+
+_FAKE_ROWS = [
+    {
+        "paper": "http://orkg.org/orkg/resource/R1",
+        "title": "BERT on SQuAD",
+        "doi": "10.1/bert",
+        "year": "2019",
+        "methodLabel": "BERT",
+        "datasetLabel": "SQuAD",
+    },
+    {
+        "paper": "http://orkg.org/orkg/resource/R2",
+        "title": "ALBERT for Question Answering",
+        "doi": "10.1/albert",
+        "year": "2020",
+        "methodLabel": "ALBERT",
+        "datasetLabel": "SQuAD",
+    },
+]
+
+
+class TestPipelineIntegration:
+    """End-to-end tests for RAGPipeline.ask() with all I/O mocked."""
+
+    def _make_pipeline(self, rows=None, answer="Test answer."):
+        """Create a RAGPipeline with mocked SPARQL and LLM."""
+        from unittest.mock import AsyncMock, MagicMock
+        from backend.rag.pipeline import RAGPipeline
+
+        mock_sparql = MagicMock()
+        mock_sparql.execute.return_value = rows if rows is not None else _FAKE_ROWS
+        mock_sparql.execute_async = AsyncMock(
+            return_value=rows if rows is not None else _FAKE_ROWS
+        )
+
+        mock_llm = MagicMock()
+        mock_llm.generate.return_value = answer
+
+        return RAGPipeline(sparql_client=mock_sparql, llm_client=mock_llm)
+
+    async def test_ask_returns_required_keys(self):
+        pipeline = self._make_pipeline()
+        with patch("backend.rag.pipeline.classify_query",
+                   return_value=QueryType.METHOD_USAGE), \
+             patch("backend.rag.pipeline.extract_entities",
+                   return_value=ExtractedEntities(methods=["BERT"], datasets=["SQuAD"])):
+            result = await pipeline.ask("What papers apply BERT to SQuAD?")
+
+        assert result["question"] == "What papers apply BERT to SQuAD?"
+        assert result["query_type"] == "method_usage"
+        assert "entities" in result
+        assert "sparql_queries" in result
+        assert "strategies_used" in result
+        assert "answer" in result
+        assert "sources" in result
+        assert "kg_results_count" in result
+
+    async def test_ask_sources_contain_expected_papers(self):
+        pipeline = self._make_pipeline()
+        with patch("backend.rag.pipeline.classify_query",
+                   return_value=QueryType.METHOD_USAGE), \
+             patch("backend.rag.pipeline.extract_entities",
+                   return_value=ExtractedEntities(methods=["BERT"], datasets=["SQuAD"])):
+            result = await pipeline.ask("What papers apply BERT to SQuAD?")
+
+        titles = [s["title"] for s in result["sources"]]
+        assert "BERT on SQuAD" in titles
+        assert "ALBERT for Question Answering" in titles
+
+    async def test_ask_answer_comes_from_llm(self):
+        pipeline = self._make_pipeline(answer="Mocked LLM answer here.")
+        with patch("backend.rag.pipeline.classify_query",
+                   return_value=QueryType.TOPIC_SEARCH), \
+             patch("backend.rag.pipeline.extract_entities",
+                   return_value=ExtractedEntities(fields=["NLP"])):
+            result = await pipeline.ask("Papers about NLP")
+
+        assert result["answer"] == "Mocked LLM answer here."
+
+    async def test_ask_year_validated_in_sources(self):
+        rows_with_bad_year = [
+            {**_FAKE_ROWS[0], "year": "2019"},   # valid
+            {**_FAKE_ROWS[1], "year": "9"},       # invalid — month
+        ]
+        pipeline = self._make_pipeline(rows=rows_with_bad_year)
+        with patch("backend.rag.pipeline.classify_query",
+                   return_value=QueryType.METHOD_USAGE), \
+             patch("backend.rag.pipeline.extract_entities",
+                   return_value=ExtractedEntities(methods=["BERT"], datasets=["SQuAD"])):
+            result = await pipeline.ask("BERT on SQuAD")
+
+        by_title = {s["title"]: s for s in result["sources"]}
+        assert by_title["BERT on SQuAD"]["year"] == "2019"
+        assert by_title["ALBERT for Question Answering"]["year"] is None
+
+    async def test_ask_empty_kg_returns_answer_with_no_sources(self):
+        pipeline = self._make_pipeline(rows=[], answer="Nothing found.")
+        with patch("backend.rag.pipeline.classify_query",
+                   return_value=QueryType.TOPIC_SEARCH), \
+             patch("backend.rag.pipeline.extract_entities",
+                   return_value=ExtractedEntities(fields=["robotics"])):
+            result = await pipeline.ask("Papers on robotics")
+
+        assert result["sources"] == []
+        assert result["answer"] == "Nothing found."
+        assert result["kg_results_count"] == 0
+
+    async def test_ask_claim_verification_type(self):
+        pipeline = self._make_pipeline()
+        with patch("backend.rag.pipeline.classify_query",
+                   return_value=QueryType.CLAIM_VERIFICATION), \
+             patch("backend.rag.pipeline.extract_entities",
+                   return_value=ExtractedEntities(methods=["BERT"])):
+            result = await pipeline.ask("Is it true that BERT outperforms LSTM?")
+
+        assert result["query_type"] == "claim_verification"
+        assert len(result["sources"]) >= 1
+
+    async def test_ask_entities_reflected_in_response(self):
+        pipeline = self._make_pipeline()
+        extracted = ExtractedEntities(
+            methods=["CNN"], datasets=["MNIST"], tasks=["image classification"]
+        )
+        with patch("backend.rag.pipeline.classify_query",
+                   return_value=QueryType.METHOD_USAGE), \
+             patch("backend.rag.pipeline.extract_entities", return_value=extracted):
+            result = await pipeline.ask("CNN on MNIST for image classification")
+
+        assert "CNN" in result["entities"]["methods"]
+        assert "MNIST" in result["entities"]["datasets"]
+        assert "image classification" in result["entities"]["tasks"]

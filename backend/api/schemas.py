@@ -85,9 +85,22 @@ class AskResponse(BaseModel):
     )
 
 
+class LLMStatus(BaseModel):
+    """Health status of the LLM component."""
+
+    status: str = Field(description="'ok' or 'error'")
+    model: str = Field(description="Ollama model name (e.g. 'llama3')")
+
+
+class SPARQLStatus(BaseModel):
+    """Health status of the SPARQL endpoint."""
+
+    status: str = Field(description="'ok' or 'error'")
+
+
 class HealthResponse(BaseModel):
     """Response body for the /health endpoint."""
 
-    llm: dict = Field(description="LLM component status")
-    sparql: dict = Field(description="SPARQL endpoint status")
+    llm: LLMStatus = Field(description="LLM component status")
+    sparql: SPARQLStatus = Field(description="SPARQL endpoint status")
     pipeline: str = Field(description="Overall pipeline status: ready | degraded")
