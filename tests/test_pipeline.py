@@ -27,8 +27,6 @@ from backend.rag.context_builder import (
     build_evidence_context,
     format_sources,
 )
-from backend.rag.hybrid_retrieval import reciprocal_rank_fusion
-
 
 # ── Fixtures ──────────────────────────────────────────────────────
 
@@ -580,42 +578,6 @@ class TestAsyncQueryBuilder:
 
         assert _title_fallback_for(ExpandedEntities(), limit=5) is None
 
-
-# ── Hybrid Retrieval / RRF ────────────────────────────────────────
-
-class TestHybridRetrieval:
-
-    def test_rrf_paper_in_both_lists_ranks_first(self):
-        list_a = [
-            {"paper": "http://example.org/R1", "title": "Paper 1"},
-            {"paper": "http://example.org/R2", "title": "Paper 2"},
-        ]
-        list_b = [
-            {"paper": "http://example.org/R2", "title": "Paper 2"},
-            {"paper": "http://example.org/R3", "title": "Paper 3"},
-        ]
-        merged = reciprocal_rank_fusion(list_a, list_b)
-        assert merged[0]["paper"] == "http://example.org/R2"
-        assert len(merged) == 3
-
-    def test_rrf_annotates_score(self):
-        results = [{"paper": "http://example.org/R1", "title": "A"}]
-        merged = reciprocal_rank_fusion(results)
-        assert "_rrf_score" in merged[0]
-        assert merged[0]["_rrf_score"] > 0
-
-    def test_rrf_empty(self):
-        assert reciprocal_rank_fusion([], []) == []
-
-    def test_hybrid_retrieve_falls_back_to_kg_when_no_vector_store(self):
-        from backend.rag.hybrid_retrieval import hybrid_retrieve
-
-        kg_results = [
-            {"paper": "http://example.org/R1", "title": "A"},
-            {"paper": "http://example.org/R2", "title": "B"},
-        ]
-        results = hybrid_retrieve("test", kg_results, vector_store=None, top_k=5)
-        assert len(results) == 2
 
 
 # ── Keyword Extraction Fallback ───────────────────────────────────

@@ -37,6 +37,10 @@ class Settings(BaseSettings):
     api_port: int = 8000
     api_reload: bool = True
     log_level: str = "INFO"
+    # Comma-separated list of allowed CORS origins.
+    # Override with CORS_ORIGINS env var for production, e.g.:
+    #   CORS_ORIGINS=https://myapp.example.com
+    cors_origins: list[str] = ["http://localhost:3000", "http://localhost:8080", "http://localhost:5173"]
 
     # --- Retrieval ---
     max_results: int = 5

@@ -44,6 +44,7 @@ class Source(BaseModel):
     title: str = Field(description="Paper title")
     uri: str = Field(description="ORKG resource URI")
     doi: str = Field(default="N/A", description="Paper DOI if available")
+    year: str | None = Field(default=None, description="Publication year if available")
     methods: list[str] = Field(default_factory=list, description="Methods found in this paper")
     datasets: list[str] = Field(default_factory=list, description="Datasets found in this paper")
 

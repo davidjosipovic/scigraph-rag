@@ -17,8 +17,11 @@ Papers are referenced by **title** (not by number) to prevent the LLM
 from hallucinating citation numbers that don't correspond to real sources.
 """
 
+import re
 from typing import Any
 from collections import defaultdict
+
+_YEAR_RE = re.compile(r"^(19|20)\d{2}$")
 
 
 def build_context(results: list[dict[str, Any]], query_type: str) -> str:
@@ -144,6 +147,7 @@ def format_sources(results: list[dict[str, Any]]) -> list[dict[str, str]]:
             "title": info["title"],
             "uri": uri,
             "doi": info["doi"],
+            "year": info.get("year"),
         }
         if info["methods"]:
             source["methods"] = list(info["methods"])
@@ -176,10 +180,12 @@ def _group_by_paper(results: list[dict[str, Any]]) -> dict[str, dict]:
             continue
 
         if uri not in papers:
+            raw_year = row.get("year")
+            year = raw_year if (raw_year and _YEAR_RE.match(str(raw_year))) else None
             papers[uri] = {
                 "title": row.get("title", "Unknown"),
                 "doi": row.get("doi", "N/A"),
-                "year": row.get("year"),
+                "year": year,
                 "score": row.get("_score"),
                 "methods": set(),
                 "datasets": set(),
