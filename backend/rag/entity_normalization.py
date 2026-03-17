@@ -113,8 +113,6 @@ METHOD_SYNONYMS: dict[str, list[str]] = {
     # ── Contrastive / self-supervised ────────────────────────────────
     "simclr": ["simple contrastive learning of representations"],
     "moco": ["momentum contrast"],
-    "contrastive learning": ["self-supervised contrastive learning"],
-
     # ── Classical ML ─────────────────────────────────────────────────
     "svm": ["support vector machine", "support vector machines", "support vector classification"],
     "support vector machine": ["svm"],
@@ -173,7 +171,7 @@ METHOD_SYNONYMS: dict[str, list[str]] = {
     "meta-learning": ["learning to learn", "few-shot meta-learning"],
     "few-shot learning": ["few shot learning", "low-shot learning"],
     "zero-shot learning": ["zero shot learning", "zero-shot transfer"],
-    "contrastive learning": ["contrastive self-supervised learning"],
+    "contrastive learning": ["self-supervised contrastive learning", "contrastive self-supervised learning"],
     "knowledge distillation": ["model distillation", "model compression"],
     "neural architecture search": ["nas", "automated machine learning", "automl"],
     "nas": ["neural architecture search"],

@@ -18,12 +18,18 @@ from backend.api.schemas import (
     HealthResponse,
     Source,
 )
+from backend.config import settings
 from backend.rag.pipeline import RAGPipeline
 
 router = APIRouter()
 
 # Pipeline instance (initialized once, reused across requests)
 _pipeline: RAGPipeline | None = None
+
+# Semaphore to cap concurrent /ask executions.
+# Created lazily inside the running event loop on first request.
+# Prevents Ollama (single-threaded) from being saturated by parallel LLM calls.
+_ask_semaphore: asyncio.Semaphore | None = None
 
 
 def get_pipeline() -> RAGPipeline:
@@ -32,6 +38,14 @@ def get_pipeline() -> RAGPipeline:
     if _pipeline is None:
         _pipeline = RAGPipeline()
     return _pipeline
+
+
+def get_semaphore() -> asyncio.Semaphore:
+    """Lazy-initialize and return the concurrency semaphore."""
+    global _ask_semaphore
+    if _ask_semaphore is None:
+        _ask_semaphore = asyncio.Semaphore(settings.max_concurrent_requests)
+    return _ask_semaphore
 
 
 @router.post("/ask", response_model=AskResponse)
@@ -49,6 +63,17 @@ async def ask_question(request: AskRequest) -> AskResponse:
     7. Return the answer with cited sources and full pipeline transparency
     """
     logger.info(f"Received question: {request.question}")
+
+    # Acquire concurrency slot — rejects with 503 if server is saturated.
+    semaphore = get_semaphore()
+    try:
+        await asyncio.wait_for(semaphore.acquire(), timeout=settings.ollama_timeout)
+    except asyncio.TimeoutError:
+        logger.warning("Request rejected: pipeline semaphore timeout (server busy)")
+        raise HTTPException(
+            status_code=503,
+            detail="Server is busy. Please retry in a moment.",
+        )
 
     try:
         pipeline = get_pipeline()
@@ -74,6 +99,8 @@ async def ask_question(request: AskRequest) -> AskResponse:
             status_code=500,
             detail=f"An error occurred while processing your question: {str(e)}",
         )
+    finally:
+        semaphore.release()
 
 
 @router.get("/health", response_model=HealthResponse)

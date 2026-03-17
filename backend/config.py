@@ -47,6 +47,12 @@ class Settings(BaseSettings):
     sparql_timeout: int = 10
     max_context_papers: int = 8
 
+    # --- Concurrency ---
+    # Max concurrent /ask requests allowed to run the full pipeline.
+    # Ollama is single-threaded; too many parallel LLM calls saturate it.
+    # Extra requests wait (up to ollama_timeout seconds) before getting 503.
+    max_concurrent_requests: int = 3
+
 
 # Singleton settings instance — import this everywhere
 settings = Settings()

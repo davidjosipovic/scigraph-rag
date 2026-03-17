@@ -164,7 +164,9 @@ class SPARQLClient:
         logger.debug(f"Executing local SPARQL query:\n{query[:200]}...")
 
         try:
-            assert self._local_graph is not None
+            if self._local_graph is None:
+                logger.error("_query_local called but no local graph is loaded.")
+                return []
             qres = self._local_graph.query(query)
             results = []
 

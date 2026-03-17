@@ -1,0 +1,125 @@
+2026-03-17 11:58:52.440 | INFO     | backend.api.routes:ask_question:65 - Received question: Which papers compare CNN and SVM?
+2026-03-17 11:58:52.441 | INFO     | backend.kg.sparql_client:__init__:66 - Using remote ORKG SPARQL endpoint: https://orkg.org/triplestore
+2026-03-17 11:58:52.441 | INFO     | backend.rag.pipeline:ask:109 - Processing question: Which papers compare CNN and SVM?
+2026-03-17 11:58:54.227 | INFO     | backend.llm.ollama_client:generate:235 - LLM generation complete: 17 chars, model=llama3
+2026-03-17 11:58:54.228 | INFO     | backend.rag.query_classifier:classify_query:72 - Query classified as 'method_comparison'
+2026-03-17 11:58:56.321 | INFO     | backend.llm.ollama_client:generate:235 - LLM generation complete: 85 chars, model=llama3
+2026-03-17 11:58:56.321 | INFO     | backend.rag.entity_extractor:extract_entities:114 - Entity extraction complete: {'methods': ['CNN', 'SVM'], 'datasets': [], 'tasks': [], 'fields': [], 'metrics': []}
+2026-03-17 11:58:56.321 | INFO     | backend.rag.pipeline:ask:119 - Step 1 — Query type: method_comparison
+2026-03-17 11:58:56.322 | INFO     | backend.rag.pipeline:ask:120 - Step 2 — Entities: methods=['CNN', 'SVM'], datasets=[], tasks=[], fields=[], metrics=[]
+2026-03-17 11:58:56.322 | INFO     | backend.rag.pipeline:ask:139 - Step 3 — Normalization: method_variants={'cnn': ['convolutional neural network', 'dcnn', 'deep convolutional network', 'convnet'], 'svm': ['support vector machine', 'support vector machines', 'support vector classification']}, dataset_variants={}
+2026-03-17 11:58:56.476 | INFO     | backend.kg.sparql_client:_query_remote:134 - Remote query returned 10 results.
+2026-03-17 11:58:56.575 | INFO     | backend.kg.sparql_client:_query_remote:134 - Remote query returned 10 results.
+2026-03-17 11:58:56.627 | INFO     | backend.kg.sparql_client:_query_remote:134 - Remote query returned 10 results.
+2026-03-17 11:58:56.632 | INFO     | backend.kg.sparql_client:_query_remote:134 - Remote query returned 10 results.
+2026-03-17 11:59:06.416 | WARNING  | backend.kg.sparql_client:_query_remote:138 - SPARQL query timed out after 10s.
+  Query (truncated): PREFIX orkgc: <http://orkg.org/orkg/class/>
+PREFIX orkgp: <http://orkg.org/orkg/predicate/>
+PREFIX orkgr: <http://orkg.o...
+2026-03-17 11:59:06.421 | WARNING  | backend.kg.sparql_client:_query_remote:138 - SPARQL query timed out after 10s.
+  Query (truncated): PREFIX orkgc: <http://orkg.org/orkg/class/>
+PREFIX orkgp: <http://orkg.org/orkg/predicate/>
+PREFIX orkgr: <http://orkg.o...
+2026-03-17 11:59:06.422 | WARNING  | backend.rag.query_builder:retrieve_async:176 - Timeout on comparison(CNN,SVM) — falling back to title search
+2026-03-17 11:59:06.582 | INFO     | backend.kg.sparql_client:_query_remote:134 - Remote query returned 10 results.
+2026-03-17 11:59:06.583 | WARNING  | backend.rag.query_builder:retrieve_async:176 - Timeout on comparison_variant(convolutional neural network,SVM) — falling back to title search
+2026-03-17 11:59:06.584 | INFO     | backend.rag.query_builder:retrieve_async:210 - Async retrieval complete: 60 total results from 5 queries (strategies: ['timeout_fallback(comparison(CNN,SVM))', 'timeout_fallback(comparison_variant(convolutional neural network,SVM))', 'method(CNN)', 'method(convolutional neural network)', 'method(SVM)', 'method(support vector machine)'])
+2026-03-17 11:59:06.585 | INFO     | backend.rag.pipeline:ask:147 - Step 4 — Retrieval: 60 results from 5 queries
+2026-03-17 11:59:06.586 | INFO     | backend.rag.pipeline:ask:154 - Step 5 — Ranking: 60 rows, top score=3
+2026-03-17 11:59:06.586 | INFO     | backend.rag.pipeline:ask:165 - Step 6 — Filter: 60 → 60 rows (dropped 0 noise rows)
+2026-03-17 11:59:06.586 | INFO     | backend.rag.pipeline:ask:172 - Step 7 — Truncation: top 8 papers
+2026-03-17 11:59:12.770 | INFO     | backend.llm.ollama_client:generate:235 - LLM generation complete: 630 chars, model=llama3
+2026-03-17 11:59:12.771 | INFO     | backend.rag.pipeline:ask:184 - Step 9 — Answer: 630 chars
+2026-03-17 11:59:13.101 | INFO     | backend.kg.sparql_client:_query_remote:134 - Remote query returned 1 results.
+2026-03-17 11:59:13.117 | INFO     | backend.rag.query_classifier:classify_query:72 - Query classified as 'topic_search'
+2026-03-17 11:59:13.117 | INFO     | backend.rag.query_classifier:classify_query:72 - Query classified as 'method_comparison'
+2026-03-17 11:59:13.118 | INFO     | backend.rag.query_classifier:classify_query:72 - Query classified as 'dataset_search'
+2026-03-17 11:59:13.118 | INFO     | backend.rag.query_classifier:classify_query:72 - Query classified as 'claim_verification'
+2026-03-17 11:59:13.118 | INFO     | backend.rag.query_classifier:classify_query:72 - Query classified as 'method_usage'
+2026-03-17 11:59:13.119 | INFO     | backend.rag.query_classifier:classify_query:72 - Query classified as 'paper_lookup'
+2026-03-17 11:59:13.119 | WARNING  | backend.rag.query_classifier:classify_query:75 - Unexpected classifier output: 'I don't know' — falling back to topic_search
+2026-03-17 11:59:13.120 | INFO     | backend.rag.query_classifier:classify_query:72 - Query classified as 'topic_search'
+2026-03-17 11:59:13.120 | ERROR    | backend.rag.query_classifier:classify_query:81 - Query classification failed: Ollama down — falling back to topic_search
+2026-03-17 11:59:13.125 | INFO     | backend.rag.query_classifier:classify_query:72 - Query classified as 'topic_search'
+2026-03-17 11:59:13.125 | INFO     | backend.rag.entity_extractor:extract_entities:114 - Entity extraction complete: {'methods': ['CNN', 'SVM'], 'datasets': [], 'tasks': [], 'fields': [], 'metrics': []}
+2026-03-17 11:59:13.126 | INFO     | backend.rag.entity_extractor:extract_entities:114 - Entity extraction complete: {'methods': [], 'datasets': ['MNIST', 'CIFAR-10'], 'tasks': [], 'fields': [], 'metrics': []}
+2026-03-17 11:59:13.126 | INFO     | backend.rag.entity_extractor:extract_entities:114 - Entity extraction complete: {'methods': ['BERT'], 'datasets': [], 'tasks': ['sentiment analysis'], 'fields': [], 'metrics': []}
+2026-03-17 11:59:13.126 | INFO     | backend.rag.entity_extractor:extract_entities:114 - Entity extraction complete: {'methods': [], 'datasets': [], 'tasks': [], 'fields': ['natural language processing'], 'metrics': []}
+2026-03-17 11:59:13.127 | INFO     | backend.rag.entity_extractor:extract_entities:114 - Entity extraction complete: {'methods': [], 'datasets': ['MNIST'], 'tasks': [], 'fields': [], 'metrics': ['accuracy']}
+2026-03-17 11:59:13.127 | WARNING  | backend.rag.entity_extractor:extract_entities:102 - Entity extractor: no JSON found in response: 'I cannot parse this'
+2026-03-17 11:59:13.128 | ERROR    | backend.rag.entity_extractor:extract_entities:121 - Entity extraction failed: Ollama down
+2026-03-17 11:59:13.128 | INFO     | backend.rag.entity_extractor:extract_entities:114 - Entity extraction complete: {'methods': ['BERT'], 'datasets': [], 'tasks': [], 'fields': [], 'metrics': []}
+2026-03-17 11:59:13.129 | INFO     | backend.rag.entity_extractor:extract_entities:114 - Entity extraction complete: {'methods': ['CNN'], 'datasets': ['MNIST'], 'tasks': [], 'fields': [], 'metrics': []}
+2026-03-17 11:59:13.129 | INFO     | backend.rag.entity_extractor:extract_entities:114 - Entity extraction complete: {'methods': ['CNN', 'SVM'], 'datasets': ['MNIST'], 'tasks': [], 'fields': [], 'metrics': []}
+2026-03-17 11:59:13.130 | INFO     | backend.rag.entity_extractor:extract_entities:114 - Entity extraction complete: {'methods': ['CNN'], 'datasets': [], 'tasks': [], 'fields': [], 'metrics': []}
+2026-03-17 11:59:13.148 | INFO     | backend.rag.pipeline:ask:109 - Processing question: What papers apply BERT to SQuAD?
+2026-03-17 11:59:13.148 | INFO     | backend.rag.pipeline:ask:119 - Step 1 — Query type: method_usage
+2026-03-17 11:59:13.148 | INFO     | backend.rag.pipeline:ask:120 - Step 2 — Entities: methods=['BERT'], datasets=['SQuAD'], tasks=[], fields=[], metrics=[]
+2026-03-17 11:59:13.148 | INFO     | backend.rag.pipeline:ask:139 - Step 3 — Normalization: method_variants={'bert': ['bidirectional encoder representations from transformers', 'bert-base', 'bert-large']}, dataset_variants={'squad': ['stanford question answering dataset', 'squad 1.1', 'squad v1']}
+2026-03-17 11:59:13.148 | INFO     | backend.rag.query_builder:retrieve_async:210 - Async retrieval complete: 6 total results from 3 queries (strategies: ['combined(BERT,SQuAD)', 'method(BERT)', 'method(bidirectional encoder representations from transformers)'])
+2026-03-17 11:59:13.148 | INFO     | backend.rag.pipeline:ask:147 - Step 4 — Retrieval: 6 results from 3 queries
+2026-03-17 11:59:13.149 | INFO     | backend.rag.pipeline:ask:154 - Step 5 — Ranking: 6 rows, top score=5
+2026-03-17 11:59:13.149 | INFO     | backend.rag.pipeline:ask:165 - Step 6 — Filter: 6 → 6 rows (dropped 0 noise rows)
+2026-03-17 11:59:13.149 | INFO     | backend.rag.pipeline:ask:172 - Step 7 — Truncation: top 8 papers
+2026-03-17 11:59:13.149 | INFO     | backend.rag.pipeline:ask:184 - Step 9 — Answer: 12 chars
+2026-03-17 11:59:13.152 | INFO     | backend.rag.pipeline:ask:109 - Processing question: What papers apply BERT to SQuAD?
+2026-03-17 11:59:13.153 | INFO     | backend.rag.pipeline:ask:119 - Step 1 — Query type: method_usage
+2026-03-17 11:59:13.153 | INFO     | backend.rag.pipeline:ask:120 - Step 2 — Entities: methods=['BERT'], datasets=['SQuAD'], tasks=[], fields=[], metrics=[]
+2026-03-17 11:59:13.153 | INFO     | backend.rag.pipeline:ask:139 - Step 3 — Normalization: method_variants={'bert': ['bidirectional encoder representations from transformers', 'bert-base', 'bert-large']}, dataset_variants={'squad': ['stanford question answering dataset', 'squad 1.1', 'squad v1']}
+2026-03-17 11:59:13.153 | INFO     | backend.rag.query_builder:retrieve_async:210 - Async retrieval complete: 6 total results from 3 queries (strategies: ['combined(BERT,SQuAD)', 'method(BERT)', 'method(bidirectional encoder representations from transformers)'])
+2026-03-17 11:59:13.153 | INFO     | backend.rag.pipeline:ask:147 - Step 4 — Retrieval: 6 results from 3 queries
+2026-03-17 11:59:13.154 | INFO     | backend.rag.pipeline:ask:154 - Step 5 — Ranking: 6 rows, top score=5
+2026-03-17 11:59:13.154 | INFO     | backend.rag.pipeline:ask:165 - Step 6 — Filter: 6 → 6 rows (dropped 0 noise rows)
+2026-03-17 11:59:13.154 | INFO     | backend.rag.pipeline:ask:172 - Step 7 — Truncation: top 8 papers
+2026-03-17 11:59:13.154 | INFO     | backend.rag.pipeline:ask:184 - Step 9 — Answer: 12 chars
+2026-03-17 11:59:13.155 | INFO     | backend.rag.pipeline:ask:109 - Processing question: Papers about NLP
+2026-03-17 11:59:13.155 | INFO     | backend.rag.pipeline:ask:119 - Step 1 — Query type: topic_search
+2026-03-17 11:59:13.156 | INFO     | backend.rag.pipeline:ask:120 - Step 2 — Entities: methods=[], datasets=[], tasks=[], fields=['NLP'], metrics=[]
+2026-03-17 11:59:13.156 | INFO     | backend.rag.pipeline:ask:139 - Step 3 — Normalization: method_variants={}, dataset_variants={}
+2026-03-17 11:59:13.156 | INFO     | backend.rag.query_builder:retrieve_async:210 - Async retrieval complete: 4 total results from 2 queries (strategies: ['field(NLP)', 'field(natural language processing)'])
+2026-03-17 11:59:13.156 | INFO     | backend.rag.pipeline:ask:147 - Step 4 — Retrieval: 4 results from 2 queries
+2026-03-17 11:59:13.156 | INFO     | backend.rag.pipeline:ask:154 - Step 5 — Ranking: 4 rows, top score=0
+2026-03-17 11:59:13.156 | INFO     | backend.rag.pipeline:ask:165 - Step 6 — Filter: 4 → 0 rows (dropped 4 noise rows)
+2026-03-17 11:59:13.156 | INFO     | backend.rag.pipeline:ask:172 - Step 7 — Truncation: top 8 papers
+2026-03-17 11:59:13.156 | INFO     | backend.rag.pipeline:ask:184 - Step 9 — Answer: 23 chars
+2026-03-17 11:59:13.157 | INFO     | backend.rag.pipeline:ask:109 - Processing question: BERT on SQuAD
+2026-03-17 11:59:13.158 | INFO     | backend.rag.pipeline:ask:119 - Step 1 — Query type: method_usage
+2026-03-17 11:59:13.158 | INFO     | backend.rag.pipeline:ask:120 - Step 2 — Entities: methods=['BERT'], datasets=['SQuAD'], tasks=[], fields=[], metrics=[]
+2026-03-17 11:59:13.158 | INFO     | backend.rag.pipeline:ask:139 - Step 3 — Normalization: method_variants={'bert': ['bidirectional encoder representations from transformers', 'bert-base', 'bert-large']}, dataset_variants={'squad': ['stanford question answering dataset', 'squad 1.1', 'squad v1']}
+2026-03-17 11:59:13.158 | INFO     | backend.rag.query_builder:retrieve_async:210 - Async retrieval complete: 6 total results from 3 queries (strategies: ['combined(BERT,SQuAD)', 'method(BERT)', 'method(bidirectional encoder representations from transformers)'])
+2026-03-17 11:59:13.158 | INFO     | backend.rag.pipeline:ask:147 - Step 4 — Retrieval: 6 results from 3 queries
+2026-03-17 11:59:13.158 | INFO     | backend.rag.pipeline:ask:154 - Step 5 — Ranking: 6 rows, top score=5
+2026-03-17 11:59:13.158 | INFO     | backend.rag.pipeline:ask:165 - Step 6 — Filter: 6 → 6 rows (dropped 0 noise rows)
+2026-03-17 11:59:13.158 | INFO     | backend.rag.pipeline:ask:172 - Step 7 — Truncation: top 8 papers
+2026-03-17 11:59:13.158 | INFO     | backend.rag.pipeline:ask:184 - Step 9 — Answer: 12 chars
+2026-03-17 11:59:13.160 | INFO     | backend.rag.pipeline:ask:109 - Processing question: Papers on robotics
+2026-03-17 11:59:13.160 | INFO     | backend.rag.pipeline:ask:119 - Step 1 — Query type: topic_search
+2026-03-17 11:59:13.160 | INFO     | backend.rag.pipeline:ask:120 - Step 2 — Entities: methods=[], datasets=[], tasks=[], fields=['robotics'], metrics=[]
+2026-03-17 11:59:13.160 | INFO     | backend.rag.pipeline:ask:139 - Step 3 — Normalization: method_variants={}, dataset_variants={}
+2026-03-17 11:59:13.160 | INFO     | backend.rag.query_builder:retrieve_async:198 - Primary strategies returned 0 results, trying fallbacks...
+2026-03-17 11:59:13.160 | INFO     | backend.rag.query_builder:retrieve_async:210 - Async retrieval complete: 0 total results from 4 queries (strategies: ['field(robotics)', 'field(robot learning)', 'broad_entity(robotics)', "title_fallback(['robotics'])"])
+2026-03-17 11:59:13.160 | INFO     | backend.rag.pipeline:ask:147 - Step 4 — Retrieval: 0 results from 4 queries
+2026-03-17 11:59:13.160 | INFO     | backend.rag.pipeline:ask:154 - Step 5 — Ranking: 0 rows, top score=0
+2026-03-17 11:59:13.160 | INFO     | backend.rag.pipeline:ask:165 - Step 6 — Filter: 0 → 0 rows (dropped 0 noise rows)
+2026-03-17 11:59:13.160 | INFO     | backend.rag.pipeline:ask:172 - Step 7 — Truncation: top 8 papers
+2026-03-17 11:59:13.160 | INFO     | backend.rag.pipeline:ask:184 - Step 9 — Answer: 14 chars
+2026-03-17 11:59:13.162 | INFO     | backend.rag.pipeline:ask:109 - Processing question: Is it true that BERT outperforms LSTM?
+2026-03-17 11:59:13.162 | INFO     | backend.rag.pipeline:ask:119 - Step 1 — Query type: claim_verification
+2026-03-17 11:59:13.162 | INFO     | backend.rag.pipeline:ask:120 - Step 2 — Entities: methods=['BERT'], datasets=[], tasks=[], fields=[], metrics=[]
+2026-03-17 11:59:13.162 | INFO     | backend.rag.pipeline:ask:139 - Step 3 — Normalization: method_variants={'bert': ['bidirectional encoder representations from transformers', 'bert-base', 'bert-large']}, dataset_variants={}
+2026-03-17 11:59:13.162 | INFO     | backend.rag.query_builder:retrieve_async:210 - Async retrieval complete: 6 total results from 3 queries (strategies: ["claim_evidence(['BERT'])", 'method(BERT)', 'method(bidirectional encoder representations from transformers)'])
+2026-03-17 11:59:13.162 | INFO     | backend.rag.pipeline:ask:147 - Step 4 — Retrieval: 6 results from 3 queries
+2026-03-17 11:59:13.162 | INFO     | backend.rag.pipeline:ask:154 - Step 5 — Ranking: 6 rows, top score=3
+2026-03-17 11:59:13.162 | INFO     | backend.rag.pipeline:ask:165 - Step 6 — Filter: 6 → 6 rows (dropped 0 noise rows)
+2026-03-17 11:59:13.163 | INFO     | backend.rag.pipeline:ask:172 - Step 7 — Truncation: top 8 papers
+2026-03-17 11:59:13.163 | INFO     | backend.rag.pipeline:ask:184 - Step 9 — Answer: 12 chars
+2026-03-17 11:59:13.164 | INFO     | backend.rag.pipeline:ask:109 - Processing question: CNN on MNIST for image classification
+2026-03-17 11:59:13.164 | INFO     | backend.rag.pipeline:ask:119 - Step 1 — Query type: method_usage
+2026-03-17 11:59:13.164 | INFO     | backend.rag.pipeline:ask:120 - Step 2 — Entities: methods=['CNN'], datasets=['MNIST'], tasks=['image classification'], fields=[], metrics=[]
+2026-03-17 11:59:13.164 | INFO     | backend.rag.pipeline:ask:139 - Step 3 — Normalization: method_variants={'cnn': ['convolutional neural network', 'dcnn', 'deep convolutional network', 'convnet']}, dataset_variants={'mnist': ['benchmark mnist', 'sequential mnist', 'handwritten mnist', 'le cun mnist']}
+2026-03-17 11:59:13.165 | INFO     | backend.rag.query_builder:retrieve_async:210 - Async retrieval complete: 10 total results from 5 queries (strategies: ['combined(CNN,MNIST)', 'method(CNN)', 'method(convolutional neural network)', 'task(image classification)', 'task(visual recognition)'])
+2026-03-17 11:59:13.165 | INFO     | backend.rag.pipeline:ask:147 - Step 4 — Retrieval: 10 results from 5 queries
+2026-03-17 11:59:13.165 | INFO     | backend.rag.pipeline:ask:154 - Step 5 — Ranking: 10 rows, top score=0
+2026-03-17 11:59:13.165 | INFO     | backend.rag.pipeline:ask:165 - Step 6 — Filter: 10 → 0 rows (dropped 10 noise rows)
+2026-03-17 11:59:13.165 | INFO     | backend.rag.pipeline:ask:172 - Step 7 — Truncation: top 8 papers
+2026-03-17 11:59:13.165 | INFO     | backend.rag.pipeline:ask:184 - Step 9 — Answer: 12 chars

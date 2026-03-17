@@ -1,0 +1,27 @@
+2026-03-17 11:58:29.001 | INFO     | backend.api.routes:ask_question:65 - Received question: Which papers compare LLM and RNN?
+2026-03-17 11:58:29.002 | INFO     | backend.kg.sparql_client:__init__:66 - Using remote ORKG SPARQL endpoint: https://orkg.org/triplestore
+2026-03-17 11:58:29.002 | INFO     | backend.rag.pipeline:ask:109 - Processing question: Which papers compare LLM and RNN?
+2026-03-17 11:58:31.179 | INFO     | backend.llm.ollama_client:generate:235 - LLM generation complete: 85 chars, model=llama3
+2026-03-17 11:58:31.179 | INFO     | backend.rag.entity_extractor:extract_entities:114 - Entity extraction complete: {'methods': ['LLM', 'RNN'], 'datasets': [], 'tasks': [], 'fields': [], 'metrics': []}
+2026-03-17 11:58:31.951 | INFO     | backend.llm.ollama_client:generate:235 - LLM generation complete: 17 chars, model=llama3
+2026-03-17 11:58:31.952 | INFO     | backend.rag.query_classifier:classify_query:72 - Query classified as 'method_comparison'
+2026-03-17 11:58:31.952 | INFO     | backend.rag.pipeline:ask:119 - Step 1 — Query type: method_comparison
+2026-03-17 11:58:31.952 | INFO     | backend.rag.pipeline:ask:120 - Step 2 — Entities: methods=['LLM', 'RNN'], datasets=[], tasks=[], fields=[], metrics=[]
+2026-03-17 11:58:31.952 | INFO     | backend.rag.pipeline:ask:139 - Step 3 — Normalization: method_variants={'rnn': ['recurrent neural network']}, dataset_variants={}
+2026-03-17 11:58:32.181 | INFO     | backend.kg.sparql_client:_query_remote:134 - Remote query returned 10 results.
+2026-03-17 11:58:32.312 | INFO     | backend.kg.sparql_client:_query_remote:134 - Remote query returned 10 results.
+2026-03-17 11:58:32.684 | INFO     | backend.kg.sparql_client:_query_remote:134 - Remote query returned 10 results.
+2026-03-17 11:58:42.047 | WARNING  | backend.kg.sparql_client:_query_remote:138 - SPARQL query timed out after 10s.
+  Query (truncated): PREFIX orkgc: <http://orkg.org/orkg/class/>
+PREFIX orkgp: <http://orkg.org/orkg/predicate/>
+PREFIX orkgr: <http://orkg.o...
+2026-03-17 11:58:42.048 | WARNING  | backend.rag.query_builder:retrieve_async:176 - Timeout on comparison(LLM,RNN) — falling back to title search
+2026-03-17 11:58:42.270 | INFO     | backend.kg.sparql_client:_query_remote:134 - Remote query returned 10 results.
+2026-03-17 11:58:42.271 | INFO     | backend.rag.query_builder:retrieve_async:210 - Async retrieval complete: 40 total results from 4 queries (strategies: ['timeout_fallback(comparison(LLM,RNN))', 'method(LLM)', 'method(RNN)', 'method(recurrent neural network)'])
+2026-03-17 11:58:42.271 | INFO     | backend.rag.pipeline:ask:147 - Step 4 — Retrieval: 40 results from 4 queries
+2026-03-17 11:58:42.271 | INFO     | backend.rag.pipeline:ask:154 - Step 5 — Ranking: 40 rows, top score=3
+2026-03-17 11:58:42.271 | INFO     | backend.rag.pipeline:ask:165 - Step 6 — Filter: 40 → 40 rows (dropped 0 noise rows)
+2026-03-17 11:58:42.271 | INFO     | backend.rag.pipeline:ask:172 - Step 7 — Truncation: top 8 papers
+2026-03-17 11:58:53.443 | INFO     | backend.llm.ollama_client:generate:235 - LLM generation complete: 1691 chars, model=llama3
+2026-03-17 11:58:53.444 | INFO     | backend.rag.pipeline:ask:184 - Step 9 — Answer: 1691 chars
+2026-03-17 11:59:17.957 | INFO     | backend.kg.sparql_client:_query_remote:134 - Remote query returned 1 results.

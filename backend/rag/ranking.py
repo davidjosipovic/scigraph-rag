@@ -103,13 +103,20 @@ def rank_results(
     query_datasets = {d.lower() for d in entities.datasets}
     query_keywords = {e.lower() for e in entities.all_entities()}
 
-    # Include variants in matching
+    # Include variants in matching.
+    # Skip 1–2 char variants (e.g. "dl", "ml", "rl") — too short for safe
+    # substring matching and would produce false positives on unrelated labels.
+    # The canonical form (index 0 from all_method_forms) is always kept.
     variant_methods: set[str] = set()
     for m in entities.methods:
-        variant_methods.update(v.lower() for v in entities.all_method_forms(m))
+        canonical, *variants = entities.all_method_forms(m)
+        variant_methods.add(canonical.lower())
+        variant_methods.update(v.lower() for v in variants if len(v) >= 3)
     variant_datasets: set[str] = set()
     for d in entities.datasets:
-        variant_datasets.update(v.lower() for v in entities.all_dataset_forms(d))
+        canonical, *variants = entities.all_dataset_forms(d)
+        variant_datasets.add(canonical.lower())
+        variant_datasets.update(v.lower() for v in variants if len(v) >= 3)
 
     all_match_methods = query_methods | variant_methods
     all_match_datasets = query_datasets | variant_datasets
@@ -193,13 +200,19 @@ def hard_filter(
     if not entities.methods or not entities.datasets:
         return results  # nothing to hard-filter
 
-    # Build match sets (canonical + variants, lowercased)
+    # Build match sets (canonical + variants, lowercased).
+    # Short variants (< 3 chars) are excluded to prevent false-positive
+    # substring matches (e.g. "ml" in "html").
     all_methods: set[str] = set()
     for m in entities.methods:
-        all_methods.update(v.lower() for v in entities.all_method_forms(m))
+        canonical, *variants = entities.all_method_forms(m)
+        all_methods.add(canonical.lower())
+        all_methods.update(v.lower() for v in variants if len(v) >= 3)
     all_datasets: set[str] = set()
     for d in entities.datasets:
-        all_datasets.update(v.lower() for v in entities.all_dataset_forms(d))
+        canonical, *variants = entities.all_dataset_forms(d)
+        all_datasets.add(canonical.lower())
+        all_datasets.update(v.lower() for v in variants if len(v) >= 3)
 
     # Collect labels per paper URI from ALL rows
     paper_method_labels: dict[str, set[str]] = {}

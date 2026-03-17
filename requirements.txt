@@ -18,4 +18,8 @@ loguru==0.7.3
 # Testing
 pytest==8.3.4
 pytest-asyncio==0.25.0
-httpx==0.28.1
+
+# Development (formatting / linting — not required at runtime)
+black==24.10.0
+isort==5.13.2
+ruff==0.8.6
