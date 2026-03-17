@@ -1,0 +1,54 @@
+2026-03-17 11:12:08.132 | INFO     | backend.api.routes:ask_question:49 - Received question: Which papers compare CNN and SVM?
+2026-03-17 11:12:08.132 | INFO     | backend.kg.sparql_client:__init__:66 - Using remote ORKG SPARQL endpoint: https://orkg.org/triplestore
+2026-03-17 11:12:08.132 | INFO     | backend.rag.pipeline:ask:109 - Processing question: Which papers compare CNN and SVM?
+2026-03-17 11:12:10.324 | INFO     | backend.llm.ollama_client:generate:226 - LLM generation complete: 85 chars, model=llama3
+2026-03-17 11:12:10.325 | INFO     | backend.rag.entity_extractor:extract_entities:114 - Entity extraction complete: {'methods': ['CNN', 'SVM'], 'datasets': [], 'tasks': [], 'fields': [], 'metrics': []}
+2026-03-17 11:12:11.099 | INFO     | backend.llm.ollama_client:generate:226 - LLM generation complete: 17 chars, model=llama3
+2026-03-17 11:12:11.099 | INFO     | backend.rag.query_classifier:classify_query:72 - Query classified as 'method_comparison'
+2026-03-17 11:12:11.100 | INFO     | backend.rag.pipeline:ask:119 - Step 1 — Query type: method_comparison
+2026-03-17 11:12:11.100 | INFO     | backend.rag.pipeline:ask:120 - Step 2 — Entities: methods=['CNN', 'SVM'], datasets=[], tasks=[], fields=[], metrics=[]
+2026-03-17 11:12:11.101 | INFO     | backend.rag.pipeline:ask:139 - Step 3 — Normalization: method_variants={'cnn': ['convolutional neural network', 'dcnn', 'deep convolutional network', 'convnet'], 'svm': ['support vector machine', 'support vector machines', 'support vector classification']}, dataset_variants={}
+2026-03-17 11:12:11.277 | INFO     | backend.kg.sparql_client:_query_remote:134 - Remote query returned 10 results.
+2026-03-17 11:12:11.337 | INFO     | backend.kg.sparql_client:_query_remote:134 - Remote query returned 10 results.
+2026-03-17 11:12:11.465 | INFO     | backend.kg.sparql_client:_query_remote:134 - Remote query returned 10 results.
+2026-03-17 11:12:11.480 | INFO     | backend.kg.sparql_client:_query_remote:134 - Remote query returned 10 results.
+2026-03-17 11:12:21.213 | WARNING  | backend.kg.sparql_client:_query_remote:138 - SPARQL query timed out after 10s.
+  Query (truncated): PREFIX orkgc: <http://orkg.org/orkg/class/>
+PREFIX orkgp: <http://orkg.org/orkg/predicate/>
+PREFIX orkgr: <http://orkg.o...
+2026-03-17 11:12:21.214 | WARNING  | backend.kg.sparql_client:_query_remote:138 - SPARQL query timed out after 10s.
+  Query (truncated): PREFIX orkgc: <http://orkg.org/orkg/class/>
+PREFIX orkgp: <http://orkg.org/orkg/predicate/>
+PREFIX orkgr: <http://orkg.o...
+2026-03-17 11:12:21.216 | WARNING  | backend.rag.query_builder:retrieve_async:174 - Timeout on comparison(CNN,SVM) — falling back to title search
+2026-03-17 11:12:21.625 | INFO     | backend.kg.sparql_client:_query_remote:134 - Remote query returned 10 results.
+2026-03-17 11:12:21.626 | WARNING  | backend.rag.query_builder:retrieve_async:174 - Timeout on comparison_variant(convolutional neural network,SVM) — falling back to title search
+2026-03-17 11:12:21.628 | INFO     | backend.rag.query_builder:retrieve_async:208 - Async retrieval complete: 60 total results from 6 queries (strategies: ['timeout_fallback(comparison(CNN,SVM))', 'timeout_fallback(comparison_variant(convolutional neural network,SVM))', 'method(CNN)', 'method(convolutional neural network)', 'method(SVM)', 'method(support vector machine)'])
+2026-03-17 11:12:21.628 | INFO     | backend.rag.pipeline:ask:147 - Step 4 — Retrieval: 60 results from 6 queries
+2026-03-17 11:12:21.629 | INFO     | backend.rag.pipeline:ask:154 - Step 5 — Ranking: 60 rows, top score=3
+2026-03-17 11:12:21.630 | INFO     | backend.rag.pipeline:ask:165 - Step 6 — Filter: 60 → 60 rows (dropped 0 noise rows)
+2026-03-17 11:12:21.630 | INFO     | backend.rag.pipeline:ask:172 - Step 7 — Truncation: top 8 papers
+2026-03-17 11:12:29.639 | INFO     | backend.llm.ollama_client:generate:226 - LLM generation complete: 1063 chars, model=llama3
+2026-03-17 11:12:29.640 | INFO     | backend.rag.pipeline:ask:184 - Step 9 — Answer: 1063 chars
+2026-03-17 11:12:29.778 | INFO     | backend.kg.sparql_client:_query_remote:134 - Remote query returned 1 results.
+2026-03-17 11:12:29.795 | INFO     | backend.rag.query_classifier:classify_query:72 - Query classified as 'topic_search'
+2026-03-17 11:12:29.799 | INFO     | backend.rag.query_classifier:classify_query:72 - Query classified as 'method_comparison'
+2026-03-17 11:12:29.800 | INFO     | backend.rag.query_classifier:classify_query:72 - Query classified as 'dataset_search'
+2026-03-17 11:12:29.800 | INFO     | backend.rag.query_classifier:classify_query:72 - Query classified as 'claim_verification'
+2026-03-17 11:12:29.801 | INFO     | backend.rag.query_classifier:classify_query:72 - Query classified as 'method_usage'
+2026-03-17 11:12:29.801 | INFO     | backend.rag.query_classifier:classify_query:72 - Query classified as 'paper_lookup'
+2026-03-17 11:12:29.802 | WARNING  | backend.rag.query_classifier:classify_query:75 - Unexpected classifier output: 'I don't know' — falling back to topic_search
+2026-03-17 11:12:29.802 | INFO     | backend.rag.query_classifier:classify_query:72 - Query classified as 'topic_search'
+2026-03-17 11:12:29.802 | ERROR    | backend.rag.query_classifier:classify_query:81 - Query classification failed: Ollama down — falling back to topic_search
+2026-03-17 11:12:29.803 | INFO     | backend.rag.query_classifier:classify_query:72 - Query classified as 'topic_search'
+2026-03-17 11:12:29.803 | INFO     | backend.rag.entity_extractor:extract_entities:114 - Entity extraction complete: {'methods': ['CNN', 'SVM'], 'datasets': [], 'tasks': [], 'fields': [], 'metrics': []}
+2026-03-17 11:12:29.804 | INFO     | backend.rag.entity_extractor:extract_entities:114 - Entity extraction complete: {'methods': [], 'datasets': ['MNIST', 'CIFAR-10'], 'tasks': [], 'fields': [], 'metrics': []}
+2026-03-17 11:12:29.804 | INFO     | backend.rag.entity_extractor:extract_entities:114 - Entity extraction complete: {'methods': ['BERT'], 'datasets': [], 'tasks': ['sentiment analysis'], 'fields': [], 'metrics': []}
+2026-03-17 11:12:29.805 | INFO     | backend.rag.entity_extractor:extract_entities:114 - Entity extraction complete: {'methods': [], 'datasets': [], 'tasks': [], 'fields': ['natural language processing'], 'metrics': []}
+2026-03-17 11:12:29.805 | INFO     | backend.rag.entity_extractor:extract_entities:114 - Entity extraction complete: {'methods': [], 'datasets': ['MNIST'], 'tasks': [], 'fields': [], 'metrics': ['accuracy']}
+2026-03-17 11:12:29.806 | WARNING  | backend.rag.entity_extractor:extract_entities:102 - Entity extractor: no JSON found in response: 'I cannot parse this'
+2026-03-17 11:12:29.806 | ERROR    | backend.rag.entity_extractor:extract_entities:121 - Entity extraction failed: Ollama down
+2026-03-17 11:12:29.806 | INFO     | backend.rag.entity_extractor:extract_entities:114 - Entity extraction complete: {'methods': ['BERT'], 'datasets': [], 'tasks': [], 'fields': [], 'metrics': []}
+2026-03-17 11:12:29.807 | INFO     | backend.rag.entity_extractor:extract_entities:114 - Entity extraction complete: {'methods': ['CNN'], 'datasets': ['MNIST'], 'tasks': [], 'fields': [], 'metrics': []}
+2026-03-17 11:12:29.807 | INFO     | backend.rag.entity_extractor:extract_entities:114 - Entity extraction complete: {'methods': ['CNN', 'SVM'], 'datasets': ['MNIST'], 'tasks': [], 'fields': [], 'metrics': []}
+2026-03-17 11:12:29.808 | INFO     | backend.rag.entity_extractor:extract_entities:114 - Entity extraction complete: {'methods': ['CNN'], 'datasets': [], 'tasks': [], 'fields': [], 'metrics': []}

@@ -180,6 +180,85 @@ METHOD_SYNONYMS: dict[str, list[str]] = {
     "automl": ["automated machine learning", "neural architecture search"],
 }
 
+TASK_SYNONYMS: dict[str, list[str]] = {
+    # ── Named entity recognition ─────────────────────────────────────
+    "ner": ["named entity recognition", "entity recognition", "entity extraction", "entity tagging"],
+    "named entity recognition": ["ner", "entity recognition", "entity tagging"],
+
+    # ── Part-of-speech ───────────────────────────────────────────────
+    "pos tagging": ["part-of-speech tagging", "pos", "part of speech tagging"],
+    "pos": ["part-of-speech tagging", "pos tagging"],
+
+    # ── Machine translation ──────────────────────────────────────────
+    "mt": ["machine translation", "neural machine translation", "nmt"],
+    "machine translation": ["mt", "nmt", "neural machine translation"],
+    "nmt": ["neural machine translation", "machine translation"],
+
+    # ── Question answering ───────────────────────────────────────────
+    "qa": ["question answering", "reading comprehension", "open domain qa"],
+    "question answering": ["qa", "reading comprehension", "open-domain qa"],
+    "reading comprehension": ["qa", "question answering"],
+
+    # ── Sentiment / classification ───────────────────────────────────
+    "sentiment analysis": ["opinion mining", "sentiment classification", "opinion analysis"],
+    "text classification": ["document classification", "text categorization", "sentence classification"],
+    "image classification": ["visual recognition", "object recognition", "visual classification"],
+
+    # ── Object detection / segmentation ─────────────────────────────
+    "object detection": ["visual object detection", "bounding box detection"],
+    "semantic segmentation": ["scene parsing", "pixel-level classification", "scene segmentation"],
+    "instance segmentation": ["mask prediction", "panoptic segmentation"],
+
+    # ── Speech ───────────────────────────────────────────────────────
+    "asr": ["automatic speech recognition", "speech recognition", "voice recognition"],
+    "speech recognition": ["asr", "automatic speech recognition"],
+
+    # ── Generation ───────────────────────────────────────────────────
+    "text generation": ["language generation", "natural language generation", "nlg"],
+    "image generation": ["text-to-image generation", "image synthesis"],
+    "summarization": ["text summarization", "document summarization", "abstractive summarization", "extractive summarization"],
+
+    # ── Inference / entailment ───────────────────────────────────────
+    "nli": ["natural language inference", "textual entailment", "recognizing textual entailment"],
+    "natural language inference": ["nli", "textual entailment"],
+
+    # ── Parsing / extraction ─────────────────────────────────────────
+    "dependency parsing": ["syntactic parsing", "dependency analysis"],
+    "relation extraction": ["information extraction", "relational learning"],
+    "coreference resolution": ["coref resolution", "anaphora resolution"],
+
+    # ── Retrieval ────────────────────────────────────────────────────
+    "information retrieval": ["ir", "document retrieval", "passage retrieval"],
+    "ir": ["information retrieval", "document retrieval"],
+}
+
+FIELD_SYNONYMS: dict[str, list[str]] = {
+    # ── NLP ──────────────────────────────────────────────────────────
+    "nlp": ["natural language processing", "computational linguistics", "text mining", "text analysis"],
+    "natural language processing": ["nlp", "text analysis", "computational linguistics"],
+
+    # ── Computer vision ──────────────────────────────────────────────
+    "cv": ["computer vision", "image processing", "visual computing"],
+    "computer vision": ["cv", "image understanding", "visual recognition"],
+
+    # ── Medical / biomedical ─────────────────────────────────────────
+    "medical imaging": ["clinical imaging", "radiology ai", "healthcare imaging", "biomedical imaging"],
+    "bioinformatics": ["computational biology", "genomics", "proteomics"],
+
+    # ── Robotics ─────────────────────────────────────────────────────
+    "robotics": ["robot learning", "autonomous systems", "robotic control", "autonomous robots"],
+
+    # ── Speech ───────────────────────────────────────────────────────
+    "speech processing": ["audio processing", "spoken language processing", "voice processing"],
+
+    # ── Graph / knowledge ────────────────────────────────────────────
+    "knowledge graph": ["knowledge base", "ontology", "semantic web", "linked data"],
+
+    # ── Recommendation ───────────────────────────────────────────────
+    "recommendation systems": ["recommender systems", "collaborative filtering", "content-based filtering"],
+    "recommender systems": ["recommendation systems", "collaborative filtering"],
+}
+
 DATASET_SYNONYMS: dict[str, list[str]] = {
     # ── Handwritten / digits ─────────────────────────────────────────
     "mnist": ["benchmark mnist", "sequential mnist", "handwritten mnist", "le cun mnist"],
@@ -283,7 +362,9 @@ class ExpandedEntities:
         datasets: original extracted datasets
         method_variants:  {canonical → [variant1, variant2, ...]}
         dataset_variants: {canonical → [variant1, variant2, ...]}
-        tasks / fields / metrics: passed through unchanged
+        task_variants:    {canonical → [variant1, variant2, ...]}
+        field_variants:   {canonical → [variant1, variant2, ...]}
+        metrics: passed through unchanged (no synonyms)
     """
 
     methods: list[str] = field(default_factory=list)
@@ -293,6 +374,8 @@ class ExpandedEntities:
     metrics: list[str] = field(default_factory=list)
     method_variants: dict[str, list[str]] = field(default_factory=dict)
     dataset_variants: dict[str, list[str]] = field(default_factory=dict)
+    task_variants: dict[str, list[str]] = field(default_factory=dict)
+    field_variants: dict[str, list[str]] = field(default_factory=dict)
 
     def all_method_forms(self, method: str) -> list[str]:
         """Return the canonical form + all variants for a method."""
@@ -303,6 +386,16 @@ class ExpandedEntities:
         """Return the canonical form + all variants for a dataset."""
         variants = self.dataset_variants.get(dataset.lower(), [])
         return [dataset] + variants
+
+    def all_task_forms(self, task: str) -> list[str]:
+        """Return the canonical form + all variants for a task."""
+        variants = self.task_variants.get(task.lower(), [])
+        return [task] + variants
+
+    def all_field_forms(self, field_name: str) -> list[str]:
+        """Return the canonical form + all variants for a research field."""
+        variants = self.field_variants.get(field_name.lower(), [])
+        return [field_name] + variants
 
     def all_entities(self) -> list[str]:
         """Return all original entities as a flat list."""
@@ -324,9 +417,7 @@ def expand_entities(entities: ExtractedEntities) -> ExpandedEntities:
     """
     Expand extracted entities with their known synonym variants.
 
-    For each method/dataset, looks up the synonym dictionary and attaches
-    all known alternative surface forms.  Tasks, fields, and metrics are
-    passed through unchanged.
+    Looks up synonym dictionaries for methods, datasets, tasks, and fields.
 
     Args:
         entities: Raw entities from the entity extractor.
@@ -351,6 +442,16 @@ def expand_entities(entities: ExtractedEntities) -> ExpandedEntities:
         key = dataset.lower()
         if key in DATASET_SYNONYMS:
             expanded.dataset_variants[key] = DATASET_SYNONYMS[key]
+
+    for task in entities.tasks:
+        key = task.lower()
+        if key in TASK_SYNONYMS:
+            expanded.task_variants[key] = TASK_SYNONYMS[key]
+
+    for field_name in entities.fields:
+        key = field_name.lower()
+        if key in FIELD_SYNONYMS:
+            expanded.field_variants[key] = FIELD_SYNONYMS[key]
 
     return expanded
 

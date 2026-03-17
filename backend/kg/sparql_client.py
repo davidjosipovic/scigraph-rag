@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import asyncio
 import socket
+import threading
 import urllib.error
 from typing import Any
 from loguru import logger
@@ -28,6 +29,15 @@ from backend.config import settings
 
 class SPARQLTimeoutError(Exception):
     """Raised when a SPARQL query times out so callers can handle it."""
+
+
+# Module-level result cache: query string → result rows.
+# Shared across all SPARQLClient instances (singleton pattern).
+# Capped at 256 entries; when full the oldest entry is evicted.
+# Protected by a lock so concurrent threads don't corrupt the dict.
+_SPARQL_CACHE: dict[str, list[dict[str, Any]]] = {}
+_SPARQL_CACHE_MAX = 256
+_SPARQL_CACHE_LOCK = threading.Lock()
 
 
 class SPARQLClient:
@@ -61,6 +71,7 @@ class SPARQLClient:
         """
         Execute a SPARQL SELECT query and return results as a list of dicts.
 
+        Results are cached by query string to avoid redundant network calls.
         Each dict maps variable names → their string values.
         On timeout or error the query is skipped and an empty list is returned.
 
@@ -74,9 +85,25 @@ class SPARQLClient:
             SPARQLTimeoutError: When the remote endpoint times out.
                 Callers can catch this to trigger a fallback query.
         """
+        with _SPARQL_CACHE_LOCK:
+            if query in _SPARQL_CACHE:
+                logger.debug("SPARQL cache hit")
+                return _SPARQL_CACHE[query]
+
+        # Execute outside the lock so other threads can use the cache concurrently
         if self._local_graph is not None:
-            return self._query_local(query)
-        return self._query_remote(query)
+            results = self._query_local(query)
+        else:
+            results = self._query_remote(query)
+
+        with _SPARQL_CACHE_LOCK:
+            # Evict oldest entry when cache is full
+            if len(_SPARQL_CACHE) >= _SPARQL_CACHE_MAX:
+                oldest_key = next(iter(_SPARQL_CACHE))
+                del _SPARQL_CACHE[oldest_key]
+            _SPARQL_CACHE[query] = results
+
+        return results
 
     async def execute_async(self, query: str) -> list[dict[str, Any]]:
         """

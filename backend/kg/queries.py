@@ -47,6 +47,23 @@ def _sanitize(value: str) -> str:
     return sanitized.strip()
 
 
+def _label_filter(var: str, value: str) -> str:
+    """
+    Return a SPARQL FILTER clause for matching an entity label.
+
+    Short entities (≤ 4 chars, typically acronyms like CNN, NER, F1, BERT)
+    use word-boundary regex to prevent false-positive substring matches.
+    For example, CONTAINS would match "NER" inside "mineral" or "manner".
+    Word-boundary regex requires the entity to appear as a standalone word.
+
+    Longer entities use CONTAINS, which is index-optimised in Virtuoso and
+    safe for multi-word phrases like "convolutional neural network".
+    """
+    if len(value) <= 4:
+        return f'FILTER(REGEX({var}, "\\\\b{value}\\\\b", "i"))'
+    return f'FILTER(CONTAINS(LCASE({var}), LCASE("{value}")))'
+
+
 # ─── SEMANTIC RETRIEVAL QUERIES ──────────────────────────────────
 # These traverse graph relationships, not paper titles.
 
@@ -59,18 +76,20 @@ def papers_by_method(method: str, limit: int = 5) -> str:
     Matches on the label of the method entity, not the paper title.
     """
     method = _sanitize(method)
+    filter_m = _label_filter("?methodLabel", method)
     return f"""{PREFIXES}
 
-SELECT DISTINCT ?paper ?title ?doi ?methodLabel ?contribLabel WHERE {{
+SELECT DISTINCT ?paper ?title ?doi ?year ?methodLabel ?contribLabel WHERE {{
     ?paper rdf:type orkgc:Paper .
     ?paper rdfs:label ?title .
     ?paper orkgp:P31 ?contrib .
     ?contrib rdfs:label ?contribLabel .
     ?contrib ?pred ?method .
     ?method rdfs:label ?methodLabel .
-    FILTER(CONTAINS(LCASE(?methodLabel), LCASE("{method}")))
+    {filter_m}
 
     OPTIONAL {{ ?paper orkgp:P26 ?doi . }}
+    OPTIONAL {{ ?paper orkgp:P28 ?year . }}
 }}
 LIMIT {limit}
 """
@@ -83,18 +102,20 @@ def papers_by_dataset(dataset: str, limit: int = 5) -> str:
     Traverses: Paper → Contribution → * → Dataset entity
     """
     dataset = _sanitize(dataset)
+    filter_d = _label_filter("?datasetLabel", dataset)
     return f"""{PREFIXES}
 
-SELECT DISTINCT ?paper ?title ?doi ?datasetLabel ?contribLabel WHERE {{
+SELECT DISTINCT ?paper ?title ?doi ?year ?datasetLabel ?contribLabel WHERE {{
     ?paper rdf:type orkgc:Paper .
     ?paper rdfs:label ?title .
     ?paper orkgp:P31 ?contrib .
     ?contrib rdfs:label ?contribLabel .
     ?contrib ?pred ?dataset .
     ?dataset rdfs:label ?datasetLabel .
-    FILTER(CONTAINS(LCASE(?datasetLabel), LCASE("{dataset}")))
+    {filter_d}
 
     OPTIONAL {{ ?paper orkgp:P26 ?doi . }}
+    OPTIONAL {{ ?paper orkgp:P28 ?year . }}
 }}
 LIMIT {limit}
 """
@@ -107,17 +128,19 @@ def papers_by_research_problem(problem: str, limit: int = 5) -> str:
     Traverses: Paper → Contribution → P32 (research problem) → Problem entity
     """
     problem = _sanitize(problem)
+    filter_p = _label_filter("?problemLabel", problem)
     return f"""{PREFIXES}
 
-SELECT DISTINCT ?paper ?title ?doi ?problemLabel WHERE {{
+SELECT DISTINCT ?paper ?title ?doi ?year ?problemLabel WHERE {{
     ?paper rdf:type orkgc:Paper .
     ?paper rdfs:label ?title .
     ?paper orkgp:P31 ?contrib .
     ?contrib orkgp:P32 ?problem .
     ?problem rdfs:label ?problemLabel .
-    FILTER(CONTAINS(LCASE(?problemLabel), LCASE("{problem}")))
+    {filter_p}
 
     OPTIONAL {{ ?paper orkgp:P26 ?doi . }}
+    OPTIONAL {{ ?paper orkgp:P28 ?year . }}
 }}
 LIMIT {limit}
 """
@@ -130,16 +153,18 @@ def papers_by_research_field(field: str, limit: int = 5) -> str:
     Traverses: Paper → P30 (research field) → Field entity
     """
     field = _sanitize(field)
+    filter_f = _label_filter("?fieldLabel", field)
     return f"""{PREFIXES}
 
-SELECT DISTINCT ?paper ?title ?doi ?fieldLabel WHERE {{
+SELECT DISTINCT ?paper ?title ?doi ?year ?fieldLabel WHERE {{
     ?paper rdf:type orkgc:Paper .
     ?paper rdfs:label ?title .
     ?paper orkgp:P30 ?fieldRes .
     ?fieldRes rdfs:label ?fieldLabel .
-    FILTER(CONTAINS(LCASE(?fieldLabel), LCASE("{field}")))
+    {filter_f}
 
     OPTIONAL {{ ?paper orkgp:P26 ?doi . }}
+    OPTIONAL {{ ?paper orkgp:P28 ?year . }}
 }}
 LIMIT {limit}
 """
@@ -159,9 +184,11 @@ def papers_comparing_methods(method_a: str, method_b: str, limit: int = 5) -> st
     """
     method_a = _sanitize(method_a)
     method_b = _sanitize(method_b)
+    filter_a = _label_filter("?methodALabel", method_a)
+    filter_b = _label_filter("?methodBLabel", method_b)
     return f"""{PREFIXES}
 
-SELECT DISTINCT ?paper ?title ?doi ?methodALabel ?methodBLabel WHERE {{
+SELECT DISTINCT ?paper ?title ?doi ?year ?methodALabel ?methodBLabel WHERE {{
     ?paper rdf:type orkgc:Paper .
     ?paper rdfs:label ?title .
 
@@ -169,15 +196,16 @@ SELECT DISTINCT ?paper ?title ?doi ?methodALabel ?methodBLabel WHERE {{
     ?paper orkgp:P31 ?contribA .
     ?contribA ?predA ?entityA .
     ?entityA rdfs:label ?methodALabel .
-    FILTER(CONTAINS(LCASE(?methodALabel), LCASE("{method_a}")))
+    {filter_a}
 
     # Method B — via any contribution of this paper
     ?paper orkgp:P31 ?contribB .
     ?contribB ?predB ?entityB .
     ?entityB rdfs:label ?methodBLabel .
-    FILTER(CONTAINS(LCASE(?methodBLabel), LCASE("{method_b}")))
+    {filter_b}
 
     OPTIONAL {{ ?paper orkgp:P26 ?doi . }}
+    OPTIONAL {{ ?paper orkgp:P28 ?year . }}
 }}
 LIMIT {limit}
 """
@@ -204,9 +232,11 @@ def papers_by_method_and_dataset(
     """
     method = _sanitize(method)
     dataset = _sanitize(dataset)
+    filter_m = _label_filter("?methodLabel", method)
+    filter_d = _label_filter("?datasetLabel", dataset)
     return f"""{PREFIXES}
 
-SELECT DISTINCT ?paper ?title ?doi ?methodLabel ?datasetLabel WHERE {{
+SELECT DISTINCT ?paper ?title ?doi ?year ?methodLabel ?datasetLabel WHERE {{
     ?paper rdf:type orkgc:Paper .
     ?paper rdfs:label ?title .
 
@@ -215,11 +245,11 @@ SELECT DISTINCT ?paper ?title ?doi ?methodLabel ?datasetLabel WHERE {{
         ?paper orkgp:P31 ?contrib .
         ?contrib ?predM ?entityM .
         ?entityM rdfs:label ?methodLabel .
-        FILTER(CONTAINS(LCASE(?methodLabel), LCASE("{method}")))
+        {filter_m}
 
         ?contrib ?predD ?entityD .
         ?entityD rdfs:label ?datasetLabel .
-        FILTER(CONTAINS(LCASE(?datasetLabel), LCASE("{dataset}")))
+        {filter_d}
     }}
     UNION
     {{
@@ -227,17 +257,18 @@ SELECT DISTINCT ?paper ?title ?doi ?methodLabel ?datasetLabel WHERE {{
         ?paper orkgp:P31 ?contribM .
         ?contribM ?predM2 ?entityM2 .
         ?entityM2 rdfs:label ?methodLabel .
-        FILTER(CONTAINS(LCASE(?methodLabel), LCASE("{method}")))
+        {filter_m}
 
         ?paper orkgp:P31 ?contribD .
         ?contribD ?predD2 ?entityD2 .
         ?entityD2 rdfs:label ?datasetLabel .
-        FILTER(CONTAINS(LCASE(?datasetLabel), LCASE("{dataset}")))
+        {filter_d}
 
         FILTER(?contribM != ?contribD)
     }}
 
     OPTIONAL {{ ?paper orkgp:P26 ?doi . }}
+    OPTIONAL {{ ?paper orkgp:P28 ?year . }}
 }}
 LIMIT {limit}
 """
@@ -296,11 +327,13 @@ def claim_evidence(keywords: list[str], limit: int = 15) -> str:
     if not keywords:
         return ""
     filters = " || ".join(
-        f'CONTAINS(LCASE(?valueLabel), LCASE("{kw}"))' for kw in keywords
+        f'REGEX(?valueLabel, "\\\\b{kw}\\\\b", "i")' if len(kw) <= 4
+        else f'CONTAINS(LCASE(?valueLabel), LCASE("{kw}"))'
+        for kw in keywords
     )
     return f"""{PREFIXES}
 
-SELECT DISTINCT ?paper ?title ?doi ?contribLabel ?predLabel ?valueLabel WHERE {{
+SELECT DISTINCT ?paper ?title ?doi ?year ?contribLabel ?predLabel ?valueLabel WHERE {{
     ?paper rdf:type orkgc:Paper .
     ?paper rdfs:label ?title .
     ?paper orkgp:P31 ?contrib .
@@ -311,6 +344,7 @@ SELECT DISTINCT ?paper ?title ?doi ?contribLabel ?predLabel ?valueLabel WHERE {{
     FILTER({filters})
 
     OPTIONAL {{ ?paper orkgp:P26 ?doi . }}
+    OPTIONAL {{ ?paper orkgp:P28 ?year . }}
 }}
 LIMIT {limit}
 """
@@ -326,7 +360,7 @@ def paper_lookup_by_title(title_fragment: str, limit: int = 5) -> str:
     title_fragment = _sanitize(title_fragment)
     return f"""{PREFIXES}
 
-SELECT DISTINCT ?paper ?title ?doi ?fieldLabel WHERE {{
+SELECT DISTINCT ?paper ?title ?doi ?year ?fieldLabel WHERE {{
     ?paper rdf:type orkgc:Paper .
     ?paper rdfs:label ?title .
     FILTER(CONTAINS(LCASE(?title), LCASE("{title_fragment}")))
@@ -351,17 +385,19 @@ def broad_entity_search(keyword: str, limit: int = 5) -> str:
     the keyword. This is more inclusive than method/dataset-specific queries.
     """
     keyword = _sanitize(keyword)
+    filter_e = _label_filter("?entityLabel", keyword)
     return f"""{PREFIXES}
 
-SELECT DISTINCT ?paper ?title ?doi ?entityLabel WHERE {{
+SELECT DISTINCT ?paper ?title ?doi ?year ?entityLabel WHERE {{
     ?paper rdf:type orkgc:Paper .
     ?paper rdfs:label ?title .
     ?paper orkgp:P31 ?contrib .
     ?contrib ?pred ?entity .
     ?entity rdfs:label ?entityLabel .
-    FILTER(CONTAINS(LCASE(?entityLabel), LCASE("{keyword}")))
+    {filter_e}
 
     OPTIONAL {{ ?paper orkgp:P26 ?doi . }}
+    OPTIONAL {{ ?paper orkgp:P28 ?year . }}
 }}
 LIMIT {limit}
 """
@@ -372,17 +408,20 @@ def title_keyword_search(keywords: list[str], limit: int = 5) -> str:
     Last-resort fallback: search paper titles for keywords.
 
     Only used when graph-based queries return no results.
+    Short keywords (≤ 4 chars, e.g. "NER", "F1") use word-boundary regex
+    to prevent substring false positives like "NER" matching "mineral".
     """
-    keywords = [_sanitize(kw) for kw in keywords if _sanitize(kw)]
-    if len(keywords) == 1:
-        filter_clause = f'CONTAINS(LCASE(?title), LCASE("{keywords[0]}"))'
-    else:
-        filter_clause = " || ".join(
-            f'CONTAINS(LCASE(?title), LCASE("{kw}"))' for kw in keywords
-        )
+    keywords = list(dict.fromkeys(_sanitize(kw) for kw in keywords if _sanitize(kw)))
+    if not keywords:
+        return ""
+    filter_clause = " || ".join(
+        f'REGEX(LCASE(?title), "\\\\b{kw}\\\\b", "i")' if len(kw) <= 4
+        else f'CONTAINS(LCASE(?title), LCASE("{kw}"))'
+        for kw in keywords
+    )
     return f"""{PREFIXES}
 
-SELECT DISTINCT ?paper ?title ?doi ?fieldLabel WHERE {{
+SELECT DISTINCT ?paper ?title ?doi ?year ?fieldLabel WHERE {{
     ?paper rdf:type orkgc:Paper .
     ?paper rdfs:label ?title .
     FILTER({filter_clause})

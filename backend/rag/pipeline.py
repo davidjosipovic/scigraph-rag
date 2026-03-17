@@ -177,10 +177,10 @@ class RAGPipeline:
         context = build_context(truncated, query_type.value)
         logger.debug(f"Step 8 — Context: {len(context)} chars")
 
-        # ── Step 9: LLM generation ──
+        # ── Step 9: LLM generation (run in executor to avoid blocking event loop) ──
         prompt_template = get_prompt_template(query_type.value)
         prompt = prompt_template.format(context=context, question=question)
-        answer = self.llm.generate(prompt)
+        answer = await loop.run_in_executor(None, self.llm.generate, prompt)
         logger.info(f"Step 9 — Answer: {len(answer)} chars")
 
         # ── Step 10: Format sources ──

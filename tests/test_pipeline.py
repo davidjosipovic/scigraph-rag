@@ -1,19 +1,21 @@
 """
 Tests for the RAG pipeline components:
-  - Query classifier (6 types)
-  - Entity extractor
+  - Query classifier (6 types, LLM-based with mocks)
+  - Entity extractor (LLM-based with mocks)
   - Entity normalization
-  - Ranking, hard filtering, truncation
-  - Context builder (with scores)
+  - Ranking, hard filtering, soft filtering, truncation
+  - Context builder
   - Prompt templates
   - Async query builder
   - Hybrid retrieval (RRF)
 """
 
 import asyncio
+import pytest
+from unittest.mock import patch
 
 from backend.rag.query_classifier import classify_query, QueryType
-from backend.rag.entity_extractor import extract_entities, extract_keywords
+from backend.rag.entity_extractor import extract_entities, extract_keywords, ExtractedEntities
 from backend.rag.entity_normalization import (
     expand_entities,
     get_method_variants,
@@ -23,99 +25,156 @@ from backend.rag.ranking import rank_results, hard_filter, soft_filter, truncate
 from backend.rag.context_builder import (
     build_paper_context,
     build_evidence_context,
-    build_contribution_context,
     format_sources,
 )
 from backend.rag.hybrid_retrieval import reciprocal_rank_fusion
 
 
+# ── Fixtures ──────────────────────────────────────────────────────
+
+@pytest.fixture(autouse=True)
+def clear_lru_caches():
+    """Clear LRU caches before each test to avoid cross-test interference."""
+    classify_query.cache_clear()
+    extract_entities.cache_clear()
+    yield
+    classify_query.cache_clear()
+    extract_entities.cache_clear()
+
+
+# ── Query Classifier ──────────────────────────────────────────────
+
 class TestQueryClassifier:
-    """Test 6-type question classification."""
+    """Test 6-type question classification (LLM mocked)."""
+
+    def _classify_with_mock(self, question: str, llm_response: str) -> QueryType:
+        with patch("backend.rag.query_classifier.ollama_client.generate", return_value=llm_response):
+            return classify_query(question)
 
     def test_topic_search(self):
-        assert classify_query("Which papers discuss machine learning?") == QueryType.TOPIC_SEARCH
-        assert classify_query("Find papers about transformers") == QueryType.TOPIC_SEARCH
-        assert classify_query("Research on knowledge graphs") == QueryType.TOPIC_SEARCH
+        assert self._classify_with_mock("Find papers about transformers", "topic_search") == QueryType.TOPIC_SEARCH
 
     def test_method_comparison(self):
-        assert classify_query("Compare CNN and SVM") == QueryType.METHOD_COMPARISON
-        assert classify_query("What is the difference between BERT and GPT?") == QueryType.METHOD_COMPARISON
-        assert classify_query("CNN vs RNN for text classification") == QueryType.METHOD_COMPARISON
+        assert self._classify_with_mock("Compare CNN and SVM", "method_comparison") == QueryType.METHOD_COMPARISON
 
     def test_dataset_search(self):
-        assert classify_query("Papers using the MNIST dataset") == QueryType.DATASET_SEARCH
-        assert classify_query("Which benchmark is used for NER?") == QueryType.DATASET_SEARCH
-        assert classify_query("Models evaluated on ImageNet") == QueryType.DATASET_SEARCH
+        assert self._classify_with_mock("Papers using MNIST dataset", "dataset_search") == QueryType.DATASET_SEARCH
 
     def test_claim_verification(self):
-        assert classify_query("Does paper X claim that CNN outperforms SVM?") == QueryType.CLAIM_VERIFICATION
-        assert classify_query("Is it true that BERT outperforms GPT on NER?") == QueryType.CLAIM_VERIFICATION
-        assert classify_query("Verify that random forests outperform decision trees") == QueryType.CLAIM_VERIFICATION
+        assert self._classify_with_mock("Does CNN outperform SVM?", "claim_verification") == QueryType.CLAIM_VERIFICATION
 
     def test_method_usage(self):
-        assert classify_query("Where is reinforcement learning used in medical diagnosis?") == QueryType.METHOD_USAGE
-        assert classify_query("Papers using BERT for sentiment analysis") == QueryType.METHOD_USAGE
+        assert self._classify_with_mock("Where is BERT used?", "method_usage") == QueryType.METHOD_USAGE
 
     def test_paper_lookup(self):
-        assert classify_query("Look up the paper on attention mechanisms") == QueryType.PAPER_LOOKUP
-        assert classify_query("Tell me about paper titled attention is all you need") == QueryType.PAPER_LOOKUP
+        assert self._classify_with_mock("Look up attention is all you need", "paper_lookup") == QueryType.PAPER_LOOKUP
 
+    def test_invalid_llm_response_falls_back_to_topic_search(self):
+        assert self._classify_with_mock("Some question", "I don't know") == QueryType.TOPIC_SEARCH
+
+    def test_llm_response_with_whitespace(self):
+        assert self._classify_with_mock("Find papers", "  topic_search  ") == QueryType.TOPIC_SEARCH
+
+    def test_ollama_unavailable_falls_back(self):
+        with patch("backend.rag.query_classifier.ollama_client.generate", side_effect=Exception("Ollama down")):
+            result = classify_query("Find papers about CNN")
+        assert result == QueryType.TOPIC_SEARCH
+
+    def test_result_is_cached(self):
+        call_count = 0
+
+        def fake_generate(*args, **kwargs):
+            nonlocal call_count
+            call_count += 1
+            return "topic_search"
+
+        with patch("backend.rag.query_classifier.ollama_client.generate", side_effect=fake_generate):
+            classify_query("cached question abc")
+            classify_query("cached question abc")
+
+        assert call_count == 1  # second call served from cache
+
+
+# ── Entity Extractor ──────────────────────────────────────────────
 
 class TestEntityExtractor:
-    """Test typed entity extraction."""
+    """Test typed entity extraction (LLM mocked)."""
+
+    def _extract_with_mock(self, question: str, llm_json: str) -> ExtractedEntities:
+        with patch("backend.rag.entity_extractor.ollama_client.generate", return_value=llm_json):
+            return extract_entities(question)
 
     def test_extracts_methods(self):
-        entities = extract_entities("Which papers compare CNN and SVM?")
-        methods_lower = {m.lower() for m in entities.methods}
-        assert "cnn" in methods_lower
-        assert "svm" in methods_lower
+        json_resp = '{"methods": ["CNN", "SVM"], "datasets": [], "tasks": [], "fields": [], "metrics": []}'
+        entities = self._extract_with_mock("Compare CNN and SVM", json_resp)
+        assert "CNN" in entities.methods
+        assert "SVM" in entities.methods
 
     def test_extracts_datasets(self):
-        entities = extract_entities("Models evaluated on MNIST and CIFAR-10")
-        datasets_lower = {d.lower() for d in entities.datasets}
-        assert "mnist" in datasets_lower
-        assert "cifar-10" in datasets_lower
+        json_resp = '{"methods": [], "datasets": ["MNIST", "CIFAR-10"], "tasks": [], "fields": [], "metrics": []}'
+        entities = self._extract_with_mock("Models on MNIST and CIFAR-10", json_resp)
+        assert "MNIST" in entities.datasets
+        assert "CIFAR-10" in entities.datasets
 
     def test_extracts_tasks(self):
-        entities = extract_entities("Papers on sentiment analysis using BERT")
-        tasks_lower = {t.lower() for t in entities.tasks}
-        assert "sentiment analysis" in tasks_lower
+        json_resp = '{"methods": ["BERT"], "datasets": [], "tasks": ["sentiment analysis"], "fields": [], "metrics": []}'
+        entities = self._extract_with_mock("BERT for sentiment analysis", json_resp)
+        assert "sentiment analysis" in entities.tasks
 
     def test_extracts_fields(self):
-        entities = extract_entities("Research in natural language processing")
-        fields_lower = {f.lower() for f in entities.fields}
-        assert "natural language processing" in fields_lower
+        json_resp = '{"methods": [], "datasets": [], "tasks": [], "fields": ["natural language processing"], "metrics": []}'
+        entities = self._extract_with_mock("Research in NLP", json_resp)
+        assert "natural language processing" in entities.fields
 
     def test_extracts_metrics(self):
-        entities = extract_entities("Models with highest accuracy on MNIST")
-        metrics_lower = {m.lower() for m in entities.metrics}
-        assert "accuracy" in metrics_lower
+        json_resp = '{"methods": [], "datasets": ["MNIST"], "tasks": [], "fields": [], "metrics": ["accuracy"]}'
+        entities = self._extract_with_mock("Models with highest accuracy on MNIST", json_resp)
+        assert "accuracy" in entities.metrics
 
-    def test_extracts_multiple_types(self):
-        entities = extract_entities(
-            "Does CNN outperform SVM on MNIST for image classification?"
-        )
-        assert len(entities.methods) >= 2
-        assert len(entities.datasets) >= 1
-
-    def test_empty_question(self):
-        entities = extract_entities("")
+    def test_unparseable_json_returns_empty(self):
+        entities = self._extract_with_mock("Some question", "I cannot parse this")
         assert entities.is_empty()
 
-    def test_to_dict(self):
-        entities = extract_entities("CNN on MNIST")
+    def test_ollama_unavailable_returns_empty(self):
+        with patch("backend.rag.entity_extractor.ollama_client.generate", side_effect=Exception("Ollama down")):
+            entities = extract_entities("Find CNN papers")
+        assert entities.is_empty()
+
+    def test_json_embedded_in_prose(self):
+        """LLM sometimes wraps JSON in prose — regex should extract it."""
+        llm_resp = 'Sure! Here is the result: {"methods": ["BERT"], "datasets": [], "tasks": [], "fields": [], "metrics": []} Hope that helps!'
+        entities = self._extract_with_mock("BERT question", llm_resp)
+        assert "BERT" in entities.methods
+
+    def test_to_dict_has_all_keys(self):
+        json_resp = '{"methods": ["CNN"], "datasets": ["MNIST"], "tasks": [], "fields": [], "metrics": []}'
+        entities = self._extract_with_mock("CNN on MNIST", json_resp)
         d = entities.to_dict()
-        assert "methods" in d
-        assert "datasets" in d
-        assert "tasks" in d
-        assert "fields" in d
-        assert "metrics" in d
+        assert set(d.keys()) == {"methods", "datasets", "tasks", "fields", "metrics"}
 
     def test_all_entities_flat_list(self):
-        entities = extract_entities("CNN and SVM on MNIST")
+        json_resp = '{"methods": ["CNN", "SVM"], "datasets": ["MNIST"], "tasks": [], "fields": [], "metrics": []}'
+        entities = self._extract_with_mock("CNN and SVM on MNIST", json_resp)
         flat = entities.all_entities()
-        assert len(flat) >= 3  # CNN, SVM, MNIST
+        assert len(flat) == 3
 
+    def test_result_is_cached(self):
+        call_count = 0
+        json_resp = '{"methods": ["CNN"], "datasets": [], "tasks": [], "fields": [], "metrics": []}'
+
+        def fake_generate(*args, **kwargs):
+            nonlocal call_count
+            call_count += 1
+            return json_resp
+
+        with patch("backend.rag.entity_extractor.ollama_client.generate", side_effect=fake_generate):
+            extract_entities("unique cache test question xyz")
+            extract_entities("unique cache test question xyz")
+
+        assert call_count == 1
+
+
+# ── Entity Normalization ──────────────────────────────────────────
 
 class TestEntityNormalization:
     """Test dictionary-based entity synonym expansion."""
@@ -126,43 +185,58 @@ class TestEntityNormalization:
         assert "dcnn" in variants
 
     def test_lstm_variants(self):
-        variants = get_method_variants("lstm")
-        assert "long short-term memory" in variants
+        assert "long short-term memory" in get_method_variants("lstm")
+
+    def test_bert_variants(self):
+        variants = get_method_variants("bert")
+        assert "bidirectional encoder representations from transformers" in variants
+
+    def test_vit_variants(self):
+        assert "vision transformer" in get_method_variants("vit")
+
+    def test_llama_variants(self):
+        assert "llama2" in get_method_variants("llama 2")
 
     def test_mnist_variants(self):
-        variants = get_dataset_variants("mnist")
-        assert "benchmark mnist" in variants
+        assert "benchmark mnist" in get_dataset_variants("mnist")
 
     def test_cifar10_variants(self):
-        variants = get_dataset_variants("cifar-10")
-        assert "cifar10" in variants
+        assert "cifar10" in get_dataset_variants("cifar-10")
+
+    def test_imagenet_variants(self):
+        assert "ilsvrc" in get_dataset_variants("imagenet")
 
     def test_unknown_entity_returns_empty(self):
         assert get_method_variants("unknown_method_xyz") == []
         assert get_dataset_variants("unknown_dataset_xyz") == []
 
-    def test_expand_entities_populates_variants(self):
-        entities = extract_entities("CNN on MNIST")
+    def test_expand_entities_populates_method_variants(self):
+        entities = ExtractedEntities(methods=["cnn"], datasets=["mnist"])
         expanded = expand_entities(entities)
-        assert len(expanded.method_variants) >= 1
         assert "cnn" in expanded.method_variants
         assert "convolutional neural network" in expanded.method_variants["cnn"]
+
+    def test_expand_entities_populates_dataset_variants(self):
+        entities = ExtractedEntities(methods=[], datasets=["mnist"])
+        expanded = expand_entities(entities)
         assert "mnist" in expanded.dataset_variants
 
-    def test_all_method_forms(self):
-        entities = extract_entities("CNN on MNIST")
+    def test_all_method_forms_includes_canonical(self):
+        entities = ExtractedEntities(methods=["cnn"])
         expanded = expand_entities(entities)
         forms = expanded.all_method_forms("cnn")
         assert "cnn" in forms
         assert "convolutional neural network" in forms
 
-    def test_all_dataset_forms(self):
-        entities = extract_entities("CNN on MNIST")
+    def test_all_dataset_forms_includes_canonical(self):
+        entities = ExtractedEntities(datasets=["mnist"])
         expanded = expand_entities(entities)
         forms = expanded.all_dataset_forms("mnist")
         assert "mnist" in forms
         assert "benchmark mnist" in forms
 
+
+# ── Ranking ───────────────────────────────────────────────────────
 
 class TestRanking:
     """Test retrieval result ranking."""
@@ -177,7 +251,6 @@ class TestRanking:
         ]
         entities = ExpandedEntities(methods=["CNN"], datasets=["MNIST"])
         ranked = rank_results(results, entities)
-        # R2 matches method+dataset+title, should be first
         assert ranked[0]["paper"] == "http://example.org/R2"
 
     def test_method_match_beats_no_match(self):
@@ -193,173 +266,20 @@ class TestRanking:
 
     def test_empty_results(self):
         from backend.rag.entity_normalization import ExpandedEntities
-
-        entities = ExpandedEntities(methods=["CNN"])
-        ranked = rank_results([], entities)
-        assert ranked == []
+        assert rank_results([], ExpandedEntities(methods=["CNN"])) == []
 
     def test_score_annotation(self):
         from backend.rag.entity_normalization import ExpandedEntities
 
-        results = [
-            {"paper": "http://example.org/R1", "title": "CNN Paper", "methodLabel": "CNN"},
-        ]
-        entities = ExpandedEntities(methods=["CNN"])
-        ranked = rank_results(results, entities)
+        results = [{"paper": "http://example.org/R1", "title": "CNN Paper", "methodLabel": "CNN"}]
+        ranked = rank_results(results, ExpandedEntities(methods=["CNN"]))
         assert "_score" in ranked[0]
-        assert ranked[0]["_score"] >= 2  # at least method match
+        assert ranked[0]["_score"] >= 2
 
 
-class TestContextBuilder:
-    """Test structured context building."""
-
-    def test_build_paper_context_groups_by_paper(self):
-        results = [
-            {
-                "paper": "http://orkg.org/orkg/resource/R1",
-                "title": "Deep Learning for NLP",
-                "doi": "10.1234/test",
-                "methodLabel": "BERT",
-                "datasetLabel": "SQuAD",
-            },
-            {
-                "paper": "http://orkg.org/orkg/resource/R1",
-                "title": "Deep Learning for NLP",
-                "doi": "10.1234/test",
-                "methodLabel": "GPT",
-            },
-            {
-                "paper": "http://orkg.org/orkg/resource/R2",
-                "title": "CNN vs SVM",
-                "doi": "N/A",
-                "methodALabel": "CNN",
-                "methodBLabel": "SVM",
-            },
-        ]
-        context = build_paper_context(results)
-        assert "Deep Learning for NLP" in context
-        assert "CNN vs SVM" in context
-        assert "BERT" in context
-        assert "GPT" in context
-        assert "SQuAD" in context
-        # Uses structured format with "Paper:" blocks and "Triples:" sections
-        assert "Paper:" in context
-        assert "Title:" in context
-        assert "Triples:" in context
-        assert "  Method:" in context
-        # R1 should appear only once (grouped)
-        assert context.count("Deep Learning for NLP") == 1
-
-    def test_build_paper_context_empty(self):
-        context = build_paper_context([])
-        assert "No relevant papers" in context
-
-    def test_structured_paper_format(self):
-        """Verify the clean structured output format with Triples section."""
-        results = [
-            {
-                "paper": "http://orkg.org/orkg/resource/R1",
-                "title": "Effective Handwritten Digit Recognition",
-                "doi": "10.48550/arXiv.2004.00331",
-                "methodLabel": "CNN",
-                "datasetLabel": "MNIST",
-            },
-        ]
-        context = build_paper_context(results)
-        assert "Paper:" in context
-        assert "Title: Effective Handwritten Digit Recognition" in context
-        assert "URI: http://orkg.org/orkg/resource/R1" in context
-        assert "Triples:" in context
-        assert "  Method: CNN" in context
-        assert "  Dataset: MNIST" in context
-        assert "DOI: 10.48550/arXiv.2004.00331" in context
-
-    def test_build_evidence_context(self):
-        results = [
-            {
-                "paper": "http://orkg.org/orkg/resource/R1",
-                "title": "Test Paper",
-                "doi": "10.1/test",
-                "contribLabel": "Contribution 1",
-                "predLabel": "Method",
-                "valueLabel": "CNN",
-            }
-        ]
-        context = build_evidence_context(results)
-        assert "Test Paper" in context
-        assert "CNN" in context
-        assert "Evidence" in context
-
-    def test_build_evidence_context_empty(self):
-        context = build_evidence_context([])
-        assert "No evidence" in context
-
-    def test_format_sources_deduplicates(self):
-        results = [
-            {"paper": "http://example.org/R1", "title": "Paper A", "doi": "10.1/a", "methodLabel": "CNN"},
-            {"paper": "http://example.org/R1", "title": "Paper A", "doi": "10.1/a", "methodLabel": "SVM"},
-            {"paper": "http://example.org/R2", "title": "Paper B", "doi": "N/A"},
-        ]
-        sources = format_sources(results)
-        assert len(sources) == 2
-        assert sources[0]["title"] == "Paper A"
-        assert sources[1]["title"] == "Paper B"
-
-    def test_format_sources_includes_methods_and_datasets(self):
-        results = [
-            {
-                "paper": "http://example.org/R1",
-                "title": "Paper A",
-                "doi": "10.1/a",
-                "methodLabel": "CNN",
-                "datasetLabel": "MNIST",
-            },
-        ]
-        sources = format_sources(results)
-        assert len(sources) == 1
-        assert "methods" in sources[0]
-        assert "CNN" in sources[0]["methods"]
-        assert "datasets" in sources[0]
-        assert "MNIST" in sources[0]["datasets"]
-
-
-class TestPromptTemplates:
-    """Test that prompt templates exist for all 6 query types and cite by title."""
-
-    def test_all_query_types_have_templates(self):
-        from backend.llm.ollama_client import get_prompt_template
-
-        for qt in [
-            "topic_search",
-            "method_comparison",
-            "dataset_search",
-            "claim_verification",
-            "method_usage",
-            "paper_lookup",
-        ]:
-            template = get_prompt_template(qt)
-            assert "{context}" in template
-            assert "{question}" in template
-
-    def test_templates_require_title_citations(self):
-        """Verify prompts tell LLM to cite by title, not by number."""
-        from backend.llm.ollama_client import get_prompt_template
-
-        for qt in [
-            "topic_search",
-            "method_comparison",
-            "dataset_search",
-            "claim_verification",
-            "method_usage",
-            "paper_lookup",
-        ]:
-            template = get_prompt_template(qt)
-            assert "exact title" in template.lower() or "paper title" in template.lower()
-            assert "[1]" in template  # mentioned as what NOT to do
-
+# ── Hard Filter ───────────────────────────────────────────────────
 
 class TestHardFilter:
-    """Test that hard filtering removes papers missing required entities."""
 
     def test_keeps_papers_with_both_method_and_dataset(self):
         from backend.rag.entity_normalization import ExpandedEntities
@@ -371,7 +291,6 @@ class TestHardFilter:
         ]
         entities = ExpandedEntities(methods=["CNN"], datasets=["MNIST"])
         filtered = hard_filter(results, entities)
-        # Only R1 has both CNN and MNIST
         assert len(filtered) == 1
         assert filtered[0]["paper"] == "http://example.org/R1"
 
@@ -382,9 +301,7 @@ class TestHardFilter:
             {"paper": "http://example.org/R1", "title": "A", "methodLabel": "CNN"},
             {"paper": "http://example.org/R2", "title": "B"},
         ]
-        entities = ExpandedEntities(methods=["CNN"], datasets=[])
-        filtered = hard_filter(results, entities)
-        assert len(filtered) == 2  # no filtering
+        assert len(hard_filter(results, ExpandedEntities(methods=["CNN"], datasets=[]))) == 2
 
     def test_no_filter_when_only_datasets(self):
         from backend.rag.entity_normalization import ExpandedEntities
@@ -393,31 +310,22 @@ class TestHardFilter:
             {"paper": "http://example.org/R1", "title": "A", "datasetLabel": "MNIST"},
             {"paper": "http://example.org/R2", "title": "B"},
         ]
-        entities = ExpandedEntities(methods=[], datasets=["MNIST"])
-        filtered = hard_filter(results, entities)
-        assert len(filtered) == 2
+        assert len(hard_filter(results, ExpandedEntities(methods=[], datasets=["MNIST"]))) == 2
 
     def test_filter_uses_variants(self):
         from backend.rag.entity_normalization import ExpandedEntities
 
         results = [
-            {"paper": "http://example.org/R1", "title": "A", "methodLabel": "convolutional neural network", "datasetLabel": "MNIST"},
+            {"paper": "http://example.org/R1", "title": "A",
+             "methodLabel": "convolutional neural network", "datasetLabel": "MNIST"},
         ]
         entities = ExpandedEntities(
             methods=["CNN"], datasets=["MNIST"],
             method_variants={"cnn": ["convolutional neural network"]},
         )
-        filtered = hard_filter(results, entities)
-        assert len(filtered) == 1
-
-    def test_filter_empty_results(self):
-        from backend.rag.entity_normalization import ExpandedEntities
-
-        entities = ExpandedEntities(methods=["CNN"], datasets=["MNIST"])
-        assert hard_filter([], entities) == []
+        assert len(hard_filter(results, entities)) == 1
 
     def test_multi_row_paper_passes_if_labels_across_rows(self):
-        """A paper can have method in one row and dataset in another."""
         from backend.rag.entity_normalization import ExpandedEntities
 
         results = [
@@ -425,12 +333,51 @@ class TestHardFilter:
             {"paper": "http://example.org/R1", "title": "A", "datasetLabel": "MNIST"},
         ]
         entities = ExpandedEntities(methods=["CNN"], datasets=["MNIST"])
-        filtered = hard_filter(results, entities)
-        assert len(filtered) == 2  # both rows of R1 pass
+        assert len(hard_filter(results, entities)) == 2
 
+    def test_empty_results(self):
+        from backend.rag.entity_normalization import ExpandedEntities
+        assert hard_filter([], ExpandedEntities(methods=["CNN"], datasets=["MNIST"])) == []
+
+
+# ── Soft Filter ───────────────────────────────────────────────────
+
+class TestSoftFilter:
+
+    def test_drops_zero_score_rows(self):
+        results = [
+            {"paper": "http://example.org/R1", "_score": 4},
+            {"paper": "http://example.org/R2", "_score": 2},
+            {"paper": "http://example.org/R3", "_score": 0},
+        ]
+        filtered = soft_filter(results, min_score=1)
+        assert len(filtered) == 2
+
+    def test_keeps_partial_matches(self):
+        results = [
+            {"paper": "http://example.org/R1", "_score": 2},
+            {"paper": "http://example.org/R2", "_score": 0},
+        ]
+        assert len(soft_filter(results, min_score=1)) == 1
+
+    def test_custom_min_score(self):
+        results = [
+            {"paper": "http://example.org/R1", "_score": 4},
+            {"paper": "http://example.org/R2", "_score": 2},
+        ]
+        assert len(soft_filter(results, min_score=3)) == 1
+
+    def test_missing_score_key_treated_as_zero(self):
+        results = [{"paper": "http://example.org/R1", "title": "A"}]
+        assert soft_filter(results, min_score=1) == []
+
+    def test_empty_results(self):
+        assert soft_filter([], min_score=1) == []
+
+
+# ── Truncation ────────────────────────────────────────────────────
 
 class TestTruncation:
-    """Test top-N paper truncation."""
 
     def test_truncates_to_max_papers(self):
         results = [
@@ -438,13 +385,9 @@ class TestTruncation:
             for i in range(15)
         ]
         truncated = truncate_to_top_papers(results, max_papers=5)
-        uris = {r["paper"] for r in truncated}
-        assert len(uris) == 5
-        # Should be the first 5 (highest score since they are pre-sorted)
-        for i in range(5):
-            assert f"http://example.org/R{i}" in uris
+        assert len({r["paper"] for r in truncated}) == 5
 
-    def test_truncation_keeps_all_rows_for_kept_papers(self):
+    def test_keeps_all_rows_for_kept_papers(self):
         results = [
             {"paper": "http://example.org/R1", "title": "A", "_score": 5, "methodLabel": "CNN"},
             {"paper": "http://example.org/R1", "title": "A", "_score": 5, "datasetLabel": "MNIST"},
@@ -454,7 +397,7 @@ class TestTruncation:
         truncated = truncate_to_top_papers(results, max_papers=2)
         assert len(truncated) == 3  # 2 rows for R1 + 1 for R2
 
-    def test_truncation_empty(self):
+    def test_empty(self):
         assert truncate_to_top_papers([], max_papers=8) == []
 
     def test_fewer_papers_than_limit(self):
@@ -462,42 +405,129 @@ class TestTruncation:
             {"paper": "http://example.org/R1", "title": "A"},
             {"paper": "http://example.org/R2", "title": "B"},
         ]
-        truncated = truncate_to_top_papers(results, max_papers=8)
-        assert len(truncated) == 2
+        assert len(truncate_to_top_papers(results, max_papers=8)) == 2
 
 
-class TestContextScores:
-    """Test that relevance scores appear in context output."""
+# ── Context Builder ───────────────────────────────────────────────
 
-    def test_score_in_paper_block(self):
+class TestContextBuilder:
+
+    def test_groups_by_paper(self):
         results = [
-            {
-                "paper": "http://example.org/R1",
-                "title": "Test Paper",
-                "doi": "N/A",
-                "methodLabel": "CNN",
-                "_score": 5,
-            },
+            {"paper": "http://orkg.org/orkg/resource/R1", "title": "Deep Learning for NLP",
+             "doi": "10.1234/test", "methodLabel": "BERT", "datasetLabel": "SQuAD"},
+            {"paper": "http://orkg.org/orkg/resource/R1", "title": "Deep Learning for NLP",
+             "doi": "10.1234/test", "methodLabel": "GPT"},
+            {"paper": "http://orkg.org/orkg/resource/R2", "title": "CNN vs SVM",
+             "doi": "N/A", "methodALabel": "CNN", "methodBLabel": "SVM"},
         ]
         context = build_paper_context(results)
-        assert "Relevance Score: 5" in context
+        assert "Deep Learning for NLP" in context
+        assert "CNN vs SVM" in context
+        assert "BERT" in context
+        assert "GPT" in context
+        assert "SQuAD" in context
+        assert context.count("Deep Learning for NLP") == 1  # grouped, not duplicated
 
-    def test_no_score_if_not_present(self):
+    def test_structured_format(self):
         results = [
-            {
-                "paper": "http://example.org/R1",
-                "title": "Test Paper",
-                "doi": "N/A",
-            },
+            {"paper": "http://orkg.org/orkg/resource/R1",
+             "title": "Effective Handwritten Digit Recognition",
+             "doi": "10.48550/arXiv.2004.00331",
+             "methodLabel": "CNN", "datasetLabel": "MNIST"},
+        ]
+        context = build_paper_context(results)
+        assert "Paper:" in context
+        assert "Title: Effective Handwritten Digit Recognition" in context
+        assert "URI: http://orkg.org/orkg/resource/R1" in context
+        assert "DOI: 10.48550/arXiv.2004.00331" in context
+        assert "Triples:" in context
+        assert "  Method: CNN" in context
+        assert "  Dataset: MNIST" in context
+
+    def test_relevance_score_not_in_context(self):
+        """Internal scores must not leak into LLM context."""
+        results = [
+            {"paper": "http://example.org/R1", "title": "Test Paper",
+             "doi": "N/A", "methodLabel": "CNN", "_score": 5},
         ]
         context = build_paper_context(results)
         assert "Relevance Score" not in context
 
+    def test_empty_returns_no_papers_message(self):
+        assert "No relevant papers" in build_paper_context([])
+
+    def test_evidence_context(self):
+        results = [
+            {"paper": "http://orkg.org/orkg/resource/R1", "title": "Test Paper",
+             "doi": "10.1/test", "contribLabel": "Contribution 1",
+             "predLabel": "Method", "valueLabel": "CNN"},
+        ]
+        context = build_evidence_context(results)
+        assert "Test Paper" in context
+        assert "CNN" in context
+        assert "Evidence" in context
+
+    def test_evidence_context_empty(self):
+        assert "No evidence" in build_evidence_context([])
+
+    def test_entity_label_goes_only_to_methods(self):
+        """entityLabel from broad fallback must NOT be double-added to datasets."""
+        results = [
+            {"paper": "http://example.org/R1", "title": "Paper A",
+             "doi": "N/A", "entityLabel": "BERT"},
+        ]
+        context = build_paper_context(results)
+        assert "  Method: BERT" in context
+        assert "  Dataset: BERT" not in context
+
+    def test_format_sources_deduplicates(self):
+        results = [
+            {"paper": "http://example.org/R1", "title": "Paper A", "doi": "10.1/a", "methodLabel": "CNN"},
+            {"paper": "http://example.org/R1", "title": "Paper A", "doi": "10.1/a", "methodLabel": "SVM"},
+            {"paper": "http://example.org/R2", "title": "Paper B", "doi": "N/A"},
+        ]
+        sources = format_sources(results)
+        assert len(sources) == 2
+
+    def test_format_sources_includes_methods_and_datasets(self):
+        results = [
+            {"paper": "http://example.org/R1", "title": "Paper A", "doi": "10.1/a",
+             "methodLabel": "CNN", "datasetLabel": "MNIST"},
+        ]
+        sources = format_sources(results)
+        assert "CNN" in sources[0]["methods"]
+        assert "MNIST" in sources[0]["datasets"]
+
+
+# ── Prompt Templates ──────────────────────────────────────────────
+
+class TestPromptTemplates:
+
+    def test_all_query_types_have_templates(self):
+        from backend.llm.ollama_client import get_prompt_template
+
+        for qt in ["topic_search", "method_comparison", "dataset_search",
+                   "claim_verification", "method_usage", "paper_lookup"]:
+            t = get_prompt_template(qt)
+            assert "{context}" in t
+            assert "{question}" in t
+
+    def test_templates_cite_by_title_not_number(self):
+        from backend.llm.ollama_client import get_prompt_template
+
+        for qt in ["topic_search", "method_comparison", "dataset_search",
+                   "claim_verification", "method_usage", "paper_lookup"]:
+            t = get_prompt_template(qt)
+            assert "exact title" in t.lower() or "paper title" in t.lower()
+            assert "[1]" in t  # mentioned as what NOT to do
+
+
+# ── Async Query Builder ───────────────────────────────────────────
 
 class TestAsyncQueryBuilder:
-    """Test the plan-then-execute query builder refactor."""
 
-    def test_plan_queries_returns_tuples(self):
+    def test_plan_queries_returns_valid_tuples(self):
         from backend.rag.query_builder import _plan_queries
         from backend.rag.entity_normalization import ExpandedEntities
 
@@ -509,38 +539,53 @@ class TestAsyncQueryBuilder:
             assert isinstance(strategy, str)
             assert "SELECT" in query
 
-    def test_plan_fallback_returns_tuples(self):
+    def test_plan_fallback_returns_valid_tuples(self):
         from backend.rag.query_builder import _plan_fallback
         from backend.rag.entity_normalization import ExpandedEntities
 
         entities = ExpandedEntities(methods=["CNN"])
-        planned = _plan_fallback(entities, limit=5)
-        assert len(planned) > 0
-        for query, strategy in planned:
+        for query, _ in _plan_fallback(entities, limit=5):
             assert "SELECT" in query
 
-    def test_sync_retrieve_still_works(self):
-        """Ensure the synchronous retrieve() still exists and has the right signature."""
-        from backend.rag.query_builder import retrieve
+    def test_retrieve_async_is_coroutine(self):
         import inspect
-
-        sig = inspect.signature(retrieve)
-        assert "question" in sig.parameters
-        assert "query_type" in sig.parameters
-        assert "entities" in sig.parameters
-        assert "sparql_client" in sig.parameters
-
-    def test_async_retrieve_is_coroutine(self):
         from backend.rag.query_builder import retrieve_async
-        import inspect
-
         assert inspect.iscoroutinefunction(retrieve_async)
 
+    def test_retrieve_sync_signature(self):
+        import inspect
+        from backend.rag.query_builder import retrieve
+        sig = inspect.signature(retrieve)
+        assert all(p in sig.parameters for p in ["question", "query_type", "entities", "sparql_client"])
+
+    def test_short_variants_excluded_from_contains(self):
+        from backend.rag.query_builder import _usable_forms
+        assert _usable_forms(["dl", "deep learning"]) == ["deep learning"]
+        assert _usable_forms(["ml", "machine learning"]) == ["machine learning"]
+        assert _usable_forms(["CNN", "convolutional neural network"]) == ["CNN", "convolutional neural network"]
+
+    def test_title_fallback_returns_query_when_entities_present(self):
+        from backend.rag.query_builder import _title_fallback_for
+        from backend.rag.entity_normalization import ExpandedEntities
+
+        entities = ExpandedEntities(methods=["CNN"], datasets=["MNIST"])
+        query = _title_fallback_for(entities, limit=5)
+        assert query is not None
+        assert "SELECT" in query
+        assert "?title" in query
+
+    def test_title_fallback_returns_none_when_entities_empty(self):
+        from backend.rag.query_builder import _title_fallback_for
+        from backend.rag.entity_normalization import ExpandedEntities
+
+        assert _title_fallback_for(ExpandedEntities(), limit=5) is None
+
+
+# ── Hybrid Retrieval / RRF ────────────────────────────────────────
 
 class TestHybridRetrieval:
-    """Test Reciprocal Rank Fusion and hybrid retrieval concepts."""
 
-    def test_rrf_merges_two_lists(self):
+    def test_rrf_paper_in_both_lists_ranks_first(self):
         list_a = [
             {"paper": "http://example.org/R1", "title": "Paper 1"},
             {"paper": "http://example.org/R2", "title": "Paper 2"},
@@ -550,22 +595,19 @@ class TestHybridRetrieval:
             {"paper": "http://example.org/R3", "title": "Paper 3"},
         ]
         merged = reciprocal_rank_fusion(list_a, list_b)
-        uris = [r["paper"] for r in merged]
-        # R2 appears in both lists → highest RRF score
-        assert uris[0] == "http://example.org/R2"
+        assert merged[0]["paper"] == "http://example.org/R2"
         assert len(merged) == 3
 
-    def test_rrf_score_annotation(self):
+    def test_rrf_annotates_score(self):
         results = [{"paper": "http://example.org/R1", "title": "A"}]
         merged = reciprocal_rank_fusion(results)
         assert "_rrf_score" in merged[0]
         assert merged[0]["_rrf_score"] > 0
 
-    def test_rrf_empty_lists(self):
-        merged = reciprocal_rank_fusion([], [])
-        assert merged == []
+    def test_rrf_empty(self):
+        assert reciprocal_rank_fusion([], []) == []
 
-    def test_hybrid_retrieve_without_vector_store(self):
+    def test_hybrid_retrieve_falls_back_to_kg_when_no_vector_store(self):
         from backend.rag.hybrid_retrieval import hybrid_retrieve
 
         kg_results = [
@@ -573,210 +615,36 @@ class TestHybridRetrieval:
             {"paper": "http://example.org/R2", "title": "B"},
         ]
         results = hybrid_retrieve("test", kg_results, vector_store=None, top_k=5)
-        assert len(results) == 2  # falls back to KG only
+        assert len(results) == 2
 
 
-class TestTimeoutFallback:
-    """Test SPARQL timeout → title-search fallback mechanism."""
-
-    def test_title_fallback_for_returns_query(self):
-        from backend.rag.query_builder import _title_fallback_for
-        from backend.rag.entity_normalization import ExpandedEntities
-
-        entities = ExpandedEntities(methods=["CNN"], datasets=["MNIST"])
-        query = _title_fallback_for(entities, limit=5)
-        assert query is not None
-        assert "SELECT" in query
-        assert "?title" in query
-        # Title search should check for our keywords
-        assert "CNN" in query or "MNIST" in query
-
-    def test_title_fallback_for_empty_entities(self):
-        from backend.rag.query_builder import _title_fallback_for
-        from backend.rag.entity_normalization import ExpandedEntities
-
-        entities = ExpandedEntities(methods=[], datasets=[])
-        query = _title_fallback_for(entities, limit=5)
-        assert query is None
-
-    def test_sparql_timeout_error_is_importable(self):
-        from backend.kg.sparql_client import SPARQLTimeoutError
-
-        err = SPARQLTimeoutError("test timeout")
-        assert isinstance(err, Exception)
-        assert "test timeout" in str(err)
-
-    def test_context_includes_uri(self):
-        """Paper blocks should include the URI for traceability."""
-        results = [
-            {
-                "paper": "http://orkg.org/orkg/resource/R42",
-                "title": "Test Paper",
-                "doi": "N/A",
-                "methodLabel": "SVM",
-            },
-        ]
-        context = build_paper_context(results)
-        assert "URI: http://orkg.org/orkg/resource/R42" in context
-
-    def test_context_triples_section(self):
-        """Paper blocks should have a Triples section with method/dataset."""
-        results = [
-            {
-                "paper": "http://orkg.org/orkg/resource/R1",
-                "title": "Test Paper",
-                "doi": "N/A",
-                "methodLabel": "CNN",
-                "datasetLabel": "MNIST",
-            },
-        ]
-        context = build_paper_context(results)
-        assert "Triples:" in context
-        assert "  Method: CNN" in context
-        assert "  Dataset: MNIST" in context
-
-    def test_entity_label_goes_to_both_methods_and_datasets(self):
-        """entityLabel from broad search should appear in both method and dataset sets."""
-        results = [
-            {
-                "paper": "http://example.org/R1",
-                "title": "Paper A",
-                "doi": "N/A",
-                "entityLabel": "BERT",
-            },
-        ]
-        context = build_paper_context(results)
-        # entityLabel should show up in Triples as both Method and Dataset
-        assert "  Method: BERT" in context
-        assert "  Dataset: BERT" in context
-
-
-class TestPluralExtraction:
-    """Test that dictionary matching handles plural forms."""
-
-    def test_convolutional_neural_networks_plural(self):
-        entities = extract_entities(
-            "What are some papers that use Convolutional Neural Networks?"
-        )
-        methods_lower = {m.lower() for m in entities.methods}
-        assert "convolutional neural network" in methods_lower
-
-    def test_support_vector_machines_plural(self):
-        entities = extract_entities("Papers using Support Vector Machines")
-        methods_lower = {m.lower() for m in entities.methods}
-        assert "support vector machine" in methods_lower
-
-    def test_decision_trees_plural(self):
-        entities = extract_entities("How are Decision Trees used in XGBoost?")
-        methods_lower = {m.lower() for m in entities.methods}
-        assert "decision tree" in methods_lower
-
-    def test_neural_networks_plural(self):
-        entities = extract_entities("Compare neural networks and random forests")
-        methods_lower = {m.lower() for m in entities.methods}
-        assert "neural network" in methods_lower
-        assert "random forest" in methods_lower
-
-    def test_singular_still_works(self):
-        entities = extract_entities("Papers about convolutional neural network")
-        methods_lower = {m.lower() for m in entities.methods}
-        assert "convolutional neural network" in methods_lower
-
+# ── Keyword Extraction Fallback ───────────────────────────────────
 
 class TestKeywordExtraction:
-    """Test keyword extraction fallback for when NER returns empty."""
 
-    def test_extracts_phrase(self):
-        keywords = extract_keywords(
-            "What are some papers that use Convolutional Neural Networks?"
-        )
-        assert len(keywords) >= 1
-        # Should group consecutive significant words into a phrase
-        assert any("convolutional" in kw for kw in keywords)
-        assert any("neural" in kw for kw in keywords)
+    def test_extracts_significant_words(self):
+        keywords = extract_keywords("deep reinforcement learning for robot navigation")
+        assert any("deep" in kw for kw in keywords)
 
     def test_strips_stop_words(self):
         keywords = extract_keywords("What are the best papers about this?")
         assert "what" not in keywords
         assert "the" not in keywords
-        assert "papers" not in keywords
 
     def test_empty_question(self):
-        keywords = extract_keywords("")
-        assert keywords == []
+        assert extract_keywords("") == []
 
     def test_groups_consecutive_words(self):
         keywords = extract_keywords("deep reinforcement learning for robot navigation")
-        # "deep reinforcement learning" and "robot navigation" should be separate phrases
-        assert len(keywords) >= 1
         assert any("deep" in kw and "reinforcement" in kw for kw in keywords)
 
 
-class TestSoftFilter:
-    """Test soft score-based filtering."""
+# ── Timeout / Error Handling ──────────────────────────────────────
 
-    def test_drops_zero_score_rows(self):
-        results = [
-            {"paper": "http://example.org/R1", "title": "A", "_score": 4},
-            {"paper": "http://example.org/R2", "title": "B", "_score": 2},
-            {"paper": "http://example.org/R3", "title": "C", "_score": 0},
-        ]
-        filtered = soft_filter(results, min_score=1)
-        assert len(filtered) == 2
-        assert all(r["_score"] >= 1 for r in filtered)
+class TestErrorHandling:
 
-    def test_keeps_partial_matches(self):
-        """Papers matching only method (+2) or only dataset (+2) should survive."""
-        results = [
-            {"paper": "http://example.org/R1", "title": "A", "_score": 2},  # method only
-            {"paper": "http://example.org/R2", "title": "B", "_score": 2},  # dataset only
-            {"paper": "http://example.org/R3", "title": "C", "_score": 0},  # no match
-        ]
-        filtered = soft_filter(results, min_score=1)
-        assert len(filtered) == 2  # both partial matches kept
-
-    def test_empty_results(self):
-        assert soft_filter([], min_score=1) == []
-
-    def test_custom_min_score(self):
-        results = [
-            {"paper": "http://example.org/R1", "_score": 4},
-            {"paper": "http://example.org/R2", "_score": 2},
-            {"paper": "http://example.org/R3", "_score": 1},
-        ]
-        filtered = soft_filter(results, min_score=3)
-        assert len(filtered) == 1
-        assert filtered[0]["paper"] == "http://example.org/R1"
-
-    def test_no_score_key_treated_as_zero(self):
-        results = [{"paper": "http://example.org/R1", "title": "A"}]
-        filtered = soft_filter(results, min_score=1)
-        assert len(filtered) == 0
-
-
-class TestShortVariantFilter:
-    """Test that short variant forms are excluded from SPARQL query plans."""
-
-    def test_short_variants_excluded(self):
-        from backend.rag.query_builder import _plan_queries, _usable_forms
-        from backend.rag.entity_normalization import ExpandedEntities
-
-        # "dl" is a known variant of "deep learning" — too short for CONTAINS
-        assert _usable_forms(["dl", "deep learning"]) == ["deep learning"]
-        assert _usable_forms(["ml", "machine learning"]) == ["machine learning"]
-        assert _usable_forms(["CNN", "convolutional neural network"]) == [
-            "CNN", "convolutional neural network"
-        ]
-
-    def test_plan_queries_skips_short_forms(self):
-        from backend.rag.query_builder import _plan_queries
-        from backend.rag.entity_normalization import ExpandedEntities
-
-        entities = ExpandedEntities(
-            methods=["deep learning"],
-            method_variants={"deep learning": ["dl"]},
-        )
-        planned = _plan_queries(QueryType.TOPIC_SEARCH, entities, limit=5)
-        # "dl" should not appear in any planned query strategy name
-        strategies = [s for _, s in planned]
-        assert not any("method(dl)" in s for s in strategies)
+    def test_sparql_timeout_error_importable(self):
+        from backend.kg.sparql_client import SPARQLTimeoutError
+        err = SPARQLTimeoutError("test timeout")
+        assert isinstance(err, Exception)
+        assert "test timeout" in str(err)

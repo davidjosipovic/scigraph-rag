@@ -51,16 +51,26 @@ class ExtractedEntities:
 
 _EXTRACTOR_SYSTEM_PROMPT = """You are a scientific entity extractor for a research paper search system.
 
-Given a user question about scientific papers, extract named entities and classify them into these categories:
-- methods: ML/AI methods, algorithms, architectures, or models (e.g. BERT, CNN, SVM, transformer, random forest)
-- datasets: benchmark datasets or data collections (e.g. MNIST, ImageNet, SQuAD, CIFAR-10)
-- tasks: research tasks or problems being solved (e.g. image classification, machine translation, sentiment analysis)
-- fields: research fields or domains (e.g. natural language processing, computer vision, reinforcement learning)
-- metrics: evaluation metrics (e.g. accuracy, F1, BLEU, precision, recall)
+Given a user question, extract ONLY the named entities that are EXPLICITLY and LITERALLY present in the question text. Do NOT infer, predict, or add entities that are not directly written in the question.
+
+Classify the entities you find into these categories:
+- methods: ML/AI methods, algorithms, architectures, or models explicitly named (e.g. BERT, CNN, SVM)
+- datasets: benchmark datasets explicitly named (e.g. MNIST, ImageNet, SQuAD)
+- tasks: research tasks explicitly stated (e.g. "image classification", "sentiment analysis")
+- fields: research fields explicitly stated (e.g. "natural language processing", "medical imaging")
+- metrics: evaluation metrics explicitly named (e.g. accuracy, F1, BLEU)
+
+IMPORTANT RULES:
+- If a method is not named in the question, leave methods as []
+- If a dataset is not named in the question, leave datasets as []
+- Do NOT add methods or datasets you think might be relevant — only what is written
+- "deep learning" or "machine learning" alone is a field, not a method
 
 Respond ONLY with a valid JSON object with these exact keys. Use empty lists if nothing is found.
-Example output format:
-{"methods": ["BERT", "CNN"], "datasets": ["MNIST"], "tasks": ["image classification"], "fields": ["computer vision"], "metrics": ["accuracy"]}"""
+Example: question "Which papers use CNN on MNIST?" → {"methods": ["CNN"], "datasets": ["MNIST"], "tasks": [], "fields": [], "metrics": []}
+Example: question "Papers about deep learning for medical imaging" → {"methods": [], "datasets": [], "tasks": [], "fields": ["deep learning", "medical imaging"], "metrics": []}
+Example: question "Which papers report F1 score on NER tasks?" → {"methods": [], "datasets": [], "tasks": ["NER", "named entity recognition"], "fields": [], "metrics": ["F1"]}
+Note: NER, POS tagging, NLI, STS, QA, MT are tasks — they are NOT datasets."""
 
 
 @lru_cache(maxsize=256)

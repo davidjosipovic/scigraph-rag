@@ -57,6 +57,8 @@ def build_paper_context(results: list[dict[str, Any]]) -> str:
         lines: list[str] = ["Paper:"]
         lines.append(f"Title: {info['title']}")
         lines.append(f"URI: {uri}")
+        if info["year"]:
+            lines.append(f"Year: {info['year']}")
         if info["doi"] != "N/A":
             lines.append(f"DOI: {info['doi']}")
         if info["fields"]:
@@ -177,6 +179,7 @@ def _group_by_paper(results: list[dict[str, Any]]) -> dict[str, dict]:
             papers[uri] = {
                 "title": row.get("title", "Unknown"),
                 "doi": row.get("doi", "N/A"),
+                "year": row.get("year"),
                 "score": row.get("_score"),
                 "methods": set(),
                 "datasets": set(),

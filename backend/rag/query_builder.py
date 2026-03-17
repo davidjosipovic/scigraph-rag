@@ -50,9 +50,11 @@ class RetrievalResult:
         query: str,
         strategy: str,
     ) -> None:
-        """Add results from one retrieval query."""
+        """Add results from one retrieval query. Skips duplicate query strings."""
         self.results.extend(rows)
-        self.sparql_queries.append(query.strip())
+        query = query.strip()
+        if query not in self.sparql_queries:
+            self.sparql_queries.append(query)
         self.strategies_used.append(strategy)
 
     @property
@@ -100,7 +102,7 @@ def retrieve(
     result = RetrievalResult()
 
     # Plan queries
-    planned = _plan_queries(query_type, entities, limit)
+    planned = _plan_queries(query_type, entities, limit, question=question)
 
     # Execute sequentially
     for query, strategy in planned:
@@ -163,7 +165,7 @@ async def retrieve_async(
     result = RetrievalResult()
 
     # Plan queries
-    planned = _plan_queries(query_type, entities, limit)
+    planned = _plan_queries(query_type, entities, limit, question=question)
 
     # Execute ALL primary queries in parallel
     tasks = [sparql_client.execute_async(q) for q, _ in planned]
@@ -236,14 +238,17 @@ def _plan_queries(
     query_type: QueryType,
     entities: ExpandedEntities,
     limit: int,
+    question: str = "",
 ) -> PlannedQueries:
     """Select and plan SPARQL queries based on query type."""
+    if query_type == QueryType.PAPER_LOOKUP:
+        return _plan_paper_lookup(entities, limit, question)
+
     strategy_map = {
         QueryType.METHOD_COMPARISON: _plan_method_comparison,
         QueryType.METHOD_USAGE: _plan_method_usage,
         QueryType.DATASET_SEARCH: _plan_dataset_search,
         QueryType.CLAIM_VERIFICATION: _plan_claim_evidence,
-        QueryType.PAPER_LOOKUP: _plan_paper_lookup,
         QueryType.TOPIC_SEARCH: _plan_topic_search,
     }
 
@@ -313,12 +318,14 @@ def _plan_method_usage(
             planned.append((query, f"method({form})"))
 
     for task in entities.tasks[:2]:
-        query = Q.papers_by_research_problem(task, limit)
-        planned.append((query, f"task({task})"))
+        for form in _usable_forms(entities.all_task_forms(task)[:2]):
+            query = Q.papers_by_research_problem(form, limit)
+            planned.append((query, f"task({form})"))
 
-    for field in entities.fields[:2]:
-        query = Q.papers_by_research_field(field, limit)
-        planned.append((query, f"field({field})"))
+    for field_name in entities.fields[:2]:
+        for form in _usable_forms(entities.all_field_forms(field_name)[:2]):
+            query = Q.papers_by_research_field(form, limit)
+            planned.append((query, f"field({form})"))
 
     return planned
 
@@ -386,18 +393,63 @@ def _plan_claim_evidence(
     return planned
 
 
+_LOOKUP_PREFIXES = (
+    "tell me about the ", "tell me about ", "what is the ", "what is ",
+    "what are ", "find the paper ", "find the ", "show me the ", "show me ",
+    "look up the ", "look up ", "describe the ", "describe ",
+    "give me info on the ", "give me info on ", "information about the ",
+    "information about ", "info on the ", "info on ", "about the ", "about ",
+    "explain the ", "explain ", "find ",
+)
+_LOOKUP_SUFFIXES = (" paper", " article", " study", " publication", " work")
+
+
+def _extract_title_from_question(question: str) -> str:
+    """
+    Strip common question boilerplate to extract the paper title.
+
+    E.g. "Tell me about the Attention is All You Need paper"
+         → "Attention is All You Need"
+    """
+    q = question.strip()
+    q_lower = q.lower()
+
+    for prefix in _LOOKUP_PREFIXES:
+        if q_lower.startswith(prefix):
+            q = q[len(prefix):]
+            q_lower = q_lower[len(prefix):]
+            break
+
+    for suffix in _LOOKUP_SUFFIXES:
+        if q_lower.endswith(suffix):
+            q = q[: -len(suffix)]
+            break
+
+    return q.strip()
+
+
 def _plan_paper_lookup(
     entities: ExpandedEntities,
     limit: int,
+    question: str = "",
 ) -> PlannedQueries:
     """
     Plan queries for paper_lookup questions.
 
-    Title search is the primary strategy here.
+    1. Direct title extraction from the question (most precise)
+    2. Joined entity labels as title fragment
+    3. Each entity term individually
     """
     planned: PlannedQueries = []
-    all_terms = entities.all_entities()
 
+    # Primary: extract the paper title phrase directly from the question
+    if question:
+        title_fragment = _extract_title_from_question(question)
+        if title_fragment and len(title_fragment) > 3:
+            query = Q.paper_lookup_by_title(title_fragment, limit)
+            planned.append((query, f"title_phrase({title_fragment!r})"))
+
+    all_terms = entities.all_entities()
     if all_terms:
         query = Q.paper_lookup_by_title(" ".join(all_terms), limit)
         planned.append((query, f"title_lookup({all_terms})"))
@@ -430,13 +482,15 @@ def _plan_topic_search(
             query = Q.papers_by_method_and_dataset(method, dataset, limit)
             planned.append((query, f"combined({method},{dataset})"))
 
-    for field in entities.fields[:2]:
-        query = Q.papers_by_research_field(field, limit)
-        planned.append((query, f"field({field})"))
+    for field_name in entities.fields[:2]:
+        for form in _usable_forms(entities.all_field_forms(field_name)[:2]):
+            query = Q.papers_by_research_field(form, limit)
+            planned.append((query, f"field({form})"))
 
     for task in entities.tasks[:2]:
-        query = Q.papers_by_research_problem(task, limit)
-        planned.append((query, f"task({task})"))
+        for form in _usable_forms(entities.all_task_forms(task)[:2]):
+            query = Q.papers_by_research_problem(form, limit)
+            planned.append((query, f"task({form})"))
 
     for method in entities.methods[:2]:
         for form in _usable_forms(entities.all_method_forms(method)[:2]):

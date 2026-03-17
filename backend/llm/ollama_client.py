@@ -29,6 +29,7 @@ Your responses must:
 Do NOT:
 - Make up papers, authors, or results not in the provided context
 - Use numeric citations like [1], [2], [3]
+- Use resource IDs like (R213192) or URIs — reference papers by title only
 - Fabricate claims or findings
 - Guess answers when evidence is missing
 - Include papers that are not listed in the context
