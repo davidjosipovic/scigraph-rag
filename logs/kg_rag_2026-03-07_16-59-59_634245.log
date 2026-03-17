@@ -1,3 +1,0 @@
-2026-03-07 16:59:59.653 | INFO     | backend.kg.sparql_client:__init__:39 - Using remote ORKG SPARQL endpoint: https://orkg.org/triplestore
-2026-03-07 16:59:59.653 | INFO     | backend.llm.ollama_client:__init__:182 - OllamaClient initialized: model=llama3, url=http://localhost:11434
-2026-03-07 16:59:59.820 | INFO     | backend.kg.sparql_client:_query_remote:72 - Remote query returned 1 results.
