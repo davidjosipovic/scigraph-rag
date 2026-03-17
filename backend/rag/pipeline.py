@@ -18,6 +18,7 @@ Returns a structured JSON response with all pipeline artifacts
 (entities, SPARQL queries used, answer, sources).
 """
 
+import asyncio
 from typing import Any
 from loguru import logger
 
@@ -27,10 +28,10 @@ from backend.rag.entity_extractor import extract_entities, ExtractedEntities
 from backend.rag.entity_extractor import extract_keywords
 from backend.rag.entity_normalization import expand_entities, ExpandedEntities
 from backend.rag.query_builder import retrieve_async, RetrievalResult
-from backend.rag.ranking import rank_results, soft_filter, truncate_to_top_papers
+from backend.rag.ranking import rank_results, hard_filter, soft_filter, truncate_to_top_papers
 from backend.rag.context_builder import build_context, format_sources
 from backend.kg.sparql_client import SPARQLClient
-from backend.llm.ollama_client import OllamaClient, get_prompt_template
+from backend.llm.ollama_client import OllamaClient, ollama_client, get_prompt_template
 
 
 class RAGPipeline:
@@ -82,7 +83,7 @@ class RAGPipeline:
         llm_client: OllamaClient | None = None,
     ) -> None:
         self.sparql = sparql_client or SPARQLClient()
-        self.llm = llm_client or OllamaClient()
+        self.llm = llm_client or ollama_client
 
     async def ask(self, question: str) -> dict[str, Any]:
         """
@@ -107,12 +108,15 @@ class RAGPipeline:
         """
         logger.info(f"Processing question: {question}")
 
-        # ── Step 1: Classify the question ──
-        query_type = classify_query(question)
+        # ── Steps 1 + 2: Classify and extract entities in parallel ──
+        # Both calls take the same input and are independent — run concurrently
+        # to halve the LLM latency for this stage.
+        loop = asyncio.get_running_loop()
+        query_type, entities = await asyncio.gather(
+            loop.run_in_executor(None, classify_query, question),
+            loop.run_in_executor(None, extract_entities, question),
+        )
         logger.info(f"Step 1 — Query type: {query_type.value}")
-
-        # ── Step 2: Extract entities ──
-        entities = extract_entities(question)
         logger.info(
             f"Step 2 — Entities: methods={entities.methods}, "
             f"datasets={entities.datasets}, tasks={entities.tasks}, "
@@ -152,10 +156,14 @@ class RAGPipeline:
             f"top score={ranked[0].get('_score', 0) if ranked else 0}"
         )
 
-        # ── Step 6: Soft filter (drop score-0 noise, keep partial matches) ──
-        filtered = soft_filter(ranked, min_score=1)
+        # ── Step 6: Filter results ──
+        # Hard filter first: when both methods and datasets are present,
+        # drop papers that don't match at least one of each.
+        # Soft filter after: drop any remaining score-0 noise.
+        filtered = hard_filter(ranked, expanded)
+        filtered = soft_filter(filtered, min_score=1)
         logger.info(
-            f"Step 6 — Soft filter: {len(ranked)} → {len(filtered)} rows "
+            f"Step 6 — Filter: {len(ranked)} → {len(filtered)} rows "
             f"(dropped {len(ranked) - len(filtered)} noise rows)"
         )
 

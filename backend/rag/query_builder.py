@@ -375,7 +375,8 @@ def _plan_claim_evidence(
     all_terms = entities.all_entities()
     if all_terms:
         query = Q.claim_evidence(all_terms, limit + 5)
-        planned.append((query, f"claim_evidence({all_terms})"))
+        if query:
+            planned.append((query, f"claim_evidence({all_terms})"))
 
     for method in entities.methods[:2]:
         for form in _usable_forms(entities.all_method_forms(method)[:2]):

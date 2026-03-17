@@ -16,6 +16,8 @@ Timeout handling:
 from __future__ import annotations
 
 import asyncio
+import socket
+import urllib.error
 from typing import Any
 from loguru import logger
 from SPARQLWrapper import SPARQLWrapper, JSON
@@ -86,7 +88,7 @@ class SPARQLClient:
         Raises:
             SPARQLTimeoutError: propagated from ``execute()``.
         """
-        loop = asyncio.get_event_loop()
+        loop = asyncio.get_running_loop()
         return await loop.run_in_executor(None, self.execute, query)
 
     def _query_remote(self, query: str) -> list[dict[str, Any]]:
@@ -105,7 +107,7 @@ class SPARQLClient:
             logger.info(f"Remote query returned {len(results)} results.")
             return results
 
-        except TimeoutError:
+        except (socket.timeout, TimeoutError):
             logger.warning(
                 f"SPARQL query timed out after {settings.sparql_timeout}s.\n"
                 f"  Query (truncated): {query[:120]}..."
@@ -113,6 +115,17 @@ class SPARQLClient:
             raise SPARQLTimeoutError(
                 f"SPARQL timeout after {settings.sparql_timeout}s"
             )
+        except urllib.error.URLError as e:
+            if isinstance(e.reason, socket.timeout):
+                logger.warning(
+                    f"SPARQL query timed out after {settings.sparql_timeout}s.\n"
+                    f"  Query (truncated): {query[:120]}..."
+                )
+                raise SPARQLTimeoutError(
+                    f"SPARQL timeout after {settings.sparql_timeout}s"
+                )
+            logger.error(f"SPARQL remote query failed (URLError): {e}")
+            return []
         except SPARQLTimeoutError:
             raise  # re-raise our own exception
         except Exception as e:

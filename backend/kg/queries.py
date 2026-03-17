@@ -30,6 +30,23 @@ PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>
 """.strip()
 
 
+def _sanitize(value: str) -> str:
+    """
+    Sanitize a user-supplied string before interpolating it into a SPARQL query.
+
+    Removes characters that could break out of a SPARQL string literal
+    (double quote, backslash) and strips leading/trailing whitespace.
+    Scientific entity names only need letters, digits, spaces, hyphens,
+    dots, plus signs, and underscores — everything else is stripped.
+    """
+    # Remove chars that can close or escape a SPARQL string literal
+    sanitized = value.replace("\\", "").replace('"', "").replace("'", "")
+    # Remove SPARQL structural characters
+    for ch in ("{", "}", "(", ")", "<", ">", ";", "#"):
+        sanitized = sanitized.replace(ch, "")
+    return sanitized.strip()
+
+
 # ─── SEMANTIC RETRIEVAL QUERIES ──────────────────────────────────
 # These traverse graph relationships, not paper titles.
 
@@ -41,6 +58,7 @@ def papers_by_method(method: str, limit: int = 5) -> str:
     Traverses: Paper → Contribution → * → Method entity
     Matches on the label of the method entity, not the paper title.
     """
+    method = _sanitize(method)
     return f"""{PREFIXES}
 
 SELECT DISTINCT ?paper ?title ?doi ?methodLabel ?contribLabel WHERE {{
@@ -64,6 +82,7 @@ def papers_by_dataset(dataset: str, limit: int = 5) -> str:
 
     Traverses: Paper → Contribution → * → Dataset entity
     """
+    dataset = _sanitize(dataset)
     return f"""{PREFIXES}
 
 SELECT DISTINCT ?paper ?title ?doi ?datasetLabel ?contribLabel WHERE {{
@@ -87,6 +106,7 @@ def papers_by_research_problem(problem: str, limit: int = 5) -> str:
 
     Traverses: Paper → Contribution → P32 (research problem) → Problem entity
     """
+    problem = _sanitize(problem)
     return f"""{PREFIXES}
 
 SELECT DISTINCT ?paper ?title ?doi ?problemLabel WHERE {{
@@ -109,6 +129,7 @@ def papers_by_research_field(field: str, limit: int = 5) -> str:
 
     Traverses: Paper → P30 (research field) → Field entity
     """
+    field = _sanitize(field)
     return f"""{PREFIXES}
 
 SELECT DISTINCT ?paper ?title ?doi ?fieldLabel WHERE {{
@@ -136,6 +157,8 @@ def papers_comparing_methods(method_a: str, method_b: str, limit: int = 5) -> st
                Paper → Contribution → * → MethodB
     Both methods can be in the same or different contributions.
     """
+    method_a = _sanitize(method_a)
+    method_b = _sanitize(method_b)
     return f"""{PREFIXES}
 
 SELECT DISTINCT ?paper ?title ?doi ?methodALabel ?methodBLabel WHERE {{
@@ -179,6 +202,8 @@ def papers_by_method_and_dataset(
         Paper → Contribution → * → Method entity
         Paper → Contribution → * → Dataset entity
     """
+    method = _sanitize(method)
+    dataset = _sanitize(dataset)
     return f"""{PREFIXES}
 
 SELECT DISTINCT ?paper ?title ?doi ?methodLabel ?datasetLabel WHERE {{
@@ -267,6 +292,9 @@ def claim_evidence(keywords: list[str], limit: int = 15) -> str:
     Uses OR-matching on contribution entity labels so partial evidence
     is still retrieved.
     """
+    keywords = [_sanitize(kw) for kw in keywords if _sanitize(kw)]
+    if not keywords:
+        return ""
     filters = " || ".join(
         f'CONTAINS(LCASE(?valueLabel), LCASE("{kw}"))' for kw in keywords
     )
@@ -295,6 +323,7 @@ def paper_lookup_by_title(title_fragment: str, limit: int = 5) -> str:
     This is the ONLY query that matches on paper title, and it's used
     specifically when the user is looking up a known paper by name.
     """
+    title_fragment = _sanitize(title_fragment)
     return f"""{PREFIXES}
 
 SELECT DISTINCT ?paper ?title ?doi ?fieldLabel WHERE {{
@@ -321,6 +350,7 @@ def broad_entity_search(keyword: str, limit: int = 5) -> str:
     Broad fallback: find papers that have ANY contribution entity matching
     the keyword. This is more inclusive than method/dataset-specific queries.
     """
+    keyword = _sanitize(keyword)
     return f"""{PREFIXES}
 
 SELECT DISTINCT ?paper ?title ?doi ?entityLabel WHERE {{
@@ -343,6 +373,7 @@ def title_keyword_search(keywords: list[str], limit: int = 5) -> str:
 
     Only used when graph-based queries return no results.
     """
+    keywords = [_sanitize(kw) for kw in keywords if _sanitize(kw)]
     if len(keywords) == 1:
         filter_clause = f'CONTAINS(LCASE(?title), LCASE("{keywords[0]}"))'
     else:

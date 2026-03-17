@@ -15,6 +15,7 @@ if the model is unavailable or returns unparseable output.
 import json
 import re
 from dataclasses import dataclass, field
+from functools import lru_cache
 
 from loguru import logger
 
@@ -62,6 +63,7 @@ Example output format:
 {"methods": ["BERT", "CNN"], "datasets": ["MNIST"], "tasks": ["image classification"], "fields": ["computer vision"], "metrics": ["accuracy"]}"""
 
 
+@lru_cache(maxsize=256)
 def extract_entities(question: str) -> ExtractedEntities:
     """
     Extract typed scientific entities from a natural language question using Llama 3.

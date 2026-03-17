@@ -11,6 +11,7 @@ Supported query types (6):
 """
 
 from enum import Enum
+from functools import lru_cache
 
 from loguru import logger
 
@@ -44,6 +45,7 @@ Respond with ONLY the category name, nothing else. No explanation, no punctuatio
 _VALID_TYPES = {qt.value for qt in QueryType}
 
 
+@lru_cache(maxsize=256)
 def classify_query(question: str) -> QueryType:
     """
     Classify a user question into one of six supported query types using Llama 3.

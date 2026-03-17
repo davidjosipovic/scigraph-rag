@@ -1,0 +1,33 @@
+2026-03-17 10:31:01.090 | INFO     | backend.api.routes:ask_question:49 - Received question: Which papers compare CNN and SVM?
+2026-03-17 10:31:01.090 | INFO     | backend.kg.sparql_client:__init__:56 - Using remote ORKG SPARQL endpoint: https://orkg.org/triplestore
+2026-03-17 10:31:01.090 | INFO     | backend.rag.pipeline:ask:109 - Processing question: Which papers compare CNN and SVM?
+2026-03-17 10:31:04.372 | INFO     | backend.llm.ollama_client:generate:226 - LLM generation complete: 85 chars, model=llama3
+2026-03-17 10:31:04.372 | INFO     | backend.rag.entity_extractor:extract_entities:104 - Entity extraction complete: {'methods': ['CNN', 'SVM'], 'datasets': [], 'tasks': [], 'fields': [], 'metrics': []}
+2026-03-17 10:31:05.146 | INFO     | backend.llm.ollama_client:generate:226 - LLM generation complete: 17 chars, model=llama3
+2026-03-17 10:31:05.147 | INFO     | backend.rag.query_classifier:classify_query:72 - Query classified as 'method_comparison'
+2026-03-17 10:31:05.147 | INFO     | backend.rag.pipeline:ask:119 - Step 1 — Query type: method_comparison
+2026-03-17 10:31:05.147 | INFO     | backend.rag.pipeline:ask:120 - Step 2 — Entities: methods=['CNN', 'SVM'], datasets=[], tasks=[], fields=[], metrics=[]
+2026-03-17 10:31:05.148 | INFO     | backend.rag.pipeline:ask:139 - Step 3 — Normalization: method_variants={'cnn': ['convolutional neural network', 'dcnn', 'deep convolutional network', 'convnet'], 'svm': ['support vector machine', 'support vector machines', 'support vector classification']}, dataset_variants={}
+2026-03-17 10:31:05.304 | INFO     | backend.kg.sparql_client:_query_remote:107 - Remote query returned 10 results.
+2026-03-17 10:31:05.338 | INFO     | backend.kg.sparql_client:_query_remote:107 - Remote query returned 10 results.
+2026-03-17 10:31:05.413 | INFO     | backend.kg.sparql_client:_query_remote:107 - Remote query returned 10 results.
+2026-03-17 10:31:05.415 | INFO     | backend.kg.sparql_client:_query_remote:107 - Remote query returned 10 results.
+2026-03-17 10:31:15.245 | WARNING  | backend.kg.sparql_client:_query_remote:111 - SPARQL query timed out after 10s.
+  Query (truncated): PREFIX orkgc: <http://orkg.org/orkg/class/>
+PREFIX orkgp: <http://orkg.org/orkg/predicate/>
+PREFIX orkgr: <http://orkg.o...
+2026-03-17 10:31:15.246 | WARNING  | backend.kg.sparql_client:_query_remote:111 - SPARQL query timed out after 10s.
+  Query (truncated): PREFIX orkgc: <http://orkg.org/orkg/class/>
+PREFIX orkgp: <http://orkg.org/orkg/predicate/>
+PREFIX orkgr: <http://orkg.o...
+2026-03-17 10:31:15.246 | WARNING  | backend.rag.query_builder:retrieve_async:174 - Timeout on comparison(CNN,SVM) — falling back to title search
+2026-03-17 10:31:15.743 | INFO     | backend.kg.sparql_client:_query_remote:107 - Remote query returned 10 results.
+2026-03-17 10:31:15.744 | WARNING  | backend.rag.query_builder:retrieve_async:174 - Timeout on comparison_variant(convolutional neural network,SVM) — falling back to title search
+2026-03-17 10:31:15.886 | INFO     | backend.kg.sparql_client:_query_remote:107 - Remote query returned 10 results.
+2026-03-17 10:31:15.887 | INFO     | backend.rag.query_builder:retrieve_async:208 - Async retrieval complete: 60 total results from 6 queries (strategies: ['timeout_fallback(comparison(CNN,SVM))', 'timeout_fallback(comparison_variant(convolutional neural network,SVM))', 'method(CNN)', 'method(convolutional neural network)', 'method(SVM)', 'method(support vector machine)'])
+2026-03-17 10:31:15.887 | INFO     | backend.rag.pipeline:ask:147 - Step 4 — Retrieval: 60 results from 6 queries
+2026-03-17 10:31:15.888 | INFO     | backend.rag.pipeline:ask:154 - Step 5 — Ranking: 60 rows, top score=3
+2026-03-17 10:31:15.888 | INFO     | backend.rag.pipeline:ask:165 - Step 6 — Filter: 60 → 60 rows (dropped 0 noise rows)
+2026-03-17 10:31:15.888 | INFO     | backend.rag.pipeline:ask:172 - Step 7 — Truncation: top 8 papers
+2026-03-17 10:31:25.615 | INFO     | backend.llm.ollama_client:generate:226 - LLM generation complete: 1842 chars, model=llama3
+2026-03-17 10:31:25.615 | INFO     | backend.rag.pipeline:ask:184 - Step 9 — Answer: 1842 chars

@@ -57,8 +57,6 @@ def build_paper_context(results: list[dict[str, Any]]) -> str:
         lines: list[str] = ["Paper:"]
         lines.append(f"Title: {info['title']}")
         lines.append(f"URI: {uri}")
-        if info["score"] is not None:
-            lines.append(f"Relevance Score: {info['score']}")
         if info["doi"] != "N/A":
             lines.append(f"DOI: {info['doi']}")
         if info["fields"]:
@@ -127,32 +125,6 @@ def build_evidence_context(results: list[dict[str, Any]]) -> str:
 
     header = f"=== Evidence from ORKG ({len(papers)} sources) ===\n"
     return header + "\n\n".join(blocks)
-
-
-def build_contribution_context(results: list[dict[str, Any]]) -> str:
-    """
-    Convert paper contribution results into structured context.
-
-    Used when enriching a specific paper with its full contributions.
-    """
-    if not results:
-        return "No contribution details were found for this paper."
-
-    lines = ["=== Paper Contributions ===\n"]
-    current_contrib = None
-
-    for row in results:
-        contrib = row.get("contribLabel", "Unknown")
-        pred = row.get("predLabel", row.get("predicate", "?"))
-        value = row.get("valueLabel", row.get("value", "?"))
-
-        if contrib != current_contrib:
-            current_contrib = contrib
-            lines.append(f"Contribution: {contrib}")
-
-        lines.append(f"  - {pred}: {value}")
-
-    return "\n".join(lines)
 
 
 def format_sources(results: list[dict[str, Any]]) -> list[dict[str, str]]:
@@ -251,10 +223,10 @@ def _group_by_paper(results: list[dict[str, Any]]) -> dict[str, dict]:
             if pair not in info["contributions"][contrib]:
                 info["contributions"][contrib].append(pair)
 
-        # Broad entity label (from fallback queries) — classify heuristically
+        # Broad entity label (from fallback queries) — add only to methods
+        # as a general catch-all; adding to both caused duplicate noise
         val = row.get("entityLabel")
         if val:
             info["methods"].add(val)
-            info["datasets"].add(val)
 
     return papers
