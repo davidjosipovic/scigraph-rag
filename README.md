@@ -46,9 +46,18 @@ scigraph-rag/
 ### 1. Environment Setup
 
 ```bash
-# Arch Linux: ensure python-venv is installed
-python -m venv .venv
-source .venv/bin/activate
+# Install pyenv i pyenv-virtualenv ako već nisu instalirani:
+# https://github.com/pyenv/pyenv#installation
+# https://github.com/pyenv/pyenv-virtualenv#installation
+
+# Instaliraj Python 3.13.6 i kreiraj virtualenv
+pyenv install 3.13.6
+pyenv virtualenv 3.13.6 scigraph-rag-3.13
+
+# Postavi lokalni virtualenv za ovaj projekt (kreira .python-version)
+pyenv local scigraph-rag-3.13
+
+# Instaliraj dependencies i postavi .env
 pip install -r requirements.txt
 cp .env.example .env
 
