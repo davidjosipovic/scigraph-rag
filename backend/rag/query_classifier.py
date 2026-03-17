@@ -1,5 +1,5 @@
 """
-Query classifier: determines the type of user question.
+Query classifier: determines the type of user question using Llama 3.
 
 Supported query types (6):
   - topic_search:       General topic/field-based paper search
@@ -8,13 +8,13 @@ Supported query types (6):
   - claim_verification: Verify a scientific claim
   - method_usage:       Find papers that use a specific method
   - paper_lookup:       Look up a specific paper by name/identifier
-
-The classifier uses keyword heuristics for simplicity and speed.
-In a production system, this could be replaced with an LLM-based classifier.
 """
 
-import re
 from enum import Enum
+
+from loguru import logger
+
+from backend.llm.ollama_client import ollama_client
 
 
 class QueryType(str, Enum):
@@ -28,89 +28,28 @@ class QueryType(str, Enum):
     PAPER_LOOKUP = "paper_lookup"
 
 
-# --- Classification patterns (checked in priority order) ---
+_CLASSIFIER_SYSTEM_PROMPT = """You are a query classifier for a scientific paper search system.
+Your only job is to classify the user's question into exactly one of these categories:
 
-_CLAIM_PATTERNS = [
-    r"\bdoes\b.*\bclaim\b",
-    r"\bis it true\b",
-    r"\bverify\b",
-    r"\bconfirm\b",
-    r"\boutperform",
-    r"\bbetter than\b",
-    r"\bcompared to\b.*\bresult",
-    r"\baccuracy\b.*\bhigher\b",
-    r"\bdoes paper\b",
-    r"\bsupported\b.*\bevidence\b",
-]
+- topic_search: General topic or field-based search for papers (e.g. "papers about transformers")
+- method_comparison: Comparing two or more methods or models (e.g. "compare BERT vs GPT")
+- dataset_search: Finding papers that use a specific dataset or benchmark (e.g. "papers trained on ImageNet")
+- claim_verification: Verifying or checking a scientific claim or result (e.g. "does model X outperform Y?")
+- method_usage: Finding papers that use a specific method or technique (e.g. "papers using attention")
+- paper_lookup: Looking up a specific paper by title or identifier (e.g. "find paper titled Attention is All You Need")
 
-_METHOD_COMPARISON_PATTERNS = [
-    r"\bcompare\b.*\band\b",
-    r"\bcomparison\b.*\bbetween\b",
-    r"\bvs\.?\b",
-    r"\bversus\b",
-    r"\bcompared\b.*\bto\b",
-    r"\bdifference\b.*\bbetween\b",
-    r"\bwhich\b.*\bbetter\b",
-    r"\bcompare\b",
-]
+Respond with ONLY the category name, nothing else. No explanation, no punctuation."""
 
-_DATASET_SEARCH_PATTERNS = [
-    r"\bdataset\b",
-    r"\bbenchmark\b",
-    r"\btrained on\b",
-    r"\bevaluated on\b",
-    r"\btested on\b",
-    r"\busing\b.*\bdata\b",
-    r"\bpapers?\b.*\busing\b.*(?:MNIST|CIFAR|ImageNet|SQuAD|GLUE|CoNLL)",
-]
 
-_PAPER_LOOKUP_PATTERNS = [
-    r"\bpaper\b.*\btitled\b",
-    r"\bfind\b.*\bpaper\b.*\bcalled\b",
-    r"\blook\s?up\b",
-    r"\bdetails\b.*\bpaper\b",
-    r"\bwhat\b.*\bpaper\b.*\babout\b",
-    r"\btell me about\b.*\bpaper\b",
-]
-
-_METHOD_USAGE_PATTERNS = [
-    r"\bpapers?\b.*\busing\b",
-    r"\bpapers?\b.*\bthat\s+use\b",
-    r"\bapplied\b.*\bmethod\b",
-    r"\bapplications?\s+of\b",
-    r"\bwho\s+uses?\b",
-    r"\bused\b.*\bfor\b",
-    r"\bwhere\s+is\b.*\bused\b",
-    r"\bhow\s+is\b.*\bused\b",
-]
-
-_TOPIC_SEARCH_PATTERNS = [
-    r"\bwhat are\b.*\bapproaches\b",
-    r"\bsurvey\b",
-    r"\boverview\b",
-    r"\bstate of the art\b",
-    r"\brecent\b.*\bwork\b",
-    r"\bwhich papers\b",
-    r"\bfind papers\b",
-    r"\bsearch for\b",
-    r"\blist\b.*\bpapers\b",
-    r"\bresearch\b.*\bon\b",
-    r"\bpapers\b.*\babout\b",
-    r"\bpapers\b.*\bin\b.*\bfield\b",
-]
+_VALID_TYPES = {qt.value for qt in QueryType}
 
 
 def classify_query(question: str) -> QueryType:
     """
-    Classify a user question into one of six supported query types.
+    Classify a user question into one of six supported query types using Llama 3.
 
-    Checks patterns in priority order:
-      1. claim_verification  (highest specificity)
-      2. method_comparison
-      3. dataset_search
-      4. paper_lookup
-      5. method_usage
-      6. topic_search        (broadest, fallback)
+    Falls back to topic_search if the model returns an unexpected value
+    or if Ollama is unavailable.
 
     Args:
         question: The user's natural language question.
@@ -118,21 +57,24 @@ def classify_query(question: str) -> QueryType:
     Returns:
         The detected QueryType.
     """
-    q = question.lower().strip()
+    try:
+        raw = ollama_client.generate(
+            prompt=question,
+            system=_CLASSIFIER_SYSTEM_PROMPT,
+            temperature=0.0,
+            max_tokens=16,
+        )
+        label = raw.strip().lower()
 
-    checks: list[tuple[list[str], QueryType]] = [
-        (_CLAIM_PATTERNS, QueryType.CLAIM_VERIFICATION),
-        (_METHOD_COMPARISON_PATTERNS, QueryType.METHOD_COMPARISON),
-        (_DATASET_SEARCH_PATTERNS, QueryType.DATASET_SEARCH),
-        (_PAPER_LOOKUP_PATTERNS, QueryType.PAPER_LOOKUP),
-        (_METHOD_USAGE_PATTERNS, QueryType.METHOD_USAGE),
-        (_TOPIC_SEARCH_PATTERNS, QueryType.TOPIC_SEARCH),
-    ]
+        if label in _VALID_TYPES:
+            logger.info(f"Query classified as '{label}'")
+            return QueryType(label)
 
-    for patterns, query_type in checks:
-        for pattern in patterns:
-            if re.search(pattern, q):
-                return query_type
+        logger.warning(
+            f"Unexpected classifier output: '{raw}' — falling back to topic_search"
+        )
+        return QueryType.TOPIC_SEARCH
 
-    # Default fallback
-    return QueryType.TOPIC_SEARCH
+    except Exception as e:
+        logger.error(f"Query classification failed: {e} — falling back to topic_search")
+        return QueryType.TOPIC_SEARCH
