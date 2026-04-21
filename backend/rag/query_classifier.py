@@ -1,5 +1,5 @@
 """
-Query classifier: determines the type of user question using Llama 3.
+Query classifier: determines the type of user question using an LLM.
 
 Supported query types (6):
   - topic_search:       General topic/field-based paper search
@@ -11,11 +11,10 @@ Supported query types (6):
 """
 
 from enum import Enum
-from functools import lru_cache
 
 from loguru import logger
 
-from backend.llm.ollama_client import ollama_client
+from backend.llm.base import BaseLLMClient
 
 
 class QueryType(str, Enum):
@@ -45,22 +44,22 @@ Respond with ONLY the category name, nothing else. No explanation, no punctuatio
 _VALID_TYPES = {qt.value for qt in QueryType}
 
 
-@lru_cache(maxsize=256)
-def classify_query(question: str) -> QueryType:
+def classify_query(question: str, client: BaseLLMClient) -> QueryType:
     """
-    Classify a user question into one of six supported query types using Llama 3.
+    Classify a user question into one of six supported query types.
 
     Falls back to topic_search if the model returns an unexpected value
-    or if Ollama is unavailable.
+    or if the client is unavailable.
 
     Args:
         question: The user's natural language question.
+        client:   LLM client to use for classification.
 
     Returns:
         The detected QueryType.
     """
     try:
-        raw = ollama_client.generate(
+        raw = client.generate(
             prompt=question,
             system=_CLASSIFIER_SYSTEM_PROMPT,
             temperature=0.0,

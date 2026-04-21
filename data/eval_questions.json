@@ -1,0 +1,671 @@
+{
+  "description": "Evaluation question set for the scigraph-rag GraphRAG system over ORKG. Covers all 6 supported query types (50 total, ~8-9 per type). Used to compare multiple LLMs on answer quality and latency.",
+  "version": "1.1",
+  "total_questions": 50,
+  "query_types": ["topic_search", "method_comparison", "dataset_search", "claim_verification", "method_usage", "paper_lookup"],
+  "questions": [
+
+    {
+      "id": "Q01",
+      "question": "What papers exist about graph neural networks?",
+      "query_type": "topic_search",
+      "difficulty": "easy",
+      "expected_entities": {
+        "methods": ["graph neural network"],
+        "datasets": [],
+        "tasks": [],
+        "fields": []
+      },
+      "answer_hints": ["GNN", "node classification", "graph-structured data"]
+    },
+    {
+      "id": "Q02",
+      "question": "Find papers on federated learning.",
+      "query_type": "topic_search",
+      "difficulty": "easy",
+      "expected_entities": {
+        "methods": ["federated learning"],
+        "datasets": [],
+        "tasks": [],
+        "fields": []
+      },
+      "answer_hints": ["distributed training", "data privacy", "local model updates"]
+    },
+    {
+      "id": "Q03",
+      "question": "What research has been done on knowledge distillation?",
+      "query_type": "topic_search",
+      "difficulty": "medium",
+      "expected_entities": {
+        "methods": ["knowledge distillation"],
+        "datasets": [],
+        "tasks": [],
+        "fields": []
+      },
+      "answer_hints": ["teacher model", "student model", "model compression"]
+    },
+    {
+      "id": "Q04",
+      "question": "Show me papers about neural architecture search.",
+      "query_type": "topic_search",
+      "difficulty": "medium",
+      "expected_entities": {
+        "methods": ["neural architecture search"],
+        "datasets": [],
+        "tasks": [],
+        "fields": []
+      },
+      "answer_hints": ["NAS", "AutoML", "architecture optimization"]
+    },
+    {
+      "id": "Q05",
+      "question": "What papers study contrastive learning for visual representations?",
+      "query_type": "topic_search",
+      "difficulty": "hard",
+      "expected_entities": {
+        "methods": ["contrastive learning"],
+        "datasets": [],
+        "tasks": [],
+        "fields": ["computer vision"]
+      },
+      "answer_hints": ["self-supervised", "SimCLR", "MoCo", "image representations"]
+    },
+
+    {
+      "id": "Q06",
+      "question": "Which papers compare CNN and RNN for text classification?",
+      "query_type": "method_comparison",
+      "difficulty": "easy",
+      "expected_entities": {
+        "methods": ["CNN", "RNN"],
+        "datasets": [],
+        "tasks": ["text classification"],
+        "fields": []
+      },
+      "answer_hints": ["accuracy", "sequence modeling", "convolutional", "recurrent"]
+    },
+    {
+      "id": "Q07",
+      "question": "How do BERT and GPT compare on natural language understanding tasks?",
+      "query_type": "method_comparison",
+      "difficulty": "easy",
+      "expected_entities": {
+        "methods": ["BERT", "GPT"],
+        "datasets": ["GLUE"],
+        "tasks": [],
+        "fields": ["NLP"]
+      },
+      "answer_hints": ["bidirectional", "autoregressive", "fine-tuning", "benchmark"]
+    },
+    {
+      "id": "Q08",
+      "question": "What papers compare ResNet and VGG on image classification?",
+      "query_type": "method_comparison",
+      "difficulty": "medium",
+      "expected_entities": {
+        "methods": ["ResNet", "VGG"],
+        "datasets": ["ImageNet"],
+        "tasks": ["image classification"],
+        "fields": []
+      },
+      "answer_hints": ["residual connections", "depth", "top-1 accuracy"]
+    },
+    {
+      "id": "Q09",
+      "question": "Are there papers comparing LSTM and Transformer for machine translation?",
+      "query_type": "method_comparison",
+      "difficulty": "medium",
+      "expected_entities": {
+        "methods": ["LSTM", "Transformer"],
+        "datasets": [],
+        "tasks": ["machine translation"],
+        "fields": []
+      },
+      "answer_hints": ["sequence-to-sequence", "attention", "BLEU score"]
+    },
+    {
+      "id": "Q10",
+      "question": "Which papers compare SVM and random forest for classification?",
+      "query_type": "method_comparison",
+      "difficulty": "hard",
+      "expected_entities": {
+        "methods": ["SVM", "random forest"],
+        "datasets": [],
+        "tasks": [],
+        "fields": []
+      },
+      "answer_hints": ["kernel", "ensemble", "feature importance", "accuracy"]
+    },
+
+    {
+      "id": "Q11",
+      "question": "Which papers use the ImageNet dataset?",
+      "query_type": "dataset_search",
+      "difficulty": "easy",
+      "expected_entities": {
+        "methods": [],
+        "datasets": ["ImageNet"],
+        "tasks": [],
+        "fields": []
+      },
+      "answer_hints": ["image classification", "1000 classes", "ILSVRC"]
+    },
+    {
+      "id": "Q12",
+      "question": "Find papers that evaluate on the SQuAD benchmark.",
+      "query_type": "dataset_search",
+      "difficulty": "easy",
+      "expected_entities": {
+        "methods": [],
+        "datasets": ["SQuAD"],
+        "tasks": ["question answering"],
+        "fields": []
+      },
+      "answer_hints": ["reading comprehension", "F1 score", "exact match"]
+    },
+    {
+      "id": "Q13",
+      "question": "What papers train models on the MNIST dataset?",
+      "query_type": "dataset_search",
+      "difficulty": "easy",
+      "expected_entities": {
+        "methods": [],
+        "datasets": ["MNIST"],
+        "tasks": [],
+        "fields": []
+      },
+      "answer_hints": ["handwritten digits", "classification accuracy", "benchmark"]
+    },
+    {
+      "id": "Q14",
+      "question": "Which papers use CIFAR-10 for evaluating image models?",
+      "query_type": "dataset_search",
+      "difficulty": "medium",
+      "expected_entities": {
+        "methods": [],
+        "datasets": ["CIFAR-10"],
+        "tasks": ["image classification"],
+        "fields": []
+      },
+      "answer_hints": ["10 classes", "32x32 images", "test accuracy"]
+    },
+    {
+      "id": "Q15",
+      "question": "Find papers that use the CoNLL-2003 dataset.",
+      "query_type": "dataset_search",
+      "difficulty": "hard",
+      "expected_entities": {
+        "methods": [],
+        "datasets": ["CoNLL-2003"],
+        "tasks": ["NER"],
+        "fields": []
+      },
+      "answer_hints": ["named entity recognition", "F1", "sequence labeling"]
+    },
+
+    {
+      "id": "Q16",
+      "question": "Does BERT outperform traditional methods on question answering?",
+      "query_type": "claim_verification",
+      "difficulty": "easy",
+      "expected_entities": {
+        "methods": ["BERT"],
+        "datasets": ["SQuAD"],
+        "tasks": ["question answering"],
+        "fields": []
+      },
+      "answer_hints": ["F1", "exact match", "pre-training", "fine-tuning"]
+    },
+    {
+      "id": "Q17",
+      "question": "Do transformers achieve better results than LSTMs on machine translation?",
+      "query_type": "claim_verification",
+      "difficulty": "easy",
+      "expected_entities": {
+        "methods": ["Transformer", "LSTM"],
+        "datasets": ["WMT"],
+        "tasks": ["machine translation"],
+        "fields": []
+      },
+      "answer_hints": ["BLEU", "attention mechanism", "parallelization"]
+    },
+    {
+      "id": "Q18",
+      "question": "Is ResNet more accurate than VGG on the ImageNet benchmark?",
+      "query_type": "claim_verification",
+      "difficulty": "medium",
+      "expected_entities": {
+        "methods": ["ResNet", "VGG"],
+        "datasets": ["ImageNet"],
+        "tasks": ["image classification"],
+        "fields": []
+      },
+      "answer_hints": ["top-1 accuracy", "residual connections", "depth", "vanishing gradient"]
+    },
+    {
+      "id": "Q19",
+      "question": "Does data augmentation improve model performance on small datasets?",
+      "query_type": "claim_verification",
+      "difficulty": "medium",
+      "expected_entities": {
+        "methods": [],
+        "datasets": [],
+        "tasks": [],
+        "fields": ["computer vision"]
+      },
+      "answer_hints": ["overfitting", "generalization", "rotation", "flip", "accuracy improvement"]
+    },
+    {
+      "id": "Q20",
+      "question": "Is random forest better than SVM for text classification tasks?",
+      "query_type": "claim_verification",
+      "difficulty": "hard",
+      "expected_entities": {
+        "methods": ["random forest", "SVM"],
+        "datasets": [],
+        "tasks": ["text classification"],
+        "fields": []
+      },
+      "answer_hints": ["accuracy", "feature extraction", "TF-IDF", "benchmark comparison"]
+    },
+
+    {
+      "id": "Q21",
+      "question": "Which papers use attention mechanisms for NLP tasks?",
+      "query_type": "method_usage",
+      "difficulty": "easy",
+      "expected_entities": {
+        "methods": ["attention mechanism"],
+        "datasets": [],
+        "tasks": [],
+        "fields": ["NLP"]
+      },
+      "answer_hints": ["self-attention", "sequence-to-sequence", "transformer"]
+    },
+    {
+      "id": "Q22",
+      "question": "Find papers that apply transfer learning to medical imaging.",
+      "query_type": "method_usage",
+      "difficulty": "medium",
+      "expected_entities": {
+        "methods": ["transfer learning"],
+        "datasets": [],
+        "tasks": [],
+        "fields": ["medical imaging"]
+      },
+      "answer_hints": ["ImageNet pre-training", "fine-tuning", "radiology", "classification"]
+    },
+    {
+      "id": "Q23",
+      "question": "What papers use BERT for named entity recognition?",
+      "query_type": "method_usage",
+      "difficulty": "easy",
+      "expected_entities": {
+        "methods": ["BERT"],
+        "datasets": ["CoNLL-2003"],
+        "tasks": ["NER"],
+        "fields": []
+      },
+      "answer_hints": ["token classification", "fine-tuning", "F1 score"]
+    },
+    {
+      "id": "Q24",
+      "question": "Which papers use GAN for image generation?",
+      "query_type": "method_usage",
+      "difficulty": "medium",
+      "expected_entities": {
+        "methods": ["GAN"],
+        "datasets": [],
+        "tasks": ["image generation"],
+        "fields": []
+      },
+      "answer_hints": ["generator", "discriminator", "adversarial training", "FID score"]
+    },
+    {
+      "id": "Q25",
+      "question": "Find papers that use LSTM for sentiment analysis.",
+      "query_type": "method_usage",
+      "difficulty": "medium",
+      "expected_entities": {
+        "methods": ["LSTM"],
+        "datasets": ["IMDB"],
+        "tasks": ["sentiment analysis"],
+        "fields": []
+      },
+      "answer_hints": ["sequence modeling", "opinion", "accuracy", "review classification"]
+    },
+
+    {
+      "id": "Q26",
+      "question": "Find the paper titled 'Attention Is All You Need'.",
+      "query_type": "paper_lookup",
+      "difficulty": "easy",
+      "expected_entities": {
+        "methods": ["Transformer"],
+        "datasets": [],
+        "tasks": [],
+        "fields": []
+      },
+      "answer_hints": ["Vaswani", "multi-head attention", "encoder-decoder", "2017"]
+    },
+    {
+      "id": "Q27",
+      "question": "Look up the BERT paper on language model pre-training.",
+      "query_type": "paper_lookup",
+      "difficulty": "easy",
+      "expected_entities": {
+        "methods": ["BERT"],
+        "datasets": ["GLUE"],
+        "tasks": [],
+        "fields": ["NLP"]
+      },
+      "answer_hints": ["Devlin", "bidirectional", "pre-training", "2018"]
+    },
+    {
+      "id": "Q28",
+      "question": "Find papers about ResNet residual network architecture.",
+      "query_type": "paper_lookup",
+      "difficulty": "medium",
+      "expected_entities": {
+        "methods": ["ResNet"],
+        "datasets": ["ImageNet"],
+        "tasks": ["image classification"],
+        "fields": []
+      },
+      "answer_hints": ["He et al.", "skip connections", "deep residual learning"]
+    },
+    {
+      "id": "Q29",
+      "question": "What is the paper that introduced word2vec word embeddings?",
+      "query_type": "paper_lookup",
+      "difficulty": "medium",
+      "expected_entities": {
+        "methods": ["word2vec"],
+        "datasets": [],
+        "tasks": [],
+        "fields": ["NLP"]
+      },
+      "answer_hints": ["Mikolov", "distributed representations", "skip-gram", "CBOW"]
+    },
+    {
+      "id": "Q30",
+      "question": "Find the paper that introduced generative adversarial networks.",
+      "query_type": "paper_lookup",
+      "difficulty": "hard",
+      "expected_entities": {
+        "methods": ["GAN"],
+        "datasets": [],
+        "tasks": ["image generation"],
+        "fields": []
+      },
+      "answer_hints": ["Goodfellow", "generator", "discriminator", "adversarial", "2014"]
+    },
+
+    {
+      "id": "Q31",
+      "question": "What papers work on question answering in the biomedical domain?",
+      "query_type": "topic_search",
+      "difficulty": "hard",
+      "expected_entities": {
+        "methods": [],
+        "datasets": ["PubMed"],
+        "tasks": ["question answering"],
+        "fields": ["bioinformatics"]
+      },
+      "answer_hints": ["biomedical NLP", "clinical text", "PubMed", "entity recognition"]
+    },
+    {
+      "id": "Q32",
+      "question": "Find papers on automatic speech recognition.",
+      "query_type": "topic_search",
+      "difficulty": "easy",
+      "expected_entities": {
+        "methods": [],
+        "datasets": ["LibriSpeech"],
+        "tasks": ["speech recognition"],
+        "fields": ["speech processing"]
+      },
+      "answer_hints": ["word error rate", "WER", "end-to-end", "acoustic model"]
+    },
+    {
+      "id": "Q33",
+      "question": "What research exists on recommendation systems using deep learning?",
+      "query_type": "topic_search",
+      "difficulty": "medium",
+      "expected_entities": {
+        "methods": ["deep learning"],
+        "datasets": [],
+        "tasks": [],
+        "fields": ["recommendation systems"]
+      },
+      "answer_hints": ["collaborative filtering", "user embeddings", "item embeddings", "click-through rate"]
+    },
+    {
+      "id": "Q34",
+      "question": "Show me papers about zero-shot learning.",
+      "query_type": "topic_search",
+      "difficulty": "medium",
+      "expected_entities": {
+        "methods": ["zero-shot learning"],
+        "datasets": [],
+        "tasks": [],
+        "fields": []
+      },
+      "answer_hints": ["unseen classes", "semantic embeddings", "generalization", "attribute vectors"]
+    },
+
+    {
+      "id": "Q35",
+      "question": "Which papers compare BERT and RoBERTa on the GLUE benchmark?",
+      "query_type": "method_comparison",
+      "difficulty": "hard",
+      "expected_entities": {
+        "methods": ["BERT", "RoBERTa"],
+        "datasets": ["GLUE"],
+        "tasks": [],
+        "fields": ["NLP"]
+      },
+      "answer_hints": ["fine-tuning", "pre-training data", "training steps", "score improvement"]
+    },
+    {
+      "id": "Q36",
+      "question": "How do U-Net and DeepLab compare for semantic segmentation?",
+      "query_type": "method_comparison",
+      "difficulty": "hard",
+      "expected_entities": {
+        "methods": ["U-Net", "DeepLab"],
+        "datasets": [],
+        "tasks": ["semantic segmentation"],
+        "fields": ["computer vision"]
+      },
+      "answer_hints": ["encoder-decoder", "dilated convolutions", "IoU", "mean IoU"]
+    },
+    {
+      "id": "Q37",
+      "question": "Are there papers comparing XGBoost and deep learning on tabular data?",
+      "query_type": "method_comparison",
+      "difficulty": "hard",
+      "expected_entities": {
+        "methods": ["XGBoost", "deep learning"],
+        "datasets": [],
+        "tasks": [],
+        "fields": []
+      },
+      "answer_hints": ["gradient boosting", "structured data", "accuracy", "feature engineering"]
+    },
+
+    {
+      "id": "Q38",
+      "question": "Find papers that use the MS COCO dataset for object detection.",
+      "query_type": "dataset_search",
+      "difficulty": "medium",
+      "expected_entities": {
+        "methods": [],
+        "datasets": ["MS COCO"],
+        "tasks": ["object detection"],
+        "fields": []
+      },
+      "answer_hints": ["mean average precision", "mAP", "bounding box", "instance segmentation"]
+    },
+    {
+      "id": "Q39",
+      "question": "Which papers evaluate language models on the SuperGLUE benchmark?",
+      "query_type": "dataset_search",
+      "difficulty": "hard",
+      "expected_entities": {
+        "methods": [],
+        "datasets": ["SuperGLUE"],
+        "tasks": [],
+        "fields": ["NLP"]
+      },
+      "answer_hints": ["natural language understanding", "multi-task", "reading comprehension", "coreference"]
+    },
+    {
+      "id": "Q40",
+      "question": "What papers use the WMT14 dataset for machine translation experiments?",
+      "query_type": "dataset_search",
+      "difficulty": "hard",
+      "expected_entities": {
+        "methods": [],
+        "datasets": ["WMT14"],
+        "tasks": ["machine translation"],
+        "fields": []
+      },
+      "answer_hints": ["English-German", "BLEU score", "parallel corpus", "translation quality"]
+    },
+
+    {
+      "id": "Q41",
+      "question": "Is LSTM better than GRU for sequence modeling tasks?",
+      "query_type": "claim_verification",
+      "difficulty": "medium",
+      "expected_entities": {
+        "methods": ["LSTM", "GRU"],
+        "datasets": [],
+        "tasks": [],
+        "fields": []
+      },
+      "answer_hints": ["gating mechanism", "memory cell", "vanishing gradient", "parameter count"]
+    },
+    {
+      "id": "Q42",
+      "question": "Do graph neural networks outperform traditional methods on node classification?",
+      "query_type": "claim_verification",
+      "difficulty": "hard",
+      "expected_entities": {
+        "methods": ["graph neural network"],
+        "datasets": [],
+        "tasks": [],
+        "fields": []
+      },
+      "answer_hints": ["semi-supervised", "node embeddings", "graph structure", "accuracy"]
+    },
+    {
+      "id": "Q43",
+      "question": "Is YOLO faster than Faster R-CNN for real-time object detection?",
+      "query_type": "claim_verification",
+      "difficulty": "hard",
+      "expected_entities": {
+        "methods": ["YOLO", "Faster R-CNN"],
+        "datasets": ["MS COCO"],
+        "tasks": ["object detection"],
+        "fields": []
+      },
+      "answer_hints": ["frames per second", "FPS", "mAP", "real-time", "speed-accuracy tradeoff"]
+    },
+
+    {
+      "id": "Q44",
+      "question": "Find papers that apply convolutional neural networks to medical image analysis.",
+      "query_type": "method_usage",
+      "difficulty": "medium",
+      "expected_entities": {
+        "methods": ["CNN"],
+        "datasets": [],
+        "tasks": [],
+        "fields": ["medical imaging"]
+      },
+      "answer_hints": ["diagnosis", "segmentation", "X-ray", "MRI", "classification accuracy"]
+    },
+    {
+      "id": "Q45",
+      "question": "Which papers use variational autoencoders for representation learning?",
+      "query_type": "method_usage",
+      "difficulty": "hard",
+      "expected_entities": {
+        "methods": ["VAE"],
+        "datasets": [],
+        "tasks": [],
+        "fields": []
+      },
+      "answer_hints": ["latent space", "encoder", "decoder", "ELBO", "generative model"]
+    },
+    {
+      "id": "Q46",
+      "question": "What papers use random forest for feature selection?",
+      "query_type": "method_usage",
+      "difficulty": "medium",
+      "expected_entities": {
+        "methods": ["random forest"],
+        "datasets": [],
+        "tasks": [],
+        "fields": []
+      },
+      "answer_hints": ["feature importance", "Gini impurity", "ensemble", "variable selection"]
+    },
+    {
+      "id": "Q47",
+      "question": "Find papers that use word2vec embeddings for sentiment analysis.",
+      "query_type": "method_usage",
+      "difficulty": "hard",
+      "expected_entities": {
+        "methods": ["word2vec"],
+        "datasets": ["IMDB"],
+        "tasks": ["sentiment analysis"],
+        "fields": []
+      },
+      "answer_hints": ["word embeddings", "distributed representations", "opinion", "accuracy"]
+    },
+
+    {
+      "id": "Q48",
+      "question": "Find the paper about ELMo embeddings from language models.",
+      "query_type": "paper_lookup",
+      "difficulty": "medium",
+      "expected_entities": {
+        "methods": ["ELMo"],
+        "datasets": [],
+        "tasks": [],
+        "fields": ["NLP"]
+      },
+      "answer_hints": ["Peters", "contextual embeddings", "bidirectional language model", "2018"]
+    },
+    {
+      "id": "Q49",
+      "question": "Look up papers about the Vision Transformer (ViT) for image recognition.",
+      "query_type": "paper_lookup",
+      "difficulty": "medium",
+      "expected_entities": {
+        "methods": ["ViT"],
+        "datasets": ["ImageNet"],
+        "tasks": ["image classification"],
+        "fields": ["computer vision"]
+      },
+      "answer_hints": ["Dosovitskiy", "patch embeddings", "self-attention", "2020"]
+    },
+    {
+      "id": "Q50",
+      "question": "Find the paper that introduced the T5 text-to-text transfer transformer.",
+      "query_type": "paper_lookup",
+      "difficulty": "hard",
+      "expected_entities": {
+        "methods": ["T5"],
+        "datasets": ["GLUE", "SuperGLUE"],
+        "tasks": [],
+        "fields": ["NLP"]
+      },
+      "answer_hints": ["Raffel", "text-to-text", "multi-task", "C4 dataset", "2019"]
+    }
+
+  ]
+}

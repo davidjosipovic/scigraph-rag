@@ -19,6 +19,7 @@ Returns a structured JSON response with all pipeline artifacts
 """
 
 import asyncio
+from functools import partial
 from typing import Any
 from loguru import logger
 
@@ -31,7 +32,8 @@ from backend.rag.query_builder import retrieve_async, RetrievalResult
 from backend.rag.ranking import rank_results, hard_filter, soft_filter, truncate_to_top_papers
 from backend.rag.context_builder import build_context_and_sources
 from backend.kg.sparql_client import SPARQLClient
-from backend.llm.ollama_client import OllamaClient, ollama_client, get_prompt_template
+from backend.llm.base import BaseLLMClient, get_prompt_template
+from backend.llm.factory import create_llm_client
 
 
 class RAGPipeline:
@@ -80,10 +82,10 @@ class RAGPipeline:
     def __init__(
         self,
         sparql_client: SPARQLClient | None = None,
-        llm_client: OllamaClient | None = None,
+        llm_client: BaseLLMClient | None = None,
     ) -> None:
         self.sparql = sparql_client or SPARQLClient()
-        self.llm = llm_client or ollama_client
+        self.llm = llm_client or create_llm_client()
 
     async def ask(self, question: str) -> dict[str, Any]:
         """
@@ -111,10 +113,12 @@ class RAGPipeline:
         # ── Steps 1 + 2: Classify and extract entities in parallel ──
         # Both calls take the same input and are independent — run concurrently
         # to halve the LLM latency for this stage.
+        # partial() is used because run_in_executor does not support kwargs,
+        # and both functions require the llm client as a second argument.
         loop = asyncio.get_running_loop()
         query_type, entities = await asyncio.gather(
-            loop.run_in_executor(None, classify_query, question),
-            loop.run_in_executor(None, extract_entities, question),
+            loop.run_in_executor(None, partial(classify_query, question, self.llm)),
+            loop.run_in_executor(None, partial(extract_entities, question, self.llm)),
         )
         logger.info(f"Step 1 — Query type: {query_type.value}")
         logger.info(

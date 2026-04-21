@@ -27,10 +27,30 @@ class Settings(BaseSettings):
     use_local_rdf: bool = False
     local_rdf_path: str = "data/orkg_dump.nt"
 
-    # --- Ollama / LLM ---
+    # --- LLM provider ---
+    # Which provider to use for answer generation.
+    # Options: "ollama" (default, local), "openai", "anthropic"
+    llm_provider: str = "ollama"
+
+    # --- Ollama (local) ---
     ollama_base_url: str = "http://localhost:11434"
     ollama_model: str = "llama3"
     ollama_timeout: int = 120
+
+    # --- OpenAI ---
+    openai_api_key: str = ""
+    openai_model: str = "gpt-4o-mini"
+    # Leave empty to use the default OpenAI endpoint.
+    # Set to a custom URL to use a compatible local server (vLLM, LM Studio, etc.)
+    openai_base_url: str = ""
+
+    # --- Anthropic ---
+    anthropic_api_key: str = ""
+    anthropic_model: str = "claude-haiku-4-5-20251001"
+
+    # --- Google Gemini (free tier available at aistudio.google.com) ---
+    gemini_api_key: str = ""
+    gemini_model: str = "gemini-2.5-flash-lite"
 
     # --- API ---
     api_host: str = "0.0.0.0"

@@ -1,0 +1,4 @@
+model,questions_total,questions_answered,questions_failed,avg_latency_s,avg_kg_results,avg_sources,avg_groundedness,avg_relevance,avg_completeness,avg_overall_score,questions_scored
+gemini:gemma-3-12b-it,10,10,0,71.969,31.000,7.600,N/A,N/A,N/A,N/A,0
+gemini:gemma-3-4b-it,10,10,0,9.771,33.400,7.200,N/A,N/A,N/A,N/A,0
+ollama:llama3,10,10,0,41.258,36.400,7.300,N/A,N/A,N/A,N/A,0

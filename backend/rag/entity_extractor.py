@@ -8,18 +8,17 @@ Extracts entities of these types:
   - field:    Research fields/domains (NLP, computer vision, etc.)
   - metric:   Evaluation metrics (accuracy, F1, BLEU, etc.)
 
-Uses Llama 3 via Ollama for extraction. Falls back to keyword extraction
+Uses the provided LLM client for extraction. Falls back to keyword extraction
 if the model is unavailable or returns unparseable output.
 """
 
 import json
 import re
 from dataclasses import dataclass, field
-from functools import lru_cache
 
 from loguru import logger
 
-from backend.llm.ollama_client import ollama_client
+from backend.llm.base import BaseLLMClient
 
 
 @dataclass
@@ -73,10 +72,9 @@ Example: question "Which papers report F1 score on NER tasks?" → {"methods": [
 Note: NER, POS tagging, NLI, STS, QA, MT are tasks — they are NOT datasets."""
 
 
-@lru_cache(maxsize=256)
-def extract_entities(question: str) -> ExtractedEntities:
+def extract_entities(question: str, client: BaseLLMClient) -> ExtractedEntities:
     """
-    Extract typed scientific entities from a natural language question using Llama 3.
+    Extract typed scientific entities from a natural language question.
 
     Falls back to empty ExtractedEntities if the model is unavailable
     or returns unparseable output (pipeline.py handles the empty case
@@ -84,12 +82,13 @@ def extract_entities(question: str) -> ExtractedEntities:
 
     Args:
         question: The user's natural language question.
+        client:   LLM client to use for extraction.
 
     Returns:
         ExtractedEntities with populated typed entity lists.
     """
     try:
-        raw = ollama_client.generate(
+        raw = client.generate(
             prompt=question,
             system=_EXTRACTOR_SYSTEM_PROMPT,
             temperature=0.0,

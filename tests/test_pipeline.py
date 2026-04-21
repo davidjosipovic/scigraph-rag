@@ -12,7 +12,7 @@ Tests for the RAG pipeline components:
 
 import asyncio
 import pytest
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from backend.rag.query_classifier import classify_query, QueryType
 from backend.rag.entity_extractor import extract_entities, extract_keywords, ExtractedEntities
@@ -31,26 +31,18 @@ from backend.rag.context_builder import (
     format_sources,
 )
 
-# ── Fixtures ──────────────────────────────────────────────────────
-
-@pytest.fixture(autouse=True)
-def clear_lru_caches():
-    """Clear LRU caches before each test to avoid cross-test interference."""
-    classify_query.cache_clear()
-    extract_entities.cache_clear()
-    yield
-    classify_query.cache_clear()
-    extract_entities.cache_clear()
-
-
 # ── Query Classifier ──────────────────────────────────────────────
 
 class TestQueryClassifier:
     """Test 6-type question classification (LLM mocked)."""
 
+    def _mock_client(self, response: str):
+        client = MagicMock()
+        client.generate.return_value = response
+        return client
+
     def _classify_with_mock(self, question: str, llm_response: str) -> QueryType:
-        with patch("backend.rag.query_classifier.ollama_client.generate", return_value=llm_response):
-            return classify_query(question)
+        return classify_query(question, self._mock_client(llm_response))
 
     def test_topic_search(self):
         assert self._classify_with_mock("Find papers about transformers", "topic_search") == QueryType.TOPIC_SEARCH
@@ -76,24 +68,11 @@ class TestQueryClassifier:
     def test_llm_response_with_whitespace(self):
         assert self._classify_with_mock("Find papers", "  topic_search  ") == QueryType.TOPIC_SEARCH
 
-    def test_ollama_unavailable_falls_back(self):
-        with patch("backend.rag.query_classifier.ollama_client.generate", side_effect=Exception("Ollama down")):
-            result = classify_query("Find papers about CNN")
+    def test_client_unavailable_falls_back(self):
+        client = MagicMock()
+        client.generate.side_effect = Exception("Client unavailable")
+        result = classify_query("Find papers about CNN", client)
         assert result == QueryType.TOPIC_SEARCH
-
-    def test_result_is_cached(self):
-        call_count = 0
-
-        def fake_generate(*args, **kwargs):
-            nonlocal call_count
-            call_count += 1
-            return "topic_search"
-
-        with patch("backend.rag.query_classifier.ollama_client.generate", side_effect=fake_generate):
-            classify_query("cached question abc")
-            classify_query("cached question abc")
-
-        assert call_count == 1  # second call served from cache
 
 
 # ── Entity Extractor ──────────────────────────────────────────────
@@ -101,9 +80,13 @@ class TestQueryClassifier:
 class TestEntityExtractor:
     """Test typed entity extraction (LLM mocked)."""
 
+    def _mock_client(self, response: str):
+        client = MagicMock()
+        client.generate.return_value = response
+        return client
+
     def _extract_with_mock(self, question: str, llm_json: str) -> ExtractedEntities:
-        with patch("backend.rag.entity_extractor.ollama_client.generate", return_value=llm_json):
-            return extract_entities(question)
+        return extract_entities(question, self._mock_client(llm_json))
 
     def test_extracts_methods(self):
         json_resp = '{"methods": ["CNN", "SVM"], "datasets": [], "tasks": [], "fields": [], "metrics": []}'
@@ -136,9 +119,10 @@ class TestEntityExtractor:
         entities = self._extract_with_mock("Some question", "I cannot parse this")
         assert entities.is_empty()
 
-    def test_ollama_unavailable_returns_empty(self):
-        with patch("backend.rag.entity_extractor.ollama_client.generate", side_effect=Exception("Ollama down")):
-            entities = extract_entities("Find CNN papers")
+    def test_client_unavailable_returns_empty(self):
+        client = MagicMock()
+        client.generate.side_effect = Exception("Client unavailable")
+        entities = extract_entities("Find CNN papers", client)
         assert entities.is_empty()
 
     def test_json_embedded_in_prose(self):
@@ -158,21 +142,6 @@ class TestEntityExtractor:
         entities = self._extract_with_mock("CNN and SVM on MNIST", json_resp)
         flat = entities.all_entities()
         assert len(flat) == 3
-
-    def test_result_is_cached(self):
-        call_count = 0
-        json_resp = '{"methods": ["CNN"], "datasets": [], "tasks": [], "fields": [], "metrics": []}'
-
-        def fake_generate(*args, **kwargs):
-            nonlocal call_count
-            call_count += 1
-            return json_resp
-
-        with patch("backend.rag.entity_extractor.ollama_client.generate", side_effect=fake_generate):
-            extract_entities("unique cache test question xyz")
-            extract_entities("unique cache test question xyz")
-
-        assert call_count == 1
 
 
 # ── Entity Normalization ──────────────────────────────────────────
