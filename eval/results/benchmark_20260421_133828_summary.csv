@@ -1,0 +1,4 @@
+model,questions_total,questions_answered,questions_failed,avg_latency_s,avg_kg_results,avg_sources,avg_groundedness,avg_relevance,avg_completeness,avg_overall_score,questions_scored
+groq:meta-llama/llama-4-scout-17b-16e-instruct,50,50,0,3.948,27.140,6.400,2.820,3.480,2.640,2.980,50
+groq:openai/gpt-oss-20b,50,50,0,10.774,21.660,6.300,3.040,3.880,3.000,3.307,50
+groq:qwen/qwen3-32b,50,50,0,23.154,17.480,6.600,2.820,3.680,3.080,3.193,50

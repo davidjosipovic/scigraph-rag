@@ -52,6 +52,10 @@ class Settings(BaseSettings):
     gemini_api_key: str = ""
     gemini_model: str = "gemini-2.5-flash-lite"
 
+    # --- Groq (free tier, OpenAI-compatible — console.groq.com) ---
+    groq_api_key: str = ""
+    groq_model: str = "llama-3.1-8b-instant"
+
     # --- API ---
     api_host: str = "0.0.0.0"
     api_port: int = 8000

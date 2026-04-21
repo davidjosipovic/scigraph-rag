@@ -20,7 +20,7 @@ from loguru import logger
 from backend.config import settings
 from backend.llm.base import BaseLLMClient
 
-_SUPPORTED_PROVIDERS = ("ollama", "openai", "anthropic", "gemini")
+_SUPPORTED_PROVIDERS = ("ollama", "openai", "anthropic", "gemini", "groq")
 
 
 def create_llm_client(
@@ -61,6 +61,14 @@ def create_llm_client(
     if resolved_provider == "gemini":
         from backend.llm.gemini_client import GeminiClient
         return GeminiClient(model=model)
+
+    if resolved_provider == "groq":
+        from backend.llm.openai_client import OpenAIClient
+        return OpenAIClient(
+            api_key=settings.groq_api_key,
+            model=model or settings.groq_model,
+            base_url="https://api.groq.com/openai/v1",
+        )
 
     raise ValueError(
         f"Unknown LLM provider: '{resolved_provider}'. "

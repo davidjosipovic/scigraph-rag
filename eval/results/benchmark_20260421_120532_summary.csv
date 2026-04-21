@@ -1,0 +1,5 @@
+model,questions_total,questions_answered,questions_failed,avg_latency_s,avg_kg_results,avg_sources,avg_groundedness,avg_relevance,avg_completeness,avg_overall_score,questions_scored
+groq:gemma2-9b-it,50,50,0,1.727,14.780,6.140,0.020,0.020,0.020,0.020,50
+groq:llama-3.1-8b-instant,50,50,0,15.316,27.960,6.640,2.920,3.680,2.580,3.060,50
+groq:llama-3.3-70b-versatile,50,50,0,6.821,25.960,6.580,2.633,3.286,2.265,2.729,49
+groq:mixtral-8x7b-32768,50,50,0,0.247,14.780,6.140,0.020,0.020,0.020,0.020,50
