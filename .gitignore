@@ -9,3 +9,4 @@ data/*.rdf
 *.egg-info/
 dist/
 build/
+logs/

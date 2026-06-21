@@ -4,17 +4,17 @@ A **GraphRAG** pipeline that uses the [Open Research Knowledge Graph (ORKG)](htt
 
 ## Key Features
 
-- **10-step pipeline**: classify → extract → normalize → retrieve (parallel SPARQL) → rank → hard/soft filter → truncate → context → generate → sources
+- **9-stage pipeline**: classify → extract → normalize → retrieve (parallel SPARQL) → rank → hard/soft filter → truncate → context+sources → generate
 - **Query classification** (6 types): `topic_search`, `method_comparison`, `dataset_search`, `claim_verification`, `method_usage`, `paper_lookup`
 - **Scientific NER**: Extracts methods, datasets, tasks, research fields, and metrics using Llama 3 with few-shot prompting; keyword fallback when NER returns nothing
-- **Entity normalization**: ~90 method synonyms, ~55 dataset synonyms, 28 task synonyms, 11 field synonyms — expands abbreviations like CNN → convolutional neural network, NER → named entity recognition
+- **Entity normalization**: 117 method synonyms, 62 dataset synonyms, 28 task synonyms, 11 field synonyms — expands abbreviations like CNN → convolutional neural network, NER → named entity recognition
 - **Parallel SPARQL retrieval**: `asyncio.gather()` fires all strategy queries concurrently; 10 s timeout with title-keyword fallback
 - **SPARQL injection protection**: `_sanitize()` strips dangerous characters; word-boundary regex (`\bTERM\b`) for short terms (≤ 4 chars) to prevent substring false-positives (e.g. "NER" matching "mineral")
 - **Thread-safe query cache**: module-level 256-entry FIFO cache with `threading.Lock()`
 - **Heuristic ranking**: +2 method match, +2 dataset match, +1 title keyword; `hard_filter` requires both method and dataset when both are present; `soft_filter` drops score-0 noise
 - **Year validation**: rejects ORKG values like "9" or "12" (months stored in year predicates) — only 4-digit years 1900–2099 accepted
 - **Fully local LLM**: Ollama (Llama 3) via persistent `httpx.Client` connection pool — zero API costs
-- **138 tests** across unit, integration, and end-to-end pipeline tests with `pytest-asyncio`
+- **142 tests** across unit, integration, and end-to-end pipeline tests with `pytest-asyncio`
 
 ## Architecture
 
@@ -66,7 +66,7 @@ scigraph-rag/
 │   │   ├── queries.py         # SPARQL query builders (method, dataset, title, field)
 │   │   └── sparql_client.py   # Thread-safe SPARQL client with 256-entry cache
 │   ├── rag/
-│   │   ├── pipeline.py        # Main orchestrator (10-step pipeline)
+│   │   ├── pipeline.py        # Main orchestrator (9-stage pipeline)
 │   │   ├── query_classifier.py
 │   │   ├── entity_extractor.py
 │   │   ├── entity_normalization.py  # METHOD/DATASET/TASK/FIELD synonyms
@@ -162,7 +162,7 @@ All settings are in `.env` (loaded by `pydantic-settings`):
 | `OLLAMA_BASE_URL` | `http://localhost:11434` | Ollama API URL |
 | `OLLAMA_MODEL` | `llama3` | Model to use |
 | `OLLAMA_TIMEOUT` | `120` | LLM request timeout (seconds) |
-| `SPARQL_ENDPOINT` | `https://orkg.org/triplestore` | ORKG SPARQL endpoint |
+| `ORKG_SPARQL_ENDPOINT` | `https://orkg.org/triplestore` | ORKG SPARQL endpoint |
 | `SPARQL_TIMEOUT` | `10` | SPARQL query timeout (seconds) |
 | `MAX_CONTEXT_PAPERS` | `8` | Max papers fed to LLM |
 | `CORS_ORIGINS` | `http://localhost:3000,...` | Allowed CORS origins |
