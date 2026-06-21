@@ -321,9 +321,10 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p.add_argument(
         "--judge",
-        default="openai:gpt-4o",
+        default="ollama:qwen3:8b",
         metavar="PROVIDER:MODEL",
-        help="Judge model for answer scoring (default: openai:gpt-4o)",
+        help="Judge model for answer scoring (default: ollama:qwen3:8b — "
+        "must not also appear in --models, see self-judging bias check)",
     )
     p.add_argument(
         "--questions",
@@ -409,6 +410,16 @@ def main() -> None:
     for spec in args.models:
         parse_model(spec)
     parse_model(args.judge)
+
+    # The judge must not also be a candidate model — otherwise it would be
+    # scoring its own answers (self-judging bias), silently inflating its score.
+    if not args.skip_judge and args.judge in args.models:
+        parser.error(
+            f"--judge {args.judge!r} is also listed in --models. "
+            "The judge cannot score its own answers (self-judging bias) — "
+            "pick a judge model that is not one of the candidates."
+        )
+
     asyncio.run(main_async(args))
 
 

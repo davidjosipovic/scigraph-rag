@@ -72,6 +72,11 @@ class OllamaClient(BaseLLMClient):
             "prompt": prompt,
             "system": system,
             "stream": False,
+            # Disable extended "thinking" mode on reasoning models (e.g. qwen3).
+            # Ignored by models that don't support it — safe no-op otherwise.
+            # Without this, num_predict can be exhausted entirely by the hidden
+            # <think> trace, leaving an empty final response.
+            "think": False,
             "options": {
                 "temperature": temperature,
                 "num_predict": max_tokens,

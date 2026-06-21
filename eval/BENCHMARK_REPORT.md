@@ -53,7 +53,7 @@ Svaki generirani odgovor ocjenjuje neovisni model-sudac (`ollama:llama3.2`) na *
 
 Sudac prima: pitanje, generirani odgovor, naslove dohvaćenih izvora i `answer_hints`. Odgovara isključivo JSON-om bez slobodnog teksta.
 
-Sudac (`llama3.2`) je namjerno odabran kao model koji **nije testiran** u benchmarku kako bi se izbjegla pristranost.
+**Napomena (ispravak):** za ovaj izvještaj sudac je bio `llama3.2`, koji se — kako se vidi u tablici rezultata niže — **istovremeno koristio i kao testirani kandidat** (self-judging bias). Ranija tvrdnja da je sudac "namjerno odabran kao model koji nije testiran u benchmarku" bila je netočna. Od `eval/benchmark.py` revizije nakon ovog izvještaja, `--judge` default je `ollama:qwen3:8b` (model koji nije kandidat u glavnoj usporedbi), a `eval/benchmark.py` sad odbija pokretanje ako se `--judge` poklapa s nekim iz `--models`.
 
 ### Tehničke pojedinosti
 
@@ -170,7 +170,7 @@ Svi modeli konzistentno postižu najviši **Relevance** score (3.2–3.9) — mo
 
 ## Ograničenja evaluacije
 
-1. **LLM-as-judge pristranost** — Sudac (`llama3.2`) ima vlastite predrasude i može favorizirati određeni stil odgovora. Idealno bi bio korišten jači model (GPT-4o, Claude Opus) kao sudac.
+1. **LLM-as-judge pristranost** — Sudac (`llama3.2`) ima vlastite predrasude i može favorizirati određeni stil odgovora. Idealno bi bio korišten jači model (GPT-4o, Claude Opus) kao sudac. **Dodatno:** u ovom izvještaju sudac (`llama3.2`) je istovremeno bio i jedan od testiranih kandidata, što je dodatni, ozbiljniji izvor pristranosti (self-judging bias) — rezultate za `ollama:llama3.2` iz ove tablice treba uzeti s rezervom. Novi runovi koriste `qwen3:8b` kao suca, koji nije kandidat u glavnoj usporedbi.
 
 2. **Answer hints su nužni uvjet, ne dovoljan** — `answer_hints` provjera ne mjeri je li odgovor faktično točan, nego sadrži li ključne pojmove. Model može pogoditi ključne riječi bez razumijevanja.
 

@@ -103,6 +103,15 @@ def main() -> None:
     with open(args.results) as f:
         results = json.load(f)
 
+    candidate_labels = {f"{r['provider']}:{r['model']}" for r in results}
+    if args.judge in candidate_labels:
+        logger.warning(
+            f"--judge {args.judge!r} is also one of the candidate models in "
+            f"{args.results.name} — re-judging with it will self-score those "
+            "answers (self-judging bias). Continuing anyway since --force/"
+            "recovery runs may need this; double-check before trusting those scores."
+        )
+
     questions_by_id = load_questions_by_id(args.questions)
     judge_client = create_llm_client(provider=judge_provider, model=judge_model)
 

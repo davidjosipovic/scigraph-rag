@@ -1,18 +1,17 @@
 """
 Main RAG pipeline orchestrator.
 
-Implements the full 10-step GraphRAG pipeline:
+Implements the 9-stage GraphRAG pipeline:
 
   1.  Query Classification       → query_type
   2.  Entity Extraction          → typed entities (methods, datasets, tasks, ...)
   3.  Entity Normalization       → expanded variants (CNN → convolutional neural network, ...)
   4.  Multi-Strategy Retrieval   → combined + per-entity SPARQL queries (async parallel)
   5.  Retrieval Ranking          → score & sort papers by relevance
-  6.  Soft Score Filtering       → drop papers with score == 0 (keep partial matches)
+  6.  Filtering                  → hard filter (method+dataset) + soft filter (score-0 noise)
   7.  Truncation                 → top N papers for context window
-  8.  Context Construction       → structured per-paper blocks with scores
-  9.  LLM Generation            → grounded answer (cites papers by title, not number)
-  10. Source Formatting          → citations + metadata
+  8.  Context + Source Building  → structured per-paper blocks + deduplicated citations
+  9.  LLM Generation             → grounded answer (cites papers by title, not number)
 
 Returns a structured JSON response with all pipeline artifacts
 (entities, SPARQL queries used, answer, sources).
@@ -59,33 +58,40 @@ class RAGPipeline:
         │  Rank       │ → score papers (+2 method, +2 dataset, +1 title kw)
         └─────┬──────┘
         ┌─────▼──────┐
-        │  Filter     │ → drop score-0 noise, keep partial matches
+        │  Filter     │ → hard filter (method+dataset) + soft filter (score-0 noise)
         └─────┬──────┘
         ┌─────▼──────┐
         │  Truncate   │ → top 8 papers for context window
         └─────┬──────┘
         ┌─────▼──────┐
-        │  Context    │ → structured Paper: blocks with scores
+        │  Context    │ → structured Paper: blocks + deduplicated sources
         └─────┬──────┘
         ┌─────▼──────┐
         │  Generate   │ → LLM answer (cites by title, not [1] [2])
-        └─────┬──────┘
-        ┌─────▼──────┐
-        │  Sources    │ → deduplicated paper references
         └─────┴──────┘
 
     Usage:
         pipeline = RAGPipeline()
         result = await pipeline.ask("Which papers use CNN on MNIST?")
+
+    Ablation flags (for evaluation experiments — see eval/ablation.py):
+        enable_normalization=False  skips synonym expansion; only the
+                                     canonical extracted term is matched.
+        enable_hard_filter=False    skips the method+dataset hard filter;
+                                     only the score-0 soft filter still runs.
     """
 
     def __init__(
         self,
         sparql_client: SPARQLClient | None = None,
         llm_client: BaseLLMClient | None = None,
+        enable_normalization: bool = True,
+        enable_hard_filter: bool = True,
     ) -> None:
         self.sparql = sparql_client or SPARQLClient()
         self.llm = llm_client or create_llm_client()
+        self.enable_normalization = enable_normalization
+        self.enable_hard_filter = enable_hard_filter
 
     async def ask(self, question: str) -> dict[str, Any]:
         """
@@ -139,7 +145,18 @@ class RAGPipeline:
                 entities = ExtractedEntities(methods=keywords)
 
         # ── Step 3: Normalize / expand entities ──
-        expanded = expand_entities(entities)
+        # (ablation: enable_normalization=False keeps only the canonical
+        # extracted term, with no synonym variants, for comparison runs)
+        if self.enable_normalization:
+            expanded = expand_entities(entities)
+        else:
+            expanded = ExpandedEntities(
+                methods=list(entities.methods),
+                datasets=list(entities.datasets),
+                tasks=list(entities.tasks),
+                fields=list(entities.fields),
+                metrics=list(entities.metrics),
+            )
         logger.info(
             f"Step 3 — Normalization: "
             f"method_variants={expanded.method_variants}, "
@@ -164,7 +181,8 @@ class RAGPipeline:
         # Hard filter first: when both methods and datasets are present,
         # drop papers that don't match at least one of each.
         # Soft filter after: drop any remaining score-0 noise.
-        filtered = hard_filter(ranked, expanded)
+        # (ablation: enable_hard_filter=False skips the hard filter step)
+        filtered = hard_filter(ranked, expanded) if self.enable_hard_filter else ranked
         filtered = soft_filter(filtered, min_score=1)
         logger.info(
             f"Step 6 — Filter: {len(ranked)} → {len(filtered)} rows "
