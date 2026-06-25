@@ -74,12 +74,26 @@ scigraph-rag/
 │   │   ├── ranking.py         # Heuristic scoring + hard/soft filter
 │   │   └── context_builder.py # Context + sources in one pass
 │   ├── llm/
-│   │   └── ollama_client.py   # Persistent httpx.Client, prompt templates
+│   │   ├── base.py            # BaseLLMClient ABC + prompt templates
+│   │   ├── factory.py         # Provider factory (resolves LLM_PROVIDER)
+│   │   ├── ollama_client.py   # Ollama (local) — persistent httpx.Client
+│   │   ├── openai_client.py   # OpenAI + Groq (OpenAI-compatible API)
+│   │   ├── anthropic_client.py
+│   │   └── gemini_client.py
 │   ├── config.py              # Pydantic-settings config (env-driven)
 │   └── main.py                # FastAPI app + CORS
+├── eval/
+│   ├── benchmark.py           # Multi-model benchmark runner (LLM-as-judge)
+│   ├── ablation.py            # Ablation study (normalization × hard filter)
+│   ├── judge.py               # LLM-as-judge scorer (groundedness/relevance/completeness)
+│   ├── rejudge.py             # Retroactively re-score existing results with new judge
+│   └── results/               # JSON + CSV output from benchmark and ablation runs
+├── data/
+│   └── eval_questions.json    # 50 evaluation questions (6 types, 3 difficulty levels)
 ├── tests/
 │   ├── test_pipeline.py       # Pipeline unit + end-to-end integration tests
-│   └── test_kg.py             # SPARQL query builder tests
+│   ├── test_kg.py             # SPARQL query builder + sanitization tests
+│   └── test_api.py            # FastAPI endpoint tests
 ├── pytest.ini                 # asyncio_mode = auto
 ├── requirements.txt
 └── Makefile                   # make run, make test

@@ -1,5 +1,0 @@
-config,questions_total,questions_failed,avg_latency_s,avg_kg_results,avg_sources
-norm_on_filter_on,10,0,15.388,34.800,7.400
-norm_off_filter_on,10,0,15.649,21.000,7.100
-norm_on_filter_off,10,0,15.004,34.800,7.400
-norm_off_filter_off,10,0,14.547,21.000,7.100
