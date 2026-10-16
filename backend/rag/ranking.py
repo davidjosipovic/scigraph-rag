@@ -18,6 +18,8 @@ Scoring system (per paper):
     +2  found by a title lookup, +10 more for an exact title match
     +1  per question keyword in the title, for papers found by a title
         keyword search (paper lookups)
+    +3  among the earliest papers recording a looked-up method (+1 more if
+        they record it 3+ times) — the likely origin paper
     +1  the paper carries results (benchmark scores) and matches an entity
 
 Terms of up to 4 characters must match a whole word (an optional plural
@@ -63,6 +65,8 @@ SCORE_TITLE_KEYWORD = 1
 SCORE_TITLE_LOOKUP = 2
 SCORE_EXACT_TITLE = 10  # the user named this paper; nothing else should outrank it
 SCORE_HAS_RESULTS = 1
+SCORE_ORIGIN = 3
+SCORE_ORIGIN_MENTIONS = 1
 
 # Predicate labels that put a claim-evidence value into a role
 # (kept in sync with _METHOD_PRED_RE / _DATASET_PRED_RE in backend/kg/queries.py).
@@ -97,7 +101,8 @@ class _PaperProfile:
     """Everything the retrieval strategies said about one paper."""
 
     __slots__ = ("title", "method_labels", "dataset_labels", "any_labels",
-                 "title_lookup", "exact_title", "title_hits", "has_results")
+                 "title_lookup", "exact_title", "title_hits", "has_results",
+                 "origin_mentions")
 
     def __init__(self, title: str) -> None:
         self.title = title
@@ -108,6 +113,7 @@ class _PaperProfile:
         self.exact_title = False
         self.title_hits = 0
         self.has_results = False
+        self.origin_mentions = 0
 
     def add_row(self, row: dict[str, Any]) -> None:
         for key in _METHOD_KEYS:
@@ -140,6 +146,10 @@ class _PaperProfile:
 
         # title_keyword_search rows count title keyword hits; claim_evidence
         # rows also carry ?hits, but always with a predicate
+        # earliest_papers_with rows: candidate origin paper of a method
+        if "firstYear" in row:
+            self.origin_mentions = max(self.origin_mentions, int(row.get("mentions") or 0), 1)
+
         if "hits" in row and not pred:
             self.title_hits = max(self.title_hits, int(row["hits"]))
 
@@ -234,6 +244,9 @@ def rank_results(
             score += SCORE_TITLE_LOOKUP + (SCORE_EXACT_TITLE if p.exact_title else 0)
 
         score += p.title_hits
+
+        if p.origin_mentions:
+            score += SCORE_ORIGIN + (SCORE_ORIGIN_MENTIONS if p.origin_mentions >= 3 else 0)
 
         if p.has_results and matched_entity:
             score += SCORE_HAS_RESULTS

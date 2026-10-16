@@ -79,6 +79,13 @@ class Settings(BaseSettings):
     enrich_candidates: int = 15
     # Max (predicate, value) pairs from that record shown per paper.
     max_detail_pairs: int = 15
+    # Graph retrieval strategies (switchable for ablation studies):
+    #   multi-term evidence  contributions covering several question terms (topic / usage)
+    #   benchmark traversal  Contribution → model / Benchmark → Dataset → Evaluation
+    #   origin lookup        earliest papers recording a method (paper lookup)
+    enable_multi_term: bool = True
+    enable_benchmark: bool = True
+    enable_origin: bool = True
 
     # --- Concurrency ---
     # Max concurrent /ask requests allowed to run the full pipeline.

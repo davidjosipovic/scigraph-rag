@@ -430,3 +430,104 @@ class TestExtractTitleFromQuestion:
     def test_strips_article_suffix(self):
         title = _extract_title_from_question("Show me the ResNet article")
         assert title == "ResNet"
+
+    def test_quoted_title_wins(self):
+        title = _extract_title_from_question("Find the paper titled 'Attention Is All You Need'.")
+        assert title == "Attention Is All You Need"
+
+    def test_strips_introduced_phrase_and_punctuation(self):
+        title = _extract_title_from_question("Find the paper that introduced the T5 text-to-text transfer transformer.")
+        assert title == "T5 text-to-text transfer transformer"
+
+
+# ── Graph traversal strategies ────────────────────────────────────
+
+class TestGraphTraversalQueries:
+
+    def test_benchmark_results_traverses_leaderboard_path(self):
+        from backend.kg.queries import benchmark_results
+
+        q = benchmark_results(["ResNet", "VGG"], ["ImageNet"])
+        assert "orkgp:P1004" in q          # contribution → model
+        assert "orkgp:PWC_HAS_BENCHMARK" in q
+        assert "orkgp:P2005" in q          # benchmark → dataset
+        assert "orkgp:P34" in q            # benchmark → evaluation
+        assert "imagenet" in q.lower()
+
+    def test_benchmark_results_requires_two_methods_for_comparisons(self):
+        from backend.kg.queries import benchmark_results
+
+        assert "COUNT(DISTINCT ?kw) >= 2" in benchmark_results(["LSTM", "GRU"], [])
+        assert "COUNT(DISTINCT ?kw) >= 1" in benchmark_results(["LSTM"], [])
+
+    def test_benchmark_results_without_methods_is_empty(self):
+        from backend.kg.queries import benchmark_results
+
+        assert benchmark_results([], ["ImageNet"]) == ""
+
+    def test_benchmark_results_sanitizes_terms(self):
+        from backend.kg.queries import benchmark_results
+
+        q = benchmark_results(['x") } DROP ?s', "VGG"], [])
+        assert '") }' not in q
+
+    def test_earliest_papers_with_orders_by_year(self):
+        from backend.kg.queries import earliest_papers_with
+
+        q = earliest_papers_with("word2vec")
+        assert "ORDER BY ?firstYear DESC(?mentions)" in q
+        assert "orkgp:P29" in q
+
+    def test_papers_details_batches_uris_and_benchmarks(self):
+        from backend.kg.queries import papers_details
+
+        q = papers_details(["http://orkg.org/orkg/resource/R1", "http://orkg.org/orkg/resource/R2"])
+        assert "VALUES ?paper" in q
+        assert "<http://orkg.org/orkg/resource/R1>" in q and "<http://orkg.org/orkg/resource/R2>" in q
+        assert "PWC_HAS_BENCHMARK" in q
+
+    def test_papers_details_rejects_invalid_iri(self):
+        from backend.kg.queries import papers_details
+
+        with pytest.raises(ValueError):
+            papers_details(["http://orkg.org/x> } ?s ?p ?o { <http://a"])
+
+
+class TestGraphStrategyPlanning:
+
+    @staticmethod
+    def _strategies(query_type, **ents):
+        from backend.rag.entity_normalization import ExpandedEntities
+        from backend.rag.query_builder import _plan_queries
+
+        return [name for _, name in _plan_queries(query_type, ExpandedEntities(**ents), 5, question="q")]
+
+    def test_comparison_uses_benchmark_traversal(self):
+        from backend.rag.query_classifier import QueryType
+
+        names = self._strategies(QueryType.METHOD_COMPARISON, methods=["ResNet", "VGG"], datasets=["ImageNet"])
+        assert any(n.startswith("benchmark(") for n in names)
+        assert any(n.startswith("claim_evidence(") for n in names)
+
+    def test_topic_search_with_several_terms_uses_multi_term_evidence(self):
+        from backend.rag.query_classifier import QueryType
+
+        names = self._strategies(QueryType.TOPIC_SEARCH, methods=["deep learning"], fields=["recommendation systems"])
+        assert any(n.startswith("multi_term(") for n in names)
+        assert not any(n.startswith("multi_term(") for n in self._strategies(QueryType.TOPIC_SEARCH, methods=["GAN"]))
+
+    def test_lookup_uses_origin_strategy(self):
+        from backend.rag.query_classifier import QueryType
+
+        names = self._strategies(QueryType.PAPER_LOOKUP, methods=["word2vec"])
+        assert "earliest(word2vec)" in names
+
+    def test_strategies_can_be_switched_off(self, monkeypatch):
+        from backend.config import settings
+        from backend.rag.query_classifier import QueryType
+
+        monkeypatch.setattr(settings, "enable_benchmark", False)
+        monkeypatch.setattr(settings, "enable_origin", False)
+        names = self._strategies(QueryType.METHOD_COMPARISON, methods=["ResNet", "VGG"])
+        names += self._strategies(QueryType.PAPER_LOOKUP, methods=["word2vec"])
+        assert not any(n.startswith(("benchmark(", "earliest(")) for n in names)

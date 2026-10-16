@@ -595,6 +595,114 @@ LIMIT {limit * 3}
 """
 
 
+def benchmark_results(methods: list[str], datasets: list[str], limit: int = 10) -> str:
+    """
+    Benchmark results of the queried methods, by traversing the leaderboard
+    structure ORKG imports from Papers with Code:
+
+        Paper → P31 → Contribution → P1004 (model) → Model
+                                   → PWC_HAS_BENCHMARK → Benchmark → P2005 → Dataset
+                                                                   → P34   → Evaluation ("Top 1 accuracy_71.24")
+
+    This answers "Is X better than Y on D?" with the numbers themselves
+    instead of text matches. With two or more methods, only papers whose
+    models cover at least two of them are returned — a paper benchmarking
+    just one side of a comparison crowds out the ones that compare. When
+    datasets are given, only benchmarks on those datasets count. Each row is
+    one (model, dataset, scores) triple.
+    """
+    methods = list(dict.fromkeys(_sanitize(m) for m in methods if _sanitize(m)))
+    datasets = list(dict.fromkeys(_sanitize(d) for d in datasets if _sanitize(d)))
+    if not methods:
+        return ""
+    model_branches = "\n            UNION\n            ".join(
+        f"""{{
+                ?m rdfs:label ?ml .
+                {_fulltext("?ml", m)}
+                {_label_filter("?ml", m)}
+                ?c orkgp:P1004 ?m .
+                BIND({i} AS ?kw)
+            }}"""
+        for i, m in enumerate(methods)
+    )
+    dataset_filter = (
+        "FILTER(" + " || ".join(_label_match("?dl", d) for d in datasets) + ")"
+        if datasets else ""
+    )
+    return f"""{PREFIXES}
+
+SELECT ?paper (SAMPLE(?t) AS ?title) (SAMPLE(?d) AS ?doi) (SAMPLE(?y) AS ?year)
+       ?contribLabel (SAMPLE(?ml2) AS ?methodLabel) (SAMPLE(?dl) AS ?datasetLabel)
+       (SAMPLE(?pl) AS ?predLabel)
+       (GROUP_CONCAT(DISTINCT ?score; separator=" | ") AS ?valueLabel) ?hits WHERE {{
+    {{
+        SELECT ?paper (COUNT(DISTINCT ?kw) AS ?hits) WHERE {{
+            {model_branches}
+            ?c orkgp:PWC_HAS_BENCHMARK ?b .
+            ?b orkgp:P2005 ?ds .
+            ?ds rdfs:label ?dl .
+            {dataset_filter}
+            ?paper orkgp:P31 ?c .
+        }}
+        GROUP BY ?paper
+        HAVING (COUNT(DISTINCT ?kw) >= {min(2, len(methods))})
+        ORDER BY DESC(?hits) ?paper
+        LIMIT {limit}
+    }}
+    ?paper orkgp:P31 ?contrib ;
+           rdfs:label ?t .
+    ?contrib rdfs:label ?contribLabel ;
+             orkgp:P1004 ?m2 ;
+             orkgp:PWC_HAS_BENCHMARK ?b2 .
+    ?m2 rdfs:label ?ml2 .
+    FILTER({" || ".join(_label_match("?ml2", m) for m in methods)})
+    ?b2 orkgp:P2005 ?ds2 ;
+        orkgp:P34 ?e .
+    ?ds2 rdfs:label ?dl .
+    {dataset_filter}
+    ?e rdfs:label ?el .
+    BIND(REPLACE(STR(?el), "^Quantity ", "") AS ?score)
+    BIND(CONCAT(STR(?dl), " result") AS ?pl)
+
+    {_PAPER_META_GROUPED}
+}}
+GROUP BY ?paper ?contrib ?contribLabel ?ds2 ?hits
+ORDER BY DESC(?hits) ?paper
+LIMIT {limit * 6}
+"""
+
+
+def earliest_papers_with(term: str, limit: int = 5) -> str:
+    """
+    The earliest papers whose contributions mention ``term``, with how many
+    distinct values mention it (paper_lookup: "the paper that introduced X").
+
+    The paper that introduced a method is usually the first one in the graph
+    to record it, and often records several variants of it (ResNet-50,
+    ResNet-101, ...). Papers are ordered by publication year, then by the
+    number of matching values; ``?firstYear`` and ``?mentions`` are returned
+    for ranking.
+    """
+    term = _sanitize(term)
+    return f"""{PREFIXES}
+
+SELECT ?paper (SAMPLE(?t) AS ?title) (SAMPLE(?d) AS ?doi) (MIN(xsd:integer(?yr)) AS ?firstYear)
+       (COUNT(DISTINCT ?v) AS ?mentions) (SAMPLE(?lbl) AS ?entityLabel) WHERE {{
+    {_contrib_value("?c", "?p", "?v", "?lbl", term)}
+    {_label_filter("?lbl", term)}
+    ?paper orkgp:P31 ?c ;
+           rdf:type orkgc:Paper ;
+           rdfs:label ?t ;
+           orkgp:P29 ?yr .
+    FILTER(isLiteral(?yr) && REGEX(STR(?yr), "^[0-9]{{4}}$"))
+    OPTIONAL {{ ?paper orkgp:P26 ?d . }}
+}}
+GROUP BY ?paper
+ORDER BY ?firstYear DESC(?mentions) ?paper
+LIMIT {limit}
+"""
+
+
 def paper_lookup_by_title(title_fragment: str, limit: int = 5) -> str:
     """
     Look up a paper by title fragment (fallback / paper_lookup queries).

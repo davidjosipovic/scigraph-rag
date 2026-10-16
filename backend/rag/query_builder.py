@@ -291,6 +291,8 @@ def _plan_method_comparison(
             query = Q.papers_comparing_methods(variant, methods[1], limit)
             planned.append((query, f"comparison_variant({variant},{methods[1]})"))
 
+    planned += _benchmark_evidence(entities, limit)
+
     for method in methods[:2]:
         for dataset in entities.datasets[:2]:
             query = Q.papers_by_method_and_dataset(method, dataset, limit)
@@ -337,6 +339,7 @@ def _plan_method_usage(
             query = Q.papers_by_research_field(form, limit)
             planned.append((query, f"field({form})"))
 
+    planned += _multi_term_evidence(entities, limit)
     return planned
 
 
@@ -394,6 +397,8 @@ def _plan_claim_evidence(
         query = Q.claim_evidence(all_terms, limit + 5)
         if query:
             planned.append((query, f"claim_evidence({all_terms})"))
+
+    planned += _benchmark_evidence(entities, limit)
 
     for method in entities.methods[:2]:
         for form in _usable_forms(entities.all_method_forms(method)[:2]):
@@ -491,6 +496,7 @@ def _plan_paper_lookup(
     2. Titles ranked by how many of the question's content words they contain
     3. Each method name individually (datasets and fields are not titles:
        a lone "GLUE" matches "... Copper Glue Layer")
+    4. The earliest papers recording each method (likely the one introducing it)
     """
     planned: PlannedQueries = []
 
@@ -509,7 +515,41 @@ def _plan_paper_lookup(
         query = Q.paper_lookup_by_title(method, limit)
         planned.append((query, f"title_lookup({method})"))
 
+    # The paper that introduced a method is usually the first in the graph
+    # to record it — found by aggregating over the graph, not by its title.
+    for method in entities.methods[:2] if settings.enable_origin else []:
+        query = Q.earliest_papers_with(method, limit)
+        planned.append((query, f"earliest({method})"))
+
     return planned
+
+
+def _benchmark_evidence(entities: ExpandedEntities, limit: int) -> PlannedQueries:
+    """
+    Leaderboard results of the queried methods (on the queried datasets, if
+    any) — the graph path Contribution → model / Benchmark → Dataset →
+    Evaluation, which holds the numbers comparisons and claims are about.
+    """
+    if not settings.enable_benchmark or not entities.methods:
+        return []
+    datasets = [f for d in entities.datasets[:2] for f in _usable_forms(entities.all_dataset_forms(d)[:2])]
+    query = Q.benchmark_results(entities.methods[:3], datasets, limit)
+    return [(query, f"benchmark({entities.methods[:3]},{datasets})")] if query else []
+
+
+def _multi_term_evidence(entities: ExpandedEntities, limit: int) -> PlannedQueries:
+    """
+    Contributions covering several of the question's terms at once (ranked
+    by how many distinct terms they match), for questions with more than one
+    facet — "deep learning" + "recommendation systems", "question
+    answering" + "biomedical". Single-term questions are already covered by
+    the per-entity queries.
+    """
+    terms = entities.all_entities()
+    if not settings.enable_multi_term or len(terms) < 2:
+        return []
+    query = Q.claim_evidence(terms, limit + 5)
+    return [(query, f"multi_term({terms})")] if query else []
 
 
 def _plan_topic_search(
@@ -553,6 +593,7 @@ def _plan_topic_search(
             query = Q.papers_by_dataset(form, limit)
             planned.append((query, f"dataset({form})"))
 
+    planned += _multi_term_evidence(entities, limit)
     return planned
 
 
