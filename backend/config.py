@@ -26,6 +26,10 @@ class Settings(BaseSettings):
     orkg_sparql_endpoint: str = "https://orkg.org/triplestore"
     use_local_rdf: bool = False
     local_rdf_path: str = "data/orkg_dump.nt"
+    # Use Virtuoso's full-text index (bif:contains) to pre-filter label
+    # matches. The public ORKG endpoint is Virtuoso; disable for other
+    # SPARQL engines. Always off when use_local_rdf is true (rdflib).
+    sparql_fulltext: bool = True
 
     # --- LLM provider ---
     # Which provider to use for answer generation.

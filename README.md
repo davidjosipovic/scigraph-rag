@@ -178,6 +178,7 @@ All settings are in `.env` (loaded by `pydantic-settings`):
 | `OLLAMA_TIMEOUT` | `120` | LLM request timeout (seconds) |
 | `ORKG_SPARQL_ENDPOINT` | `https://orkg.org/triplestore` | ORKG SPARQL endpoint |
 | `SPARQL_TIMEOUT` | `10` | SPARQL query timeout (seconds) |
+| `SPARQL_FULLTEXT` | `true` | Use Virtuoso full-text index (`bif:contains`) for label matching |
 | `MAX_CONTEXT_PAPERS` | `8` | Max papers fed to LLM |
 | `CORS_ORIGINS` | `http://localhost:3000,...` | Allowed CORS origins |
 

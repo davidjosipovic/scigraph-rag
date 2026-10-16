@@ -9,6 +9,7 @@ Verifies that:
 
 import pytest
 
+from backend.kg import queries as kg_queries
 from backend.kg.queries import (
     _label_filter,
     papers_by_method,
@@ -35,8 +36,14 @@ class TestLabelFilter:
     def test_short_entity_uses_regex(self):
         f = _label_filter("?lbl", "NER")
         assert "REGEX" in f
-        assert r"\\b" in f
-        assert "NER" in f
+        assert "(^|[^A-Za-z0-9])NER([^A-Za-z0-9]|$)" in f
+
+    def test_short_entity_escapes_regex_metacharacters(self):
+        # Unescaped, "C++" would be a possessive quantifier matching any "C"
+        # token (e.g. "cytochrome C oxidase"); "F1." would match "F1x".
+        assert "C[+][+]" in _label_filter("?lbl", "C++")
+        assert "F1[.]" in _label_filter("?lbl", "F1.")
+        assert "\\" not in _label_filter("?lbl", "C++")
 
     def test_long_entity_uses_contains(self):
         f = _label_filter("?lbl", "convolutional neural network")
@@ -123,12 +130,18 @@ class TestCombinedQuery:
         assert "?datasetLabel" in query
         assert "LIMIT 5" in query
 
-    def test_uses_union_of_same_and_cross_contribution(self):
+    def test_ranks_same_contribution_first(self):
         query = papers_by_method_and_dataset("SVM", "CIFAR-10", limit=5)
-        assert "UNION" in query
-        assert "?contribM" in query
-        assert "?contribD" in query
-        assert "FILTER(?contribM != ?contribD)" in query
+        assert "BIND(IF(?cm = ?cd, 1, 0) AS ?same)" in query
+        assert "ORDER BY DESC(?sameContrib)" in query
+
+    def test_method_and_dataset_must_be_different_values(self):
+        query = papers_by_method_and_dataset("SVM", "CIFAR-10", limit=5)
+        assert "FILTER(?vm != ?vd)" in query
+
+    def test_one_row_per_paper(self):
+        query = papers_by_method_and_dataset("SVM", "CIFAR-10", limit=5)
+        assert "GROUP BY ?paper" in query
 
     def test_returns_paper_metadata_fields(self):
         query = papers_by_method_and_dataset("BERT", "SQuAD")
@@ -157,6 +170,98 @@ class TestEnrichmentQueries:
         assert "orkgp:P26" in query
         assert "orkgp:P30" in query
 
+    def test_paper_metadata_includes_authors(self):
+        query = paper_metadata("http://orkg.org/orkg/resource/R999")
+        assert "orkgp:hasAuthors" in query
+        assert "?authors" in query
+
+    def test_full_contributions_keeps_literal_values(self):
+        # ~43% of ORKG contribution values are literals (scores, sizes, ...);
+        # FILTER(BOUND(?valueLabel)) on a label-only OPTIONAL dropped them all.
+        query = paper_full_contributions("http://orkg.org/orkg/resource/R1")
+        assert "COALESCE(?vl, ?value)" in query
+        assert "BOUND(" not in query
+
+    @pytest.mark.parametrize("bad", [
+        "R12345",
+        "http://orkg.org/x> } ?s ?p ?o { <http://a",
+        "http://orkg.org/x\n",
+    ])
+    def test_enrichment_queries_reject_invalid_iri(self, bad):
+        with pytest.raises(ValueError):
+            paper_full_contributions(bad)
+        with pytest.raises(ValueError):
+            paper_metadata(bad)
+
+
+# ── ORKG Schema ───────────────────────────────────────────────────
+
+ALL_PAPER_QUERIES = [
+    lambda: papers_by_method("BERT"),
+    lambda: papers_by_dataset("SQuAD"),
+    lambda: papers_by_research_problem("NER"),
+    lambda: papers_by_research_field("NLP"),
+    lambda: papers_comparing_methods("CNN", "SVM"),
+    lambda: papers_by_method_and_dataset("BERT", "SQuAD"),
+    lambda: claim_evidence(["BERT", "GLUE"]),
+    lambda: paper_lookup_by_title("attention"),
+    lambda: broad_entity_search("transformer"),
+    lambda: title_keyword_search(["BERT"]),
+    lambda: paper_metadata("http://orkg.org/orkg/resource/R1"),
+]
+
+
+class TestOrkgSchema:
+
+    @pytest.mark.parametrize("make_query", ALL_PAPER_QUERIES)
+    def test_year_is_p29_not_month(self, make_query):
+        # In ORKG, P28 is "publication month" and P29 is "publication year".
+        query = make_query()
+        assert "orkgp:P29" in query
+        assert "orkgp:P28" not in query
+
+    def test_research_field_includes_subfields(self):
+        query = papers_by_research_field("Computer Sciences")
+        assert "orkgp:P36*" in query
+
+    def test_entity_queries_match_literal_values(self):
+        query = papers_by_method("transformer")
+        assert "isLiteral(?lbl)" in query
+
+    def test_entity_queries_exclude_rdf_type(self):
+        # rdf:type → orkgc:Contribution has label "Contribution"
+        query = broad_entity_search("contribution")
+        assert "NOT IN (rdf:type, rdfs:label)" in query
+
+    def test_entity_query_returns_distinct_papers(self):
+        # The inner sub-select picks LIMIT distinct papers; otherwise one
+        # paper with many matching labels fills the whole LIMIT.
+        query = papers_by_method("BERT", limit=5)
+        assert "GROUP BY ?paper" in query
+        assert "LIMIT 5" in query
+
+
+class TestFulltext:
+
+    def test_fulltext_prefilter_when_enabled(self, monkeypatch):
+        monkeypatch.setattr(kg_queries, "FULLTEXT", True)
+        query = papers_by_dataset("CIFAR-10")
+        # Index tokenizes "CIFAR-10" as "cifar 10"; exact FILTER is kept.
+        assert "bif:contains \"'CIFAR 10'\"" in query
+        assert 'CONTAINS(LCASE(STR(?lbl)), LCASE("CIFAR-10"))' in query
+
+    def test_long_terms_get_wildcard(self, monkeypatch):
+        monkeypatch.setattr(kg_queries, "FULLTEXT", True)
+        assert "'transformer*'" in papers_by_method("transformer")
+        # Short terms are whole-word matches, never wildcards
+        assert "'BERT'" in papers_by_method("BERT")
+
+    def test_no_bif_when_disabled(self, monkeypatch):
+        # rdflib (USE_LOCAL_RDF) and non-Virtuoso endpoints lack bif:contains
+        monkeypatch.setattr(kg_queries, "FULLTEXT", False)
+        for make_query in ALL_PAPER_QUERIES:
+            assert "bif:" not in make_query()
+
 
 # ── Claim Evidence ────────────────────────────────────────────────
 
@@ -171,6 +276,21 @@ class TestClaimEvidence:
         assert '"MNIST"' in query       # in CONTAINS literal
         assert '"accuracy"' in query    # in CONTAINS literal
         assert "LIMIT 15" in query
+
+    def test_claim_evidence_ranks_contributions_by_keyword_coverage(self):
+        # Coverage counts DISTINCT keywords across all values of a
+        # contribution, not keywords inside one label.
+        query = claim_evidence(["BERT", "SQuAD"], limit=10)
+        assert "COUNT(DISTINCT ?kw) AS ?hits" in query
+        assert "GROUP BY ?contrib" in query
+        assert "ORDER BY DESC(?hits)" in query
+
+    def test_claim_evidence_includes_benchmark_scores(self):
+        # Scores live two hops down: Contribution → PWC_HAS_BENCHMARK →
+        # Benchmark → P34 (evaluation) → "Quantity F1_95.0"
+        query = claim_evidence(["BERT", "SQuAD"], limit=10)
+        assert "orkgp:PWC_HAS_BENCHMARK" in query
+        assert "orkgp:P34" in query
 
     def test_claim_evidence_empty_keywords_returns_empty_string(self):
         """If all keywords sanitize to empty, return '' to avoid malformed SPARQL."""
