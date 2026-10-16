@@ -536,6 +536,14 @@
      "found_by": [
       "entity"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1559551",
+     "title": "Blockchain-Federated Learning based Architecture for Android Malware Detection",
+     "grade": 2,
+     "found_by": [
+      "pool-rules-test"
+     ]
     }
    ]
   },
@@ -1301,6 +1309,14 @@
      "grade": 1,
      "found_by": [
       "pool-e2e-graph"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R370907",
+     "title": "Learning Transferable Visual Models From Natural Language Supervision",
+     "grade": 2,
+     "found_by": [
+      "pool-rules"
      ]
     }
    ]
@@ -2388,6 +2404,14 @@
      "found_by": [
       "pool-e2e-graph"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R193517",
+     "title": "Deep malaria parasite detection in thin blood smear microscopic images",
+     "grade": 1,
+     "found_by": [
+      "pool-rules-test"
+     ]
     }
    ]
   },
@@ -2842,6 +2866,14 @@
      "grade": 0,
      "found_by": [
       "pool-benchmark"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R468401",
+     "title": "HiRID-ICU-Benchmark -- A Comprehensive Machine Learning Benchmark on High-resolution ICU Data",
+     "grade": 0,
+     "found_by": [
+      "pool-rules"
      ]
     }
    ]
@@ -5099,6 +5131,70 @@
      "found_by": [
       "pool-e2e-old"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R431071",
+     "title": "Deep Residual Output Layers for Neural Language Generation",
+     "grade": 2,
+     "found_by": [
+      "pool-rules"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R429435",
+     "title": "FRAGE: Frequency-Agnostic Word Representation",
+     "grade": 2,
+     "found_by": [
+      "pool-rules"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R430977",
+     "title": "Improving Neural Language Modeling via Adversarial Training",
+     "grade": 2,
+     "found_by": [
+      "pool-rules"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R465128",
+     "title": "Analysing Mathematical Reasoning Abilities of Neural Models",
+     "grade": 0,
+     "found_by": [
+      "pool-rules"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R466007",
+     "title": "Are NLP Models really able to Solve Simple Math Word Problems?",
+     "grade": 0,
+     "found_by": [
+      "pool-rules"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R157417",
+     "title": "Autoformer: Searching transformers for visual recognition",
+     "grade": 0,
+     "found_by": [
+      "pool-rules"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1889274",
+     "title": "Beyond Characters: Subword-level Morpheme Segmentation",
+     "grade": 0,
+     "found_by": [
+      "pool-rules"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R468401",
+     "title": "HiRID-ICU-Benchmark -- A Comprehensive Machine Learning Benchmark on High-resolution ICU Data",
+     "grade": 0,
+     "found_by": [
+      "pool-rules"
+     ]
     }
    ]
   },
@@ -5968,6 +6064,14 @@
      "grade": 1,
      "found_by": [
       "pool-ablation"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1471350",
+     "title": "Development of goat behaviour prediction with accelerometer data: a machine learning and pre-processing approach",
+     "grade": 1,
+     "found_by": [
+      "pool-rules-test"
      ]
     }
    ]
@@ -7096,6 +7200,14 @@
      "found_by": [
       "pool-e2e-graph"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R499887",
+     "title": "FLAT: Chinese NER Using Flat-Lattice Transformer",
+     "grade": 2,
+     "found_by": [
+      "pool-rules"
+     ]
     }
    ]
   },
@@ -8046,6 +8158,38 @@
      "found_by": [
       "pool-ablation"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1422077",
+     "title": "Attentional Dynamics Explain the Elusive Nature of Context Effects",
+     "grade": 0,
+     "found_by": [
+      "pool-rules-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1424502",
+     "title": "DIVIDING UP THE PIE: ATTENTION ALLOCATION",
+     "grade": 0,
+     "found_by": [
+      "pool-rules-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1414987",
+     "title": "Can increased processing noise induce better decisions? Evidence polarization through exponential weighting",
+     "grade": 0,
+     "found_by": [
+      "pool-rules-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1420474",
+     "title": "Decision Processes in Continuous-Outcome Retrieval from Visual Working Memory",
+     "grade": 0,
+     "found_by": [
+      "pool-rules-test"
+     ]
     }
    ]
   },
@@ -8661,6 +8805,30 @@
      "grade": 0,
      "found_by": [
       "pool-e2e"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1471330",
+     "title": "Deep learning methods for poultry disease prediction using images",
+     "grade": 0,
+     "found_by": [
+      "pool-rules-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1644635",
+     "title": "Deep Learning Beehive Monitoring System for Early Detection of the Varroa Mite",
+     "grade": 0,
+     "found_by": [
+      "pool-rules-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1471216",
+     "title": "Deep learning-based classification of visual symptoms of bacterial wilt disease caused by Ralstonia solanacearum in tomato plants",
+     "grade": 0,
+     "found_by": [
+      "pool-rules-test"
      ]
     }
    ]
@@ -9405,6 +9573,14 @@
      "found_by": [
       "pool-e2e-graph"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R602909",
+     "title": "Multi-ontology mapping generative adversarial network in internet of things for ontology alignment",
+     "grade": 0,
+     "found_by": [
+      "pool-rules-test"
+     ]
     }
    ]
   },
@@ -9800,6 +9976,14 @@
      "found_by": [
       "pool-e2e-graph"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R165783",
+     "title": "ROBOKOP: an abstraction layer and user interface for knowledge graphs to support question answering",
+     "grade": 2,
+     "found_by": [
+      "pool-rules"
+     ]
     }
    ]
   },
@@ -10073,6 +10257,14 @@
      "grade": 1,
      "found_by": [
       "pool-e2e"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R284310",
+     "title": "A knowledge graph based speech interface for question answering systems",
+     "grade": 1,
+     "found_by": [
+      "pool-rules-test"
      ]
     }
    ]
@@ -13491,6 +13683,30 @@
      "found_by": [
       "pool-e2e-graph"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R213149",
+     "title": "FNDNet – A deep convolutional neural network for fake news detection",
+     "grade": 0,
+     "found_by": [
+      "pool-rules-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R135489",
+     "title": "Identification of Leukemia Subtypes from Microscopic Images Using Convolutional Neural Network",
+     "grade": 2,
+     "found_by": [
+      "pool-rules-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R138756",
+     "title": "Learning Spatial–Spectral–Temporal EEG Features With Recurrent 3D Convolutional Neural Networks for Cross-Task Mental Workload Assessment",
+     "grade": 1,
+     "found_by": [
+      "pool-rules-test"
+     ]
     }
    ]
   },
@@ -14845,6 +15061,22 @@
      "found_by": [
       "pool-ablation"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R191625",
+     "title": "Deep Contextualized Word Embedding for Text-based Online User Profiling to Detect Social Bots on Twitter",
+     "grade": 0,
+     "found_by": [
+      "pool-rules-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1888013",
+     "title": "HellaSwag: Can a Machine Really Finish Your Sentence?",
+     "grade": 0,
+     "found_by": [
+      "pool-rules-test"
+     ]
     }
    ]
   },
@@ -15309,6 +15541,46 @@
      "found_by": [
       "pool-e2e-graph"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R532383",
+     "title": "An Empirical Study of Training Self-Supervised Vision Transformers",
+     "grade": 1,
+     "found_by": [
+      "pool-rules"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1868834",
+     "title": "FQ-ViT: Post-Training Quantization for Fully Quantized Vision Transformer",
+     "grade": 1,
+     "found_by": [
+      "pool-rules"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R536511",
+     "title": "Combining EfficientNet and Vision Transformers for Video Deepfake Detection",
+     "grade": 0,
+     "found_by": [
+      "pool-rules"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R455399",
+     "title": "Deep Nearest Neighbor Anomaly Detection",
+     "grade": 0,
+     "found_by": [
+      "pool-rules"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R504234",
+     "title": "GIT: A Generative Image-to-text Transformer for Vision and Language",
+     "grade": 0,
+     "found_by": [
+      "pool-rules"
+     ]
     }
    ]
   },
@@ -15550,6 +15822,30 @@
      "grade": 0,
      "found_by": [
       "pool-e2e"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R471148",
+     "title": "Investigating Pretrained Language Models for Graph-to-Text Generation",
+     "grade": 0,
+     "found_by": [
+      "pool-rules-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R471209",
+     "title": "Text-to-Text Pre-Training for Data-to-Text Tasks",
+     "grade": 0,
+     "found_by": [
+      "pool-rules-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1735247",
+     "title": "Converting the Point of View of Messages Spoken to Virtual Assistants",
+     "grade": 0,
+     "found_by": [
+      "pool-rules-test"
      ]
     }
    ]

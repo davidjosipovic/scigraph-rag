@@ -1,26 +1,26 @@
 {
- "mode": "ollama_qwen2.5_7b",
+ "mode": "retrieval_e2e_qwen2.5_7b_final",
  "k": 8,
  "split": null,
  "summary": [
   {
    "query_type": "claim_verification",
    "n": 8,
-   "P@K": 0.734375,
-   "P2@K": 0.375,
-   "R@K": 0.4085836038961039,
-   "nDCG@K": 0.6382344318830194,
-   "Hit@K": 0.75,
+   "P@K": 0.765625,
+   "P2@K": 0.40625,
+   "R@K": 0.484476461038961,
+   "nDCG@K": 0.6815959659481432,
+   "Hit@K": 0.875,
    "empty": 0.0,
    "unjudged": 0.0
   },
   {
    "query_type": "dataset_search",
    "n": 8,
-   "P@K": 0.984375,
+   "P@K": 0.96875,
    "P2@K": 0.6666666666666666,
    "R@K": 0.46095085470085473,
-   "nDCG@K": 0.8417136661603718,
+   "nDCG@K": 0.8334475957991023,
    "Hit@K": 1.0,
    "empty": 0.0,
    "unjudged": 0.0
@@ -39,22 +39,22 @@
   {
    "query_type": "method_usage",
    "n": 9,
-   "P@K": 0.7638888888888888,
-   "P2@K": 0.3333333333333333,
-   "R@K": 0.2139261972595306,
-   "nDCG@K": 0.6105149831896305,
-   "Hit@K": 0.8888888888888888,
+   "P@K": 0.8472222222222222,
+   "P2@K": 0.3472222222222222,
+   "R@K": 0.23085955629815277,
+   "nDCG@K": 0.6461792303289908,
+   "Hit@K": 1.0,
    "empty": 0.0,
    "unjudged": 0.0
   },
   {
    "query_type": "paper_lookup",
    "n": 8,
-   "P@K": 0.171875,
-   "P2@K": 0.15625,
-   "R@K": 0.75,
-   "nDCG@K": 0.45370648273487074,
-   "Hit@K": 0.75,
+   "P@K": 0.234375,
+   "P2@K": 0.171875,
+   "R@K": 0.875,
+   "nDCG@K": 0.5435831311913218,
+   "Hit@K": 0.875,
    "empty": 0.0,
    "unjudged": 0.0
   },
@@ -62,9 +62,9 @@
    "query_type": "topic_search",
    "n": 9,
    "P@K": 0.9027777777777778,
-   "P2@K": 0.6805555555555556,
-   "R@K": 0.2466551482891352,
-   "nDCG@K": 0.8241180376596122,
+   "P2@K": 0.6944444444444444,
+   "R@K": 0.2494826766068596,
+   "nDCG@K": 0.8288021617849393,
    "Hit@K": 1.0,
    "empty": 0.0,
    "unjudged": 0.0
@@ -72,11 +72,11 @@
   {
    "query_type": "ALL",
    "n": 50,
-   "P@K": 0.705,
-   "P2@K": 0.43166666666666664,
-   "R@K": 0.41916146870558635,
-   "nDCG@K": 0.6645672456159997,
-   "Hit@K": 0.88,
+   "P@K": 0.7325,
+   "P2@K": 0.44416666666666665,
+   "R@K": 0.45486128557258587,
+   "nDCG@K": 0.6918254903892924,
+   "Hit@K": 0.94,
    "empty": 0.0,
    "unjudged": 0.0
   }
@@ -95,43 +95,43 @@
    "unjudged": 0.0,
    "retrieved": [
     {
-     "uri": "http://orkg.org/orkg/resource/R756318",
-     "title": "A field study to estimate heavy metal concentrations in a soil-rice system: Application of graph neural networks",
+     "uri": "http://orkg.org/orkg/resource/R459148",
+     "title": "Few-Shot Learning with Graph Neural Networks",
      "grade": 2
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R690134",
-     "title": "Explainable Identification of Hate Speech towards Islam using Graph Neural Networks",
+     "uri": "http://orkg.org/orkg/resource/R210351",
+     "title": "Graph Neural Network-Based Anomaly Detection in Multivariate Time Series",
      "grade": 2
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R214233",
-     "title": null,
+     "uri": "http://orkg.org/orkg/resource/R508646",
+     "title": "Supervised Community Detection with Line Graph Neural Networks",
      "grade": 2
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R753897",
-     "title": "Graph Neural Networks for Antisocial Behavior Detection on Twitter",
+     "uri": "http://orkg.org/orkg/resource/R678767",
+     "title": "A Novel Computational Model for Predicting microRNA–Disease Associations Based on Heterogeneous Graph Convolutional Networks",
      "grade": 2
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R642412",
-     "title": "Ship Classification Method for Massive AIS Trajectories Based on GNN",
-     "grade": 2
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R1912483",
-     "title": "Structure is the Signal: Graph Encodings and GNNs for Constraint Repair in Collaborative KGs",
-     "grade": 2
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R1560448",
-     "title": "Credit card fraud detection based on federated graph learning",
+     "uri": "http://orkg.org/orkg/resource/R678774",
+     "title": "Compound–protein interaction prediction with end-to-end learning of neural networks for graphs and sequences",
      "grade": 2
     },
     {
      "uri": "http://orkg.org/orkg/resource/R1560390",
      "title": "Encoder–decoder graph neural network for credit card fraud detection",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1559435",
+     "title": "FedHGCDroid: An Adaptive Multi-Dimensional Federated Learning for Privacy-Preserving Android Malware Classification",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1580409",
+     "title": "Graph neural network-enabled manufacturing method classification from engineering drawings",
      "grade": 2
     }
    ]
@@ -142,7 +142,7 @@
    "detected_type": "topic_search",
    "P@K": 1.0,
    "P2@K": 1.0,
-   "R@K": 0.38095238095238093,
+   "R@K": 0.36363636363636365,
    "nDCG@K": 1.0,
    "Hit@K": 1.0,
    "empty": 0.0,
@@ -204,17 +204,17 @@
    "retrieved": [
     {
      "uri": "http://orkg.org/orkg/resource/R525376",
-     "title": null,
+     "title": "A Fast Knowledge Distillation Framework for Visual Recognition",
      "grade": 2
     },
     {
      "uri": "http://orkg.org/orkg/resource/R493091",
-     "title": null,
+     "title": "Temporal Knowledge Distillation for On-device Audio Classification",
      "grade": 2
     },
     {
      "uri": "http://orkg.org/orkg/resource/R413775",
-     "title": null,
+     "title": "Transformer-based ASR Incorporating Time-reduction Layer and Fine-tuning with Self-Knowledge Distillation",
      "grade": 2
     },
     {
@@ -234,12 +234,12 @@
     },
     {
      "uri": "http://orkg.org/orkg/resource/R409034",
-     "title": null,
+     "title": "Multiple Fusion Adaptation: A Strong Framework for Unsupervised Semantic Segmentation Adaptation",
      "grade": 2
     },
     {
      "uri": "http://orkg.org/orkg/resource/R408352",
-     "title": null,
+     "title": "Prototypical Pseudo Label Denoising and Target Structure Learning for Domain Adaptive Semantic Segmentation",
      "grade": 2
     }
    ]
@@ -301,11 +301,11 @@
   {
    "id": "Q05",
    "query_type": "topic_search",
-   "detected_type": "topic_search",
+   "detected_type": "method_usage",
    "P@K": 1.0,
-   "P2@K": 0.125,
-   "R@K": 0.058823529411764705,
-   "nDCG@K": 0.6264713513838285,
+   "P2@K": 0.25,
+   "R@K": 0.1111111111111111,
+   "nDCG@K": 0.6686284685117715,
    "Hit@K": 1.0,
    "empty": 0.0,
    "unjudged": 0.0,
@@ -341,13 +341,13 @@
      "grade": 1
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R641471",
-     "title": "UCAS-IIE-NLP at SemEval-2023 Task 12: Enhancing Generalization of Multilingual BERT for Low-resource Sentiment Analysis",
-     "grade": 1
+     "uri": "http://orkg.org/orkg/resource/R370907",
+     "title": null,
+     "grade": 2
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R1639070",
-     "title": null,
+     "uri": "http://orkg.org/orkg/resource/R641471",
+     "title": "UCAS-IIE-NLP at SemEval-2023 Task 12: Enhancing Generalization of Multilingual BERT for Low-resource Sentiment Analysis",
      "grade": 1
     }
    ]
@@ -430,12 +430,12 @@
     },
     {
      "uri": "http://orkg.org/orkg/resource/R1771793",
-     "title": null,
+     "title": "BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions",
      "grade": 1
     },
     {
      "uri": "http://orkg.org/orkg/resource/R549358",
-     "title": null,
+     "title": "Contract Discovery: Dataset and a Few-Shot Semantic Retrieval Challenge with Competitive Baselines",
      "grade": 1
     },
     {
@@ -455,7 +455,7 @@
     },
     {
      "uri": "http://orkg.org/orkg/resource/R1888013",
-     "title": null,
+     "title": "HellaSwag: Can a Machine Really Finish Your Sentence?",
      "grade": 2
     }
    ]
@@ -504,7 +504,7 @@
     },
     {
      "uri": "http://orkg.org/orkg/resource/R1765947",
-     "title": null,
+     "title": "Doubly Deformable Aggregation of Covariance Matrices for Few-shot Segmentation",
      "grade": 0
     },
     {
@@ -842,10 +842,10 @@
    "id": "Q15",
    "query_type": "dataset_search",
    "detected_type": "dataset_search",
-   "P@K": 1.0,
+   "P@K": 0.875,
    "P2@K": 0.625,
    "R@K": 0.3333333333333333,
-   "nDCG@K": 0.8583246322369953,
+   "nDCG@K": 0.7921960693468401,
    "Hit@K": 1.0,
    "empty": 0.0,
    "unjudged": 0.0,
@@ -856,23 +856,8 @@
      "grade": 2
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R172672",
-     "title": "Named Entity Recognition with Bidirectional LSTM-CNNs",
-     "grade": 2
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R145794",
-     "title": "Neural Architectures for Named Entity Recognition",
-     "grade": 2
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R46629",
-     "title": "Segment representations in named entity recognition",
-     "grade": 1
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R46615",
-     "title": "Soft-constrained inference for named entity recognition",
+     "uri": "http://orkg.org/orkg/resource/R12209",
+     "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
      "grade": 2
     },
     {
@@ -888,6 +873,21 @@
     {
      "uri": "http://orkg.org/orkg/resource/R130368",
      "title": "Deep contextualized word representations",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R145803",
+     "title": "End-to-end Neural Coreference Resolution",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R172672",
+     "title": "Named Entity Recognition with Bidirectional LSTM-CNNs",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R145794",
+     "title": "Neural Architectures for Named Entity Recognition",
      "grade": 2
     }
    ]
@@ -936,12 +936,12 @@
     },
     {
      "uri": "http://orkg.org/orkg/resource/R1565176",
-     "title": null,
+     "title": "KenSwQuAD��A Question Answering Dataset for Swahili Low-resource Language",
      "grade": 1
     },
     {
      "uri": "http://orkg.org/orkg/resource/R1771223",
-     "title": null,
+     "title": "PIQA: Reasoning about Physical Commonsense in Natural Language",
      "grade": 2
     }
    ]
@@ -950,52 +950,52 @@
    "id": "Q17",
    "query_type": "claim_verification",
    "detected_type": "claim_verification",
-   "P@K": 0.125,
-   "P2@K": 0.0,
-   "R@K": 0.0,
-   "nDCG@K": 0.201878906520566,
-   "Hit@K": 0.0,
+   "P@K": 0.375,
+   "P2@K": 0.375,
+   "R@K": 0.75,
+   "nDCG@K": 0.592680143966989,
+   "Hit@K": 1.0,
    "empty": 0.0,
    "unjudged": 0.0,
    "retrieved": [
     {
-     "uri": "http://orkg.org/orkg/resource/R429193",
-     "title": "PENELOPIE: Enabling Open Information Extraction for the Greek Language through Machine Translation",
-     "grade": 1
+     "uri": "http://orkg.org/orkg/resource/R431071",
+     "title": null,
+     "grade": 2
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R496149",
-     "title": "BB_twtr at SemEval-2017 Task 4: Twitter Sentiment Analysis with CNNs and LSTMs",
+     "uri": "http://orkg.org/orkg/resource/R1380982",
+     "title": "Fine-Tuned T5 Transformer with LSTM and Spider Monkey Optimizer for Redundancy Reduction in Automatic Question Generation",
      "grade": 0
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R12209",
-     "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+     "uri": "http://orkg.org/orkg/resource/R429435",
+     "title": null,
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R430977",
+     "title": null,
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R465128",
+     "title": null,
      "grade": 0
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R476452",
-     "title": "Modelling Interaction of Sentence Pair with coupled-LSTMs",
+     "uri": "http://orkg.org/orkg/resource/R466007",
+     "title": null,
      "grade": 0
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R1362291",
-     "title": "Transformers are Short-Text Classifiers",
+     "uri": "http://orkg.org/orkg/resource/R157417",
+     "title": null,
      "grade": 0
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R501428",
-     "title": "\"Liar, Liar Pants on Fire\": A New Benchmark Dataset for Fake News Detection",
-     "grade": 0
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R584466",
-     "title": "A multi-model architecture based on Long Short-Term Memory neural networks for multi-step sea level forecasting",
-     "grade": 0
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R475909",
-     "title": "Combining Similarity Features and Deep Representation Learning for Stance Detection in the Context of Checking Fake News",
+     "uri": "http://orkg.org/orkg/resource/R1889274",
+     "title": null,
      "grade": 0
     }
    ]
@@ -1166,17 +1166,37 @@
    "id": "Q21",
    "query_type": "method_usage",
    "detected_type": "method_usage",
-   "P@K": 1.0,
+   "P@K": 0.875,
    "P2@K": 0.75,
    "R@K": 0.2222222222222222,
-   "nDCG@K": 0.8803081921563277,
+   "nDCG@K": 0.8284786442899876,
    "Hit@K": 1.0,
    "empty": 0.0,
    "unjudged": 0.0,
    "retrieved": [
     {
-     "uri": "http://orkg.org/orkg/resource/R654023",
-     "title": "A Lightweight Neural Model for Biomedical Entity Linking",
+     "uri": "http://orkg.org/orkg/resource/R209798",
+     "title": "Multimodal Fusion with BERT and Attention Mechanism for Fake News Detection",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1565235",
+     "title": "A self-attention TCN-based model for suicidal ideation detection from social media posts",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1383310",
+     "title": "Attracting Effect of Pinpoint Auditory Glimpse on Digital Signage",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R216331",
+     "title": "Big bird: Transformers for longer sequences",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R236269",
+     "title": "Call Attention to Rumors: Deep Attention Based Recurrent Neural Networks for Early Rumor Detection",
      "grade": 2
     },
     {
@@ -1185,34 +1205,14 @@
      "grade": 1
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R569061",
-     "title": "learning beyond datasets: knowledge graph augmented neural networks for natural language processing",
+     "uri": "http://orkg.org/orkg/resource/R130368",
+     "title": "Deep contextualized word representations",
      "grade": 2
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R569066",
-     "title": "accurate text-enhanced knowledge graph representation learning",
+     "uri": "http://orkg.org/orkg/resource/R207073",
+     "title": "FNED: A Deep Network for Fake News Early Detection on Social Media",
      "grade": 2
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R284219",
-     "title": "Commonsense Knowledge Aware Conversation Generation with Graph Attention",
-     "grade": 2
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R568339",
-     "title": "how knowledge graph and attention help a quantitative analysis into bag-level relation extraction",
-     "grade": 2
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R568915",
-     "title": "long-tail relation extraction via knowledge graph embeddings and graph convolution networks",
-     "grade": 2
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R1560000",
-     "title": "MixHD: A Method for Detecting Hallucinations Based on the Internal State and Output Probability of Large Language Models",
-     "grade": 1
     }
    ]
   },
@@ -1276,7 +1276,7 @@
    "detected_type": "method_usage",
    "P@K": 0.625,
    "P2@K": 0.375,
-   "R@K": 0.16666666666666666,
+   "R@K": 0.15789473684210525,
    "nDCG@K": 0.5924486242873997,
    "Hit@K": 1.0,
    "empty": 0.0,
@@ -1289,7 +1289,7 @@
     },
     {
      "uri": "http://orkg.org/orkg/resource/R163747",
-     "title": null,
+     "title": "CrossNER: Evaluating Cross-Domain Named Entity Recognition",
      "grade": 1
     },
     {
@@ -1392,12 +1392,12 @@
    "retrieved": [
     {
      "uri": "http://orkg.org/orkg/resource/R496860",
-     "title": null,
+     "title": "A C-LSTM Neural Network for Text Classification",
      "grade": 2
     },
     {
      "uri": "http://orkg.org/orkg/resource/R1815115",
-     "title": null,
+     "title": "BanglaBook: A Large-scale Bangla Dataset for Sentiment Analysis from Book Reviews",
      "grade": 1
     },
     {
@@ -1417,7 +1417,7 @@
     },
     {
      "uri": "http://orkg.org/orkg/resource/R496817",
-     "title": null,
+     "title": "Convolutional Neural Networks with Recurrent Neural Filters",
      "grade": 2
     },
     {
@@ -1505,7 +1505,7 @@
     },
     {
      "uri": "http://orkg.org/orkg/resource/R564645",
-     "title": null,
+     "title": "Asynchronous Methods for Deep Reinforcement Learning",
      "grade": 0
     },
     {
@@ -1515,12 +1515,12 @@
     },
     {
      "uri": "http://orkg.org/orkg/resource/R563544",
-     "title": null,
+     "title": "Deep Reinforcement Learning with Double Q-learning",
      "grade": 0
     },
     {
      "uri": "http://orkg.org/orkg/resource/R562590",
-     "title": null,
+     "title": "Dueling Network Architectures for Deep Reinforcement Learning",
      "grade": 0
     },
     {
@@ -1666,38 +1666,38 @@
      "grade": 2
     },
     {
+     "uri": "http://orkg.org/orkg/resource/R1742015",
+     "title": "Cloud Removal with Fusion of High Resolution Optical and SAR Images Using Generative Adversarial Networks",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1718664",
+     "title": "Dual Pyramid Generative Adversarial Networks for Semantic Image Synthesis",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1724522",
+     "title": "EVA-GAN: Enhanced Various Audio Generation via Scalable Generative Adversarial Networks",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1724631",
+     "title": "HiFi-GAN: Generative Adversarial Networks for Efficient and High Fidelity Speech Synthesis",
+     "grade": 0
+    },
+    {
      "uri": "http://orkg.org/orkg/resource/R213009",
      "title": "MAD-GAN: Multivariate Anomaly Detection for Time Series Data with Generative Adversarial Networks",
      "grade": 0
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R1355675",
-     "title": "Discriminative Forests Improve Generative Diversity for Generative Adversarial Networks",
-     "grade": 0
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R479146",
-     "title": null,
-     "grade": 0
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R678801",
+     "uri": "http://orkg.org/orkg/resource/R602909",
      "title": null,
      "grade": 0
     },
     {
      "uri": "http://orkg.org/orkg/resource/R1560494",
      "title": "A Credit Card Fraud Detection Model Based on Multi-Feature Fusion and Generative Adversarial Network",
-     "grade": 0
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R1560444",
-     "title": "Assessment of catastrophic forgetting in continual credit card fraud detection",
-     "grade": 0
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R1742015",
-     "title": "Cloud Removal with Fusion of High Resolution Optical and SAR Images Using Generative Adversarial Networks",
      "grade": 0
     }
    ]
@@ -1708,7 +1708,7 @@
    "detected_type": "topic_search",
    "P@K": 1.0,
    "P2@K": 0.25,
-   "R@K": 0.14285714285714285,
+   "R@K": 0.13333333333333333,
    "nDCG@K": 0.6686284685117715,
    "Hit@K": 1.0,
    "empty": 0.0,
@@ -1741,7 +1741,7 @@
     },
     {
      "uri": "http://orkg.org/orkg/resource/R1382275",
-     "title": null,
+     "title": "MetaQA: Combining Expert Agents for Multi-Skill Question Answering",
      "grade": 1
     },
     {
@@ -1751,7 +1751,7 @@
     },
     {
      "uri": "http://orkg.org/orkg/resource/R1388759",
-     "title": null,
+     "title": "PeerQA: A Scientific Question Answering Dataset from Peer Reviews",
      "grade": 1
     }
    ]
@@ -2291,21 +2291,21 @@
    "query_type": "claim_verification",
    "detected_type": "claim_verification",
    "P@K": 1.0,
-   "P2@K": 0.25,
-   "R@K": 0.2857142857142857,
-   "nDCG@K": 0.6305500166285675,
+   "P2@K": 0.125,
+   "R@K": 0.14285714285714285,
+   "nDCG@K": 0.5866410517031347,
    "Hit@K": 1.0,
    "empty": 0.0,
    "unjudged": 0.0,
    "retrieved": [
     {
-     "uri": "http://orkg.org/orkg/resource/R756318",
-     "title": "A field study to estimate heavy metal concentrations in a soil-rice system: Application of graph neural networks",
+     "uri": "http://orkg.org/orkg/resource/R459148",
+     "title": "Few-Shot Learning with Graph Neural Networks",
      "grade": 1
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R690134",
-     "title": "Explainable Identification of Hate Speech towards Islam using Graph Neural Networks",
+     "uri": "http://orkg.org/orkg/resource/R210351",
+     "title": "Graph Neural Network-Based Anomaly Detection in Multivariate Time Series",
      "grade": 1
     },
     {
@@ -2314,28 +2314,28 @@
      "grade": 2
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R214233",
-     "title": null,
+     "uri": "http://orkg.org/orkg/resource/R508646",
+     "title": "Supervised Community Detection with Line Graph Neural Networks",
      "grade": 1
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R642412",
-     "title": "Ship Classification Method for Massive AIS Trajectories Based on GNN",
+     "uri": "http://orkg.org/orkg/resource/R678767",
+     "title": "A Novel Computational Model for Predicting microRNA–Disease Associations Based on Heterogeneous Graph Convolutional Networks",
      "grade": 1
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R1912483",
-     "title": "Structure is the Signal: Graph Encodings and GNNs for Constraint Repair in Collaborative KGs",
+     "uri": "http://orkg.org/orkg/resource/R678774",
+     "title": "Compound–protein interaction prediction with end-to-end learning of neural networks for graphs and sequences",
      "grade": 1
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R1871681",
-     "title": "Classic GNNs are Strong Baselines: Reassessing GNNs for Node Classification",
-     "grade": 2
+     "uri": "http://orkg.org/orkg/resource/R1560390",
+     "title": "Encoder–decoder graph neural network for credit card fraud detection",
+     "grade": 1
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R1560448",
-     "title": "Credit card fraud detection based on federated graph learning",
+     "uri": "http://orkg.org/orkg/resource/R1559435",
+     "title": "FedHGCDroid: An Adaptive Multi-Dimensional Federated Learning for Privacy-Preserving Android Malware Classification",
      "grade": 1
     }
    ]
@@ -2374,7 +2374,7 @@
     },
     {
      "uri": "http://orkg.org/orkg/resource/R518141",
-     "title": null,
+     "title": "Leveraging Synthetic Data in Object Detection on Unmanned Aerial Vehicles",
      "grade": 0
     },
     {
@@ -2398,28 +2398,28 @@
    "id": "Q44",
    "query_type": "method_usage",
    "detected_type": "method_usage",
-   "P@K": 0.375,
+   "P@K": 0.5,
    "P2@K": 0.125,
-   "R@K": 0.07692307692307693,
-   "nDCG@K": 0.2506719915704194,
+   "R@K": 0.07142857142857142,
+   "nDCG@K": 0.2363729765466043,
    "Hit@K": 1.0,
    "empty": 0.0,
    "unjudged": 0.0,
    "retrieved": [
     {
      "uri": "http://orkg.org/orkg/resource/R705980",
-     "title": null,
+     "title": "A multimodal fake news detection model based on crossmodal attention residual and multichannel convolutional neural networks",
      "grade": 0
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R192303",
-     "title": "COVID-19 detection from chest X-Ray images using Deep Learning and Convolutional Neural Networks",
-     "grade": 2
+     "uri": "http://orkg.org/orkg/resource/R138802",
+     "title": "Assessing the severity of positive valence symptoms in initial psychiatric evaluation records: Should we use convolutional neural networks?",
+     "grade": 0
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R1411979",
-     "title": "Classification of Fraud Calls by Intent Analysis of Call Transcripts",
-     "grade": 0
+     "uri": "http://orkg.org/orkg/resource/R138742",
+     "title": "Automated EEG-based screening of depression using deep convolutional neural network",
+     "grade": 1
     },
     {
      "uri": "http://orkg.org/orkg/resource/R1433310",
@@ -2427,24 +2427,24 @@
      "grade": 0
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R673550",
-     "title": "Deep learning models for plant disease detection and diagnosis",
+     "uri": "http://orkg.org/orkg/resource/R138763",
+     "title": "EEG-based mild depression recognition using convolutional neural network",
      "grade": 1
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R178420",
-     "title": "In-vehicle network intrusion detection using deep convolutional neural network",
+     "uri": "http://orkg.org/orkg/resource/R213149",
+     "title": null,
      "grade": 0
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R700821",
-     "title": "MFPIM: A Deep Learning Model Based on Multimodal Fusion Technology for Pulsar Identification",
+     "uri": "http://orkg.org/orkg/resource/R135489",
+     "title": null,
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R138756",
+     "title": null,
      "grade": 1
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R1411326",
-     "title": "A Hybrid Deep Learning And Modified Butterfly Optimization Based Feature Selection For Transaction Credit Card Fraud Detection",
-     "grade": 0
     }
    ]
   },
@@ -2452,53 +2452,53 @@
    "id": "Q45",
    "query_type": "method_usage",
    "detected_type": "method_usage",
-   "P@K": 0.25,
-   "P2@K": 0.0,
-   "R@K": 0.0,
-   "nDCG@K": 0.20666477868295938,
-   "Hit@K": 0.0,
+   "P@K": 1.0,
+   "P2@K": 0.125,
+   "R@K": 0.16666666666666666,
+   "nDCG@K": 0.593771565827358,
+   "Hit@K": 1.0,
    "empty": 0.0,
    "unjudged": 0.0,
    "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R1763952",
+     "title": "A Multimodal Anomaly Detector for Robot-Assisted Feeding Using an LSTM-based Variational Autoencoder",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1559566",
+     "title": "Augmenting Android Malware Using Conditional Variational Autoencoder for the Malware Family Classification",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1790982",
+     "title": "Evidence-Aware Inferential Text Generation with Vector Quantised Variational AutoEncoder",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R705980",
+     "title": "A multimodal fake news detection model based on crossmodal attention residual and multichannel convolutional neural networks",
+     "grade": 1
+    },
     {
      "uri": "http://orkg.org/orkg/resource/R193176",
      "title": "A Recurrent Variational Autoencoder for Human Motion Synthesis",
      "grade": 1
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R140183",
-     "title": null,
-     "grade": 0
+     "uri": "http://orkg.org/orkg/resource/R609559",
+     "title": "A semi-supervised deep learning approach for vessel trajectory classification based on AIS data",
+     "grade": 2
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R1355568",
-     "title": "Generalized Variational Inference via Optimal Transport",
+     "uri": "http://orkg.org/orkg/resource/R1763832",
+     "title": "AER: Auto-Encoder with Regression for Time Series Anomaly Detection",
      "grade": 1
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R549823",
-     "title": "Representation Learning for Text-level Discourse Parsing",
-     "grade": 0
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R182418",
-     "title": "SPECTER: Document-level Representation Learning using Citation-informed Transformers",
-     "grade": 0
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R140174",
-     "title": null,
-     "grade": 0
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R565585",
-     "title": "Adjusting for Bias with Procedural Data",
-     "grade": 0
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R565595",
-     "title": "AlignMixup: Improving Representations By Interpolating Aligned Features",
-     "grade": 0
+     "uri": "http://orkg.org/orkg/resource/R1560464",
+     "title": "An attention-based balanced variational autoencoder method for credit card fraud detection",
+     "grade": 1
     }
    ]
   },
@@ -2570,7 +2570,7 @@
    "retrieved": [
     {
      "uri": "http://orkg.org/orkg/resource/R496335",
-     "title": null,
+     "title": "All-but-the-Top: Simple and Effective Postprocessing for Word Representations",
      "grade": 2
     },
     {
@@ -2667,53 +2667,53 @@
   {
    "id": "Q49",
    "query_type": "paper_lookup",
-   "detected_type": "topic_search",
-   "P@K": 0.0,
-   "P2@K": 0.0,
-   "R@K": 0.0,
-   "nDCG@K": 0.0,
-   "Hit@K": 0.0,
+   "detected_type": "paper_lookup",
+   "P@K": 0.5,
+   "P2@K": 0.125,
+   "R@K": 1.0,
+   "nDCG@K": 0.7190131876516087,
+   "Hit@K": 1.0,
    "empty": 0.0,
    "unjudged": 0.0,
    "retrieved": [
     {
-     "uri": "http://orkg.org/orkg/resource/R1826857",
+     "uri": "http://orkg.org/orkg/resource/R370901",
+     "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R532383",
+     "title": null,
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1868834",
+     "title": null,
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R157417",
+     "title": "Autoformer: Searching transformers for visual recognition",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R536511",
      "title": null,
      "grade": 0
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R1790216",
+     "uri": "http://orkg.org/orkg/resource/R439661",
+     "title": "CoCa: Contrastive Captioners are Image-Text Foundation Models",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R455399",
      "title": null,
      "grade": 0
     },
     {
-     "uri": "http://orkg.org/orkg/resource/R1826869",
+     "uri": "http://orkg.org/orkg/resource/R504234",
      "title": null,
-     "grade": 0
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R287931",
-     "title": "This Looks Like That: Deep Learning for Interpretable Image Recognition",
-     "grade": 0
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R69558",
-     "title": "A framework for explainable deep neural models using external knowledge graphs",
-     "grade": 0
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R69560",
-     "title": "A symbolic approach for explaining errors in image classification tasks",
-     "grade": 0
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R1826848",
-     "title": null,
-     "grade": 0
-    },
-    {
-     "uri": "http://orkg.org/orkg/resource/R69555",
-     "title": "Explaining trained neural networks with semantic web technologies",
      "grade": 0
     }
    ]

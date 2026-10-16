@@ -19,6 +19,7 @@ Usage:
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
 
 from backend.rag.entity_extractor import ExtractedEntities
@@ -411,11 +412,50 @@ class ExpandedEntities:
         }
 
 
+# Last words that end in "s" but are not plurals.
+_NOT_PLURAL = {"news", "series", "species", "lens", "bias", "atlas", "corpus", "sars"}
+_NOT_PLURAL_SUFFIXES = ("ss", "us", "is", "ics", "ous", "ys")
+_PARENTHESES_RE = re.compile(r"^(.+?)\s*\(([^()]+)\)\s*$")
+
+
+def surface_forms(term: str) -> list[str]:
+    """
+    Split one extracted term into the forms the graph labels use.
+
+    LLMs return entities as they appear in the question: plural
+    ("variational autoencoders", "LSTMs") or with an acronym in parentheses
+    ("Vision Transformer (ViT)"). Graph labels and the synonym dictionaries
+    use the singular, separate forms, so "X (Y)" becomes X and Y and a
+    plural last word becomes singular.
+    """
+    term = term.strip()
+    m = _PARENTHESES_RE.match(term)
+    parts = [m.group(1), m.group(2)] if m else [term]
+    out = []
+    for part in parts:
+        words = part.split()
+        last = words[-1] if words else ""
+        low = last.lower()
+        if (
+            len(low) > 3 and low.endswith("s") and low not in _NOT_PLURAL
+            and not low.endswith(_NOT_PLURAL_SUFFIXES)
+        ):
+            words[-1] = last[:-1]
+        out.append(" ".join(words))
+    return list(dict.fromkeys(f for f in out if f))
+
+
+def _normalized(terms: list[str]) -> list[str]:
+    return list(dict.fromkeys(f for t in terms for f in surface_forms(t)))
+
+
 def expand_entities(entities: ExtractedEntities) -> ExpandedEntities:
     """
     Expand extracted entities with their known synonym variants.
 
-    Looks up synonym dictionaries for methods, datasets, tasks, and fields.
+    Terms are first reduced to their surface forms (singular, acronyms in
+    parentheses split off — see surface_forms), then looked up in the
+    synonym dictionaries for methods, datasets, tasks, and fields.
 
     Args:
         entities: Raw entities from the entity extractor.
@@ -424,29 +464,29 @@ def expand_entities(entities: ExtractedEntities) -> ExpandedEntities:
         ExpandedEntities with variant mappings populated.
     """
     expanded = ExpandedEntities(
-        methods=list(entities.methods),
-        datasets=list(entities.datasets),
-        tasks=list(entities.tasks),
-        fields=list(entities.fields),
+        methods=_normalized(entities.methods),
+        datasets=_normalized(entities.datasets),
+        tasks=_normalized(entities.tasks),
+        fields=_normalized(entities.fields),
         metrics=list(entities.metrics),
     )
 
-    for method in entities.methods:
+    for method in expanded.methods:
         key = method.lower()
         if key in METHOD_SYNONYMS:
             expanded.method_variants[key] = METHOD_SYNONYMS[key]
 
-    for dataset in entities.datasets:
+    for dataset in expanded.datasets:
         key = dataset.lower()
         if key in DATASET_SYNONYMS:
             expanded.dataset_variants[key] = DATASET_SYNONYMS[key]
 
-    for task in entities.tasks:
+    for task in expanded.tasks:
         key = task.lower()
         if key in TASK_SYNONYMS:
             expanded.task_variants[key] = TASK_SYNONYMS[key]
 
-    for field_name in entities.fields:
+    for field_name in expanded.fields:
         key = field_name.lower()
         if key in FIELD_SYNONYMS:
             expanded.field_variants[key] = FIELD_SYNONYMS[key]

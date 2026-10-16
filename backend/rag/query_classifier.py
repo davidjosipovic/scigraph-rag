@@ -10,6 +10,7 @@ Supported query types (6):
   - paper_lookup:       Look up a specific paper by name/identifier
 """
 
+import re
 from enum import Enum
 
 from loguru import logger
@@ -43,13 +44,52 @@ Respond with ONLY the category name, nothing else. No explanation, no punctuatio
 
 _VALID_TYPES = {qt.value for qt in QueryType}
 
+# Question shapes that determine the type unambiguously. Small LLMs confuse
+# exactly these — "Is X better than Y?" (a claim) as a comparison, "Look up
+# papers about X" as a topic search — so they are decided before the LLM.
+_LOOKUP_RE = re.compile(
+    r"^(find|look up|show me|get)\s+the\s+paper\b|^look up\b|\bthe paper (that|which) introduced\b"
+    r"|\bpaper (titled|entitled|called)\b",
+    re.I,
+)
+_YES_NO_RE = re.compile(r"^(does|do|is|are|can|will|has|have|did)\b", re.I)
+_CLAIM_CUE_RE = re.compile(
+    r"\b(better|worse|outperforms?|outperformed|more|less|faster|slower|improves?|improved"
+    r"|superior|inferior|beats?|than)\b",
+    re.I,
+)
+_PAPERS_RE = re.compile(r"\bpapers?\b", re.I)
+_COMPARE_RE = re.compile(r"\b(compare[sd]?|comparing|comparison|versus|vs\.?)\b", re.I)
+
+
+def rule_based_type(question: str) -> QueryType | None:
+    """
+    Query type from the question's shape, or None when it is not clear-cut.
+
+    - paper_lookup:       "Find the paper titled ...", "Look up ...",
+                          "... the paper that introduced X"
+    - claim_verification: a yes/no question with a comparative or effect
+                          cue ("Does X outperform Y?", "Is X faster than Y?")
+                          that does not ask for papers
+    - method_comparison:  "compare", "comparing", "versus"
+    """
+    q = question.strip()
+    if _LOOKUP_RE.search(q):
+        return QueryType.PAPER_LOOKUP
+    if _YES_NO_RE.search(q) and _CLAIM_CUE_RE.search(q) and not _PAPERS_RE.search(q):
+        return QueryType.CLAIM_VERIFICATION
+    if _COMPARE_RE.search(q):
+        return QueryType.METHOD_COMPARISON
+    return None
+
 
 def classify_query(question: str, client: BaseLLMClient) -> QueryType:
     """
     Classify a user question into one of six supported query types.
 
-    Falls back to topic_search if the model returns an unexpected value
-    or if the client is unavailable.
+    Clear-cut question shapes are decided by rule_based_type(); the LLM
+    classifies the rest. Falls back to topic_search if the model returns an
+    unexpected value or if the client is unavailable.
 
     Args:
         question: The user's natural language question.
@@ -58,6 +98,11 @@ def classify_query(question: str, client: BaseLLMClient) -> QueryType:
     Returns:
         The detected QueryType.
     """
+    ruled = rule_based_type(question)
+    if ruled is not None:
+        logger.info(f"Query classified as '{ruled.value}' (rule)")
+        return ruled
+
     try:
         raw = client.generate(
             prompt=question,

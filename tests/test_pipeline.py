@@ -884,3 +884,59 @@ class TestPipelineIntegration:
         assert "CNN" in result["entities"]["methods"]
         assert "MNIST" in result["entities"]["datasets"]
         assert "image classification" in result["entities"]["tasks"]
+
+
+# ── Rule-based query types & surface forms ────────────────────────
+
+class TestRuleBasedType:
+
+    @pytest.mark.parametrize("question,expected", [
+        ("Find the paper titled 'Attention Is All You Need'.", "paper_lookup"),
+        ("Look up papers about the Vision Transformer (ViT).", "paper_lookup"),
+        ("What is the paper that introduced word2vec?", "paper_lookup"),
+        ("Is YOLO faster than Faster R-CNN for real-time object detection?", "claim_verification"),
+        ("Does data augmentation improve model performance on small datasets?", "claim_verification"),
+        ("Are there papers comparing LSTM and Transformer for translation?", "method_comparison"),
+        ("How do U-Net and DeepLab compare for semantic segmentation?", "method_comparison"),
+    ])
+    def test_clear_cut_shapes(self, question, expected):
+        from backend.rag.query_classifier import rule_based_type
+        assert rule_based_type(question).value == expected
+
+    @pytest.mark.parametrize("question", [
+        "What papers exist about graph neural networks?",
+        "Which papers use the ImageNet dataset?",
+        "Find papers that apply transfer learning to medical imaging.",
+    ])
+    def test_other_questions_go_to_the_llm(self, question):
+        from backend.rag.query_classifier import rule_based_type
+        assert rule_based_type(question) is None
+
+    def test_rule_skips_llm_call(self):
+        from unittest.mock import MagicMock
+        llm = MagicMock()
+        assert classify_query("Is BERT better than ELMo on SQuAD?", llm) == QueryType.CLAIM_VERIFICATION
+        llm.generate.assert_not_called()
+
+
+class TestSurfaceForms:
+
+    @pytest.mark.parametrize("term,expected", [
+        ("variational autoencoders", ["variational autoencoder"]),
+        ("LSTMs", ["LSTM"]),
+        ("Vision Transformer (ViT)", ["Vision Transformer", "ViT"]),
+        ("fake news", ["fake news"]),
+        ("sentiment analysis", ["sentiment analysis"]),
+        ("robotics", ["robotics"]),
+        ("CNN", ["CNN"]),
+    ])
+    def test_forms(self, term, expected):
+        from backend.rag.entity_normalization import surface_forms
+        assert surface_forms(term) == expected
+
+    def test_expand_entities_uses_singular_for_synonyms(self):
+        from backend.rag.entity_extractor import ExtractedEntities
+        from backend.rag.entity_normalization import expand_entities
+        x = expand_entities(ExtractedEntities(methods=["variational autoencoders"]))
+        assert x.methods == ["variational autoencoder"]
+        assert "vae" in x.method_variants["variational autoencoder"]
