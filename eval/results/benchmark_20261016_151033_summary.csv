@@ -1,0 +1,2 @@
+model,questions_total,questions_answered,questions_failed,avg_latency_s,avg_kg_results,avg_sources,avg_groundedness,avg_relevance,avg_completeness,avg_overall_score,questions_scored
+groq:allam-2-7b,50,50,0,1.355,41.840,7.360,1.560,2.480,1.740,1.927,50

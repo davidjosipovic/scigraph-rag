@@ -1,0 +1,2 @@
+model,questions_total,questions_answered,questions_failed,avg_latency_s,avg_kg_results,avg_sources,avg_groundedness,avg_relevance,avg_completeness,avg_overall_score,questions_scored
+groq:qwen/qwen3.8-27b,50,50,0,2.891,38.600,7.280,4.680,4.920,3.440,4.346,50

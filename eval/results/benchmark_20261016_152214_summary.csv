@@ -1,0 +1,2 @@
+model,questions_total,questions_answered,questions_failed,avg_latency_s,avg_kg_results,avg_sources,avg_groundedness,avg_relevance,avg_completeness,avg_overall_score,questions_scored
+groq:openai/gpt-oss-20b,50,50,0,2.029,33.840,6.920,4.780,4.920,3.660,4.453,50

@@ -1,0 +1,7 @@
+model,questions_total,questions_answered,questions_failed,avg_latency_s,avg_kg_results,avg_sources,avg_groundedness,avg_relevance,avg_completeness,avg_overall_score,questions_scored
+groq:openai/gpt-oss-20b,50,50,0,13.674,34.200,6.960,4.560,4.900,3.520,4.326,50
+ollama:llama3,50,50,0,9.838,38.060,7.200,3.140,3.940,2.660,3.246,50
+ollama:llama3.2,50,50,0,6.588,41.900,7.440,3.200,3.860,2.620,3.225,50
+ollama:mistral,50,50,0,13.582,37.020,7.160,3.200,3.740,2.720,3.219,50
+ollama:phi3:mini,50,50,0,11.459,37.460,7.060,3.440,4.060,2.800,3.432,50
+ollama:qwen2.5:7b,50,50,0,11.618,37.900,6.980,3.680,4.240,2.780,3.565,50

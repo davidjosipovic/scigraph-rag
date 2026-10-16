@@ -1,0 +1,2 @@
+model,questions_total,questions_answered,questions_failed,avg_latency_s,avg_kg_results,avg_sources,avg_groundedness,avg_relevance,avg_completeness,avg_overall_score,questions_scored
+groq:openai/gpt-oss-120b,50,50,0,3.468,36.300,7.140,4.660,4.880,3.540,4.359,50
