@@ -311,6 +311,46 @@
      "found_by": [
       "pool-e2e-old"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R690094",
+     "title": "Identifying Hate Speech Through Syntax Dependency Graph Convolution and Sentiment Knowledge Transfer",
+     "grade": 2,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R656570",
+     "title": "Learning to Substitute Ingredients in Recipes",
+     "grade": 2,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R642069",
+     "title": "Graph-based asynchronous event processing for rapid object recognition",
+     "grade": 2,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R130492",
+     "title": "QA-GNN: Reasoning with Language Models and Knowledge Graphs for Question Answering",
+     "grade": 2,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1557316",
+     "title": "Revisiting Concept Drift in Windows Malware Detection: Adaptation to Real Drifted Malware with Minimal Samples",
+     "grade": 2,
+     "found_by": [
+      "pool-rerank30"
+     ]
     }
    ]
   },
@@ -737,6 +777,46 @@
      "grade": 1,
      "found_by": [
       "entity"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R525376",
+     "title": "A Fast Knowledge Distillation Framework for Visual Recognition",
+     "grade": 2,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R493091",
+     "title": "Temporal Knowledge Distillation for On-device Audio Classification",
+     "grade": 2,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R413775",
+     "title": "Transformer-based ASR Incorporating Time-reduction Layer and Fine-tuning with Self-Knowledge Distillation",
+     "grade": 2,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R409034",
+     "title": "Multiple Fusion Adaptation: A Strong Framework for Unsupervised Semantic Segmentation Adaptation",
+     "grade": 2,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R408352",
+     "title": "Prototypical Pseudo Label Denoising and Target Structure Learning for Domain Adaptive Semantic Segmentation",
+     "grade": 2,
+     "found_by": [
+      "pool-e2e-graph"
      ]
     }
    ]
@@ -1214,6 +1294,14 @@
      "found_by": [
       "entity"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1639070",
+     "title": "CLIFF: Contrastive Learning for Improving Faithfulness and Factuality in Abstractive Summarization",
+     "grade": 1,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
     }
    ]
   },
@@ -1514,6 +1602,38 @@
      "grade": 1,
      "found_by": [
       "pool-v4"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R418749",
+     "title": "Combining Neural Networks and Log-linear Models to Improve Relation Extraction",
+     "grade": 1,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R413307",
+     "title": "Deep Speech: Scaling up end-to-end speech recognition",
+     "grade": 0,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R500464",
+     "title": "Detection and Classification of Cardiac Arrhythmias by a Challenge-Best Deep Learning Neural Network Model",
+     "grade": 0,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R468099",
+     "title": "Image Captioning and Visual Question Answering Based on Attributes and External Knowledge",
+     "grade": 0,
+     "found_by": [
+      "pool-ablation"
      ]
     }
    ]
@@ -1858,6 +1978,38 @@
      "grade": 0,
      "found_by": [
       "pool-e2e-old"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R460819",
+     "title": "Scaling Language Models: Methods, Analysis & Insights from Training Gopher",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1771793",
+     "title": "BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions",
+     "grade": 1,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R549358",
+     "title": "Contract Discovery: Dataset and a Few-Shot Semantic Retrieval Challenge with Competitive Baselines",
+     "grade": 1,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1888013",
+     "title": "HellaSwag: Can a Machine Really Finish Your Sentence?",
+     "grade": 2,
+     "found_by": [
+      "pool-e2e-graph"
      ]
     }
    ]
@@ -2220,6 +2372,22 @@
      "found_by": [
       "pool-e2e-old"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1844786",
+     "title": "SynCo: Synthetic Hard Negatives in Contrastive Learning for Better Unsupervised Visual Representations",
+     "grade": 1,
+     "found_by": [
+      "pool-ablation"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1765947",
+     "title": "Doubly Deformable Aggregation of Covariance Matrices for Few-shot Segmentation",
+     "grade": 0,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
     }
    ]
   },
@@ -2530,6 +2698,150 @@
      "grade": 0,
      "found_by": [
       "pool-v4"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R221022",
+     "title": "Fake news detection using Deep Learning",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1735967",
+     "title": "HAT: Hardware-Aware Transformers for Efficient Natural Language Processing",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1735984",
+     "title": "Lite Transformer with Long-Short Range Attention",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1735939",
+     "title": "PowerNorm: Rethinking Batch Normalization in Transformers",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1703618",
+     "title": "OOSTraj: Out-of-Sight Trajectory Prediction With Vision-Positioning Denoising",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R260028",
+     "title": "Theory entity extraction for social and behavioral sciences papers using distant supervision",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1880374",
+     "title": "Top-down Discourse Parsing via Sequence Labelling",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R261056",
+     "title": "Topological Data Analysis Helps to Improve Accuracy of Deep Learning Models for Fake News Detection Trained on Very Small Training Sets",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R706003",
+     "title": "Federated Learning in the Detection of Fake News Using Deep Learning as a Basic Method",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1587252",
+     "title": "Looking for a needle in a haystack: A comprehensive study of hallucinations in neural machine translation",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1559920",
+     "title": "Optimal Transport for Unsupervised Hallucination Detection in Neural Machine Translation",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1471251",
+     "title": "QTransLeafNet: A Quantum-Enhanced and Explainable Deep Learning Framework for Segmentation and Classification of Apple Leaf Diseases",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R739650",
+     "title": "The PolitiFact-Oslo Corpus: A New Dataset for Fake News Analysis and Detection",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R431071",
+     "title": "Deep Residual Output Layers for Neural Language Generation",
+     "grade": 2,
+     "found_by": [
+      "pool-benchmark"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R429435",
+     "title": "FRAGE: Frequency-Agnostic Word Representation",
+     "grade": 2,
+     "found_by": [
+      "pool-benchmark"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R430977",
+     "title": "Improving Neural Language Modeling via Adversarial Training",
+     "grade": 2,
+     "found_by": [
+      "pool-benchmark"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R465128",
+     "title": "Analysing Mathematical Reasoning Abilities of Neural Models",
+     "grade": 0,
+     "found_by": [
+      "pool-benchmark"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R466007",
+     "title": "Are NLP Models really able to Solve Simple Math Word Problems?",
+     "grade": 0,
+     "found_by": [
+      "pool-benchmark"
      ]
     }
    ]
@@ -2857,6 +3169,38 @@
      "found_by": [
       "pool-e2e-old"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1815115",
+     "title": "BanglaBook: A Large-scale Bangla Dataset for Sentiment Analysis from Book Reviews",
+     "grade": 2,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R435385",
+     "title": "Collection and Validation of Psychophysiological Data from Professional and Amateur Players: a Multimodal eSports Dataset",
+     "grade": 2,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R500178",
+     "title": "Early hospital mortality prediction using vital signals",
+     "grade": 2,
+     "found_by": [
+      "pool-ablation"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R479771",
+     "title": "ETHOS: an Online Hate Speech Detection Dataset",
+     "grade": 1,
+     "found_by": [
+      "pool-ablation"
+     ]
     }
    ]
   },
@@ -3073,6 +3417,30 @@
      "grade": 2,
      "found_by": [
       "entity"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1564559",
+     "title": "Pyramidclip: Hierarchical feature alignment for vision-language model pretraining",
+     "grade": 2,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1564562",
+     "title": "Ra-clip: Retrieval augmented contrastive language-image pre-training",
+     "grade": 2,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1564556",
+     "title": "Slip: Self-supervision meets language-image pre-training",
+     "grade": 2,
+     "found_by": [
+      "pool-rerank"
      ]
     }
    ]
@@ -3517,6 +3885,54 @@
      "grade": 2,
      "found_by": [
       "entity"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R11019",
+     "title": "Identity Mappings in Deep Residual Networks",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1763586",
+     "title": "Latent-Insensitive autoencoders for Anomaly Detection",
+     "grade": 2,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1708285",
+     "title": "Learning Long Range Dependencies on Graphs via Random Walks",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1764098",
+     "title": "Locally varying distance transform for unsupervised visual anomaly detection",
+     "grade": 2,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1738149",
+     "title": "Spiking-Diffusion: Vector Quantized Discrete Diffusion Model with Spiking Neural Networks",
+     "grade": 2,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R281370",
+     "title": "Visual Sudoku Puzzle Classification: A Suite of Collective Neuro-Symbolic Tasks",
+     "grade": 2,
+     "found_by": [
+      "pool-rerank30"
      ]
     }
    ]
@@ -3994,6 +4410,22 @@
      "found_by": [
       "pool-v2"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1585359",
+     "title": "LazyReview: A Dataset for Uncovering Lazy Thinking in NLP Peer Reviews",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1584401",
+     "title": "NLPeer: A Unified Resource for the Computational Study of Peer Review",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
     }
    ]
   },
@@ -4311,6 +4743,30 @@
      "grade": 0,
      "found_by": [
       "pool-e2e-old"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R463037",
+     "title": "Large Batch Optimization for Deep Learning: Training BERT in 76 minutes",
+     "grade": 1,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1565176",
+     "title": "KenSwQuAD��A Question Answering Dataset for Swahili Low-resource Language",
+     "grade": 1,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1771223",
+     "title": "PIQA: Reasoning about Physical Commonsense in Natural Language",
+     "grade": 2,
+     "found_by": [
+      "pool-e2e-graph"
      ]
     }
    ]
@@ -5188,6 +5644,30 @@
      "found_by": [
       "pool-e2e"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1387583",
+     "title": "Pseudo-Labeling Driven Refinement of Benchmark Object Detection Datasets via Analysis of Learning Patterns",
+     "grade": 0,
+     "found_by": [
+      "pool-field"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1383199",
+     "title": "A Multi-user Interactive Public Display with Dynamic Layout Optimization",
+     "grade": 0,
+     "found_by": [
+      "pool-field"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1383288",
+     "title": "Assisting people with visual impairments in aiming at a target on a large wall-mounted display",
+     "grade": 0,
+     "found_by": [
+      "pool-field"
+     ]
     }
    ]
   },
@@ -5456,6 +5936,38 @@
      "grade": 2,
      "found_by": [
       "pool-v3"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1815115",
+     "title": "BanglaBook: A Large-scale Bangla Dataset for Sentiment Analysis from Book Reviews",
+     "grade": 2,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R435385",
+     "title": "Collection and Validation of Psychophysiological Data from Professional and Amateur Players: a Multimodal eSports Dataset",
+     "grade": 1,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R500178",
+     "title": "Early hospital mortality prediction using vital signals",
+     "grade": 1,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R479771",
+     "title": "ETHOS: an Online Hate Speech Detection Dataset",
+     "grade": 1,
+     "found_by": [
+      "pool-ablation"
      ]
     }
    ]
@@ -5764,6 +6276,46 @@
      "found_by": [
       "pool-e2e"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R418536",
+     "title": "Going out on a limb: Joint Extraction of Entity Mentions and Relations without Dependency Trees",
+     "grade": 2,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R11000",
+     "title": "ImageBERT: Cross-modal Pre-training with Large-scale Weak-supervised Image-Text Data",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R467320",
+     "title": "LayoutLMv2: Multi-modal Pre-training for Visually-Rich Document Understanding",
+     "grade": 2,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1382492",
+     "title": "PRM-KGED: paper recommender model using knowledge graph embedding and deep neural network",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1382505",
+     "title": "TAPRec: time-aware paper recommendation via the modeling of researchers’ dynamic preferences",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
     }
    ]
   },
@@ -6028,6 +6580,30 @@
      "grade": 0,
      "found_by": [
       "pool-v3"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1559208",
+     "title": "Android Malware Detection Using Deep Transfer Learning Model for IoT Applications",
+     "grade": 1,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1559233",
+     "title": "Efficient Malware Detection Using Transfer Learning and GAN-Based Data Augmentation",
+     "grade": 1,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1559237",
+     "title": "Visualized Malware Images using Hybrid Ensemble Deep Transfer Learning",
+     "grade": 1,
+     "found_by": [
+      "pool-test"
      ]
     }
    ]
@@ -6336,6 +6912,190 @@
      "found_by": [
       "pool-e2e"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R212636",
+     "title": "GDUF_DM at FakeDeS 2021: Spanish Fake News Detection with BERT and Sample Memory",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1591000",
+     "title": "Entity Linking via Explicit Mention-Mention Coreference Modeling",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1379811",
+     "title": "A scoping review of ChatGPT research in accounting and finance",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1410949",
+     "title": "CSCD-NS: a Chinese Spelling Check Dataset for Native Speakers",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R213186",
+     "title": "HiNER: A Large Hindi Named Entity Recognition Dataset",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1387463",
+     "title": "HITS at DISRPT 2023: Discourse Segmentation, Connective Detection, and Relation Classification",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1385109",
+     "title": "Scalable Model Merging with Progressive Layer-wise Distillation",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1387455",
+     "title": "ToNy: Contextual embeddings for accurate multilingual discourse segmentation of full documents",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R206177",
+     "title": "A Natural Language Processing Pipeline for Detecting Informal Data References in Academic Literature",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1796457",
+     "title": "Automatic extraction of materials and properties from superconductors scientific literature",
+     "grade": 2,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R206397",
+     "title": "Computer Science Named Entity Recognition in the Open Research Knowledge Graph",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1796473",
+     "title": "Def2Vec: Extensible Word Embeddings from Dictionary Definitions",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R46321",
+     "title": "Fast and accurate entity recognition with iterated dilated convolutions",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1796467",
+     "title": "Integrating curation into scientific publishing to train AI models",
+     "grade": 2,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R213311",
+     "title": "Japanese Named Entity Recognition from Automatic Speech Recognition Using Pre-trained Models",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R206409",
+     "title": "Lessons from Deep Learning applied to Scholarly Information Extraction: What Works, What Doesn't, and Future Directions",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1816350",
+     "title": "Supplementary Features of BiLSTM for Enhanced Sequence Labeling",
+     "grade": 2,
+     "found_by": [
+      "pool-multiterm"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R496165",
+     "title": "AraBERT: Transformer-based Model for Arabic Language Understanding",
+     "grade": 1,
+     "found_by": [
+      "pool-multiterm"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R499017",
+     "title": "AlephBERT:A Hebrew Large Pre-Trained Language Model to Start-off your Hebrew NLP Application With",
+     "grade": 2,
+     "found_by": [
+      "pool-multiterm"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R163666",
+     "title": "An Overview of the Active Gene Annotation Corpus and the BioNLP OST 2019 AGAC Track Tasks",
+     "grade": 1,
+     "found_by": [
+      "pool-multiterm"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1816508",
+     "title": "BanglaCoNER: Towards Robust Bangla Complex Named Entity Recognition",
+     "grade": 2,
+     "found_by": [
+      "pool-multiterm"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1769509",
+     "title": "DeBERTaV3: Improving DeBERTa using ELECTRA-Style Pre-Training with Gradient-Disentangled Embedding Sharing",
+     "grade": 2,
+     "found_by": [
+      "pool-graph"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R163747",
+     "title": "CrossNER: Evaluating Cross-Domain Named Entity Recognition",
+     "grade": 1,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
     }
    ]
   },
@@ -6591,6 +7351,38 @@
      "grade": 0,
      "found_by": [
       "entity"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1739078",
+     "title": "CLR-GAN: Improving GANs Stability and Quality via Consistent Latent Representation and Reconstruction",
+     "grade": 2,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1742052",
+     "title": "Conditional GANs with Auxiliary Discriminative Classifier",
+     "grade": 2,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1739486",
+     "title": "Exposing flaws of generative model evaluation metrics and their unfair treatment of diffusion models",
+     "grade": 2,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1411576",
+     "title": "Scaling autoregressive models for content-rich text-to-image generation",
+     "grade": 0,
+     "found_by": [
+      "pool-ablation"
      ]
     }
    ]
@@ -6909,6 +7701,30 @@
      "found_by": [
       "pool-e2e-old"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R496860",
+     "title": "A C-LSTM Neural Network for Text Classification",
+     "grade": 2,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1815115",
+     "title": "BanglaBook: A Large-scale Bangla Dataset for Sentiment Analysis from Book Reviews",
+     "grade": 1,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R496817",
+     "title": "Convolutional Neural Networks with Recurrent Neural Filters",
+     "grade": 2,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
     }
    ]
   },
@@ -7190,6 +8006,46 @@
      "found_by": [
       "pool-e2e"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R477661",
+     "title": "Character-Level Language Modeling with Deeper Self-Attention",
+     "grade": 0,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R75130",
+     "title": "Performance analysis of the single-stage absorption heat transformer using a new working pair composed of ionic liquid and water",
+     "grade": 0,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R75111",
+     "title": "Performance of an absorption heat transformer using new working binary systems composed of {ionic liquid and water}",
+     "grade": 0,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R430646",
+     "title": "Weighted Transformer Network for Machine Translation",
+     "grade": 0,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R75126",
+     "title": "Thermodynamic analysis of absorption heat transformers using [mmim]DMP/H 2 O and [mmim]DMP/CH 3 OH as working fluids",
+     "grade": 0,
+     "found_by": [
+      "pool-ablation"
+     ]
     }
    ]
   },
@@ -7428,6 +8284,78 @@
      "grade": 0,
      "found_by": [
       "pool-e2e-old"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R606167",
+     "title": "SenseBERT: Driving Some Sense into BERT",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R547090",
+     "title": "Global Entity Disambiguation with BERT",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R197024",
+     "title": "Language-agnostic BERT Sentence Embedding",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1791586",
+     "title": "Q8BERT: Quantized 8Bit BERT",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1469460",
+     "title": "Syntax-aware Offensive Content Detection in Low-resourced Code-mixed Languages with Continual Pre-training",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1411021",
+     "title": "IndicLLMSuite: A Blueprint for Creating Pre-training and Fine-Tuning Datasets for Indian Languages",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R564645",
+     "title": "Asynchronous Methods for Deep Reinforcement Learning",
+     "grade": 0,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R563544",
+     "title": "Deep Reinforcement Learning with Double Q-learning",
+     "grade": 0,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R562590",
+     "title": "Dueling Network Architectures for Deep Reinforcement Learning",
+     "grade": 0,
+     "found_by": [
+      "pool-e2e-graph"
      ]
     }
    ]
@@ -8033,6 +8961,46 @@
      "found_by": [
       "pool-v2"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R501428",
+     "title": "\"Liar, Liar Pants on Fire\": A New Benchmark Dataset for Fake News Detection",
+     "grade": 0,
+     "found_by": [
+      "pool-origin"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R496335",
+     "title": "All-but-the-Top: Simple and Effective Postprocessing for Word Representations",
+     "grade": 0,
+     "found_by": [
+      "pool-origin"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R213169",
+     "title": "News Verification by Exploiting Conflicting Social Viewpoints in Microblogs",
+     "grade": 0,
+     "found_by": [
+      "pool-origin"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R501336",
+     "title": "On the Benefit of Combining Neural, Statistical and External Features for Fake News Identification",
+     "grade": 0,
+     "found_by": [
+      "pool-origin"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R140153",
+     "title": "Clinical Concept Embeddings Learned from Massive Sources of Medical Data",
+     "grade": 0,
+     "found_by": [
+      "pool-origin"
+     ]
     }
    ]
   },
@@ -8397,6 +9365,46 @@
      "found_by": [
       "pool-e2e-old"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1939449",
+     "title": "Atomic layer epitaxy of GaN over sapphire using switched metalorganic chemical vapor deposition",
+     "grade": 0,
+     "found_by": [
+      "pool-ablation"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1939452",
+     "title": "High-responsivity photoconductive ultraviolet sensors based on insulating single-crystal GaN epilayers",
+     "grade": 0,
+     "found_by": [
+      "pool-ablation"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1939494",
+     "title": "<i>In</i> <i>situ</i> optical characterization of GaAs surfaces under alternating supply of GaCl and AsH3",
+     "grade": 0,
+     "found_by": [
+      "pool-ablation"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R479146",
+     "title": "Orthrus: A Bimodal Learning Architecture for Malware Classification",
+     "grade": 0,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R678801",
+     "title": "Text2Sign: Towards Sign Language Production Using Neural Machine Translation and Generative Adversarial Networks",
+     "grade": 0,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
     }
    ]
   },
@@ -8703,6 +9711,94 @@
      "grade": 1,
      "found_by": [
       "pool-e2e"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R656522",
+     "title": "WalkLM : A Uniform Language Model Fine-tuning Framework for Attributed Graph Embedding",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1771877",
+     "title": "o3-mini vs DeepSeek-R1: Which One is Safer?",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1770172",
+     "title": "Search-o1: Agentic Search-Enhanced Large Reasoning Models",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1770075",
+     "title": "Evaluation of large language model performance on the Biomedical Language Understanding and Reasoning Benchmark",
+     "grade": 2,
+     "found_by": [
+      "pool-multiterm"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1770193",
+     "title": "BioGPT: Generative Pre-trained Transformer for Biomedical Text Generation and Mining",
+     "grade": 2,
+     "found_by": [
+      "pool-multiterm"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1765899",
+     "title": "BioMedGPT: Open Multimodal Generative Pre-trained Transformer for BioMedicine",
+     "grade": 2,
+     "found_by": [
+      "pool-multiterm"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1765835",
+     "title": "MEDITRON-70B: Scaling Medical Pretraining for Large Language Models",
+     "grade": 2,
+     "found_by": [
+      "pool-multiterm"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1370640",
+     "title": "Arcee's MergeKit: A Toolkit for Merging Large Language Models",
+     "grade": 1,
+     "found_by": [
+      "pool-multiterm"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1768825",
+     "title": "The Claude 3 Model Family: Opus, Sonnet, Haiku",
+     "grade": 1,
+     "found_by": [
+      "pool-graph"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1382275",
+     "title": "MetaQA: Combining Expert Agents for Multi-Skill Question Answering",
+     "grade": 1,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1388759",
+     "title": "PeerQA: A Scientific Question Answering Dataset from Peer Reviews",
+     "grade": 1,
+     "found_by": [
+      "pool-e2e-graph"
      ]
     }
    ]
@@ -9690,6 +10786,30 @@
      "found_by": [
       "entity"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R370968",
+     "title": "OPT: Open Pre-trained Transformer Language Models",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R595146",
+     "title": "Ul2: Unifying language learning paradigms",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R558105",
+     "title": "UniLMv2: Pseudo-Masked Language Models for Unified Language Model Pre-Training",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank"
+     ]
     }
    ]
   },
@@ -9959,6 +11079,14 @@
      "found_by": [
       "pool-e2e"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1806699",
+     "title": "Seeing the roads through the trees: A benchmark for modeling spatial dependencies with aerial imagery",
+     "grade": 1,
+     "found_by": [
+      "pool-ablation"
+     ]
     }
    ]
   },
@@ -10219,6 +11347,118 @@
      "grade": 0,
      "found_by": [
       "pool-v2"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1471358",
+     "title": "A machine learning system to evaluate physiological parameters and heat stress for sows in gestation crates",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R699611",
+     "title": "Application of Machine Learning Techniques to Predict a Patient’s No-Show in the Healthcare Sector",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1471350",
+     "title": "Development of goat behaviour prediction with accelerometer data: a machine learning and pre-processing approach",
+     "grade": 2,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1471402",
+     "title": "Disease detection in pigs based on feeding behaviour traits using machine learning",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1471354",
+     "title": "Evaluating ROCKET and Catch22 features for calf behaviour classification from accelerometer data using Machine Learning models",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R699607",
+     "title": "Machine Learning Predictions of No-Show Appointments in a Primary Care Setting",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1379837",
+     "title": "A Survey on Mathematical Reasoning and Optimization with Large Language Models",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1581274",
+     "title": "An Innovative Approach for Forecasting Hydroelectricity Generation by Benchmarking Tree-Based Machine Learning Models",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1560377",
+     "title": "An online fuzzy fraud detection framework for credit card transactions",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1560370",
+     "title": "CATCHM: A novel network-based credit card fraud detection method using node representation learning",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1560404",
+     "title": "Comparative Analysis of Machine Learning Algorithms and Data Balancing Techniques for Credit Card Fraud Detection",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1563720",
+     "title": "Comparison of Support Vector Machine and Extreme Gradient Boosting for predicting daily global solar radiation using temperature and precipitation in humid subtropical climates: A case study in China",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1376458",
+     "title": "Fake News Spreaders Detection: Sometimes Attention Is Not All You Need",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1794116",
+     "title": "Accurate ADMET Prediction with XGBoost",
+     "grade": 1,
+     "found_by": [
+      "pool-benchmark"
      ]
     }
    ]
@@ -11035,6 +12275,126 @@
      "found_by": [
       "pool-v2"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R196160",
+     "title": "RNN Simulations of Grammaticality Judgments on Long-distance Dependencies",
+     "grade": 2,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R419756",
+     "title": "Hello Edge: Keyword Spotting on Microcontrollers",
+     "grade": 2,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R753913",
+     "title": "Deep learning for Antisocial Behaviour Analysis on Social Media",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R753907",
+     "title": "Deep Learning for Multi-Class Antisocial Behavior Identification From Twitter",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R138870",
+     "title": "DepAudioNet: An Efficient Deep Model for Audio based Depression Classification",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R138974",
+     "title": "Depression Severity Classification from Speech Emotion",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R172696",
+     "title": "DocRED: A large-scale document-level relation extraction dataset",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R138879",
+     "title": "Exploring microscopic fluctuation of facial expression for mood disorder classification",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1560425",
+     "title": "Credit Card Fraud Detection Using Improved Deep Learning Models",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R283806",
+     "title": "Deep Learning For Knowledge Graph Completion With XLNET",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R219033",
+     "title": "Detection and defense of DDoS attack–based on deep learning in OpenFlow-based SDN",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R468572",
+     "title": "Bayesian Learning from Sequential Data using Gaussian Processes with Signature Covariances",
+     "grade": 2,
+     "found_by": [
+      "pool-benchmark"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R468401",
+     "title": "HiRID-ICU-Benchmark -- A Comprehensive Machine Learning Benchmark on High-resolution ICU Data",
+     "grade": 2,
+     "found_by": [
+      "pool-benchmark"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1868773",
+     "title": "In the Search for Optimal Multi-view Learning Models for Crop Classification with Global Remote Sensing Data",
+     "grade": 2,
+     "found_by": [
+      "pool-ablation"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1877206",
+     "title": "Neural Dynamics on Complex Networks",
+     "grade": 1,
+     "found_by": [
+      "pool-ablation"
+     ]
     }
    ]
   },
@@ -11624,6 +12984,150 @@
      "found_by": [
       "pool-e2e-old"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1471406",
+     "title": "Smartphone based detection and classification of poultry diseases from chicken fecal images using deep learning techniques",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1849709",
+     "title": "Boosting Domain Generalized and Adaptive Detection with Diffusion Models: Fitness, Generalization, and Transferability",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R402776",
+     "title": "CrowdHuman: A Benchmark for Detecting Human in a Crowd",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1849719",
+     "title": "Generalized Diffusion Detector: Mining Robust Features from Diffusion Models for Domain-Generalized Detection",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1471173",
+     "title": "Machine Learning and Deep Learning for Plant Disease Classification and Detection",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R437691",
+     "title": "SeaDronesSee: A Maritime Benchmark for Detecting Humans in Open Water",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1559279",
+     "title": "A Malware Detection Method of Code Texture Visualization Based on an Improved Faster RCNN Combining Transfer Learning",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1713369",
+     "title": "DupNet: Towards Very Tiny Quantized CNN with Improved Accuracy for Face Detection",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1772142",
+     "title": "Glance and Focus: Memory Prompting for Multi-Event Video Question Answering",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1884836",
+     "title": "Improving Knowledge Distillation via Regularizing Feature Norm and Direction",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1644613",
+     "title": "Toward Bee Motion Pattern Identification on Hive Landing Board",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R514973",
+     "title": "A Ranking-based, Balanced Loss Function Unifying Classification and Localisation in Object Detection",
+     "grade": 1,
+     "found_by": [
+      "pool-benchmark"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R402995",
+     "title": "Feature Pyramid Networks for Object Detection",
+     "grade": 1,
+     "found_by": [
+      "pool-benchmark"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R481937",
+     "title": "Deep High-Resolution Representation Learning for Visual Recognition",
+     "grade": 1,
+     "found_by": [
+      "pool-benchmark"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R404135",
+     "title": "Deep Residual Learning for Image Recognition",
+     "grade": 1,
+     "found_by": [
+      "pool-benchmark"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1803507",
+     "title": "On the Ideal Number of Groups for Isometric Gradient Propagation",
+     "grade": 1,
+     "found_by": [
+      "pool-benchmark"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R485607",
+     "title": "Res2Net: A New Multi-scale Backbone Architecture",
+     "grade": 1,
+     "found_by": [
+      "pool-benchmark"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R518141",
+     "title": "Leveraging Synthetic Data in Object Detection on Unmanned Aerial Vehicles",
+     "grade": 0,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
     }
    ]
   },
@@ -11955,6 +13459,38 @@
      "found_by": [
       "pool-e2e-old"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R135546",
+     "title": "Acute Lymphoblastic Leukemia Detection from Microscopic Images Using Weighted Ensemble of Convolutional Neural Networks",
+     "grade": 2,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R138698",
+     "title": "Application of Autoencoder in Depression Diagnosis",
+     "grade": 2,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R138690",
+     "title": "Deep learning based automatic diagnoses of attention deficit hyperactive disorder",
+     "grade": 2,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R705980",
+     "title": "A multimodal fake news detection model based on crossmodal attention residual and multichannel convolutional neural networks",
+     "grade": 0,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
     }
    ]
   },
@@ -12256,6 +13792,38 @@
      "grade": 0,
      "found_by": [
       "pool-e2e"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1790982",
+     "title": "Evidence-Aware Inferential Text Generation with Vector Quantised Variational AutoEncoder",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1788497",
+     "title": "Machine Learning 5G Attack Detection in Programmable Logic",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R140183",
+     "title": "Bio-joie: Joint representation learning of biological knowledge bases",
+     "grade": 0,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R140174",
+     "title": "Universal representation learning of knowledge bases by jointly embedding instances and ontological concepts",
+     "grade": 0,
+     "found_by": [
+      "pool-e2e-graph"
      ]
     }
    ]
@@ -12836,6 +14404,142 @@
      "found_by": [
       "pool-e2e-old"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1814924",
+     "title": "InstructABSA: Instruction Learning for Aspect Based Sentiment Analysis",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1815101",
+     "title": "Multi-Task Learning with LLMs for Implicit Sentiment Analysis: Data-level and Task-level Automatic Weight Learning",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R140156",
+     "title": "OWL2Vec*: Embedding of OWL Ontologies",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R25237",
+     "title": "A Large Scale Arabic Sentiment Lexicon for Arabic Opinion Mining",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1729624",
+     "title": "Analysis of the Evolution of Advanced Transformer-Based Language Models: Experiments on Opinion Mining",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R25253",
+     "title": "AraSenTi: Large-Scale Twitter-Specific Arabic Sentiment Lexicons",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R25245",
+     "title": "Automatic expandable large-scale sentiment lexicon of modern standard Arabic and colloquial",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1815012",
+     "title": "Breaking Free Transformer Models: Task-specific Context Attribution Promises Improved Generalizability Without Fine-tuning Pre-trained LLMs",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R25239",
+     "title": "Building an Arabic sentiment lexicon using semi-supervised learning",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1814833",
+     "title": "CAPO: Cost-Aware Prompt Optimization",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1814951",
+     "title": "Exploring the Impact of Corpus Diversity on Financial Pretrained Language Models",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1815075",
+     "title": "Learning in Wilson-Cowan model for metapopulation",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R25249",
+     "title": "NileULex: A phrase and word level sentiment lexicon for egyptian and modern standard Arabic",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1814993",
+     "title": "The Document Vectors Using Cosine Similarity Revisited",
+     "grade": 1,
+     "found_by": [
+      "pool-multiterm"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1850590",
+     "title": "Anytime Active Learning",
+     "grade": 1,
+     "found_by": [
+      "pool-multiterm"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1815065",
+     "title": "Cache me if you Can: an Online Cost-aware Teacher-Student framework to Reduce the Calls to Large Language Models",
+     "grade": 1,
+     "found_by": [
+      "pool-graph"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R496335",
+     "title": "All-but-the-Top: Simple and Effective Postprocessing for Word Representations",
+     "grade": 2,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
     }
    ]
   },
@@ -13068,6 +14772,78 @@
      "grade": 0,
      "found_by": [
       "pool-e2e-old"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R145803",
+     "title": "End-to-end Neural Coreference Resolution",
+     "grade": 0,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R513436",
+     "title": "Higher-order Coreference Resolution with Coarse-to-fine Inference",
+     "grade": 0,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R491127",
+     "title": "Jointly Predicting Predicates and Arguments in Neural Semantic Role Labeling",
+     "grade": 0,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1843191",
+     "title": "Multi-level Multimodal Common Semantic Space for Image-Phrase Grounding",
+     "grade": 0,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R69288",
+     "title": "Multi-Task Identification of Entities, Relations, and Coreference for Scientific Knowledge Graph Construction",
+     "grade": 0,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R464416",
+     "title": "Read + Verify: Machine Reading Comprehension with Unanswerable Questions",
+     "grade": 0,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1791021",
+     "title": "ReCoRD: Bridging the Gap between Human and Machine Commonsense Reading Comprehension",
+     "grade": 0,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R209610",
+     "title": "SWAG: A Large-Scale Adversarial Dataset for Grounded Commonsense Inference",
+     "grade": 0,
+     "found_by": [
+      "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R605253",
+     "title": "Increase in microbial biomass and phosphorus availability in the rhizosphere of intercropped cereal and legumes underfield conditions",
+     "grade": 0,
+     "found_by": [
+      "pool-ablation"
      ]
     }
    ]
@@ -13404,6 +15180,134 @@
      "grade": 0,
      "found_by": [
       "pool-e2e"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1711307",
+     "title": "Magnification Invariant Medical Image Analysis: A Comparison of Convolutional Networks, Vision Transformers, and Token Mixers",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1710440",
+     "title": "On Efficient Transformer-Based Image Pre-training for Low-Level Vision",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1712905",
+     "title": "Vision Transformer with Attentive Pooling for Robust Facial Expression Recognition",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R30490",
+     "title": "Activity sensing in the wild",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1462479",
+     "title": "Anti-MRSA activity of alkyl gallates.",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R71722",
+     "title": "Antibiotic Sensitivity Testing",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R508953",
+     "title": "HAKE: Human Activity Knowledge Engine",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R209968",
+     "title": "Human activity analysis: A review",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R50132",
+     "title": "Split Pane Interactivity",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1908490",
+     "title": "Vitamin D and Obesity",
+     "grade": 0,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R440303",
+     "title": "ViViT: A Video Vision Transformer",
+     "grade": 1,
+     "found_by": [
+      "pool-rerank30"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R187573",
+     "title": "Mapping of ImageNet and Wikidata for Knowledge Graphs Enabled Computer Vision",
+     "grade": 0,
+     "found_by": [
+      "pool-ablation"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1826857",
+     "title": "Dual-Perspective Semantic-Aware Representation Blending for Multi-Label Image Recognition with Partial Labels",
+     "grade": 0,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1790216",
+     "title": "IRFL: Image Recognition of Figurative Language",
+     "grade": 0,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1826869",
+     "title": "Semantic-Aware Representation Blending for Multi-Label Image Recognition with Partial Labels",
+     "grade": 0,
+     "found_by": [
+      "pool-e2e-graph"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1826848",
+     "title": "DualCoOp: Fast Adaptation to Multi-Label Recognition with Limited Annotations",
+     "grade": 0,
+     "found_by": [
+      "pool-e2e-graph"
      ]
     }
    ]

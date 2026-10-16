@@ -26,6 +26,12 @@ Usage:
     python -m eval.retrieval_eval                      # oracle mode
     python -m eval.retrieval_eval --model groq:openai/gpt-oss-20b
     python -m eval.retrieval_eval --ids Q16 Q18 --show # per-paper detail
+    python -m eval.retrieval_eval --split dev          # tune on these ...
+    python -m eval.retrieval_eval --split test         # ... report on these
+
+Splits: dev = odd question numbers, test = even ones (25 each, every query
+type in both). Retrieval changes are tuned on dev only, so test numbers are
+not fitted to the questions they are reported on.
 
 Output:
     eval/results/retrieval_<mode>_YYYYMMDD_HHMMSS.json
@@ -53,6 +59,12 @@ QUESTIONS_FILE = PROJECT_ROOT / "data" / "eval_questions.json"
 GOLD_FILE = PROJECT_ROOT / "data" / "gold" / "retrieval_gold.json"
 RESULTS_DIR = PROJECT_ROOT / "eval" / "results"
 METRICS = ("P@K", "P2@K", "R@K", "nDCG@K", "Hit@K", "empty", "unjudged")
+
+
+def in_split(qid: str, split: str | None) -> bool:
+    if not split:
+        return True
+    return (int(qid[1:]) % 2 == 1) == (split == "dev")
 
 
 def _ranked_papers(rows: list[dict]) -> list[str]:
@@ -88,14 +100,13 @@ def _mean(rows: list[dict], key: str) -> float:
     return sum(vals) / len(vals) if vals else float("nan")
 
 
-async def evaluate(model: str | None, ids: list[str] | None, k: int) -> list[dict]:
+async def evaluate(model: str | None, ids: list[str] | None, k: int, split: str | None = None) -> list[dict]:
     from backend.llm.factory import create_llm_client
     from backend.rag.pipeline import RAGPipeline
 
     questions = {q["id"]: q for q in json.load(open(QUESTIONS_FILE))["questions"]}
     gold = json.load(open(GOLD_FILE))["questions"]
-    if ids:
-        gold = {q: v for q, v in gold.items() if q in ids}
+    gold = {q: v for q, v in gold.items() if (not ids or q in ids) and in_split(q, split)}
 
     llm = create_llm_client(*model.split(":", 1)) if model else None
     # The LLM client is only used for classification/extraction in end-to-end
@@ -143,10 +154,11 @@ def main() -> None:
     p.add_argument("--model", metavar="PROVIDER:MODEL", help="End-to-end mode with this LLM (default: oracle)")
     p.add_argument("--ids", nargs="+", metavar="QID", help="Only these questions")
     p.add_argument("--k", type=int, default=settings.max_context_papers, help="Cut-off K (default: max_context_papers)")
+    p.add_argument("--split", choices=("dev", "test"), help="Only the dev (odd) or test (even) questions")
     p.add_argument("--show", action="store_true", help="Print retrieved papers with their grades")
     args = p.parse_args()
 
-    results = asyncio.run(evaluate(args.model, args.ids, args.k))
+    results = asyncio.run(evaluate(args.model, args.ids, args.k, args.split))
     summary = summarize(results)
 
     if args.show:
@@ -159,9 +171,11 @@ def main() -> None:
         print(f"{s['query_type']:<20} {s['n']:>3} " + " ".join(f"{s[m]:>8.3f}" for m in METRICS))
 
     mode = args.model.replace(":", "_").replace("/", "_") if args.model else "oracle"
+    if args.split:
+        mode += f"_{args.split}"
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
     path = RESULTS_DIR / f"retrieval_{mode}_{datetime.now():%Y%m%d_%H%M%S}.json"
-    path.write_text(json.dumps({"mode": mode, "k": args.k, "summary": summary, "questions": results}, indent=1, ensure_ascii=False))
+    path.write_text(json.dumps({"mode": mode, "k": args.k, "split": args.split, "summary": summary, "questions": results}, indent=1, ensure_ascii=False))
     print(f"\nSaved → {path}")
 
 
