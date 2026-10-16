@@ -26,11 +26,13 @@ Async support:
 from __future__ import annotations
 
 import asyncio
+import re
 from typing import Any
 from loguru import logger
 
 from backend.config import settings
 from backend.rag.query_classifier import QueryType
+from backend.rag.entity_extractor import _STOP_WORDS
 from backend.rag.entity_normalization import ExpandedEntities
 from backend.kg import queries as Q
 from backend.kg.sparql_client import SPARQLClient, SPARQLTimeoutError
@@ -267,8 +269,11 @@ def _plan_method_comparison(
     Plan queries for method_comparison questions.
 
     1. If 2+ methods: papers mentioning BOTH methods
-    2. If methods + dataset: combined query for each method+dataset pair
-    3. Each method individually (with variants)
+    2. If 2+ methods: claim evidence — contributions covering most of the
+       question's terms, with their predicates (method vs baseline) and
+       benchmark results, which is what a comparison is answered from
+    3. If methods + dataset: combined query for each method+dataset pair
+    4. Each method individually (with variants)
     """
     planned: PlannedQueries = []
     methods = entities.methods
@@ -276,6 +281,11 @@ def _plan_method_comparison(
     if len(methods) >= 2:
         query = Q.papers_comparing_methods(methods[0], methods[1], limit)
         planned.append((query, f"comparison({methods[0]},{methods[1]})"))
+
+        all_terms = entities.all_entities()
+        query = Q.claim_evidence(all_terms, limit + 5)
+        if query:
+            planned.append((query, f"claim_evidence({all_terms})"))
 
         for variant in _usable_forms(entities.all_method_forms(methods[0])[1:2]):
             query = Q.papers_comparing_methods(variant, methods[1], limit)
@@ -404,14 +414,34 @@ _LOOKUP_PREFIXES = (
 _LOOKUP_SUFFIXES = (" paper", " article", " study", " publication", " work")
 
 
+# Words that describe the lookup itself, never part of a title.
+_LOOKUP_NOISE = (
+    "titled ", "entitled ", "called ", "named ", "that introduced the ",
+    "that introduced ", "which introduced the ", "introducing the ",
+    "introduced the ", "on the ", "on ", "about the ", "about ",
+)
+_LOOKUP_STOP_WORDS = _STOP_WORDS | {"introduced", "introduce", "introducing", "titled", "look", "paper"}
+_QUOTED_RE = re.compile(r"[\"'‘“]([^\"'’”]{4,})[\"'’”]")
+
+
 def _extract_title_from_question(question: str) -> str:
     """
     Strip common question boilerplate to extract the paper title.
 
+    A quoted title wins outright; otherwise leading phrases ("find the
+    paper titled", "that introduced the") and trailing ones (" paper",
+    punctuation) are removed.
+
     E.g. "Tell me about the Attention is All You Need paper"
          → "Attention is All You Need"
+         "Find the paper titled 'Attention Is All You Need'."
+         → "Attention Is All You Need"
     """
-    q = question.strip()
+    quoted = _QUOTED_RE.search(question)
+    if quoted:
+        return quoted.group(1).strip()
+
+    q = question.strip().rstrip(".?!").strip()
     q_lower = q.lower()
 
     for prefix in _LOOKUP_PREFIXES:
@@ -420,12 +450,33 @@ def _extract_title_from_question(question: str) -> str:
             q_lower = q_lower[len(prefix):]
             break
 
+    for noise in _LOOKUP_NOISE:
+        if q_lower.startswith(noise):
+            q = q[len(noise):]
+            q_lower = q_lower[len(noise):]
+            break
+
     for suffix in _LOOKUP_SUFFIXES:
         if q_lower.endswith(suffix):
             q = q[: -len(suffix)]
             break
 
     return q.strip()
+
+
+def _title_keywords(question: str, entities: ExpandedEntities) -> list[str]:
+    """
+    Content words of a lookup question, for matching against titles.
+
+    Single words rather than phrases, because a title rarely repeats the
+    user's phrasing ("T5 text-to-text transfer transformer" vs "Exploring
+    the Limits of Transfer Learning with a Unified Text-to-Text
+    Transformer"). Extracted method names are kept even when short (T5).
+    """
+    words = re.sub(r"[^\w\s-]", " ", question.lower()).split()
+    keywords = [w for w in words if len(w) > 2 and w not in _LOOKUP_STOP_WORDS]
+    keywords += [m.lower() for m in entities.methods]
+    return list(dict.fromkeys(keywords))
 
 
 def _plan_paper_lookup(
@@ -437,26 +488,26 @@ def _plan_paper_lookup(
     Plan queries for paper_lookup questions.
 
     1. Direct title extraction from the question (most precise)
-    2. Joined entity labels as title fragment
-    3. Each entity term individually
+    2. Titles ranked by how many of the question's content words they contain
+    3. Each method name individually (datasets and fields are not titles:
+       a lone "GLUE" matches "... Copper Glue Layer")
     """
     planned: PlannedQueries = []
 
-    # Primary: extract the paper title phrase directly from the question
     if question:
         title_fragment = _extract_title_from_question(question)
         if title_fragment and len(title_fragment) > 3:
             query = Q.paper_lookup_by_title(title_fragment, limit)
             planned.append((query, f"title_phrase({title_fragment!r})"))
 
-    all_terms = entities.all_entities()
-    if all_terms:
-        query = Q.paper_lookup_by_title(" ".join(all_terms), limit)
-        planned.append((query, f"title_lookup({all_terms})"))
+        keywords = _title_keywords(question, entities)
+        if keywords:
+            query = Q.title_keyword_search(keywords, limit)
+            planned.append((query, f"title_keywords({keywords})"))
 
-        for term in all_terms[:3]:
-            query = Q.paper_lookup_by_title(term, limit)
-            planned.append((query, f"title_lookup({term})"))
+    for method in entities.methods[:3]:
+        query = Q.paper_lookup_by_title(method, limit)
+        planned.append((query, f"title_lookup({method})"))
 
     return planned
 

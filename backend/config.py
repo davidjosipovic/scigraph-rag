@@ -74,6 +74,11 @@ class Settings(BaseSettings):
     max_results: int = 5
     sparql_timeout: int = 10
     max_context_papers: int = 8
+    # Top candidates re-fetched with their full ORKG record and re-ranked
+    # before truncation to max_context_papers (0 disables enrichment).
+    enrich_candidates: int = 15
+    # Max (predicate, value) pairs from that record shown per paper.
+    max_detail_pairs: int = 15
 
     # --- Concurrency ---
     # Max concurrent /ask requests allowed to run the full pipeline.

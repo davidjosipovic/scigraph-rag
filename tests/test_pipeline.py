@@ -285,6 +285,41 @@ class TestRanking:
         from backend.rag.entity_normalization import ExpandedEntities
         assert rank_results([], ExpandedEntities(methods=["CNN"])) == []
 
+    def test_short_terms_match_whole_words_only(self):
+        from backend.rag.entity_normalization import ExpandedEntities
+
+        results = [
+            {"paper": "http://example.org/R1", "title": "Organ donation", "entityLabel": "organ"},
+            {"paper": "http://example.org/R2", "title": "Image synthesis", "methodLabel": "Conditional GANs"},
+        ]
+        ranked = rank_results(results, ExpandedEntities(methods=["GAN"]))
+        scores = {r["paper"]: r["_score"] for r in ranked}
+        assert scores["http://example.org/R1"] == 0
+        assert scores["http://example.org/R2"] >= 2
+
+    def test_claim_evidence_rows_are_scored_by_role(self):
+        from backend.rag.entity_normalization import ExpandedEntities
+
+        results = [
+            {"paper": "http://example.org/R1", "title": "Crop disease", "predLabel": "Baseline",
+             "valueLabel": "ResNet | VGG", "hits": "2"},
+            {"paper": "http://example.org/R1", "title": "Crop disease", "predLabel": "Benchmark ImageNet result",
+             "valueLabel": "Top 1 accuracy_76.1"},
+        ]
+        ranked = rank_results(results, ExpandedEntities(methods=["ResNet", "VGG"]))
+        assert ranked[0]["_score"] == 2 + 2 + 1  # both methods + carries results
+
+    def test_exact_title_lookup_outranks_keyword_match(self):
+        from backend.rag.entity_normalization import ExpandedEntities
+
+        results = [
+            {"paper": "http://example.org/R1", "title": "Audio Transformers", "methodLabel": "Transformer"},
+            {"paper": "http://example.org/R2", "title": "Attention Is All You Need",
+             "titleLength": "25", "exact": "1"},
+        ]
+        ranked = rank_results(results, ExpandedEntities(methods=["Transformer"]))
+        assert ranked[0]["paper"] == "http://example.org/R2"
+
     def test_score_annotation(self):
         from backend.rag.entity_normalization import ExpandedEntities
 
@@ -307,9 +342,29 @@ class TestHardFilter:
             {"paper": "http://example.org/R3", "title": "C", "datasetLabel": "MNIST"},
         ]
         entities = ExpandedEntities(methods=["CNN"], datasets=["MNIST"])
-        filtered = hard_filter(results, entities)
+        filtered = hard_filter(results, entities, min_keep=1)
         assert len(filtered) == 1
         assert filtered[0]["paper"] == "http://example.org/R1"
+
+    def test_keeps_everything_when_too_few_papers_pass(self):
+        from backend.rag.entity_normalization import ExpandedEntities
+
+        results = [
+            {"paper": "http://example.org/R1", "title": "A", "methodLabel": "CNN", "datasetLabel": "MNIST"},
+            {"paper": "http://example.org/R2", "title": "B", "methodLabel": "CNN"},
+        ]
+        entities = ExpandedEntities(methods=["CNN"], datasets=["MNIST"])
+        assert len(hard_filter(results, entities)) == 2
+
+    def test_title_lookup_papers_always_pass(self):
+        from backend.rag.entity_normalization import ExpandedEntities
+
+        results = [
+            {"paper": f"http://example.org/R{i}", "title": "A", "methodLabel": "BERT", "datasetLabel": "GLUE"}
+            for i in range(3)
+        ] + [{"paper": "http://example.org/R9", "title": "BERT", "titleLength": "4", "exact": "1"}]
+        entities = ExpandedEntities(methods=["BERT"], datasets=["GLUE"])
+        assert "http://example.org/R9" in {r["paper"] for r in hard_filter(results, entities)}
 
     def test_no_filter_when_only_methods(self):
         from backend.rag.entity_normalization import ExpandedEntities
@@ -355,6 +410,28 @@ class TestHardFilter:
     def test_empty_results(self):
         from backend.rag.entity_normalization import ExpandedEntities
         assert hard_filter([], ExpandedEntities(methods=["CNN"], datasets=["MNIST"])) == []
+
+
+# ── Detail Selection ──────────────────────────────────────────────
+
+class TestSelectDetailRows:
+
+    def test_keeps_entity_and_result_rows_first_and_caps_per_paper(self):
+        from backend.rag.entity_normalization import ExpandedEntities
+        from backend.rag.ranking import select_detail_rows
+
+        uri = "http://example.org/R1"
+        rows = [{"paper": uri, "methodLabel": "YOLO"}] + [
+            {"paper": uri, "_detail": True, "predLabel": "hardware used", "valueLabel": "RTX 3090"},
+            {"paper": uri, "_detail": True, "predLabel": "Evaluation metrics", "valueLabel": "FPS"},
+            {"paper": uri, "_detail": True, "predLabel": "Benchmark COCO result", "valueLabel": "mAP_50.1"},
+            {"paper": uri, "_detail": True, "predLabel": "Baseline", "valueLabel": "Faster R-CNN"},
+        ]
+        kept = select_detail_rows(rows, ExpandedEntities(methods=["Faster R-CNN"]), max_pairs=2)
+        values = [r.get("valueLabel") for r in kept]
+        assert kept[0]["methodLabel"] == "YOLO"          # retrieval rows always kept
+        assert values[1:] == ["mAP_50.1", "Faster R-CNN"]  # entity match + result; rest capped
+        assert "RTX 3090" not in values
 
 
 # ── Soft Filter ───────────────────────────────────────────────────
@@ -691,7 +768,7 @@ _FAKE_ROWS = [
         "title": "ALBERT for Question Answering",
         "doi": "10.1/albert",
         "year": "2020",
-        "methodLabel": "ALBERT",
+        "methodLabel": "BERT-based ALBERT",
         "datasetLabel": "SQuAD",
     },
 ]

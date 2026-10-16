@@ -9,6 +9,7 @@ Implements the 9-stage GraphRAG pipeline:
   4.  Multi-Strategy Retrieval   → combined + per-entity SPARQL queries (async parallel)
   5.  Retrieval Ranking          → score & sort papers by relevance
   6.  Filtering                  → hard filter (method+dataset) + soft filter (score-0 noise)
+  6b. Enrichment                 → full ORKG record of the top candidates, re-ranked
   7.  Truncation                 → top N papers for context window
   8.  Context + Source Building  → structured per-paper blocks + deduplicated citations
   9.  LLM Generation             → grounded answer (cites papers by title, not number)
@@ -28,8 +29,12 @@ from backend.rag.entity_extractor import extract_entities, ExtractedEntities
 from backend.rag.entity_extractor import extract_keywords
 from backend.rag.entity_normalization import expand_entities, ExpandedEntities
 from backend.rag.query_builder import retrieve_async, RetrievalResult
-from backend.rag.ranking import rank_results, hard_filter, soft_filter, truncate_to_top_papers
+from backend.rag.ranking import (
+    rank_results, hard_filter, soft_filter, truncate_to_top_papers,
+    top_paper_uris, select_detail_rows,
+)
 from backend.rag.context_builder import build_context_and_sources
+from backend.kg import queries as Q
 from backend.kg.sparql_client import SPARQLClient
 from backend.llm.base import BaseLLMClient, get_prompt_template
 from backend.llm.factory import create_llm_client
@@ -79,6 +84,8 @@ class RAGPipeline:
                                      canonical extracted term is matched.
         enable_hard_filter=False    skips the method+dataset hard filter;
                                      only the score-0 soft filter still runs.
+        enable_enrichment=False     skips step 6b; candidates are ranked and
+                                     shown only with the values that matched.
     """
 
     def __init__(
@@ -87,11 +94,13 @@ class RAGPipeline:
         llm_client: BaseLLMClient | None = None,
         enable_normalization: bool = True,
         enable_hard_filter: bool = True,
+        enable_enrichment: bool = True,
     ) -> None:
         self.sparql = sparql_client or SPARQLClient()
         self.llm = llm_client or create_llm_client()
         self.enable_normalization = enable_normalization
         self.enable_hard_filter = enable_hard_filter
+        self.enable_enrichment = enable_enrichment
 
     async def ask(self, question: str) -> dict[str, Any]:
         """
@@ -115,16 +124,66 @@ class RAGPipeline:
                 - strategies_used:   Retrieval strategies that were used
         """
         logger.info(f"Processing question: {question}")
+        r = await self.retrieve(question)
+        query_type, entities = r["query_type"], r["entities"]
+        retrieval, truncated = r["retrieval"], r["rows"]
+        loop = asyncio.get_running_loop()
 
+        # ── Steps 8 + 10: Build context and format sources in one pass ──
+        context, sources = build_context_and_sources(truncated, query_type.value)
+        logger.debug(f"Step 8 — Context: {len(context)} chars")
+
+        # ── Step 9: LLM generation (run in executor to avoid blocking event loop) ──
+        prompt_template = get_prompt_template(query_type.value)
+        prompt = prompt_template.format(context=context, question=question)
+        answer = await loop.run_in_executor(None, self.llm.generate, prompt)
+        logger.info(f"Step 9 — Answer: {len(answer)} chars")
+
+        return {
+            "question": question,
+            "query_type": query_type.value,
+            "entities": entities.to_dict(),
+            "sparql_queries": retrieval.sparql_queries,
+            "strategies_used": retrieval.strategies_used,
+            "answer": answer,
+            "sources": sources,
+            "kg_results_count": retrieval.total_results,
+        }
+
+    async def retrieve(
+        self,
+        question: str,
+        query_type: QueryType | None = None,
+        entities: ExtractedEntities | None = None,
+    ) -> dict[str, Any]:
+        """
+        Run steps 1–7 (classification through truncation) for a question.
+
+        ``query_type`` and ``entities`` override the LLM classification and
+        extraction steps, so retrieval can be evaluated in isolation with
+        gold inputs (see eval/retrieval_eval.py).
+
+        Returns:
+            Dict with query_type, entities (after the keyword fallback),
+            retrieval (RetrievalResult) and rows (the truncated, ranked
+            result rows the LLM context is built from).
+        """
         # ── Steps 1 + 2: Classify and extract entities in parallel ──
         # Both calls take the same input and are independent — run concurrently
         # to halve the LLM latency for this stage.
         # partial() is used because run_in_executor does not support kwargs,
         # and both functions require the llm client as a second argument.
+        # Either step is skipped when the caller supplies its result.
         loop = asyncio.get_running_loop()
+
+        async def _given(value: Any) -> Any:
+            return value
+
         query_type, entities = await asyncio.gather(
-            loop.run_in_executor(None, partial(classify_query, question, self.llm)),
-            loop.run_in_executor(None, partial(extract_entities, question, self.llm)),
+            _given(query_type) if query_type is not None
+            else loop.run_in_executor(None, partial(classify_query, question, self.llm)),
+            _given(entities) if entities is not None
+            else loop.run_in_executor(None, partial(extract_entities, question, self.llm)),
         )
         logger.info(f"Step 1 — Query type: {query_type.value}")
         logger.info(
@@ -189,32 +248,52 @@ class RAGPipeline:
             f"(dropped {len(ranked) - len(filtered)} noise rows)"
         )
 
+        # ── Step 6b: Enrich the top candidates and re-rank ──
+        # Retrieval queries return only the value that matched (grouped ones
+        # SAMPLE() a single label), so a paper comparing ResNet and VGG may
+        # arrive with just its VGG row. Re-fetch the top candidates' full
+        # record, re-score them on it, and keep the informative parts.
+        if self.enable_enrichment and settings.enrich_candidates and filtered:
+            candidates = top_paper_uris(filtered, settings.enrich_candidates)
+            details = await self._fetch_details(candidates)
+            rows = [r for r in filtered if r.get("paper") in candidates] + details
+            filtered = rank_results(rows, expanded)
+            if self.enable_hard_filter:
+                filtered = hard_filter(filtered, expanded)
+            filtered = soft_filter(filtered, min_score=1)
+            filtered = select_detail_rows(filtered, expanded, settings.max_detail_pairs)
+            logger.info(
+                f"Step 6b — Enrichment: {len(candidates)} papers, "
+                f"{len(details)} detail rows, {len(filtered)} rows after re-ranking"
+            )
+
         # ── Step 7: Truncate to top N papers ──
         truncated = truncate_to_top_papers(filtered, settings.max_context_papers)
         logger.info(
             f"Step 7 — Truncation: top {settings.max_context_papers} papers"
         )
 
-        # ── Steps 8 + 10: Build context and format sources in one pass ──
-        context, sources = build_context_and_sources(truncated, query_type.value)
-        logger.debug(f"Step 8 — Context: {len(context)} chars")
-
-        # ── Step 9: LLM generation (run in executor to avoid blocking event loop) ──
-        prompt_template = get_prompt_template(query_type.value)
-        prompt = prompt_template.format(context=context, question=question)
-        answer = await loop.run_in_executor(None, self.llm.generate, prompt)
-        logger.info(f"Step 9 — Answer: {len(answer)} chars")
-
         return {
-            "question": question,
-            "query_type": query_type.value,
-            "entities": entities.to_dict(),
-            "sparql_queries": retrieval.sparql_queries,
-            "strategies_used": retrieval.strategies_used,
-            "answer": answer,
-            "sources": sources,
-            "kg_results_count": retrieval.total_results,
+            "query_type": query_type,
+            "entities": entities,
+            "retrieval": retrieval,
+            "rows": truncated,
         }
+
+    async def _fetch_details(self, uris: list[str], batch: int = 5) -> list[dict[str, Any]]:
+        """Full ORKG records of the given papers, as rows marked ``_detail``."""
+        batches = [uris[i:i + batch] for i in range(0, len(uris), batch)]
+        results = await asyncio.gather(
+            *(self.sparql.execute_async(Q.papers_details(b)) for b in batches),
+            return_exceptions=True,
+        )
+        rows: list[dict[str, Any]] = []
+        for res in results:
+            if isinstance(res, Exception):  # enrichment is best-effort
+                logger.warning(f"Enrichment query failed: {res}")
+                continue
+            rows.extend({**r, "_detail": True} for r in res)
+        return rows
 
     def health_check(self) -> dict[str, Any]:
         """

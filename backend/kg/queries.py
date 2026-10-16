@@ -433,6 +433,54 @@ LIMIT {limit}
 """
 
 
+def papers_details(paper_uris: list[str], limit: int = 1500) -> str:
+    """
+    Full contribution records for several papers in one query (enrichment).
+
+    Returns one row per (paper, contribution, predicate, value) with the
+    paper's title / DOI / year, plus the benchmark scores stored two hops
+    down (Contribution → PWC_HAS_BENCHMARK → Benchmark → P34 evaluation),
+    as predLabel "<benchmark> result" — the numbers claims are verified on.
+
+    Used after a first ranking pass: retrieval queries only return the one
+    value that matched (and grouped queries SAMPLE() a single label), so the
+    top candidates are re-scored and shown to the LLM with their full record.
+
+    Raises:
+        ValueError: if any URI is not a plain http(s) IRI.
+    """
+    values = " ".join(f"<{_check_iri(u)}>" for u in paper_uris)
+    return f"""{PREFIXES}
+
+SELECT ?paper ?title ?doi ?year ?contribLabel ?predLabel ?valueLabel WHERE {{
+    VALUES ?paper {{ {values} }}
+    ?paper rdfs:label ?title ;
+           orkgp:P31 ?contrib .
+    ?contrib rdfs:label ?contribLabel .
+    {{
+        ?contrib ?pred ?value .
+        FILTER(?pred NOT IN (rdf:type, rdfs:label, orkgp:PWC_HAS_BENCHMARK))
+        OPTIONAL {{ ?value rdfs:label ?vl . }}
+        BIND(STR(COALESCE(?vl, ?value)) AS ?valueLabel)
+        FILTER(!STRSTARTS(?valueLabel, "http"))
+        OPTIONAL {{ ?pred rdfs:label ?pl . }}
+        BIND(STR(COALESCE(?pl, ?pred)) AS ?predLabel)
+    }}
+    UNION
+    {{
+        ?contrib orkgp:PWC_HAS_BENCHMARK ?bench .
+        ?bench rdfs:label ?benchLabel ;
+               orkgp:P34 ?eval .
+        ?eval rdfs:label ?evalLabel .
+        BIND(CONCAT(STR(?benchLabel), " result") AS ?predLabel)
+        BIND(REPLACE(STR(?evalLabel), "^Quantity ", "") AS ?valueLabel)
+    }}
+    {_PAPER_META}
+}}
+LIMIT {limit}
+"""
+
+
 def paper_metadata(paper_uri: str) -> str:
     """
     Retrieve metadata (title, DOI, year, field, authors) for a specific paper.
