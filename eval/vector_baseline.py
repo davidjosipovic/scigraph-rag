@@ -27,11 +27,14 @@ Usage:
     python -m eval.vector_baseline embed
     python -m eval.vector_baseline retrieve [--split test]     # nDCG vs gold
     python -m eval.vector_baseline answer --models ollama:qwen2.5:7b groq:openai/gpt-oss-20b
+
+Another embedding model: VECTOR_EMBED_MODEL=nomic-embed-text (see EMBEDDERS).
 """
 
 import argparse
 import asyncio
 import json
+import os
 import re
 import sys
 from collections import defaultdict
@@ -51,10 +54,15 @@ from backend.rag.pipeline import RAGPipeline  # noqa: E402
 
 INDEX_DIR = PROJECT_ROOT / "data" / "vector"
 CARDS_FILE = INDEX_DIR / "cards.jsonl"
-EMB_FILE = INDEX_DIR / "embeddings.npy"
-EMBED_MODEL = "mxbai-embed-large"
-# mxbai-embed-large is trained with this instruction on the query side only.
-QUERY_PREFIX = "Represent this sentence for searching relevant passages: "
+# Embedding models: (query prefix, document prefix, dimension, file). Each
+# model is used with the instruction prefixes it was trained with.
+EMBEDDERS = {
+    "mxbai-embed-large": ("Represent this sentence for searching relevant passages: ", "", 1024, "embeddings.npy"),
+    "nomic-embed-text": ("search_query: ", "search_document: ", 768, "embeddings_nomic.npy"),
+}
+EMBED_MODEL = os.environ.get("VECTOR_EMBED_MODEL", "mxbai-embed-large")
+QUERY_PREFIX, DOC_PREFIX, EMB_DIM, _emb_name = EMBEDDERS[EMBED_MODEL]
+EMB_FILE = INDEX_DIR / _emb_name
 CARD_CHARS = 1500  # ~400 tokens, inside the model's 512-token window
 
 ORKG = "http://orkg.org/orkg/"
@@ -166,10 +174,10 @@ def _embed(texts: list[str], client: httpx.Client) -> np.ndarray:
 
 def embed(batch: int = 64) -> None:
     cards = [json.loads(line) for line in open(CARDS_FILE)]
-    out = np.zeros((len(cards), 1024), dtype=np.float16)
+    out = np.zeros((len(cards), EMB_DIM), dtype=np.float16)
     with httpx.Client(timeout=300) as client:
         for i in range(0, len(cards), batch):
-            out[i:i + batch] = _embed([c["text"] for c in cards[i:i + batch]], client)
+            out[i:i + batch] = _embed([DOC_PREFIX + c["text"] for c in cards[i:i + batch]], client)
             if i // batch % 50 == 0:
                 logger.info(f"{i + batch}/{len(cards)}")
     np.save(EMB_FILE, out)
@@ -253,7 +261,7 @@ def retrieve_eval(split: str | None, k: int) -> None:
     print(f"\n{'query_type':<20} {'n':>3} " + " ".join(f"{m:>8}" for m in METRICS))
     for s in summary:
         print(f"{s['query_type']:<20} {s['n']:>3} " + " ".join(f"{s[m]:>8.3f}" for m in METRICS))
-    mode = "vector" + (f"_{split}" if split else "")
+    mode = "vector" + ("" if EMBED_MODEL == "mxbai-embed-large" else "_" + EMBED_MODEL.split("-")[0]) + (f"_{split}" if split else "")
     path = RESULTS_DIR / f"retrieval_{mode}_{datetime.now():%Y%m%d_%H%M%S}.json"
     path.write_text(json.dumps({"mode": mode, "k": k, "split": split, "summary": summary, "questions": results},
                                indent=1, ensure_ascii=False))

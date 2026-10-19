@@ -1,0 +1,2736 @@
+{
+ "mode": "vector_nomic",
+ "k": 8,
+ "split": null,
+ "summary": [
+  {
+   "query_type": "claim_verification",
+   "n": 8,
+   "P@K": 0.546875,
+   "P2@K": 0.078125,
+   "R@K": 0.056746031746031746,
+   "nDCG@K": 0.34026141120704495,
+   "Hit@K": 0.375,
+   "empty": 0.0,
+   "unjudged": 0.0
+  },
+  {
+   "query_type": "dataset_search",
+   "n": 8,
+   "P@K": 0.328125,
+   "P2@K": 0.125,
+   "R@K": 0.05271291208791209,
+   "nDCG@K": 0.2585721446524439,
+   "Hit@K": 0.5,
+   "empty": 0.0,
+   "unjudged": 0.0
+  },
+  {
+   "query_type": "method_comparison",
+   "n": 8,
+   "P@K": 0.265625,
+   "P2@K": 0.015625,
+   "R@K": 0.008333333333333333,
+   "nDCG@K": 0.16601166359234842,
+   "Hit@K": 0.125,
+   "empty": 0.0,
+   "unjudged": 0.0
+  },
+  {
+   "query_type": "method_usage",
+   "n": 9,
+   "P@K": 0.75,
+   "P2@K": 0.2638888888888889,
+   "R@K": 0.11803350970017637,
+   "nDCG@K": 0.531602663682818,
+   "Hit@K": 0.6666666666666666,
+   "empty": 0.0,
+   "unjudged": 0.0
+  },
+  {
+   "query_type": "paper_lookup",
+   "n": 8,
+   "P@K": 0.109375,
+   "P2@K": 0.0625,
+   "R@K": 0.375,
+   "nDCG@K": 0.24691479084482654,
+   "Hit@K": 0.375,
+   "empty": 0.0,
+   "unjudged": 0.0
+  },
+  {
+   "query_type": "topic_search",
+   "n": 9,
+   "P@K": 0.9444444444444444,
+   "P2@K": 0.7222222222222222,
+   "R@K": 0.18281844346202472,
+   "nDCG@K": 0.8658711080054312,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0
+  },
+  {
+   "query_type": "ALL",
+   "n": 50,
+   "P@K": 0.505,
+   "P2@K": 0.2225,
+   "R@K": 0.13300011591596056,
+   "nDCG@K": 0.4134268805513511,
+   "Hit@K": 0.52,
+   "empty": 0.0,
+   "unjudged": 0.0
+  }
+ ],
+ "questions": [
+  {
+   "id": "Q01",
+   "query_type": "topic_search",
+   "P@K": 1.0,
+   "P2@K": 1.0,
+   "R@K": 0.1509433962264151,
+   "nDCG@K": 1.0,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R216441",
+     "title": "BaKGraSTeC: A Background Knowledge Graph Based Method for Short Text Classification",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1707708",
+     "title": "Hyper-SAGNN: a self-attention based graph neural network for hypergraphs",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1355710",
+     "title": "Provably Powerful Graph Neural Networks for Directed Multigraphs",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1978255",
+     "title": "Knowledge Enhanced Graph Neural Networks for Graph Completion",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1355512",
+     "title": "TopoGCL: Topological Graph Contrastive Learning",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R283801",
+     "title": "Text-Graph Enhanced Knowledge Graph Representation Learning",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R700557",
+     "title": "Semantic- and relation-based graph neural network for knowledge graph completion",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R678774",
+     "title": "Compound–protein interaction prediction with end-to-end learning of neural networks for graphs and sequences",
+     "grade": 2
+    }
+   ]
+  },
+  {
+   "id": "Q02",
+   "query_type": "topic_search",
+   "P@K": 1.0,
+   "P2@K": 1.0,
+   "R@K": 0.25806451612903225,
+   "nDCG@K": 1.0,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R1355740",
+     "title": "Fed-QSSL: A Framework for Personalized Federated Learning under Bitwidth and Data Heterogeneity",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1559451",
+     "title": "Android Malware Detection Based on Network Analysis and Federated Learning",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1559442",
+     "title": "DNNdroid: Android Malware Detection Framework Based on Federated Learning and Edge Computing",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1911951",
+     "title": "Federated Personal Knowledge Graph Completion with Lightweight Large Language Models for Personalized Recommendations",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1559445",
+     "title": "A Dynamic Weighted Federated Learning for Android Malware Classification",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1559455",
+     "title": "Distributed Detection of Malicious Android Apps While Preserving Privacy Using Federated Learning",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R706003",
+     "title": "Federated Learning in the Detection of Fake News Using Deep Learning as a Basic Method",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R549429",
+     "title": "Personalized Federated Learning with Gaussian Processes",
+     "grade": 2
+    }
+   ]
+  },
+  {
+   "id": "Q03",
+   "query_type": "topic_search",
+   "P@K": 1.0,
+   "P2@K": 0.625,
+   "R@K": 0.12195121951219512,
+   "nDCG@K": 0.8690198162732529,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R1585565",
+     "title": "DistiLLM: Towards Streamlined Distillation for Large Language Models",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1926992",
+     "title": "KAT-V1: Kwai-AutoThink Technical Report",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1585596",
+     "title": "MiniLLM: On-Policy Distillation of Large Language Models",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1585698",
+     "title": "InfiFusion: A Unified Framework for Enhanced Cross-Model Reasoning via LLM Fusion",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1885135",
+     "title": "Prompt2Model: Generating Deployable Models from Natural Language Instructions",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1885126",
+     "title": "GOLD: Generalized Knowledge Distillation via Out-of-Distribution-Guided Language Data Generation",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1885144",
+     "title": "ZeroGen: Efficient Zero-shot Learning via Dataset Generation",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1885153",
+     "title": "ProGen: Progressive Zero-shot Dataset Generation via In-context Feedback",
+     "grade": 1
+    }
+   ]
+  },
+  {
+   "id": "Q04",
+   "query_type": "topic_search",
+   "P@K": 1.0,
+   "P2@K": 0.875,
+   "R@K": 0.16279069767441862,
+   "nDCG@K": 0.9510742026824198,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R197596",
+     "title": "Differentiable Architecture Search for Reinforcement Learning",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R197535",
+     "title": "AutoCoG: A Unified Data-Model Co-Search Framework for Graph Neural Networks",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R482359",
+     "title": "SqueezeNAS: Fast neural architecture search for faster semantic segmentation",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1825674",
+     "title": "How does topology of neural architectures impact gradient propagation and model performance?",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R159399",
+     "title": "DEHB: Evolutionary Hyperband for Scalable, Robust and Efficient Hyperparameter Optimization",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R508430",
+     "title": "Accuracy Prediction with Non-neural Model for Neural Architecture Search",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R197560",
+     "title": "ScaleNAS: Multi-Path One-Shot NAS for Scale-Aware High-Resolution Representation",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1355744",
+     "title": "EG-NAS: Neural Architecture Search with Fast Evolutionary Exploration",
+     "grade": 2
+    }
+   ]
+  },
+  {
+   "id": "Q05",
+   "query_type": "topic_search",
+   "P@K": 0.625,
+   "P2@K": 0.125,
+   "R@K": 0.04,
+   "nDCG@K": 0.4124031645995353,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R1355512",
+     "title": "TopoGCL: Topological Graph Contrastive Learning",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R701067",
+     "title": "Knowledge Graph Completion Using a Pre-Trained Language Model Based on Categorical Information and Multi-Layer Residual Attention",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1699180",
+     "title": "Implicit Data Synthesis for Contrastive Unsupervised Data Augmentation",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1426983",
+     "title": "A Case for Cognitive Models in Visualization Research Position paper",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R532920",
+     "title": "ScatSimCLR: self-supervised contrastive learning with pretext task regularization for small-scale datasets",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1378600",
+     "title": "scPROTEIN: a versatile deep graph contrastive learning framework for single-cell proteomics embedding",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1355585",
+     "title": "Self-Interpretable Graph Learning with Sufficient and Necessary Explanations",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1355638",
+     "title": "Understanding Distributed Representations of Concepts in Deep Neural Networks without Supervision",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q06",
+   "query_type": "method_comparison",
+   "P@K": 0.0,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.0,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R675487",
+     "title": "Covidence (No paper available)",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R675437",
+     "title": "Covidence (No paped",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R675461",
+     "title": "DistillerSR (No paper available)",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R670081",
+     "title": "SWIFT-Review: a text-mining workbench for systematic review",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R675412",
+     "title": "DistillerSR",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1556534",
+     "title": "Text Classification on Software and Hardware Requirements Using Natural Language Processing Techniques",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R212800",
+     "title": "Language-Independent Fake News Detection: English, Portuguese, and Spanish Mutual Features",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R675470",
+     "title": "Nested Knowledge (No paper available)",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q07",
+   "query_type": "method_comparison",
+   "P@K": 0.375,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.21546702330074746,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R1382250",
+     "title": "An Expert is Worth One Token: Synergizing Multiple Expert LLMs as Generalist via Expert Token Routing",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R196483",
+     "title": "What Does BERT Learn about the Structure of Language?",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R196510",
+     "title": "BERT-based Multi-Task Model for Country and Province Level MSA and Dialectal Arabic Identification",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1359006",
+     "title": "Explanation versus Structured Input in Processing Instruction",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1726045",
+     "title": "Timers and Such: A Practical Benchmark for Spoken Language Understanding with Numbers",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1565158",
+     "title": "AfroBench: How Good are Large Language Models on African Languages?",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1556539",
+     "title": "NLP4ReF: Requirements Classification and Forecasting: From Model-Based Design to Large Language Models",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R163186",
+     "title": "WikiNEuRal: Combined Neural and Knowledge-based Silver Data Creation for Multilingual NER",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q08",
+   "query_type": "method_comparison",
+   "P@K": 0.0,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.0,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R163849",
+     "title": "Ontology-driven Event Type Classification in Images",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R530767",
+     "title": "Your \"Flamingo\" is My \"Bird\": Fine-Grained, or Not",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1789305",
+     "title": "A Cognitive Paradigm Approach to Probe the Perception-Reasoning Interface in VLMs",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1695983",
+     "title": "A Vision-language Framework for Comparative Reasoning in Radiology",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R653763",
+     "title": "Combining Weakly and Webly Supervised Learning for Classifying Food Images",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R533036",
+     "title": "SplineCNN: Fast Geometric Deep Learning with Continuous B-Spline Kernels",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R458207",
+     "title": "RelationNet2: Deep Comparison Columns for Few-Shot Learning",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R458674",
+     "title": "Fast and Flexible Multi-Task Classification Using Conditional Neural Adaptive Processes",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q09",
+   "query_type": "method_comparison",
+   "P@K": 0.5,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.32269006393791866,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R1596173",
+     "title": "Findings of the 2018 Conference on Machine Translation (WMT18)",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R219516",
+     "title": "Data Augmentation using Machine Translation for Fake News Detection in the Urdu Language",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R705162",
+     "title": "DIN-SQL: Decomposed In-Context Learning of Text-to-SQL with Self-Correction",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R431544",
+     "title": "ViTA: Visual-Linguistic Translation by Aligning Object Tags",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1596186",
+     "title": "HalOmi: A Manually Annotated Benchmark for Multilingual Hallucination and Omission Detection in Machine Translation",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1735175",
+     "title": "No Language Left Behind: Scaling Human-Centered Machine Translation",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R704876",
+     "title": "Structure Guided Large Language Model for SQL Generation",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R431496",
+     "title": "Generative Imagination Elevates Machine Translation",
+     "grade": 1
+    }
+   ]
+  },
+  {
+   "id": "Q10",
+   "query_type": "method_comparison",
+   "P@K": 0.875,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.4549499956738161,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R756538",
+     "title": "An Empirical Comparison of Fake News Detection using different Machine Learning Algorithms",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R206122",
+     "title": "Measuring the Evolution of a Scientific Field through Citation Frames",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R756411",
+     "title": "Fake News Detection Model Basing on Machine Learning Algorithms",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R679004",
+     "title": "Short Term Earthquake Prediction in Hindukush Region Using Tree Based Ensemble Learning",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R260275",
+     "title": "Individual Travel Based Transportation Mode Transfer Points Analysis and Identification",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R645755",
+     "title": "Sentinel-1 and Sentinel-2 Based Crop Classification Over Agricultural Regions of Navarre (Spain)",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R675412",
+     "title": "DistillerSR",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R260272",
+     "title": "Travel Mode Detection Using GPS Data and Socioeconomic Attributes Based on a Random Forest Classifier",
+     "grade": 1
+    }
+   ]
+  },
+  {
+   "id": "Q11",
+   "query_type": "dataset_search",
+   "P@K": 0.0,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.0,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R282244",
+     "title": "A Large Scale Corpus of Food Composition Tables",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R279071",
+     "title": "Information extraction from scientific articles: a survey",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R675461",
+     "title": "DistillerSR (No paper available)",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R213420",
+     "title": "SiNER: A Large Dataset for Sindhi Named Entity Recognition",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R736697",
+     "title": "Med-HALT: Medical Domain Hallucination Test for Large Language Models",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R675487",
+     "title": "Covidence (No paper available)",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R739765",
+     "title": "BREAKING! Presenting Fake News Corpus for Automated Fact Checking",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R675470",
+     "title": "Nested Knowledge (No paper available)",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q12",
+   "query_type": "dataset_search",
+   "P@K": 0.375,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.26950156563819105,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R690024",
+     "title": "Benchmarking Large Language Models in Retrieval-Augmented Generation",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R689632",
+     "title": "Head-to-Tail: How Knowledgeable are Large Language Models (LLMs)? A.K.A. Will LLMs Replace Knowledge Graphs?",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R600520",
+     "title": "A Multitask, Multilingual, Multimodal Evaluation of ChatGPT on Reasoning, Hallucination, and Interactivity",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R391348",
+     "title": "Graph Star Net for Generalized Multi-Task Learning",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1560589",
+     "title": "LiveCodeBench: Holistic and Contamination Free Evaluation of Large Language Models for Code",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R692393",
+     "title": "Overview of Development and Recent Trends in Bibliometrics and Research Evaluation",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1585024",
+     "title": "2020 ARC Winner",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R643044",
+     "title": "Wider and Deeper LLM Networks are Fairer LLM Evaluators",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q13",
+   "query_type": "dataset_search",
+   "P@K": 0.0,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.0,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R796178",
+     "title": "Stable LM 2 1.6B Technical Report",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R796088",
+     "title": "OpenELM: An Efficient Language Model Family with Open Training and Inference Framework",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R796050",
+     "title": "Textbooks Are All You Need II: phi-1.5 technical report",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R796016",
+     "title": "Model Card for Rene",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R796012",
+     "title": "TensorOpera Unveils Fox Foundation Model: A Pioneering Small Language Model (SLM) for Cloud and Edge",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R790625",
+     "title": "Gemma: Open Models Based on Gemini Research and Technology",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R370909",
+     "title": "GPT-Neo: Large Scale Autoregressive Language Modeling with Mesh-Tensorflow",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R796044",
+     "title": "Textbooks Are All You Need",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q14",
+   "query_type": "dataset_search",
+   "P@K": 0.75,
+   "P2@K": 0.5,
+   "R@K": 0.14285714285714285,
+   "nDCG@K": 0.5349878596414486,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R1895857",
+     "title": "Freeze the Discriminator: a Simple Baseline for Fine-Tuning GANs",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1854360",
+     "title": "Evaluating the Performance of TAAF for image classification models",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R532782",
+     "title": "Lipschitz Recurrent Neural Networks",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R531226",
+     "title": "Performing Image Classification for 10 Different Monkey Species using CNN",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R529591",
+     "title": "ReMixMatch: Semi-Supervised Learning with Distribution Alignment and Augmentation Anchoring",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R426010",
+     "title": "Stacked Generative Adversarial Networks",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1830062",
+     "title": "Improving Image Clustering with Artifacts Attenuation via Inference-Time Attention Engineering",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1859093",
+     "title": "Resurrecting Recurrent Neural Networks for Long Sequences",
+     "grade": 1
+    }
+   ]
+  },
+  {
+   "id": "Q15",
+   "query_type": "dataset_search",
+   "P@K": 0.375,
+   "P2@K": 0.25,
+   "R@K": 0.125,
+   "nDCG@K": 0.28154073281528735,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R279071",
+     "title": "Information extraction from scientific articles: a survey",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R162708",
+     "title": "Introduction to the CoNLL-2003 Shared Task: Language-Independent Named Entity Recognition",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R739765",
+     "title": "BREAKING! Presenting Fake News Corpus for Automated Fact Checking",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R692393",
+     "title": "Overview of Development and Recent Trends in Bibliometrics and Research Evaluation",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R282244",
+     "title": "A Large Scale Corpus of Food Composition Tables",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R175450",
+     "title": "Comparing Constraint-Based Motion Editing Methods",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R214020",
+     "title": " ACE 2007 Multilingual Training Corpus LDC2014T18",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R145794",
+     "title": "Neural Architectures for Named Entity Recognition",
+     "grade": 2
+    }
+   ]
+  },
+  {
+   "id": "Q16",
+   "query_type": "claim_verification",
+   "P@K": 1.0,
+   "P2@K": 0.125,
+   "R@K": 0.14285714285714285,
+   "nDCG@K": 0.5623328129449572,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R606657",
+     "title": "MMCoQA: Conversational Question Answering over Text, Tables, and Images",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R151328",
+     "title": "Neuro-Symbolic Architectures for Context Understanding",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R283775",
+     "title": "BERT+vnKG: Using Deep Learning and Knowledge Graph to Improve Vietnamese Question Answering System",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R715360",
+     "title": "In-Context Retrieval-Augmented Language Models",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R715586",
+     "title": "Enhancing LLM Intelligence with ARM-RAG: Auxiliary Rationale Memory for Retrieval Augmented Generation",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1433521",
+     "title": "Retrieval Augmented Generation with Rich Answer Encoding",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1382482",
+     "title": "Encouraging Divergent Thinking in Large Language Models through Multi-Agent Debate",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R606631",
+     "title": "Ditch the Gold Standard: Re-evaluating Conversational Question Answering",
+     "grade": 2
+    }
+   ]
+  },
+  {
+   "id": "Q17",
+   "query_type": "claim_verification",
+   "P@K": 0.75,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.4356857659952141,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R431489",
+     "title": "Multimodal Transformer for Multimodal Machine Translation",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1786501",
+     "title": "MarianCG: a code generation transformer model inspired by machine translation",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R429721",
+     "title": "Phrase-Based & Neural Unsupervised Machine Translation",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1735984",
+     "title": "Lite Transformer with Long-Short Range Attention",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R370878",
+     "title": "Exploring the limits of transfer learning with a unified text-to-text transformer",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1735967",
+     "title": "HAT: Hardware-Aware Transformers for Efficient Natural Language Processing",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R429781",
+     "title": "Tilde's Machine Translation Systems for WMT 2018",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R609258",
+     "title": "WizardMath: Empowering Mathematical Reasoning for Large Language Models via Reinforced Evol-Instruct",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q18",
+   "query_type": "claim_verification",
+   "P@K": 0.0,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.0,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R553168",
+     "title": "Diacritics Restoration using BERT with Analysis on Czech language",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R642885",
+     "title": "StructGPT: A General Framework for Large Language Model to Reason over Structured Data",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R511780",
+     "title": "Mitigating Embedding and Class Assignment Mismatch in Unsupervised Image Classification",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R510881",
+     "title": "Compression Artifacts Reduction by a Deep Convolutional Network",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R705162",
+     "title": "DIN-SQL: Decomposed In-Context Learning of Text-to-SQL with Self-Correction",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1594993",
+     "title": "Assessing The Factual Accuracy of Generated Text",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R543987",
+     "title": "View-Consistent Heterogeneous Network on Graphs With Few Labeled Nodes",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R409716",
+     "title": "Entropy Minimization vs. Diversity Maximization for Domain Adaptation",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q19",
+   "query_type": "claim_verification",
+   "P@K": 0.875,
+   "P2@K": 0.125,
+   "R@K": 0.1111111111111111,
+   "nDCG@K": 0.5865740821026045,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R1559584",
+     "title": "Using Generative Adversarial Networks for Data Augmentation in Android Malware Detection",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1559577",
+     "title": "Data Augmentation for Opcode Sequence Based Malware Detection",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1559581",
+     "title": "DQSroid: Dynamic Android Malware Detection Based on Quadruple Sequences and Data Augmentation",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1559573",
+     "title": "Data Augmentation Using Conditional Generative Adversarial Network (Cgan) for Android Malware Binary and Multi-Class Classification",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R554916",
+     "title": "RandAugment: Practical automated data augmentation with a reduced search space",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1559570",
+     "title": "CAED: A Comprehensive Android Emulator Detection Framework With Data Augmentation",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1559566",
+     "title": "Augmenting Android Malware Using Conditional Variational Autoencoder for the Malware Family Classification",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R714298",
+     "title": "Augmentation-Adapted Retriever Improves Generalization of Language Models as Generic Plug-In",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q20",
+   "query_type": "claim_verification",
+   "P@K": 0.75,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.36573721512867385,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R756411",
+     "title": "Fake News Detection Model Basing on Machine Learning Algorithms",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R679004",
+     "title": "Short Term Earthquake Prediction in Hindukush Region Using Tree Based Ensemble Learning",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R756538",
+     "title": "An Empirical Comparison of Fake News Detection using different Machine Learning Algorithms",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R645755",
+     "title": "Sentinel-1 and Sentinel-2 Based Crop Classification Over Agricultural Regions of Navarre (Spain)",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R206122",
+     "title": "Measuring the Evolution of a Scientific Field through Citation Frames",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R725376",
+     "title": "Comparative performance of machine learning algorithms for Forest Cover classification using ASI - PRISMA hyperspectral data",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R646110",
+     "title": "Crop Classification Using a Combination of Spectral Indices from Spatiotemporal Multispectral Imagery and Machine Learning",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R489381",
+     "title": "Multimodal Speech Emotion Recognition and Ambiguity Resolution",
+     "grade": 1
+    }
+   ]
+  },
+  {
+   "id": "Q21",
+   "query_type": "method_usage",
+   "P@K": 0.625,
+   "P2@K": 0.625,
+   "R@K": 0.14285714285714285,
+   "nDCG@K": 0.647160196001462,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R1388197",
+     "title": "Does attention mechanism possess the feature of human reading? A perspective of sentiment classification task",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R153500",
+     "title": "The Psychology of AMBER Alert: Unresolved Issues and Implications",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R207073",
+     "title": "FNED: A Deep Network for Fake News Early Detection on Social Media",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R675487",
+     "title": "Covidence (No paper available)",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R216317",
+     "title": "Linformer: Self-Attention with Linear Complexity",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R710620",
+     "title": "Leveraging Gloss Knowledge in Neural Word Sense Disambiguation by Hierarchical Co-Attention",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1355552",
+     "title": "Focus-Then-Decide: Segmentation-Assisted Reinforcement Learning",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R283878",
+     "title": "\"how knowledge graph and attention help a quantitative analysis into bag-level relation extraction\"",
+     "grade": 2
+    }
+   ]
+  },
+  {
+   "id": "Q22",
+   "query_type": "method_usage",
+   "P@K": 0.875,
+   "P2@K": 0.375,
+   "R@K": 0.3,
+   "nDCG@K": 0.6148110348025513,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R1854717",
+     "title": "How transfer learning is used in generative models for image classification: improved accuracy",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1695983",
+     "title": "A Vision-language Framework for Comparative Reasoning in Radiology",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R675167",
+     "title": "Covid-19: automatic detection from X-ray images utilizing transfer learning with convolutional neural networks",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1865213",
+     "title": "Lung nodule detection and classification from Thorax CT-scan using RetinaNet with transfer learning",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1559192",
+     "title": "DTMIC: Deep transfer learning for malware image classification",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R675487",
+     "title": "Covidence (No paper available)",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1927636",
+     "title": "LLaVA-Med: Training a Large Language-and-Vision Assistant for Biomedicine in One Day",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1559202",
+     "title": "Transfer Learning Approach for Malware Images Classification on Android Devices Using Deep Convolutional Neural Network",
+     "grade": 1
+    }
+   ]
+  },
+  {
+   "id": "Q23",
+   "query_type": "method_usage",
+   "P@K": 1.0,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.5,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R1941994",
+     "title": "Chemical named entity recognition in the texts of scientific publications using the naïve Bayes classifier approach",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R211936",
+     "title": "Hebrew named entity recognition",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R163128",
+     "title": "Learning multilingual named entity recognition from Wikipedia",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R46645",
+     "title": "Automatic compilation of language resources for named entity recognition in Turkish by utilizing Wikipedia article titles",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R212856",
+     "title": "Vlsp shared task: Named entity recognition",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R163221",
+     "title": "Extraction of Information from the Text of Chemical Patents. 1. Identification of Specific Chemical Names",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R211524",
+     "title": "NNE: A Dataset for Nested Named Entity Recognition in English Newswire",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R150508",
+     "title": "Introduction to the Bio-entity Recognition Task at JNLPBA",
+     "grade": 1
+    }
+   ]
+  },
+  {
+   "id": "Q24",
+   "query_type": "method_usage",
+   "P@K": 0.125,
+   "P2@K": 0.125,
+   "R@K": 0.041666666666666664,
+   "nDCG@K": 0.07979453856244818,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R1557045",
+     "title": "AndroZoo: Collecting Millions of Android Apps for the Research Community",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1701315",
+     "title": "InterleaveThinker: Reinforcing Agentic Interleaved Generation",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1741234",
+     "title": "Generation Of Colors using Bidirectional Long Short Term Memory Networks",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R675487",
+     "title": "Covidence (No paper available)",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R675461",
+     "title": "DistillerSR (No paper available)",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1740842",
+     "title": "Stabilize the Latent Space for Image Autoregressive Modeling: A Unified Perspective",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R426555",
+     "title": "CogView: Mastering Text-to-Image Generation via Transformers",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1875378",
+     "title": "GANs for Medical Image Synthesis: An Empirical Study",
+     "grade": 2
+    }
+   ]
+  },
+  {
+   "id": "Q25",
+   "query_type": "method_usage",
+   "P@K": 0.75,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.41794561359083304,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R150009",
+     "title": "Recursive Deep Models for Semantic Compositionality Over a Sentiment Treebank",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R284105",
+     "title": "Difficulties and Improvements to Graph-Based Lexical Sentiment Analysis Using LISA",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R606899",
+     "title": "Sentiment Analysis of Sindhi News Articles using Deep Learning",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R25229",
+     "title": "Arabic sentiment analysis: Lexicon-based and corpus-based",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R69417",
+     "title": "Multi-Class Sentiment Analysis in Twitter: What if Classification is Not the Answer",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R497745",
+     "title": "Adversarial Training for Aspect-Based Sentiment Analysis with BERT",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R283670",
+     "title": "Fake News Detection via NLP is Vulnerable to Adversarial Attacks: ",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R25481",
+     "title": "An Ontology-Based Interpretable Fuzzy Decision Support System for Diabetes Diagnosis",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q26",
+   "query_type": "paper_lookup",
+   "P@K": 0.0,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.0,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R1468429",
+     "title": "The Intersection Between Semantic Web and Materials Science",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R151133",
+     "title": "Past and Future Emergency\nResponse Information Systems",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R151226",
+     "title": "Measuring Mobile ICT Literacy: Short-Message Performance\nAssessment in Emergency Response Settings",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R151298",
+     "title": "University Use of Social Media and the Crisis Lifecycle: Organizational Messages, First Information Responders' Reactions, Reframed Messages and Dissemination Patterns.",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R151143",
+     "title": "Human-Computer Interaction:\nTHE HUMAN AND COMPUTER AS A TEAM in Emergency Management Information Systems",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R151185",
+     "title": "Critical Factors Affecting Compliance to Campus Alerts",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R151308",
+     "title": "Twitter for Crisis Communication: Lessons Learned from Japan's Tsunami Disaster",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R151240",
+     "title": "Journalists as Crowdsourcerers: Responding to Crisis by Reporting with a Crowd",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q27",
+   "query_type": "paper_lookup",
+   "P@K": 0.125,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.16435489806825637,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R1925522",
+     "title": "ChineseBERT: Chinese Pretraining Enhanced by Glyph and Pinyin Information",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R370944",
+     "title": "Training Compute-Optimal Large Language Models",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R595146",
+     "title": "Ul2: Unifying language learning paradigms",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R370874",
+     "title": "DialoGPT: Large-Scale Generative Pre-training for Conversational Response Generation",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R370897",
+     "title": "Language Models are Few-Shot Learners",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R370926",
+     "title": "A General Language Assistant as a Laboratory for Alignment",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R370933",
+     "title": "Scaling Language Models: Methods, Analysis &amp; Insights from Training Gopher",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R370909",
+     "title": "GPT-Neo: Large Scale Autoregressive Language Modeling with Mesh-Tensorflow",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q28",
+   "query_type": "paper_lookup",
+   "P@K": 0.25,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.302818359780849,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R528011",
+     "title": "Residual Networks of Residual Networks: Multilevel Residual Networks",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R530467",
+     "title": "DenseNet Models for Tiny ImageNet Classification",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R530023",
+     "title": "Deep Pyramidal Residual Networks",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R479240",
+     "title": "An End-to-End Deep Learning Architecture for Classification of Malware’s Binary Content",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R494886",
+     "title": "MultiPoseNet: Fast Multi-Person Pose Estimation using Pose Residual Network",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R26594",
+     "title": "Cluster-Head Election Using Fuzzy Logic for Wireless Sensor Networks",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R642087",
+     "title": "Pseudo-Labels for Supervised Learning on Dynamic Vision Sensor Data, Applied to Object Detection Under Ego-Motion",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1735076",
+     "title": "An ensemble multi-scale residual attention network (EMRA-net) for image Dehazing",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q29",
+   "query_type": "paper_lookup",
+   "P@K": 0.125,
+   "P2@K": 0.125,
+   "R@K": 1.0,
+   "nDCG@K": 0.31546487678572877,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R140135",
+     "title": "node2vec: Scalable Feature Learning for Networks",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R140153",
+     "title": "Clinical Concept Embeddings Learned from Massive Sources of Medical Data",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R140156",
+     "title": "OWL2Vec*: Embedding of OWL Ontologies",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R640342",
+     "title": "Academic Expert Finding in Indonesia using Word Embedding and Document Embedding: A Case Study of Fasilkom UI",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1925563",
+     "title": "Neural Language Models for Nineteenth-Century English",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R693744",
+     "title": "Joint Embedding Learning of Educational Knowledge Graphs",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R284086",
+     "title": "Beyond word embeddings: learning entity and concept representations from large scale knowledge bases",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R194335",
+     "title": "Efficient estimation of word representations in vector space",
+     "grade": 2
+    }
+   ]
+  },
+  {
+   "id": "Q30",
+   "query_type": "paper_lookup",
+   "P@K": 0.125,
+   "P2@K": 0.125,
+   "R@K": 1.0,
+   "nDCG@K": 0.31546487678572877,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R1738546",
+     "title": "Efficient generative adversarial networks using linear additive-attention Transformers",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R602909",
+     "title": "Multi-ontology mapping generative adversarial network in internet of things for ontology alignment",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1355675",
+     "title": "Discriminative Forests Improve Generative Diversity for Generative Adversarial Networks",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1355525",
+     "title": "Where and How to Attack? A Causality-Inspired Recipe for Generating Counterfactual Adversarial Examples",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1564581",
+     "title": "FTGAN: A fully-trained generative adversarial networks for text to face generation",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1580457",
+     "title": "McGAN: Generating manufacturable designs by embedding manufacturing rules into conditional generative adversarial network",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R691140",
+     "title": "How to Turn Your Knowledge Graph Embeddings into Generative Models",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R589362",
+     "title": "Generative Adversarial Networks",
+     "grade": 2
+    }
+   ]
+  },
+  {
+   "id": "Q31",
+   "query_type": "topic_search",
+   "P@K": 1.0,
+   "P2@K": 0.5,
+   "R@K": 0.2222222222222222,
+   "nDCG@K": 0.8116586827661338,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R604642",
+     "title": "FrBMedQA: the first French biomedical question answering dataset",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R147122",
+     "title": "An overview of the BIOASQ large-scale biomedical semantic indexing and question answering competition",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R283561",
+     "title": "Question-Answering System Based on the Knowledge Graph of Traditional Chinese Medicine",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R675487",
+     "title": "Covidence (No paper available)",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1586553",
+     "title": "BixBench: a Comprehensive Benchmark for LLM-based Agents in Computational Biology",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R162369",
+     "title": "The Protein-Protein Interaction tasks of BioCreative III: classification/ranking of articles and linking bio-ontology concepts to full text",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R283488",
+     "title": "A knowledge graph based question answering method for medical domain",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R675437",
+     "title": "Covidence (No paped",
+     "grade": 1
+    }
+   ]
+  },
+  {
+   "id": "Q32",
+   "query_type": "topic_search",
+   "P@K": 1.0,
+   "P2@K": 0.875,
+   "R@K": 0.21212121212121213,
+   "nDCG@K": 0.9601027307187759,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R41079",
+     "title": "Speech Recognition Using Deep Neural Networks: A Systematic Review",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1723454",
+     "title": "Whispering LLaMA: A Cross-Modal Generative Error Correction Framework for Speech Recognition",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1723440",
+     "title": "Leveraging Unimodal Self-Supervised Learning for Multimodal Audio-Visual Speech Recognition",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1723420",
+     "title": "Auto-AVSR: Audio-Visual Speech Recognition with Automatic Labels",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1723470",
+     "title": "Sagalee: an Open Source Automatic Speech Recognition Dataset for Oromo Language",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1723460",
+     "title": "Audio-Visual Representation Learning via Knowledge Distillation from Speech Foundation Models",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R197085",
+     "title": "Language identification for multilingual speech recognition systems",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R197073",
+     "title": "Development of speech corpora for speaker recognition research and evaluation in Indian languages",
+     "grade": 1
+    }
+   ]
+  },
+  {
+   "id": "Q33",
+   "query_type": "topic_search",
+   "P@K": 1.0,
+   "P2@K": 0.625,
+   "R@K": 0.22727272727272727,
+   "nDCG@K": 0.8728956092646492,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R1382489",
+     "title": "A novel hybrid paper recommendation system using deep learning",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R284333",
+     "title": "Conversational Recommender System Based on GRU-attention Neural Network",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1382498",
+     "title": "Scientific paper recommender system using deep learning and link prediction in citation network",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R58119",
+     "title": "A Survey of Recommender Systems Based on Deep Learning",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1382492",
+     "title": "PRM-KGED: paper recommender model using knowledge graph embedding and deep neural network",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R201435",
+     "title": "PKG: A Personal Knowledge Graph for Recommendation",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R283549",
+     "title": "Predictive article recommendation using natural language processing and machine learning to support evidence updates in domain-specific knowledge graphs",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R201421",
+     "title": "Personalized Recommendations using Knowledge Graphs: A Probabilistic Logic Programming Approach",
+     "grade": 1
+    }
+   ]
+  },
+  {
+   "id": "Q34",
+   "query_type": "topic_search",
+   "P@K": 0.875,
+   "P2@K": 0.875,
+   "R@K": 0.25,
+   "nDCG@K": 0.9156857657441142,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R460586",
+     "title": "Zero-Shot Logit Adjustment",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R376011",
+     "title": "Finetuned language models are zero-shot learners",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R460668",
+     "title": "Fast Zero-Shot Image Tagging",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R460713",
+     "title": "Generative Multi-Label Zero-Shot Learning",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R554021",
+     "title": "An embarrassingly simple approach to zero-shot learning",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R460421",
+     "title": "Latent Embedding Feedback and Discriminative Features for Zero-Shot Classification",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1877084",
+     "title": "Incremental few-shot learning via vector quantization in deep embedded space",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R460604",
+     "title": "Symmetry and Group in Attribute-Object Compositions",
+     "grade": 2
+    }
+   ]
+  },
+  {
+   "id": "Q35",
+   "query_type": "method_comparison",
+   "P@K": 0.0,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.0,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R511780",
+     "title": "Mitigating Embedding and Class Assignment Mismatch in Unsupervised Image Classification",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R705162",
+     "title": "DIN-SQL: Decomposed In-Context Learning of Text-to-SQL with Self-Correction",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1560589",
+     "title": "LiveCodeBench: Holistic and Contamination Free Evaluation of Large Language Models for Code",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R543987",
+     "title": "View-Consistent Heterogeneous Network on Graphs With Few Labeled Nodes",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R704876",
+     "title": "Structure Guided Large Language Model for SQL Generation",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R704565",
+     "title": "Comparing the Impact of Open Access (OA) vs. Non-OA Articles in the Same Journals",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R704886",
+     "title": "Knowledge-to-SQL: Enhancing SQL Generation with Data Expert LLM",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R391671",
+     "title": "Neural Collaborative Filtering vs. Matrix Factorization Revisited",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q36",
+   "query_type": "method_comparison",
+   "P@K": 0.0,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.0,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R488589",
+     "title": "PiCIE: Unsupervised Semantic Segmentation using Invariance and Equivariance in Clustering",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R460115",
+     "title": "Integrative Few-Shot Learning for Classification and Segmentation",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1805957",
+     "title": "Rethinking Alignment and Uniformity in Unsupervised Semantic Segmentation",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1806126",
+     "title": "Expand-and-Quantize: Unsupervised Semantic Segmentation Using High-Dimensional Space and Product Quantization",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R459995",
+     "title": "Few-Shot Segmentation Without Meta-Learning: A Good Transductive Inference Is All You Need?",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1895514",
+     "title": "Mask-Adapter: The Devil is in the Masks for Open-Vocabulary Segmentation",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R460258",
+     "title": "SG-One: Similarity Guidance Network for One-Shot Semantic Segmentation",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R460068",
+     "title": "Learning What Not to Segment: A New Perspective on Few-Shot Segmentation",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q37",
+   "query_type": "method_comparison",
+   "P@K": 0.375,
+   "P2@K": 0.125,
+   "R@K": 0.06666666666666667,
+   "nDCG@K": 0.33498622582630516,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R1355562",
+     "title": "Arithmetic Feature Interaction Is Necessary for Deep Tabular Learning",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1355454",
+     "title": "HyperFast: Instant Classification for Tabular Data",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R41079",
+     "title": "Speech Recognition Using Deep Neural Networks: A Systematic Review",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1644452",
+     "title": "A Comparative Study of Hybrid Machine-Learning vs. Deep-Learning Approaches for Varroa Mite Detection and Counting",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R547739",
+     "title": "More layers! End-to-end regression and uncertainty on tabular data with deep learning",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1355589",
+     "title": "Exploiting Label Skews in Federated Learning with Model Concatenation",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R472593",
+     "title": "Seq2SQL: Generating Structured Queries from Natural Language using Reinforcement Learning",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R737694",
+     "title": "Fake News Detection Related to the COVID-19 in Slovak Language Using Deep Learning Methods",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q38",
+   "query_type": "dataset_search",
+   "P@K": 0.125,
+   "P2@K": 0.125,
+   "R@K": 0.07692307692307693,
+   "nDCG@K": 0.2529427027676571,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R521920",
+     "title": "Towards Open World Object Detection",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R206177",
+     "title": "A Natural Language Processing Pipeline for Detecting Informal Data References in Academic Literature",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R282244",
+     "title": "A Large Scale Corpus of Food Composition Tables",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R756449",
+     "title": "Detecting Fake News With Machine Learning",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R739765",
+     "title": "BREAKING! Presenting Fake News Corpus for Automated Fact Checking",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1559951",
+     "title": "ETF: An Entity Tracing Framework for Hallucination Detection in Code Summaries",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1560419",
+     "title": "Fraud Feature Boosting Mechanism and Spiral Oversampling Balancing Technique for Credit Card Fraud Detection",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R279071",
+     "title": "Information extraction from scientific articles: a survey",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q39",
+   "query_type": "dataset_search",
+   "P@K": 0.5,
+   "P2@K": 0.125,
+   "R@K": 0.07692307692307693,
+   "nDCG@K": 0.4322554919651671,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R460819",
+     "title": "Scaling Language Models: Methods, Analysis & Insights from Training Gopher",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R462366",
+     "title": "TinyBERT: Distilling BERT for Natural Language Understanding",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R641273",
+     "title": "MEGA: Multilingual Evaluation of Generative AI",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R475744",
+     "title": "FNet: Mixing Tokens with Fourier Transforms",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R641270",
+     "title": "Benchmarking Arabic AI with Large Language Models",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R475822",
+     "title": "RealFormer: Transformer Likes Residual Attention",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R643044",
+     "title": "Wider and Deeper LLM Networks are Fairer LLM Evaluators",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R598331",
+     "title": "GreaseLM: Graph REASoning Enhanced Language Models",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q40",
+   "query_type": "dataset_search",
+   "P@K": 0.5,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.29734880439179984,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R284021",
+     "title": "Knowledge Graphs Effectiveness in Neural Machine Translation Improvement",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1469500",
+     "title": "Code-switching input for machine translation: a case study of Vietnamese–English data",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R282244",
+     "title": "A Large Scale Corpus of Food Composition Tables",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R739772",
+     "title": "Contributions to the Study of Fake News in Portuguese: New Corpus and Automatic Detection Results",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R283956",
+     "title": "NMT Enhancement based on Knowledge Graph Mining with Pre-trained Language Model",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R151319",
+     "title": "S2ORC: The Semantic Scholar Open Research Corpus",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1596173",
+     "title": "Findings of the 2018 Conference on Machine Translation (WMT18)",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R279071",
+     "title": "Information extraction from scientific articles: a survey",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q41",
+   "query_type": "claim_verification",
+   "P@K": 0.125,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.06323567569191428,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R370899",
+     "title": "Big Bird: Transformers for Longer Sequences",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R216331",
+     "title": "Big bird: Transformers for longer sequences",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R477752",
+     "title": "Multiplicative LSTM for sequence modelling",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R424391",
+     "title": "Hierarchical Transformers Are More Efficient Language Models",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1740124",
+     "title": "Show-o: One Single Transformer to Unify Multimodal Understanding and Generation",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R661502",
+     "title": "Contextualized Structural Self-supervised Learning for Ontology Matching",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R461813",
+     "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R594025",
+     "title": "Alexatm 20b: Few-shot learning using a large-scale multilingual seq2seq model",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q42",
+   "query_type": "claim_verification",
+   "P@K": 0.875,
+   "P2@K": 0.375,
+   "R@K": 0.2,
+   "nDCG@K": 0.7085257377929955,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R1875142",
+     "title": "Are we really making much progress? Revisiting, benchmarking, and refining heterogeneous graph neural networks",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1355728",
+     "title": "SEA-GWNN: Simple and Effective Adaptive Graph Wavelet Neural Network",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1978255",
+     "title": "Knowledge Enhanced Graph Neural Networks for Graph Completion",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1355512",
+     "title": "TopoGCL: Topological Graph Contrastive Learning",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R678767",
+     "title": "A Novel Computational Model for Predicting microRNA–Disease Associations Based on Heterogeneous Graph Convolutional Networks",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R716035",
+     "title": "G-Retriever: Retrieval-Augmented Generation for Textual Graph Understanding and Question Answering",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R76736",
+     "title": "Semi-supervised classification with graph convolutional networks",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1355454",
+     "title": "HyperFast: Instant Classification for Tabular Data",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q43",
+   "query_type": "claim_verification",
+   "P@K": 0.0,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.0,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R428495",
+     "title": "R-FCN: Object Detection via Region-based Fully Convolutional Networks",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R659530",
+     "title": "Towards Real-Time Object Detection on Embedded Systems",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1849719",
+     "title": "Generalized Diffusion Detector: Mining Robust Features from Diffusion Models for Domain-Generalized Detection",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R521121",
+     "title": "Dual-Awareness Attention for Few-Shot Object Detection",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R428599",
+     "title": "Towards Streaming Perception",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R428588",
+     "title": "Adaptive Streaming Perception using Deep Reinforcement Learning",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1849709",
+     "title": "Boosting Domain Generalized and Adaptive Detection with Diffusion Models: Fitness, Generalization, and Transferability",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1746962",
+     "title": "TadML: A fast temporal action detection with Mechanics-MLP",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q44",
+   "query_type": "method_usage",
+   "P@K": 1.0,
+   "P2@K": 1.0,
+   "R@K": 0.26666666666666666,
+   "nDCG@K": 1.0,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R433441",
+     "title": "An application of cascaded 3D fully convolutional networks for medical image segmentation",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R534818",
+     "title": "Stroke lesion detection using convolutional neural networks",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R675156",
+     "title": "COVID-Net: a tailored deep convolutional neural network design for detection of COVID-19 cases from chest X-ray images",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1862678",
+     "title": "A light-weight rectangular decomposition large kernel convolution network for deformable medical image registration.",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R433827",
+     "title": "Linking convolutional neural networks with graph convolutional networks: application in pulmonary artery-vein separation",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R185374",
+     "title": "Classification of COVID-19 patients from chest CT images using multi-objective differential evolution–based convolutional neural networks",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R192306",
+     "title": "Transfer learning-based convolutional neural network for COVID-19 detection with X-ray images",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1737459",
+     "title": "DTP-Net: A convolutional neural network model to predict threshold for localizing the lesions on dermatological macro-images",
+     "grade": 2
+    }
+   ]
+  },
+  {
+   "id": "Q45",
+   "query_type": "method_usage",
+   "P@K": 1.0,
+   "P2@K": 0.125,
+   "R@K": 0.1111111111111111,
+   "nDCG@K": 0.5450500043261839,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R1378636",
+     "title": "Biophysical modeling with variational autoencoders for bimodal, single-cell RNA sequencing data",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1581804",
+     "title": "Groot-2: Weakly supervised multi-modal instruction following agents",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1355568",
+     "title": "Generalized Variational Inference via Optimal Transport",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1560464",
+     "title": "An attention-based balanced variational autoencoder method for credit card fraud detection",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R426644",
+     "title": "L-Verse: Bidirectional Generation Between Image and Text",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1379439",
+     "title": "Interpretable factor models of single-cell RNA-seq via variational autoencoders",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1581812",
+     "title": "Univla: Learning to act anywhere with task-centric latent actions",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1584984",
+     "title": "Solving ARC visual analogies with neural embeddings and vector arithmetic: A generalized method",
+     "grade": 1
+    }
+   ]
+  },
+  {
+   "id": "Q46",
+   "query_type": "method_usage",
+   "P@K": 0.5,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.4024162489077153,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R260275",
+     "title": "Individual Travel Based Transportation Mode Transfer Points Analysis and Identification",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R679004",
+     "title": "Short Term Earthquake Prediction in Hindukush Region Using Tree Based Ensemble Learning",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R675487",
+     "title": "Covidence (No paper available)",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R756411",
+     "title": "Fake News Detection Model Basing on Machine Learning Algorithms",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R206122",
+     "title": "Measuring the Evolution of a Scientific Field through Citation Frames",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R675461",
+     "title": "DistillerSR (No paper available)",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R675470",
+     "title": "Nested Knowledge (No paper available)",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R189179",
+     "title": "Land cover classification combining Sentinel-1 and Landsat 8 imagery driven by Markov random field with amendment reliability factors",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q47",
+   "query_type": "method_usage",
+   "P@K": 0.875,
+   "P2@K": 0.125,
+   "R@K": 0.2,
+   "nDCG@K": 0.577246336954169,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R140135",
+     "title": "node2vec: Scalable Feature Learning for Networks",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R284105",
+     "title": "Difficulties and Improvements to Graph-Based Lexical Sentiment Analysis Using LISA",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R574933",
+     "title": "Transportation sentiment analysis using word embedding and ontology-based topic modeling",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R140153",
+     "title": "Clinical Concept Embeddings Learned from Massive Sources of Medical Data",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R574912",
+     "title": "Using word embeddings for ontology-driven aspect-based sentiment analysis",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1807886",
+     "title": "emotion2vec: Self-Supervised Pre-Training for Speech Emotion Representation",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R640342",
+     "title": "Academic Expert Finding in Indonesia using Word Embedding and Document Embedding: A Case Study of Fasilkom UI",
+     "grade": 1
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R140156",
+     "title": "OWL2Vec*: Embedding of OWL Ontologies",
+     "grade": 1
+    }
+   ]
+  },
+  {
+   "id": "Q48",
+   "query_type": "paper_lookup",
+   "P@K": 0.0,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.0,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R284108",
+     "title": "Knowledge-Enhanced Ensemble Learning for Word Embeddings",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R283556",
+     "title": "\"learning conceptual-contextual embeddings for medical text\"",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R661559",
+     "title": "SORBET: A Siamese Network for Ontology Embeddings Using a Distance-Based Regression Loss and BERT",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R283727",
+     "title": "\"learning embeddings from scientific corpora using lexical, grammatical and semantic information\"",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R284058",
+     "title": "\"embedding imputation with grounded language information\"",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R476325",
+     "title": "Dynamic Meta-Embeddings for Improved Sentence Representations",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R283892",
+     "title": "Combining Knowledge Graph and Word Embeddings for Spherical Topic Modeling",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R693744",
+     "title": "Joint Embedding Learning of Educational Knowledge Graphs",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q49",
+   "query_type": "paper_lookup",
+   "P@K": 0.0,
+   "P2@K": 0.0,
+   "R@K": 0.0,
+   "nDCG@K": 0.0,
+   "Hit@K": 0.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R172579",
+     "title": "WISARD·a radical step forward in image recognition",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R405905",
+     "title": "Recognizing Human Actions as the Evolution of Pose Estimation Maps",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R403797",
+     "title": "Sill-Net: Feature Augmentation with Separated Illumination Representation",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1740870",
+     "title": "Scaling up GANs for Text-to-Image Synthesis",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R653428",
+     "title": "Recognition of Multiple-Food Images by Detecting Candidate Regions",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R653716",
+     "title": "Food Image Recognition Using Very Deep Convolutional Networks",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R32649",
+     "title": "Ship recognition from high resolution remote sensing imagery aided by spatial relationship",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1742434",
+     "title": "IDE-3D: Interactive Disentangled Editing for High-Resolution 3D-aware Portrait Synthesis",
+     "grade": 0
+    }
+   ]
+  },
+  {
+   "id": "Q50",
+   "query_type": "paper_lookup",
+   "P@K": 0.25,
+   "P2@K": 0.25,
+   "R@K": 1.0,
+   "nDCG@K": 0.8772153153380493,
+   "Hit@K": 1.0,
+   "empty": 0.0,
+   "unjudged": 0.0,
+   "retrieved": [
+    {
+     "uri": "http://orkg.org/orkg/resource/R370878",
+     "title": "Exploring the limits of transfer learning with a unified text-to-text transformer",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R370903",
+     "title": "Zero-Shot Text-to-Image Generation",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R370975",
+     "title": "Photorealistic Text-to-Image Diffusion Models with Deep Language Understanding",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R161808",
+     "title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer",
+     "grade": 2
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R609231",
+     "title": "WizardLM: Empowering Large Language Models to Follow Complex Instructions",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R470862",
+     "title": "A Hierarchical Model for Data-to-Text Generation",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R609258",
+     "title": "WizardMath: Empowering Mathematical Reasoning for Large Language Models via Reinforced Evol-Instruct",
+     "grade": 0
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R370907",
+     "title": "Learning Transferable Visual Models From Natural Language Supervision",
+     "grade": 0
+    }
+   ]
+  }
+ ]
+}
