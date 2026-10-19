@@ -10,3 +10,4 @@ data/*.rdf
 dist/
 build/
 logs/
+data/vector/

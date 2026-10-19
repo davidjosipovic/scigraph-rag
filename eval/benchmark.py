@@ -100,8 +100,13 @@ async def run_model(
     model: str,
     questions: list[dict],
     delay: float = 0.0,
+    pipeline_cls: type | None = None,
 ) -> list[QuestionResult]:
-    """Run all questions through the pipeline for one provider:model pair."""
+    """Run all questions through the pipeline for one provider:model pair.
+
+    ``pipeline_cls`` swaps in another RAGPipeline subclass (e.g. the vector
+    retrieval baseline in eval/vector_baseline.py).
+    """
     from backend.llm.factory import create_llm_client
     from backend.rag.pipeline import RAGPipeline
 
@@ -109,7 +114,7 @@ async def run_model(
     logger.info(f"=== Starting model: {label} ({len(questions)} questions) ===")
 
     llm_client = create_llm_client(provider=provider, model=model)
-    pipeline = RAGPipeline(llm_client=llm_client)
+    pipeline = (pipeline_cls or RAGPipeline)(llm_client=llm_client)
 
     results: list[QuestionResult] = []
 
