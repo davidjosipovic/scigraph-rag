@@ -180,7 +180,9 @@ def run(results_path: Path, judge_spec: str, out_dir: Path = RESULTS_DIR) -> Pat
     done = json.loads(out_path.read_text()) if out_path.exists() else {"judge": judge_spec, "answers": {}}
     answers = done["answers"]
 
-    todo = [r for r in results if not r.get("error") and f"{r['model']}|{r['question_id']}" not in answers]
+    # Provider failures can end up in the answer text ("Error: ..."), not in "error".
+    todo = [r for r in results if not r.get("error") and not (r["answer"] or "").startswith("Error:")
+            and f"{r['model']}|{r['question_id']}" not in answers]
     logger.info(f"{len(todo)} answers to judge with {judge_spec} ({len(answers)} already done)")
     for i, r in enumerate(todo, 1):
         key = f"{r['model']}|{r['question_id']}"
