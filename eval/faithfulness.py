@@ -127,9 +127,18 @@ def verify_claim(claim: dict, context: str, judge) -> dict:
     """
     raw = judge.generate(
         prompt=f"EVIDENCE:\n{context}\n\nCLAIM: {claim['claim']}\n\nLabel the claim.",
-        system=_VERIFY_SYSTEM, temperature=0.0, max_tokens=200,
+        system=_VERIFY_SYSTEM, temperature=0.0, max_tokens=400,
     )
-    data = _json_block(raw, "{", "}")
+    try:
+        data = _json_block(raw, "{", "}")
+    except ValueError:
+        # Long multi-line quotes sometimes break the JSON: read the fields directly.
+        label = re.search(r'"label"\s*:\s*"([SUC])', raw)
+        quote = re.search(r'"quote"\s*:\s*"((?:[^"\\]|\\.)*)"', raw)
+        if not label:
+            raise
+        data = {"label": label.group(1),
+                "quote": json.loads(f'"{quote.group(1)}"') if quote else ""}
     label = str(data.get("label", "")).strip().upper()[:1]
     quote = str(data.get("quote", "")).strip()
     if label not in LABELS:

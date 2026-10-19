@@ -544,6 +544,22 @@
      "found_by": [
       "pool-rules-test"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1879736",
+     "title": "AdaBest: Minimizing Client Drift in Federated Learning via Adaptive Bias Estimation",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1879742",
+     "title": "Connecting Low-Loss Subspace for Personalized Federated Learning",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
     }
    ]
   },
@@ -826,6 +842,46 @@
      "found_by": [
       "pool-e2e-graph"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1885048",
+     "title": "$V_kD:$ Improving Knowledge Distillation using Orthogonal Projections",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1884836",
+     "title": "Improving Knowledge Distillation via Regularizing Feature Norm and Direction",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1885108",
+     "title": "Knowledge Distillation Based on Transformed Teacher Matching",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1884954",
+     "title": "LumiNet: The Bright Side of Perceptual Knowledge Distillation",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1858964",
+     "title": "MV-MR: multi-views and multi-representations for self-supervised learning and knowledge distillation",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
     }
    ]
   },
@@ -1051,6 +1107,94 @@
      "grade": 0,
      "found_by": [
       "entity"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1748340",
+     "title": "AutoGCN -- Towards Generic Human Activity Recognition with Neural Architecture Search",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1718598",
+     "title": "CycleGANAS: Differentiable Neural Architecture Search for CycleGAN",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1738291",
+     "title": "Enhancing GAN Performance through Neural Architecture Search and Tensor Decomposition",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1706367",
+     "title": "Hierarchical Neural Architecture Search for Deep Stereo Matching",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1800985",
+     "title": "Partial Order Pruning: for Best Speed/Accuracy Trade-off in Neural Architecture Search",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1712346",
+     "title": "PocketNet: Extreme Lightweight Face Recognition Network using Neural Architecture Search and Multi-Step Knowledge Distillation",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1825472",
+     "title": "Multi-conditioned Graph Diffusion for Neural Architecture Search",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1825606",
+     "title": "Balanced Mixture of SuperNets for Learning the CNN Pooling Architecture",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1825727",
+     "title": "DeepMAD: Mathematical Architecture Design for Deep Convolutional Neural Network",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1825721",
+     "title": "Efficacy of Neural Prediction-Based Zero-Shot NAS",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1825173",
+     "title": "Generalization Properties of NAS under Activation and Skip Connection Search",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
      ]
     }
    ]
@@ -3732,6 +3876,14 @@
      "found_by": [
       "entity"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R161808",
+     "title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
     }
    ]
   },
@@ -3966,6 +4118,126 @@
      "found_by": [
       "pool-rerank30"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1757713",
+     "title": "MogaNet: Multi-order Gated Aggregation Network",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1803507",
+     "title": "On the Ideal Number of Groups for Isometric Gradient Propagation",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1812657",
+     "title": "Robust and accelerated single-spike spiking neural network training with applicability to challenging temporal tasks",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1812640",
+     "title": "Sparse Spiking Gradient Descent",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R411642",
+     "title": "DecAug: Out-of-Distribution Generalization via Decomposed Feature Representation and Semantic Augmentation",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R526704",
+     "title": "Empirical Risk Minimization for Stochastic Convex Optimization: $O(1/n)$- and $O(1/n^2)$-type of Risk Bounds",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1815075",
+     "title": "Learning in Wilson-Cowan model for metapopulation",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1854360",
+     "title": "Evaluating the Performance of TAAF for image classification models",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1854049",
+     "title": "EXACT: How to Train Your Accuracy",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R528483",
+     "title": "All you need is a good init",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R370907",
+     "title": "Learning Transferable Visual Models From Natural Language Supervision",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R528639",
+     "title": "Robust Training in High Dimensions via Block Coordinate Geometric Median Descent",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1852500",
+     "title": "Parametric Matrix Models",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1792193",
+     "title": "Efficient recurrent architectures through activity sparsity and sparse back-propagation through time",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1852631",
+     "title": "Learning local discrete features in explainable-by-design convolutional neural networks",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
     }
    ]
   },
@@ -4169,6 +4441,70 @@
      "grade": 2,
      "found_by": [
       "entity"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1852072",
+     "title": "DeiT-LT Distillation Strikes Back for Vision Transformer Training on Long-Tailed Datasets",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1858272",
+     "title": "Diff-SySC: An Approach Using Diffusion Models for Semi-Supervised Image Classification",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1857514",
+     "title": "Enhanced Long-Tailed Recognition with Contrastive CutMix Augmentation",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1860871",
+     "title": "Forte : Finding Outliers with Representation Typicality Estimation",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1824992",
+     "title": "GreenMachine: Automatic Design of Zero-Cost Proxies for Energy-Efficient NAS",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1825087",
+     "title": "LayerNAS: Neural Architecture Search in Polynomial Complexity",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1853672",
+     "title": "Scaling Up Semi-supervised Learning with Unconstrained Unlabelled Data",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1853122",
+     "title": "SST: Self-training with Self-adaptive Thresholding for Semi-supervised Learning",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
      ]
     }
    ]
@@ -4800,6 +5136,22 @@
      "found_by": [
       "pool-e2e-graph"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1703417",
+     "title": "ST-MoE-BERT: A Spatial-Temporal Mixture-of-Experts Framework for Long-Term Cross-City Mobility Prediction",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1925449",
+     "title": "BanglaBERT: Language Model Pretraining and Benchmarks for Low-Resource Language Understanding Evaluation in Bangla",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
     }
    ]
   },
@@ -5195,6 +5547,54 @@
      "found_by": [
       "pool-rules"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1730905",
+     "title": "3D Human Pose and Shape Estimation via HybrIK-Transformer",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1735967",
+     "title": "HAT: Hardware-Aware Transformers for Efficient Natural Language Processing",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1715547",
+     "title": "Holistic Transformer: A Joint Neural Network for Trajectory Prediction and Decision-Making of Autonomous Vehicles",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1735984",
+     "title": "Lite Transformer with Long-Short Range Attention",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1735939",
+     "title": "PowerNorm: Rethinking Batch Normalization in Transformers",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1712104",
+     "title": "Transformer-Based Auxiliary Loss for Face Recognition Across Age Variations",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
     }
    ]
   },
@@ -5483,6 +5883,14 @@
      "found_by": [
       "pool-v2"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R556054",
+     "title": "Attention-Based Adaptive Spectral-Spatial Kernel ResNet for Hyperspectral Image Classification",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
     }
    ]
   },
@@ -5763,6 +6171,166 @@
      "grade": 0,
      "found_by": [
       "pool-field"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1471131",
+     "title": "A Deep Learning Approach for Crop Disease and Pest Classification Using Swin Transformer and Dual-Attention Multi-Scale Fusion Network",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1471139",
+     "title": "Deep Transfer Learning-Based Multi-Object Detection for Plant Stomata Phenotypic Traits Intelligent Recognition",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1471148",
+     "title": "End-to-End Deep Learning Model for Corn Leaf Disease Classification",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1471226",
+     "title": "Identification of Mangrove Invasive Plant <i>Derris Trifoliate</i> Using UAV Images and Deep Learning Algorithms",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1387073",
+     "title": "A scalable pipeline to create synthetic datasets from functional–structural plant models for deep learning",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1383310",
+     "title": "Attracting Effect of Pinpoint Auditory Glimpse on Digital Signage",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R111782",
+     "title": "AUTOHOME-ORCA at SemEval-2019 Task 8: Application of BERT for Fact-Checking in Community Forums",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1359006",
+     "title": "Explanation versus Structured Input in Processing Instruction",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1359013",
+     "title": "Exploring Input Processing in the Classroom: An Experimental Comparison of Processing Instruction and Enriched Input",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1359009",
+     "title": "Formal Instruction from a Processing Perspective: An Investigation into the Spanish Past Tense",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1383477",
+     "title": "Interactive public ambient displays: transitioning from implicit to explicit, public to personal, interaction with multiple users",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R501478",
+     "title": "UTNLP at SemEval-2022 Task 6: A Comparative Analysis of Sarcasm Detection using generative-based and mutation-based data augmentation",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R492930",
+     "title": "AUCO ResNet: an end-to-end network for Covid-19 pre-screening from cough and breath",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R433165",
+     "title": "Brain Tumor Segmentation and Radiomics Survival Prediction: Contribution to the BRATS 2017 Challenge",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R399639",
+     "title": "Do We Really Need to Collect Millions of Faces for Effective Face Recognition?",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R550857",
+     "title": "End-to-End Offline Speech Translation System for IWSLT 2020 using Modality Agnostic Meta-Learning",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R689682",
+     "title": "Deep Learning-Based Prediction of Key Performance Indicators for Electrical Machines",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1411301",
+     "title": "Feature Selection and Machine Learning Algorithms for an Improved Credit Card Fraud Detection System ",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R689660",
+     "title": "Machine learning for KPIs prediction: a case study of the overall equipment effectiveness within the automotive industry",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1471242",
+     "title": "Zero-Shot Transfer Learning Framework for Plant Leaf Disease Classification",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
      ]
     }
    ]
@@ -6072,6 +6640,38 @@
      "grade": 1,
      "found_by": [
       "pool-rules-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R603953",
+     "title": "Detection of invalid AIS messages using machine learning techniques",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1471306",
+     "title": "Discrimination of ingestive behavior in sheep using an electronic device based on a triaxial accelerometer and machine learning",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1910661",
+     "title": "Leading Edge Erosion Classification in Offshore Wind Turbines Using Feature Extraction and Classical Machine Learning",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1471374",
+     "title": "Machine Learning Model Based Expert System for Pig Disease Diagnosis",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
      ]
     }
    ]
@@ -6708,6 +7308,70 @@
      "grade": 1,
      "found_by": [
       "pool-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1794366",
+     "title": "BreastScreening: On the Use of Multi-Modality in Medical Imaging Diagnosis",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R433160",
+     "title": "CNN-based Segmentation of Medical Imaging Data",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R433767",
+     "title": "Conditional Random Fields as Recurrent Neural Networks for 3D Medical Imaging Segmentation",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1875354",
+     "title": "Feature Extraction for Generative Medical Imaging Evaluation: New Evidence Against an Evolving Trend",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1737035",
+     "title": "Rethinking Attention Gated with Hybrid Dual Pyramid Transformer-CNN for Generalized Segmentation in Medical Imaging",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1736247",
+     "title": "S2S2: Semantic Stacking for Robust Semantic Segmentation in Medical Imaging",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R433441",
+     "title": "An application of cascaded 3D fully convolutional networks for medical image segmentation",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R433436",
+     "title": "Spatial Aggregation of Holistically-Nested Convolutional Neural Networks for Automated Pancreas Localization and Segmentation",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
      ]
     }
    ]
@@ -8190,6 +8854,22 @@
      "found_by": [
       "pool-rules-test"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1644397",
+     "title": "An imaging system for monitoring the in-and-out activity of honey bees",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R557593",
+     "title": "Fastformer: Additive Attention Can Be All You Need",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
     }
    ]
   },
@@ -8829,6 +9509,14 @@
      "grade": 0,
      "found_by": [
       "pool-rules-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1387524",
+     "title": "OFA: Unifying Architectures, Tasks, and Modalities Through a Simple Sequence-to-Sequence Learning Framework",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
      ]
     }
    ]
@@ -9984,6 +10672,54 @@
      "found_by": [
       "pool-rules"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R11026",
+     "title": "AMUSE: Multilingual Semantic Parsing for Question Answering over Linked Data",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R11022",
+     "title": "Evaluating Architectural Choices for Deep Learning Approaches for Question Answering Over Knowledge Bases",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1382562",
+     "title": "CL-MoE: Enhancing Multimodal Large Language Model with Dual Momentum Mixture-of-Experts for Continual Visual Question Answering",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R283347",
+     "title": "Question Answering system based on Knowledge Graph of Film Culture",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1410871",
+     "title": "YESciEval: Robust LLM-as-a-Judge for Scientific Question Answering",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R283296",
+     "title": "\"unscripted conversation through knowledge graph\"",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
     }
    ]
   },
@@ -10266,6 +11002,22 @@
      "found_by": [
       "pool-rules-test"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R197050",
+     "title": "Automatic Speech Recognition Datasets in Cantonese: A Survey and New Dataset",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1726009",
+     "title": "Do We Still Need Automatic Speech Recognition for Spoken Language Understanding?",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
     }
    ]
   },
@@ -10518,6 +11270,70 @@
      "found_by": [
       "entity"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1841491",
+     "title": "Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers for Generative Recommendations",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1841550",
+     "title": "Heterophily-Aware Fair Recommendation using Graph Convolutional Networks",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1841710",
+     "title": "Neighborhood-Enhanced Supervised Contrastive Learning for Collaborative Filtering",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1841431",
+     "title": "Positional encoding is not the same as context: A study on positional encoding for sequential recommendation",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1841468",
+     "title": "Proxy-based Item Representation for Attribute and Context-aware Recommendation",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1841999",
+     "title": "Retrieval with Learned Similarities",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1841892",
+     "title": "SVD-AE: Simple Autoencoders for Collaborative Filtering",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1369218",
+     "title": "A Brief Overview of Artificial Intelligence (AI)",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
     }
    ]
   },
@@ -10719,6 +11535,22 @@
      "grade": 1,
      "found_by": [
       "entity"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R370897",
+     "title": "Language Models are Few-Shot Learners",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1768258",
+     "title": "M2-Encoder: Advancing Bilingual Image-Text Understanding by Large-scale Efficient Pretraining",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
      ]
     }
    ]
@@ -11002,6 +11834,62 @@
      "found_by": [
       "pool-rerank"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R553667",
+     "title": "Adversarial GLUE: A Multi-Task Benchmark for Robustness Evaluation of Language Models",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R417679",
+     "title": "Transfer Learning in Biomedical Natural Language Processing: An Evaluation of BERT and ELMo on Ten Benchmarking Datasets",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1850545",
+     "title": "Climate Research Domain BERTs: Pretraining, Adaptation, and Evaluation",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R220497",
+     "title": "Fake News Detection in the Urdu Language using CharCNN-RoBERTa",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R221079",
+     "title": "A benchmark study of machine learning models for online fake news detection",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1565231",
+     "title": "Adapting language models for mental health analysis on social media",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1469444",
+     "title": "Deep Ensemble Network for Sentiment Analysis in Bi-lingual Low-resource Languages",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
     }
    ]
   },
@@ -11278,6 +12166,14 @@
      "grade": 1,
      "found_by": [
       "pool-ablation"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1802264",
+     "title": "SHREC 2022: pothole and crack detection in the road pavement using images and RGB-D data",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
      ]
     }
    ]
@@ -11651,6 +12547,38 @@
      "grade": 1,
      "found_by": [
       "pool-benchmark"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1812182",
+     "title": "Hopular: Modern Hopfield Networks for Tabular Data",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R479101",
+     "title": "HYDRA: A multimodal deep learning framework for malware classification",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1815115",
+     "title": "BanglaBook: A Large-scale Bangla Dataset for Sentiment Analysis from Book Reviews",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1895139",
+     "title": "Machine Learning Algorithms for Breast Cancer Detection in Mammography Images: A Comparative Study",
+     "grade": 2,
+     "found_by": [
+      "benchmark_20261019"
      ]
     }
    ]
@@ -12029,6 +12957,14 @@
      "grade": 2,
      "found_by": [
       "entity"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R598321",
+     "title": "ERNIE 3.0: Large-scale Knowledge Enhanced Pre-training for Language Understanding and Generation",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
      ]
     }
    ]
@@ -12901,6 +13837,22 @@
      "found_by": [
       "pool-e2e-old"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1978255",
+     "title": "Knowledge Enhanced Graph Neural Networks for Graph Completion",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R690094",
+     "title": "Identifying Hate Speech Through Syntax Dependency Graph Convolution and Sentiment Knowledge Transfer",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
     }
    ]
   },
@@ -13706,6 +14658,14 @@
      "grade": 1,
      "found_by": [
       "pool-rules-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1565251",
+     "title": "Effective depression detection and interpretation: Integrating machine learning, deep learning, language models, and explainable AI",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
      ]
     }
    ]
@@ -14756,6 +15716,38 @@
      "found_by": [
       "pool-e2e-graph"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R737671",
+     "title": "A Fake News Detection System based on Combination of Word Embedded Techniques and Hybrid Deep Learning Model",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1559195",
+     "title": "NMal-Droid: network-based android malware detection system using transfer learning and CNN-BiGRU ensemble",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R1925221",
+     "title": "COVID-Twitter-BERT: A Natural Language Processing Model to Analyse COVID-19 Content on Twitter",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R194335",
+     "title": "Efficient estimation of word representations in vector space",
+     "grade": 1,
+     "found_by": [
+      "benchmark_20261019"
+     ]
     }
    ]
   },
@@ -15076,6 +16068,38 @@
      "grade": 0,
      "found_by": [
       "pool-rules-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R260118",
+     "title": "Imposing Relation Structure in Language-Model Embeddings Using Contrastive Learning",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R284251",
+     "title": "Learning Multi-faceted Knowledge Graph Embeddings for Natural Language Processing",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R476574",
+     "title": "Order-Embeddings of Images and Language",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R11007",
+     "title": "spaCy 2: Natural language understanding with bloom embeddings, convolutional neural networks and incremental parsing",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
      ]
     }
    ]
@@ -15846,6 +16870,14 @@
      "grade": 0,
      "found_by": [
       "pool-rules-test"
+     ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R664276",
+     "title": "Knowledge Graph Generation From Text",
+     "grade": 0,
+     "found_by": [
+      "benchmark_20261019"
      ]
     }
    ]
