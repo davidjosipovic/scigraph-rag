@@ -40,6 +40,10 @@ class Settings(BaseSettings):
     ollama_base_url: str = "http://localhost:11434"
     ollama_model: str = "llama3"
     ollama_timeout: int = 120
+    # Context window sent with every request. Ollama's VRAM-based default is
+    # 4096 on an 8 GB GPU and silently cuts longer prompts from the front;
+    # the longest evaluation prompt is ~4.8k tokens, judge prompts are longer.
+    ollama_num_ctx: int = 8192
 
     # --- OpenAI ---
     openai_api_key: str = ""

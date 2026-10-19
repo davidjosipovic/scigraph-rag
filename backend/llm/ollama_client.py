@@ -80,6 +80,7 @@ class OllamaClient(BaseLLMClient):
             "options": {
                 "temperature": temperature,
                 "num_predict": max_tokens,
+                "num_ctx": settings.ollama_num_ctx,
             },
         }
 

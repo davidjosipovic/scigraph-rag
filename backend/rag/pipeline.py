@@ -120,6 +120,7 @@ class RAGPipeline:
                 - sparql_queries:    List of SPARQL queries executed
                 - answer:            LLM-generated answer
                 - sources:           Deduplicated cited papers
+                - context:           Knowledge graph context given to the LLM
                 - kg_results_count:  Total KG results retrieved
                 - strategies_used:   Retrieval strategies that were used
         """
@@ -147,6 +148,7 @@ class RAGPipeline:
             "strategies_used": retrieval.strategies_used,
             "answer": answer,
             "sources": sources,
+            "context": context,
             "kg_results_count": retrieval.total_results,
         }
 

@@ -62,6 +62,7 @@ class QuestionResult:
     kg_results_count: int
     sources_count: int
     sources: list[dict]
+    context: str
     query_type_detected: str
     entities_methods: list[str]
     entities_datasets: list[str]
@@ -145,6 +146,7 @@ async def run_model(
             kg_results_count=pipeline_result.get("kg_results_count", 0),
             sources_count=len(raw_sources),
             sources=raw_sources,
+            context=pipeline_result.get("context", ""),
             query_type_detected=pipeline_result.get("query_type", ""),
             entities_methods=entities.get("methods", []),
             entities_datasets=entities.get("datasets", []),
