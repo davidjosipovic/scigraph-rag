@@ -1,0 +1,1103 @@
+[
+ {
+  "id": "i001",
+  "qid": "Q29",
+  "uri": "http://orkg.org/orkg/resource/R283892",
+  "claude_grade": 0,
+  "found_by": [
+   "pool-v2"
+  ]
+ },
+ {
+  "id": "i002",
+  "qid": "Q04",
+  "uri": "http://orkg.org/orkg/resource/R1824992",
+  "claude_grade": 2,
+  "found_by": [
+   "entity"
+  ]
+ },
+ {
+  "id": "i003",
+  "qid": "Q03",
+  "uri": "http://orkg.org/orkg/resource/R1884954",
+  "claude_grade": 2,
+  "found_by": [
+   "benchmark_20261019"
+  ]
+ },
+ {
+  "id": "i004",
+  "qid": "Q29",
+  "uri": "http://orkg.org/orkg/resource/R640193",
+  "claude_grade": 0,
+  "found_by": [
+   "vector_baseline"
+  ]
+ },
+ {
+  "id": "i005",
+  "qid": "Q35",
+  "uri": "http://orkg.org/orkg/resource/R510170",
+  "claude_grade": 0,
+  "found_by": [
+   "vector_baseline"
+  ]
+ },
+ {
+  "id": "i006",
+  "qid": "Q19",
+  "uri": "http://orkg.org/orkg/resource/R1471139",
+  "claude_grade": 0,
+  "found_by": [
+   "benchmark_20261019"
+  ]
+ },
+ {
+  "id": "i007",
+  "qid": "Q31",
+  "uri": "http://orkg.org/orkg/resource/R1765439",
+  "claude_grade": 2,
+  "found_by": [
+   "title"
+  ]
+ },
+ {
+  "id": "i008",
+  "qid": "Q44",
+  "uri": "http://orkg.org/orkg/resource/R138702",
+  "claude_grade": 2,
+  "found_by": [
+   "title"
+  ]
+ },
+ {
+  "id": "i009",
+  "qid": "Q25",
+  "uri": "http://orkg.org/orkg/resource/R109012",
+  "claude_grade": 0,
+  "found_by": [
+   "title"
+  ]
+ },
+ {
+  "id": "i010",
+  "qid": "Q37",
+  "uri": "http://orkg.org/orkg/resource/R1385236",
+  "claude_grade": 1,
+  "found_by": [
+   "vector_baseline"
+  ]
+ },
+ {
+  "id": "i011",
+  "qid": "Q30",
+  "uri": "http://orkg.org/orkg/resource/R424653",
+  "claude_grade": 0,
+  "found_by": [
+   "pool-e2e-old"
+  ]
+ },
+ {
+  "id": "i012",
+  "qid": "Q09",
+  "uri": "http://orkg.org/orkg/resource/R212818",
+  "claude_grade": 0,
+  "found_by": [
+   "pool-v3"
+  ]
+ },
+ {
+  "id": "i013",
+  "qid": "Q43",
+  "uri": "http://orkg.org/orkg/resource/R1387602",
+  "claude_grade": 0,
+  "found_by": [
+   "entity"
+  ]
+ },
+ {
+  "id": "i014",
+  "qid": "Q23",
+  "uri": "http://orkg.org/orkg/resource/R213311",
+  "claude_grade": 1,
+  "found_by": [
+   "pool-rerank30"
+  ]
+ },
+ {
+  "id": "i015",
+  "qid": "Q35",
+  "uri": "http://orkg.org/orkg/resource/R1850545",
+  "claude_grade": 1,
+  "found_by": [
+   "benchmark_20261019"
+  ]
+ },
+ {
+  "id": "i016",
+  "qid": "Q05",
+  "uri": "http://orkg.org/orkg/resource/R436424",
+  "claude_grade": 2,
+  "found_by": [
+   "claim",
+   "entity"
+  ]
+ },
+ {
+  "id": "i017",
+  "qid": "Q31",
+  "uri": "http://orkg.org/orkg/resource/R6300",
+  "claude_grade": 2,
+  "found_by": [
+   "vector_baseline"
+  ]
+ },
+ {
+  "id": "i018",
+  "qid": "Q43",
+  "uri": "http://orkg.org/orkg/resource/R1565025",
+  "claude_grade": 1,
+  "found_by": [
+   "pool-e2e-old"
+  ]
+ },
+ {
+  "id": "i019",
+  "qid": "Q36",
+  "uri": "http://orkg.org/orkg/resource/R1788155",
+  "claude_grade": 1,
+  "found_by": [
+   "pool-v4"
+  ]
+ },
+ {
+  "id": "i020",
+  "qid": "Q41",
+  "uri": "http://orkg.org/orkg/resource/R476160",
+  "claude_grade": 1,
+  "found_by": [
+   "vector_baseline"
+  ]
+ },
+ {
+  "id": "i021",
+  "qid": "Q50",
+  "uri": "http://orkg.org/orkg/resource/R1388853",
+  "claude_grade": 0,
+  "found_by": [
+   "entity"
+  ]
+ },
+ {
+  "id": "i022",
+  "qid": "Q19",
+  "uri": "http://orkg.org/orkg/resource/R1355642",
+  "claude_grade": 0,
+  "found_by": [
+   "vector_baseline"
+  ]
+ },
+ {
+  "id": "i023",
+  "qid": "Q32",
+  "uri": "http://orkg.org/orkg/resource/R284310",
+  "claude_grade": 1,
+  "found_by": [
+   "pool-rules-test"
+  ]
+ },
+ {
+  "id": "i024",
+  "qid": "Q15",
+  "uri": "http://orkg.org/orkg/resource/R12209",
+  "claude_grade": 2,
+  "found_by": [
+   "entity",
+   "pipeline"
+  ]
+ },
+ {
+  "id": "i025",
+  "qid": "Q41",
+  "uri": "http://orkg.org/orkg/resource/R1560373",
+  "claude_grade": 0,
+  "found_by": [
+   "pipeline"
+  ]
+ },
+ {
+  "id": "i026",
+  "qid": "Q37",
+  "uri": "http://orkg.org/orkg/resource/R1471358",
+  "claude_grade": 1,
+  "found_by": [
+   "pool-rerank"
+  ]
+ },
+ {
+  "id": "i027",
+  "qid": "Q18",
+  "uri": "http://orkg.org/orkg/resource/R1721730",
+  "claude_grade": 1,
+  "found_by": [
+   "pool-v2"
+  ]
+ },
+ {
+  "id": "i028",
+  "qid": "Q30",
+  "uri": "http://orkg.org/orkg/resource/R1740870",
+  "claude_grade": 0,
+  "found_by": [
+   "vector_baseline"
+  ]
+ },
+ {
+  "id": "i029",
+  "qid": "Q28",
+  "uri": "http://orkg.org/orkg/resource/R1411382",
+  "claude_grade": 0,
+  "found_by": [
+   "claim",
+   "entity"
+  ]
+ },
+ {
+  "id": "i030",
+  "qid": "Q32",
+  "uri": "http://orkg.org/orkg/resource/R464209",
+  "claude_grade": 0,
+  "found_by": [
+   "entity"
+  ]
+ },
+ {
+  "id": "i031",
+  "qid": "Q09",
+  "uri": "http://orkg.org/orkg/resource/R1469452",
+  "claude_grade": 1,
+  "found_by": [
+   "claim",
+   "entity"
+  ]
+ },
+ {
+  "id": "i032",
+  "qid": "Q28",
+  "uri": "http://orkg.org/orkg/resource/R1722012",
+  "claude_grade": 0,
+  "found_by": [
+   "pool-v2"
+  ]
+ },
+ {
+  "id": "i033",
+  "qid": "Q33",
+  "uri": "http://orkg.org/orkg/resource/R565926",
+  "claude_grade": 2,
+  "found_by": [
+   "title"
+  ]
+ },
+ {
+  "id": "i034",
+  "qid": "Q24",
+  "uri": "http://orkg.org/orkg/resource/R1742052",
+  "claude_grade": 2,
+  "found_by": [
+   "pool-test"
+  ]
+ },
+ {
+  "id": "i035",
+  "qid": "Q36",
+  "uri": "http://orkg.org/orkg/resource/R485450",
+  "claude_grade": 0,
+  "found_by": [
+   "vector_baseline"
+  ]
+ },
+ {
+  "id": "i036",
+  "qid": "Q33",
+  "uri": "http://orkg.org/orkg/resource/R1382489",
+  "claude_grade": 2,
+  "found_by": [
+   "claim",
+   "title"
+  ]
+ },
+ {
+  "id": "i037",
+  "qid": "Q08",
+  "uri": "http://orkg.org/orkg/resource/R1844786",
+  "claude_grade": 1,
+  "found_by": [
+   "pool-ablation"
+  ]
+ },
+ {
+  "id": "i038",
+  "qid": "Q34",
+  "uri": "http://orkg.org/orkg/resource/R1768248",
+  "claude_grade": 2,
+  "found_by": [
+   "vector_baseline"
+  ]
+ },
+ {
+  "id": "i039",
+  "qid": "Q31",
+  "uri": "http://orkg.org/orkg/resource/R1770297",
+  "claude_grade": 2,
+  "found_by": [
+   "title"
+  ]
+ },
+ {
+  "id": "i040",
+  "qid": "Q20",
+  "uri": "http://orkg.org/orkg/resource/R229032",
+  "claude_grade": 1,
+  "found_by": [
+   "title"
+  ]
+ },
+ {
+  "id": "i041",
+  "qid": "Q32",
+  "uri": "http://orkg.org/orkg/resource/R1723412",
+  "claude_grade": 2,
+  "found_by": [
+   "title"
+  ]
+ },
+ {
+  "id": "i042",
+  "qid": "Q47",
+  "uri": "http://orkg.org/orkg/resource/R25253",
+  "claude_grade": 1,
+  "found_by": [
+   "pool-rerank30"
+  ]
+ },
+ {
+  "id": "i043",
+  "qid": "Q24",
+  "uri": "http://orkg.org/orkg/resource/R426100",
+  "claude_grade": 2,
+  "found_by": [
+   "vector_baseline"
+  ]
+ },
+ {
+  "id": "i044",
+  "qid": "Q09",
+  "uri": "http://orkg.org/orkg/resource/R476652",
+  "claude_grade": 0,
+  "found_by": [
+   "vector_baseline"
+  ]
+ },
+ {
+  "id": "i045",
+  "qid": "Q36",
+  "uri": "http://orkg.org/orkg/resource/R1737603",
+  "claude_grade": 1,
+  "found_by": [
+   "claim",
+   "pipeline"
+  ]
+ },
+ {
+  "id": "i046",
+  "qid": "Q40",
+  "uri": "http://orkg.org/orkg/resource/R1735196",
+  "claude_grade": 1,
+  "found_by": [
+   "claim",
+   "entity"
+  ]
+ },
+ {
+  "id": "i047",
+  "qid": "Q48",
+  "uri": "http://orkg.org/orkg/resource/R1771793",
+  "claude_grade": 0,
+  "found_by": [
+   "claim"
+  ]
+ },
+ {
+  "id": "i048",
+  "qid": "Q11",
+  "uri": "http://orkg.org/orkg/resource/R526331",
+  "claude_grade": 2,
+  "found_by": [
+   "vector_baseline"
+  ]
+ },
+ {
+  "id": "i049",
+  "qid": "Q27",
+  "uri": "http://orkg.org/orkg/resource/R1379785",
+  "claude_grade": 0,
+  "found_by": [
+   "entity"
+  ]
+ },
+ {
+  "id": "i050",
+  "qid": "Q44",
+  "uri": "http://orkg.org/orkg/resource/R1895085",
+  "claude_grade": 2,
+  "found_by": [
+   "vector_baseline"
+  ]
+ },
+ {
+  "id": "i051",
+  "qid": "Q32",
+  "uri": "http://orkg.org/orkg/resource/R1723259",
+  "claude_grade": 2,
+  "found_by": [
+   "pipeline"
+  ]
+ },
+ {
+  "id": "i052",
+  "qid": "Q06",
+  "uri": "http://orkg.org/orkg/resource/R601293",
+  "claude_grade": 0,
+  "found_by": [
+   "pipeline"
+  ]
+ },
+ {
+  "id": "i053",
+  "qid": "Q49",
+  "uri": "http://orkg.org/orkg/resource/R69560",
+  "claude_grade": 0,
+  "found_by": [
+   "pool-e2e"
+  ]
+ },
+ {
+  "id": "i054",
+  "qid": "Q39",
+  "uri": "http://orkg.org/orkg/resource/R456009",
+  "claude_grade": 1,
+  "found_by": [
+   "title"
+  ]
+ },
+ {
+  "id": "i055",
+  "qid": "Q02",
+  "uri": "http://orkg.org/orkg/resource/R1560432",
+  "claude_grade": 2,
+  "found_by": [
+   "entity",
+   "pipeline"
+  ]
+ },
+ {
+  "id": "i056",
+  "qid": "Q01",
+  "uri": "http://orkg.org/orkg/resource/R756308",
+  "claude_grade": 2,
+  "found_by": [
+   "claim"
+  ]
+ },
+ {
+  "id": "i057",
+  "qid": "Q47",
+  "uri": "http://orkg.org/orkg/resource/R1388197",
+  "claude_grade": 1,
+  "found_by": [
+   "title"
+  ]
+ },
+ {
+  "id": "i058",
+  "qid": "Q31",
+  "uri": "http://orkg.org/orkg/resource/R461808",
+  "claude_grade": 1,
+  "found_by": [
+   "pipeline"
+  ]
+ },
+ {
+  "id": "i059",
+  "qid": "Q36",
+  "uri": "http://orkg.org/orkg/resource/R1884762",
+  "claude_grade": 2,
+  "found_by": [
+   "entity"
+  ]
+ },
+ {
+  "id": "i060",
+  "qid": "Q20",
+  "uri": "http://orkg.org/orkg/resource/R1471350",
+  "claude_grade": 1,
+  "found_by": [
+   "pool-rules-test"
+  ]
+ },
+ {
+  "id": "i061",
+  "qid": "Q20",
+  "uri": "http://orkg.org/orkg/resource/R109668",
+  "claude_grade": 0,
+  "found_by": [
+   "title"
+  ]
+ },
+ {
+  "id": "i062",
+  "qid": "Q45",
+  "uri": "http://orkg.org/orkg/resource/R1714851",
+  "claude_grade": 2,
+  "found_by": [
+   "title"
+  ]
+ },
+ {
+  "id": "i063",
+  "qid": "Q43",
+  "uri": "http://orkg.org/orkg/resource/R428505",
+  "claude_grade": 1,
+  "found_by": [
+   "title"
+  ]
+ },
+ {
+  "id": "i064",
+  "qid": "Q26",
+  "uri": "http://orkg.org/orkg/resource/R176039",
+  "claude_grade": 2,
+  "found_by": [
+   "lookup"
+  ]
+ },
+ {
+  "id": "i065",
+  "qid": "Q25",
+  "uri": "http://orkg.org/orkg/resource/R1387593",
+  "claude_grade": 1,
+  "found_by": [
+   "entity"
+  ]
+ },
+ {
+  "id": "i066",
+  "qid": "Q50",
+  "uri": "http://orkg.org/orkg/resource/R1911305",
+  "claude_grade": 0,
+  "found_by": [
+   "entity"
+  ]
+ },
+ {
+  "id": "i067",
+  "qid": "Q22",
+  "uri": "http://orkg.org/orkg/resource/R433441",
+  "claude_grade": 1,
+  "found_by": [
+   "benchmark_20261019"
+  ]
+ },
+ {
+  "id": "i068",
+  "qid": "Q11",
+  "uri": "http://orkg.org/orkg/resource/R1871598",
+  "claude_grade": 2,
+  "found_by": [
+   "title"
+  ]
+ },
+ {
+  "id": "i069",
+  "qid": "Q09",
+  "uri": "http://orkg.org/orkg/resource/R1880374",
+  "claude_grade": 0,
+  "found_by": [
+   "pool-rerank30"
+  ]
+ },
+ {
+  "id": "i070",
+  "qid": "Q50",
+  "uri": "http://orkg.org/orkg/resource/R1720055",
+  "claude_grade": 0,
+  "found_by": [
+   "pool-e2e"
+  ]
+ },
+ {
+  "id": "i071",
+  "qid": "Q48",
+  "uri": "http://orkg.org/orkg/resource/R492787",
+  "claude_grade": 0,
+  "found_by": [
+   "pool-v2"
+  ]
+ },
+ {
+  "id": "i072",
+  "qid": "Q13",
+  "uri": "http://orkg.org/orkg/resource/R281370",
+  "claude_grade": 2,
+  "found_by": [
+   "pool-rerank30"
+  ]
+ },
+ {
+  "id": "i073",
+  "qid": "Q29",
+  "uri": "http://orkg.org/orkg/resource/R172672",
+  "claude_grade": 0,
+  "found_by": [
+   "claim"
+  ]
+ },
+ {
+  "id": "i074",
+  "qid": "Q10",
+  "uri": "http://orkg.org/orkg/resource/R209435",
+  "claude_grade": 1,
+  "found_by": [
+   "title"
+  ]
+ },
+ {
+  "id": "i075",
+  "qid": "Q28",
+  "uri": "http://orkg.org/orkg/resource/R525697",
+  "claude_grade": 1,
+  "found_by": [
+   "vector_baseline"
+  ]
+ },
+ {
+  "id": "i076",
+  "qid": "Q11",
+  "uri": "http://orkg.org/orkg/resource/R1356757",
+  "claude_grade": 0,
+  "found_by": [
+   "claim",
+   "entity"
+  ]
+ },
+ {
+  "id": "i077",
+  "qid": "Q50",
+  "uri": "http://orkg.org/orkg/resource/R471937",
+  "claude_grade": 0,
+  "found_by": [
+   "vector_baseline"
+  ]
+ },
+ {
+  "id": "i078",
+  "qid": "Q26",
+  "uri": "http://orkg.org/orkg/resource/R1376458",
+  "claude_grade": 0,
+  "found_by": [
+   "entity"
+  ]
+ },
+ {
+  "id": "i079",
+  "qid": "Q04",
+  "uri": "http://orkg.org/orkg/resource/R476963",
+  "claude_grade": 2,
+  "found_by": [
+   "vector_baseline"
+  ]
+ },
+ {
+  "id": "i080",
+  "qid": "Q49",
+  "uri": "http://orkg.org/orkg/resource/R455399",
+  "claude_grade": 0,
+  "found_by": [
+   "pool-rules"
+  ]
+ },
+ {
+  "id": "i081",
+  "qid": "Q12",
+  "uri": "http://orkg.org/orkg/resource/R216396",
+  "claude_grade": 1,
+  "found_by": [
+   "claim"
+  ]
+ },
+ {
+  "id": "i082",
+  "qid": "Q44",
+  "uri": "http://orkg.org/orkg/resource/R1563896",
+  "claude_grade": 0,
+  "found_by": [
+   "entity",
+   "pipeline",
+   "title"
+  ]
+ },
+ {
+  "id": "i083",
+  "qid": "Q04",
+  "uri": "http://orkg.org/orkg/resource/R197596",
+  "claude_grade": 2,
+  "found_by": [
+   "claim"
+  ]
+ },
+ {
+  "id": "i084",
+  "qid": "Q40",
+  "uri": "http://orkg.org/orkg/resource/R370887",
+  "claude_grade": 1,
+  "found_by": [
+   "claim",
+   "entity",
+   "pipeline"
+  ]
+ },
+ {
+  "id": "i085",
+  "qid": "Q44",
+  "uri": "http://orkg.org/orkg/resource/R1736980",
+  "claude_grade": 2,
+  "found_by": [
+   "vector_baseline"
+  ]
+ },
+ {
+  "id": "i086",
+  "qid": "Q19",
+  "uri": "http://orkg.org/orkg/resource/R1471152",
+  "claude_grade": 0,
+  "found_by": [
+   "entity"
+  ]
+ },
+ {
+  "id": "i087",
+  "qid": "Q01",
+  "uri": "http://orkg.org/orkg/resource/R415386",
+  "claude_grade": 2,
+  "found_by": [
+   "entity"
+  ]
+ },
+ {
+  "id": "i088",
+  "qid": "Q44",
+  "uri": "http://orkg.org/orkg/resource/R1411326",
+  "claude_grade": 0,
+  "found_by": [
+   "claim"
+  ]
+ },
+ {
+  "id": "i089",
+  "qid": "Q23",
+  "uri": "http://orkg.org/orkg/resource/R1387455",
+  "claude_grade": 1,
+  "found_by": [
+   "pool-rerank30"
+  ]
+ },
+ {
+  "id": "i090",
+  "qid": "Q46",
+  "uri": "http://orkg.org/orkg/resource/R1411512",
+  "claude_grade": 1,
+  "found_by": [
+   "entity",
+   "pipeline"
+  ]
+ },
+ {
+  "id": "i091",
+  "qid": "Q04",
+  "uri": "http://orkg.org/orkg/resource/R1819028",
+  "claude_grade": 0,
+  "found_by": [
+   "entity"
+  ]
+ },
+ {
+  "id": "i092",
+  "qid": "Q21",
+  "uri": "http://orkg.org/orkg/resource/R11000",
+  "claude_grade": 1,
+  "found_by": [
+   "pool-rerank"
+  ]
+ },
+ {
+  "id": "i093",
+  "qid": "Q14",
+  "uri": "http://orkg.org/orkg/resource/R1702176",
+  "claude_grade": 2,
+  "found_by": [
+   "entity"
+  ]
+ },
+ {
+  "id": "i094",
+  "qid": "Q43",
+  "uri": "http://orkg.org/orkg/resource/R1565033",
+  "claude_grade": 2,
+  "found_by": [
+   "pool-v3"
+  ]
+ },
+ {
+  "id": "i095",
+  "qid": "Q41",
+  "uri": "http://orkg.org/orkg/resource/R468572",
+  "claude_grade": 2,
+  "found_by": [
+   "pool-benchmark"
+  ]
+ },
+ {
+  "id": "i096",
+  "qid": "Q10",
+  "uri": "http://orkg.org/orkg/resource/R229032",
+  "claude_grade": 2,
+  "found_by": [
+   "title"
+  ]
+ },
+ {
+  "id": "i097",
+  "qid": "Q41",
+  "uri": "http://orkg.org/orkg/resource/R138944",
+  "claude_grade": 1,
+  "found_by": [
+   "pipeline"
+  ]
+ },
+ {
+  "id": "i098",
+  "qid": "Q37",
+  "uri": "http://orkg.org/orkg/resource/R1644221",
+  "claude_grade": 0,
+  "found_by": [
+   "pool-v2"
+  ]
+ },
+ {
+  "id": "i099",
+  "qid": "Q39",
+  "uri": "http://orkg.org/orkg/resource/R414663",
+  "claude_grade": 2,
+  "found_by": [
+   "claim",
+   "entity",
+   "pipeline"
+  ]
+ },
+ {
+  "id": "i100",
+  "qid": "Q47",
+  "uri": "http://orkg.org/orkg/resource/R1814924",
+  "claude_grade": 1,
+  "found_by": [
+   "pool-rerank"
+  ]
+ },
+ {
+  "id": "i101",
+  "qid": "Q27",
+  "uri": "http://orkg.org/orkg/resource/R111782",
+  "claude_grade": 0,
+  "found_by": [
+   "claim",
+   "title"
+  ]
+ },
+ {
+  "id": "i102",
+  "qid": "Q45",
+  "uri": "http://orkg.org/orkg/resource/R140183",
+  "claude_grade": 0,
+  "found_by": [
+   "pool-e2e-graph"
+  ]
+ },
+ {
+  "id": "i103",
+  "qid": "Q37",
+  "uri": "http://orkg.org/orkg/resource/R1355454",
+  "claude_grade": 2,
+  "found_by": [
+   "vector_baseline"
+  ]
+ },
+ {
+  "id": "i104",
+  "qid": "Q36",
+  "uri": "http://orkg.org/orkg/resource/R433357",
+  "claude_grade": 1,
+  "found_by": [
+   "title"
+  ]
+ },
+ {
+  "id": "i105",
+  "qid": "Q47",
+  "uri": "http://orkg.org/orkg/resource/R150009",
+  "claude_grade": 1,
+  "found_by": [
+   "claim"
+  ]
+ },
+ {
+  "id": "i106",
+  "qid": "Q13",
+  "uri": "http://orkg.org/orkg/resource/R1764305",
+  "claude_grade": 2,
+  "found_by": [
+   "pipeline"
+  ]
+ },
+ {
+  "id": "i107",
+  "qid": "Q31",
+  "uri": "http://orkg.org/orkg/resource/R1925371",
+  "claude_grade": 1,
+  "found_by": [
+   "pipeline"
+  ]
+ },
+ {
+  "id": "i108",
+  "qid": "Q23",
+  "uri": "http://orkg.org/orkg/resource/R12208",
+  "claude_grade": 2,
+  "found_by": [
+   "entity"
+  ]
+ },
+ {
+  "id": "i109",
+  "qid": "Q41",
+  "uri": "http://orkg.org/orkg/resource/R477604",
+  "claude_grade": 2,
+  "found_by": [
+   "vector_baseline"
+  ]
+ },
+ {
+  "id": "i110",
+  "qid": "Q25",
+  "uri": "http://orkg.org/orkg/resource/R1388841",
+  "claude_grade": 1,
+  "found_by": [
+   "entity"
+  ]
+ },
+ {
+  "id": "i111",
+  "qid": "Q46",
+  "uri": "http://orkg.org/orkg/resource/R1560411",
+  "claude_grade": 1,
+  "found_by": [
+   "claim"
+  ]
+ },
+ {
+  "id": "i112",
+  "qid": "Q01",
+  "uri": "http://orkg.org/orkg/resource/R283486",
+  "claude_grade": 2,
+  "found_by": [
+   "pool-e2e-old"
+  ]
+ },
+ {
+  "id": "i113",
+  "qid": "Q33",
+  "uri": "http://orkg.org/orkg/resource/R1841431",
+  "claude_grade": 2,
+  "found_by": [
+   "benchmark_20261019"
+  ]
+ },
+ {
+  "id": "i114",
+  "qid": "Q26",
+  "uri": "http://orkg.org/orkg/resource/R1374958",
+  "claude_grade": 0,
+  "found_by": [
+   "title"
+  ]
+ },
+ {
+  "id": "i115",
+  "qid": "Q09",
+  "uri": "http://orkg.org/orkg/resource/R1380982",
+  "claude_grade": 0,
+  "found_by": [
+   "claim",
+   "entity",
+   "pipeline",
+   "title"
+  ]
+ },
+ {
+  "id": "i116",
+  "qid": "Q09",
+  "uri": "http://orkg.org/orkg/resource/R429789",
+  "claude_grade": 1,
+  "found_by": [
+   "claim"
+  ]
+ },
+ {
+  "id": "i117",
+  "qid": "Q33",
+  "uri": "http://orkg.org/orkg/resource/R138187",
+  "claude_grade": 1,
+  "found_by": [
+   "claim",
+   "entity"
+  ]
+ },
+ {
+  "id": "i118",
+  "qid": "Q41",
+  "uri": "http://orkg.org/orkg/resource/R1702930",
+  "claude_grade": 1,
+  "found_by": [
+   "title"
+  ]
+ },
+ {
+  "id": "i119",
+  "qid": "Q34",
+  "uri": "http://orkg.org/orkg/resource/R1768583",
+  "claude_grade": 2,
+  "found_by": [
+   "title"
+  ]
+ },
+ {
+  "id": "i120",
+  "qid": "Q06",
+  "uri": "http://orkg.org/orkg/resource/R172664",
+  "claude_grade": 1,
+  "found_by": [
+   "pool-v4"
+  ]
+ }
+]
