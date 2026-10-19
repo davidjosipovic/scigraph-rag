@@ -1,40 +1,58 @@
 {
   "description": "Gold verdicts for the claim_verification questions: what a correct answer should conclude from the ORKG records. 'accept' lists every verdict counted as correct. If none of 'key_papers' is in the LLM context, INSUFFICIENT is accepted as well, since the deciding evidence was not retrieved. MIXED questions are left out of verdict accuracy.",
-  "status": "proposed — grades proposed by Claude from the ORKG records of the gold-set papers, awaiting review by the author",
+  "status": "reviewed — verdicts proposed by Claude from the ORKG records of the gold-set papers, reviewed and approved by the author on 2026-10-19",
   "questions": {
     "Q16": {
       "verdict": "SUPPORTED",
-      "accept": ["SUPPORTED"],
-      "key_papers": ["http://orkg.org/orkg/resource/R1771793"],
+      "accept": [
+        "SUPPORTED"
+      ],
+      "key_papers": [
+        "http://orkg.org/orkg/resource/R1771793"
+      ],
       "evidence": "BoolQ: BERT-MultiNLI 80.4 vs BiDAF-MultiNLI 75.57, BiDAF+ELMo 71.41, majority 62.17 accuracy. The BERT paper records alone hold only BERT's own SQuAD scores, with no baseline."
     },
     "Q17": {
       "verdict": "INSUFFICIENT",
-      "accept": ["INSUFFICIENT"],
+      "accept": [
+        "INSUFFICIENT"
+      ],
       "key_papers": [],
       "evidence": "Transformer BLEU on WMT14 En-De (28.1-29.5) and IWSLT, but the LSTM models in the same papers are scored only on language modelling (perplexity). No Transformer vs LSTM result on the same translation task."
     },
     "Q18": {
       "verdict": "INSUFFICIENT",
-      "accept": ["INSUFFICIENT", "SUPPORTED"],
+      "accept": [
+        "INSUFFICIENT",
+        "SUPPORTED"
+      ],
       "key_papers": [],
       "evidence": "No paper reports ResNet and VGG on ImageNet side by side (Dspike: spiking VGG-16 71.24 top-1 on ImageNet, ResNet-18 only on CIFAR). Cross-paper numbers (ResNet-200 79.9 top-1) point to SUPPORTED but are not comparable setups."
     },
     "Q19": {
       "verdict": "INSUFFICIENT",
-      "accept": ["INSUFFICIENT", "SUPPORTED"],
+      "accept": [
+        "INSUFFICIENT",
+        "SUPPORTED"
+      ],
       "key_papers": [],
       "evidence": "Papers do augmentation for few-shot / low-data settings and one runs a with/without-augmentation ablation (R1471378), but the records hold no numbers or finding that states the effect."
     },
     "Q20": {
       "verdict": "MIXED",
       "accept": [],
-      "key_papers": ["http://orkg.org/orkg/resource/R1815115", "http://orkg.org/orkg/resource/R755339"],
+      "key_papers": [
+        "http://orkg.org/orkg/resource/R1815115",
+        "http://orkg.org/orkg/resource/R755339"
+      ],
       "evidence": "BanglaBook: random forest above SVM (F1 0.911 vs 0.905 with 2-3-grams, 0.904 vs 0.852 with 1-grams). Requirements classification (R755339): SVM among the best methods, random forest not. Excluded from verdict accuracy."
     },
     "Q41": {
       "verdict": "REFUTED",
-      "accept": ["REFUTED", "INSUFFICIENT"],
+      "accept": [
+        "REFUTED",
+        "INSUFFICIENT"
+      ],
       "key_papers": [
         "http://orkg.org/orkg/resource/R419756",
         "http://orkg.org/orkg/resource/R1563839",
@@ -45,13 +63,19 @@
     },
     "Q42": {
       "verdict": "SUPPORTED",
-      "accept": ["SUPPORTED"],
-      "key_papers": ["http://orkg.org/orkg/resource/R1872184"],
+      "accept": [
+        "SUPPORTED"
+      ],
+      "key_papers": [
+        "http://orkg.org/orkg/resource/R1872184"
+      ],
       "evidence": "Revisiting Heterophily: ACM-GCN+ vs MLP-2 accuracy on Cora 89.75 vs 76.44, Chameleon 76.08 vs 46.72, Texas 94.92 vs 92.26."
     },
     "Q43": {
       "verdict": "INSUFFICIENT",
-      "accept": ["INSUFFICIENT"],
+      "accept": [
+        "INSUFFICIENT"
+      ],
       "key_papers": [],
       "evidence": "YOLO paper: 46 FPS on PASCAL VOC 2007. Faster R-CNN appears only as a baseline name next to an FPS metric, never with a speed value. SUPPORTED is true in general but is not in the graph — answering it is background knowledge."
     }
