@@ -1,0 +1,6 @@
+model,questions_total,questions_answered,questions_failed,avg_latency_s,avg_kg_results,avg_sources,avg_groundedness,avg_relevance,avg_completeness,avg_overall_score,questions_scored
+ollama:llama3,50,50,0,14.091,62.920,7.960,3.020,3.960,2.840,3.272,50
+ollama:llama3.2,50,50,0,9.828,59.520,7.800,3.260,3.980,2.940,3.393,50
+ollama:mistral,50,50,0,17.132,57.700,7.800,3.220,4.080,2.940,3.413,50
+ollama:phi3:mini,50,50,0,18.764,63.560,7.860,3.380,4.020,3.080,3.492,50
+ollama:qwen2.5:7b,50,50,0,15.912,58.840,7.960,3.320,4.120,2.940,3.459,50

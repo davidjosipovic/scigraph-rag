@@ -110,8 +110,17 @@ def extract_claims(answer: str, question: str, judge) -> list[dict]:
         prompt=f"Question: {question}\n\nAnswer:\n{body}\n\nList the atomic factual claims.",
         system=_EXTRACT_SYSTEM, temperature=0.0, max_tokens=2500,
     )
+    try:
+        items = _json_block(raw, "[", "]")
+    except ValueError:
+        # Unescaped quotes in paper titles or a cut-off list break the JSON:
+        # read the claim/kind pairs directly, anchored on the "kind" field.
+        items = [{"claim": c, "kind": k} for c, k in
+                 re.findall(r'"claim"\s*:\s*"(.*?)"\s*,\s*"kind"\s*:\s*"(fact|absence)"', raw, re.DOTALL)]
+        if not items:
+            raise
     claims = []
-    for c in _json_block(raw, "[", "]"):
+    for c in items:
         text = str(c.get("claim", "") if isinstance(c, dict) else c).strip()
         kind = c.get("kind", "fact") if isinstance(c, dict) else "fact"
         if text:

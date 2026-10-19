@@ -1,0 +1,5 @@
+model,questions_total,questions_answered,questions_failed,avg_latency_s,avg_kg_results,avg_sources,avg_groundedness,avg_relevance,avg_completeness,avg_overall_score,questions_scored
+groq:allam-2-7b,50,50,0,9.895,62.940,7.840,0.880,1.660,0.980,1.174,50
+groq:openai/gpt-oss-120b,50,50,0,4.786,59.400,7.960,4.600,4.880,4.100,4.528,50
+groq:openai/gpt-oss-20b,50,50,0,3.141,54.960,7.760,4.740,4.860,4.100,4.567,50
+groq:qwen/qwen3.8-27b,50,50,0,20.909,59.460,7.960,4.340,4.760,3.840,4.313,50
