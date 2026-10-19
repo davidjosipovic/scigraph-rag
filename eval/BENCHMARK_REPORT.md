@@ -1,5 +1,11 @@
 # Evaluacija GraphRAG sustava nad ORKG-om
 
+> **Zamijenjeno (19. 10. 2026).** Ovaj izvještaj opisuje stanje iz lipnja 2026: stari dohvat i ocjene jednog LLM suca koji vidi samo naslove izvora. Za aktualne rezultate vidi:
+> - `ANSWER_EVAL_REPORT.md`: gold-based Score i faithfulness na 9 modela nakon poboljšanja dohvata, uz usporedbu sa starim sucem (ρ = 0,45 po odgovoru)
+> - `RETRIEVAL_REPORT.md`: graded gold set i nDCG dohvata
+>
+> Groq modeli `llama-3.3-70b-versatile`, `llama-4-scout-17b`, `llama-3.1-8b-instant` i `qwen3-32b` iz ovog izvještaja u međuvremenu su povučeni ili zamijenjeni. Brojke ispod ostaju kao povijesni zapis i ne treba ih citirati kao konačne rezultate.
+
 ## Pregled
 
 Ovaj dokument opisuje metodologiju i rezultate evaluacije GraphRAG sustava koji odgovara na pitanja o znanstvenim publikacijama koristeći Open Research Knowledge Graph (ORKG) kao izvor podataka. Evaluacija uspoređuje **10 jezičnih modela** iz 2 providera (Ollama lokalno, Groq cloud) na skupu od **50 evaluacijskih pitanja** pokrivajući 6 tipova upita. Treći provider (Gemini) je pokušan, ali isključen iz rezultata — vidi napomenu u poglavlju "Testirani modeli".

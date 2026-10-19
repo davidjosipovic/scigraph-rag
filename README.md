@@ -87,9 +87,15 @@ scigraph-rag/
 │   ├── ablation.py            # Ablation study (normalization × hard filter)
 │   ├── judge.py               # LLM-as-judge scorer (groundedness/relevance/completeness)
 │   ├── rejudge.py             # Retroactively re-score existing results with new judge
+│   ├── retrieval_eval.py      # nDCG / recall of retrieval against the graded gold set
+│   ├── answer_eval.py         # Gold-based answer metrics (citations, abstention, verdicts)
+│   ├── faithfulness.py        # Claim-level faithfulness judge (local qwen3:8b) + kappa check
+│   ├── ANSWER_EVAL_REPORT.md  # Current answer-quality results (9 models)
+│   ├── RETRIEVAL_REPORT.md    # Retrieval results (dev/test)
 │   └── results/               # JSON + CSV output from benchmark and ablation runs
 ├── data/
-│   └── eval_questions.json    # 50 evaluation questions (6 types, 3 difficulty levels)
+│   ├── eval_questions.json    # 50 evaluation questions (6 types, 3 difficulty levels)
+│   └── gold/                  # Graded relevance gold set + claim verdicts
 ├── tests/
 │   ├── test_pipeline.py       # Pipeline unit + end-to-end integration tests
 │   ├── test_kg.py             # SPARQL query builder + sanitization tests
