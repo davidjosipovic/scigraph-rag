@@ -9,13 +9,10 @@ share every step except the choice of the papers given to the LLM.
 
 \begin{figure}[t]
 \centering
-% TODO: pipeline diagram. Classify + extract -> normalise -> [graph: SPARQL
-% strategies, rank, filter, enrich | dense: embed question, cosine top-k]
-% -> top 8 papers -> full ORKG records -> context -> LLM. Highlight that only
-% the retrieval box differs.
-\fbox{\parbox{0.9\columnwidth}{\centering\vspace{3em}Pipeline diagram\vspace{3em}}}
+\input{fig_pipeline}
 \caption{The question-answering pipeline. Only the retrieval step (shaded)
-differs between graph and dense retrieval.}
+differs between the two systems; dense retrieval uses only the question text
+(dashed).}
 \label{fig:pipeline}
 \end{figure}
 

@@ -1,0 +1,61 @@
+% Fig. 1 — pipeline. Needs \usepackage{tikz} and
+% \usetikzlibrary{positioning,arrows.meta} in main.tex.
+% Fits one IEEE column (about 8.8 cm).
+
+\begin{tikzpicture}[
+    font=\footnotesize,
+    node distance=4mm,
+    >={Stealth[length=1.6mm]},
+    step/.style={draw, rounded corners=1.5pt, align=center,
+                 inner sep=2.5pt, minimum height=6mm},
+    wide/.style={step, text width=7.6cm},
+    half/.style={step, text width=3.55cm, minimum height=3.1cm, fill=gray!15},
+    io/.style={align=center, inner sep=1pt},
+]
+  % shared input
+  \node[io] (q) {Question};
+  \node[wide, below=3mm of q] (an)
+    {\textbf{Question analysis:} type (rules, then LLM),\\
+     entities (LLM), normalisation to ORKG forms};
+
+  % the only step that differs between the two systems
+  \node[half, anchor=north east] (gr) at ([xshift=-1.5mm, yshift=-6mm]an.south)
+    {\textbf{Graph retrieval}\\[1pt]
+     SPARQL strategies per type\\
+     (entities, comparison, claim\\
+     evidence, benchmark, origin,\\
+     title) $\to$ role-aware\\
+     ranking and filtering $\to$\\
+     enrichment of the top 15};
+  \node[half, anchor=north west] (de) at ([xshift=1.5mm, yshift=-6mm]an.south)
+    {\textbf{Dense retrieval}\\[1pt]
+     embed the question\\
+     (\texttt{mxbai-embed-large})\\
+     $\to$ cosine similarity\\
+     with cards of all\\
+     68,806 ORKG papers};
+
+  % shared output
+  \node[wide, anchor=north] (top) at ([yshift=-5mm]an.south |- gr.south)
+    {\textbf{Top 8 papers}};
+  \node[wide, below=of top] (ctx)
+    {\textbf{Context:} full ORKG records fetched live,\\
+     up to 15 \emph{predicate: value} rows per paper};
+  \node[wide, below=of ctx] (llm)
+    {\textbf{LLM} with a prompt per question type\\
+     (local via Ollama, or a cloud API)};
+  \node[io, below=3mm of llm] (ans)
+    {Answer citing papers by exact title\\
+     (claims: SUPPORTED / REFUTED / INSUFFICIENT)};
+
+  % arrows
+  \draw[->] (q) -- (an);
+  \draw[->] (an.south -| gr.north) -- (gr.north);
+  \draw[->, dashed] (an.south -| de.north) -- (de.north)
+    node[midway, right, font=\scriptsize] {question text};
+  \draw[->] (gr.south) -- (gr.south |- top.north);
+  \draw[->] (de.south) -- (de.south |- top.north);
+  \draw[->] (top) -- (ctx);
+  \draw[->] (ctx) -- (llm);
+  \draw[->] (llm) -- (ans);
+\end{tikzpicture}
