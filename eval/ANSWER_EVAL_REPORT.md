@@ -15,7 +15,7 @@ Glavni rezultati na 9 modela i 50 pitanja, nakon poboljšanja dohvata (`RETRIEVA
 | Najbolji lokalni model (`qwen2.5:7b`) | **0,758** | 0,771 |
 | Najvjernija kontekstu (`qwen3.8-27b`) | 0,790 | **0,814** |
 
-Na istim odgovorima stari sudac daje cloud modelima 4,3–4,6, a lokalnima 3,3–3,5 (od 5). To je razlika od oko 22 % skale. Gold Score između najboljeg cloud i najboljeg lokalnog modela razlikuje se za 7 postotnih bodova. Unutar lokalnih modela sudac gotovo ne razlikuje kvalitetu: Spearman ρ s gold Scoreom je 0,25.
+Na istim odgovorima stari sudac daje cloud modelima 4,3–4,6, a lokalnima 3,3–3,5 (od 5). To je razlika od oko 22 % skale. Gold Score između najboljeg cloud i najboljeg lokalnog modela razlikuje se za 7 postotnih bodova. Unutar lokalnih modela sudac gotovo ne razlikuje kvalitetu: Spearman ρ s gold Scoreom je 0,20.
 
 U usporedbi s vektorskim RAG-om (`mxbai-embed-large`, isti pipeline, mijenja se samo izbor radova) graf ima jednak ukupni dohvat (nDCG@8 0,716 prema 0,725). Graf je bolji kod dataseta, usporedbi metoda i provjere tvrdnji, a vektor kod tema i traženja rada. Dohvaćeni skupovi gotovo se ne preklapaju, pa hibrid doseže 0,79; u stvarnom pipelineu hibrid značajno poboljšava dohvat u odnosu na graf (0,746 prema 0,682), ali ne i odgovore. U odgovorima ukupne razlike nema (strogi E2E: razlika oko 0 ± 0,1 za dva modela), a raspršenje između runova jednako je velikoj razlici između sustava. Graf je dosljedno bolji kod usporedbi metoda i malo vjerniji kontekstu.
 
@@ -84,7 +84,7 @@ Matrica zabune (retci su referentne oznake, stupci oznake suca):
     C    2    5    1
 ```
 
-- Sudac griješi u oba smjera podjednako, 7 puta prestrogo i 7 puta preblago. Udio S u uzorku zato je gotovo isti (sudac 73 %, referenca 71 %), pa prosjeci po modelu nisu pristrani. Pojedinačne oznake su umjereno pouzdane.
+- Sudac griješi u oba smjera, 7 puta prestrogo i 9 puta preblago (7 U→S i 2 C→S). Udio S u uzorku je zato gotovo isti (sudac 73 %, referenca 71 %), pa su prosjeci po modelu tek malo pristrani. Pojedinačne oznake su umjereno pouzdane.
 - Oznaku C sudac gotovo ne koristi. Kad tvrdnja podatak jednog rada pripiše drugom radu, sudac to označi kao U ("nema dokaza"), a ne kao C. **U i C se zato izvještavaju zajedno kao *nepodržano*.**
 - Ostali tipični promašaji su:
   - dodani detalj uz pojam koji jest u kontekstu prolazi kao S
@@ -159,7 +159,7 @@ Na Groq modele promjena `num_ctx` ne utječe, pa je njihov porast od +0,05 do +0
 |---|---|
 | Stari sudac prema gold Scoreu, razina odgovora (n = 450) | 0,45 |
 | Stari sudac prema gold Scoreu, razina modela (9 modela) | 0,87 |
-| Isto, samo 5 lokalnih modela | 0,25 |
+| Isto, samo 5 lokalnih modela | 0,20 |
 | Faithful prema gold Scoreu, razina modela | 0,67 |
 | Faithful prema gold Scoreu, razina odgovora (n = 447) | 0,15 |
 
@@ -248,7 +248,7 @@ Faithful za gpt-oss-20b računat je na 49 odgovora (Q01 na vektorskoj strani sud
 - **Raspršenje između runova jednako je velikoj razlici između sustava.** Kod qwen2.5 dohvaćeni izvori su u oba runa gotovo isti (49 od 50 pitanja za graf, 50 od 50 za vektor). Ipak se E2E grafa pomaknuo s 0,748 na 0,696, a predznak razlike graf − vektor se promijenio. Pojedini odgovor se između runova u prosjeku pomakne za 0,08–0,09. Razlike od nekoliko postotnih bodova iz jednog runa zato ne treba tumačiti.
 - **Prednost grafa na strukturiranim pitanjima prenosi se u odgovore.** Kod usporedbe metoda graf vodi po E2E u sva tri mjerenja. Kod usporedbe metoda i provjere tvrdnji odgovori s grafom citiraju 1,5 do 6 puta više ključnih radova (ocjena 2). Točnost presude na claim pitanjima ipak nije veća, jer modeli presudu donose iz općeg znanja (vidi zaključak 4).
 - **Kod traženja konkretnog rada vektor je bolji** i u dohvatu i u odgovorima.
-- **Faithfulness je viši s grafom u sva tri mjerenja**, za +0,02 do +0,05. Pojedinačno nijedna razlika nije značajna. Moguće objašnjenje je da graf donosi radove čiji zapisi izravno odgovaraju na pitanje, pa model manje dodaje iz vlastitog znanja. Ovo nije provjereno.
+- **Faithfulness je viši s grafom u sva tri mjerenja**, za +0,03 do +0,05. Pojedinačno nijedna razlika nije značajna. Moguće objašnjenje je da graf donosi radove čiji zapisi izravno odgovaraju na pitanje, pa model manje dodaje iz vlastitog znanja. Ovo nije provjereno.
 
 
 ### Hibrid u pipelineu

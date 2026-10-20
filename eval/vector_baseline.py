@@ -258,7 +258,9 @@ def rrf(rankings: list[list[str]], k: int) -> list[str]:
     for ranking in rankings:
         for r, uri in enumerate(ranking, start=1):
             score[uri] += 1 / (RRF_K + r)
-    first = {u: i for i, u in enumerate(u for ranking in rankings for u in ranking)}
+    first: dict[str, int] = {}
+    for u in (u for ranking in rankings for u in ranking):
+        first.setdefault(u, len(first))  # ties go to the earlier appearance
     return sorted(score, key=lambda u: (-score[u], first[u]))[:k]
 
 
