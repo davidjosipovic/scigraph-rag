@@ -163,7 +163,7 @@ Na Groq modele promjena `num_ctx` ne utječe, pa je njihov porast od +0,05 do +0
 | Faithful prema gold Scoreu, razina modela | 0,67 |
 | Faithful prema gold Scoreu, razina odgovora (n = 447) | 0,15 |
 
-- **Stari sudac dobro odvaja cloud od lokalnih modela, ali precjenjuje tu razliku.** gpt-oss-20b i qwen2.5:7b razlikuju se za 0,07 gold Scorea, a kod suca za 1,1 boda od 5. Unutar lokalnih modela sudac ih gotovo ne razlikuje: raspon mu je 3,27–3,49, a phi3:mini, koji je po Scoreu pretposljednji, kod njega je prvi. Vjerojatno nagrađuje stil i duljinu odgovora više od toga što odgovor stvarno citira.
+- **Stari sudac dobro odvaja cloud od lokalnih modela, ali precjenjuje tu razliku.** gpt-oss-20b i qwen2.5:7b razlikuju se za 0,07 gold Scorea, a kod suca za 1,1 boda od 5. Unutar lokalnih modela sudac ih gotovo ne razlikuje: raspon mu je 3,27–3,49, a phi3:mini, koji je po Scoreu pretposljednji, kod njega je prvi. Ocjena suca raste s duljinom odgovora (Spearman ρ = 0,26 bez allama, 0,16 unutar istog modela), a gold Score ne (ρ = −0,01); phi3:mini piše najduže lokalne odgovore.
 - **Na razini pojedinog odgovora slaganje je umjereno (ρ = 0,45).** Na runovima od 21. 6., sa starim dohvatom, bilo je praktički nula (ρ = 0,04, n = 747). Sudac je dakle nepouzdan upravo kad se ocjenjuje pojedini odgovor.
 - **Gold Score i Faithful mjere različite stvari.** Gold Score mjeri koje radove odgovor citira, a Faithful mjeri drži li se tekst odgovora konteksta. Na razini odgovora gotovo ne koreliraju (0,15), a na razini modela umjereno (0,67). Primjer je gpt-oss-20b: najbolje bira radove, ali četvrtina njegovih tvrdnji nije u kontekstu.
 
