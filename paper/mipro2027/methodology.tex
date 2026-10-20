@@ -1,6 +1,6 @@
 % Section IV — Evaluation Methodology
 % Draft 2026-10-20. Numbers: eval/ANSWER_EVAL_REPORT.md, eval/RETRIEVAL_REPORT.md.
-% \cite{TODO-*} keys are placeholders; references still have to be collected and checked.
+% References: references.bib (verified 2026-10-20).
 
 \section{Evaluation Methodology}
 \label{sec:method}
@@ -81,7 +81,7 @@ CiteUtil) otherwise.
 
 \subsection{Claim-Level Faithfulness}
 
-Following claim-decomposition approaches \cite{TODO-factscore,TODO-ragas}, a
+Following claim-decomposition approaches \cite{min2023factscore,es2024ragas}, a
 local judge (\texttt{qwen3:8b} via Ollama, not one of the evaluated models)
 splits each answer body into at most 25 atomic claims and checks every claim
 separately against the full context the model saw, labelling it supported (S),
@@ -100,7 +100,7 @@ rarely uses C and labels misattributions as U, so we report U and C together as
 
 \subsection{LLM-Judge Baseline}
 
-For comparison with common practice \cite{TODO-geval,TODO-llm-as-judge}, every
+For comparison with common practice \cite{liu2023geval,zheng2023judging}, every
 answer was also scored by an LLM judge on groundedness, relevance and
 completeness (0--5). The judge receives the question, the answer, the titles of
 the retrieved papers and answer hints, but not the context itself. It is the
@@ -114,9 +114,9 @@ papers (Section~\ref{sec:system}): the same full ORKG records, context rows,
 prompt and LLM. Dense retrieval embeds one text card per paper (title, research
 field and contribution values, at most 1,500 characters) for all 68,806 papers
 in the ORKG RDF dump of 18 October 2026 with \texttt{mxbai-embed-large}
-\cite{TODO-mxbai}, and ranks by cosine similarity; to test sensitivity to the
-embedder we repeat retrieval with \texttt{nomic-embed-text} \cite{TODO-nomic}.
-A reciprocal rank fusion (RRF, $k = 60$) \cite{TODO-rrf} of the two ranked lists
+\cite{mxbai2024}, and ranks by cosine similarity; to test sensitivity to the
+embedder we repeat retrieval with \texttt{nomic-embed-text} \cite{nussbaum2024nomic}.
+A reciprocal rank fusion (RRF, $k = 60$) \cite{cormack2009rrf} of the two ranked lists
 is computed at the retrieval level only.
 
 Nine LLMs answer with graph retrieval: five local models via Ollama
