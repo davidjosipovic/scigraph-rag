@@ -14214,6 +14214,2341 @@
     "U"
    ],
    "faithfulness": 0.6154
+  },
+  "openai/gpt-oss-20b|Q38": {
+   "model": "openai/gpt-oss-20b",
+   "qid": "Q38",
+   "query_type": "dataset_search",
+   "claims": [
+    {
+     "claim": "The paper 'Benchmarking a Benchmark: How Reliable is MS-COCO?' uses the MS-COCO dataset for manual re-annotation of all images with stricter guidelines.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Original Dataset: Ms-coco",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'COCONut: Modernizing COCO Segmentation' uses the MS-COCO dataset with an assisted-manual pipeline involving machine-generated proposals refined by humans and verified by experts.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Original Dataset: Ms-coco",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'A Strong and Reproducible Object Detector with Only Public Datasets' uses the MS-COCO dataset for standard supervised object-detection training on the public COCO train set without private data.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "research problem: Object detection",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper 'The Effect of Improving Annotation Quality on Object Detection Datasets: A Preliminary Study' uses the MS-COCO dataset with re-annotation following stricter guidelines, leading to a harder detection task.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Re-annotation Method: Model performance dropped on the re-annotated MS COCO. The new guidelines made the task fundamentally harder by requiring the annotation of many more small and occluded objects.",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Frustratingly Simple Few-Shot Object Detection' uses the MS-COCO dataset for few-shot learning with the Tfa-w-fc and Tfa-w-cos models evaluated on 10-shot and 30-shot settings.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark MS-COCO (10-shot) result: AP_10.0\nBenchmark MS-COCO (30-shot) result: AP_13.4\nmodel: Tfa w fc\nmodel: Tfa w cos",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Unbiased Teacher for Semi-Supervised Object Detection' uses the MS-COCO dataset for semi-supervised training using the Unbiased Teacher framework, evaluated at various percentages of labeled data.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark COCO 1% labeled data result: mAP_20.75",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Advanced deep-learning techniques for salient and category-specific object detection: a survey' uses the MSCOCO-1k subset of the MS-COCO dataset for reporting an mAP of 78.6%.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Accuracy: Obtains a mAP of 78.6%",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The MS-COCO dataset (full) is used by the papers 'Benchmarking a Benchmark: How Reliable is MS-COCO?', 'COCONut', 'A Strong and Reproducible Object Detector with Only Public Datasets', 'The Effect of Improving Annotation Quality on Object Detection Datasets: A Preliminary Study', 'Frustratingly Simple Few-Shot Object Detection', and 'Unbiased Teacher for Semi-Supervised Object Detection' for object detection, segmentation, and semi-supervised evaluation.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Original Dataset: Ms-coco",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The re-annotated MS-COCO dataset (strict guidelines) is used by the papers 'Benchmarking a Benchmark: How Reliable is MS-COCO?' and 'The Effect of Improving Annotation Quality on Object Detection Datasets: A Preliminary Study' for manual re-annotation with stricter guidelines, increasing the number of small and occluded objects.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Re-annotation Method: Manual re-annotation of all images, pre-loaded with original COCO-2017 labels, following new, stricter guidelines.",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The COCO-2017 dataset with assisted-manual refinement is used by the paper 'COCONut: Modernizing COCO Segmentation' for machine-generated proposals refined by humans and verified by experts.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "Original Dataset: Ms-coco",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The MSCOCO-1k subset of the MS-COCO dataset is used by the paper 'Advanced deep-learning techniques for salient and category-specific object detection: a survey' for reporting an mAP of 78.6%.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Accuracy: Obtains a mAP of 78.6%",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The MS-COCO dataset (full) includes standard COCO-2017 train/val/test splits used for object detection, segmentation, and semi-supervised evaluation.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "Original Dataset: Ms-coco",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The re-annotated MS-COCO dataset (strict guidelines) involves manual re-annotation of all images with stricter guidelines, increasing the number of small and occluded objects.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Re-annotation Method: Model performance dropped on the re-annotated MS COCO. The new guidelines made the task fundamentally harder by requiring the annotation of many more small and occluded objects.",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The COCO-2017 dataset with assisted-manual refinement involves machine-generated proposals refined by humans and then verified by experts.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Re-annotation Method: An \"assisted-manual\" pipeline: machine-generated proposals were inspected, edited, and refined by human raters, with a final quality verification stage by experts.",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The MSCOCO-1k subset of the MS-COCO dataset is a 1,000-image subset used in the paper 'Advanced deep-learning techniques for salient and category-specific object detection: a survey' for reporting an mAP of 78.6%.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Accuracy: Obtains a mAP of 78.6%",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Benchmarking a Benchmark: How Reliable is MS-COCO?' uses the MS-COCO dataset for manual re-annotation with stricter guidelines, making the detection task harder.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Re-annotation Method: Manual re-annotation of all images, pre-loaded with original COCO-2017 labels, following new, stricter guidelines.",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'The Effect of Improving Annotation Quality on Object Detection Datasets: A Preliminary Study' uses the MS-COCO dataset for re-annotation with stricter guidelines, leading to a harder detection task.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Original Dataset: Ms-coco",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Frustratingly Simple Few-Shot Object Detection' uses the MS-COCO dataset for few-shot learning with the Tfa-w-fc and Tfa-w-cos models evaluated on 10-shot and 30-shot settings.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark MS-COCO (10-shot) result: AP_10.0\nBenchmark MS-COCO (30-shot) result: AP_13.4\nmodel: Tfa w fc\nmodel: Tfa w cos",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Unbiased Teacher for Semi-Supervised Object Detection' uses the MS-COCO dataset for semi-supervised training with the Unbiased Teacher framework, evaluated at various percentages of labeled data.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark COCO 1% labeled data result: mAP_20.75",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'A Strong and Reproducible Object Detector with Only Public Datasets' uses the MS-COCO dataset for standard supervised object-detection training on the public COCO train set without private data.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "research problem: Object detection",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper 'COCONut: Modernizing COCO Segmentation' uses the MS-COCO dataset with an assisted-manual pipeline involving machine-generated proposals refined by humans and verified by experts.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Original Dataset: Ms-coco",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Benchmarking a Benchmark: How Reliable is MS-COCO?' uses the MS-COCO dataset for manual re-annotation of all images with stricter guidelines.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Original Dataset: Ms-coco",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'The Effect of Improving Annotation Quality on Object Detection Datasets: A Preliminary Study' uses the MS-COCO dataset for re-annotation with stricter guidelines, leading to a harder detection task.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Original Dataset: Ms-coco",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Frustratingly Simple Few-Shot Object Detection' uses the MS-COCO dataset for few-shot learning with the Tfa-w-fc and Tfa-w-cos models evaluated on 10-shot and 30-shot settings.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark MS-COCO (10-shot) result: AP_10.0\nBenchmark MS-COCO (30-shot) result: AP_13.4\nmodel: Tfa w fc\nmodel: Tfa w cos",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Unbiased Teacher for Semi-Supervised Object Detection' uses the MS-COCO dataset for semi-supervised training with the Unbiased Teacher framework, evaluated at various percentages of labeled data.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark COCO 1% labeled data result: mAP_20.75",
+     "quote_ok": true,
+     "label": "S"
+    }
+   ],
+   "labels": [
+    "S",
+    "S",
+    "U",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "U",
+    "S",
+    "U",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "U",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S"
+   ],
+   "faithfulness": 0.84
+  },
+  "openai/gpt-oss-20b|Q39": {
+   "model": "openai/gpt-oss-20b",
+   "qid": "Q39",
+   "query_type": "dataset_search",
+   "claims": [
+    {
+     "claim": "The paper 'Scaling Language Models: Methods, Analysis & Insights from Training Gopher' describes fine-tuning a large transformer model on the SuperGLUE dataset.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "fine-tuning data: SuperGLUE",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Scaling Language Models: Methods, Analysis & Insights from Training Gopher' reports state-of-the-art results on 10 of 12 NLP benchmarks, including SuperGLUE.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "benchmark_result: SOTA on 10 of 12 NLP benchmarks including GLUE, SuperGLUE, LAMBADA, HellaSwag, PIQA, WinoGrande, OpenBookQA, ARC, BoolQ, RACE",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Scaling Language Models: Methods, Analysis & Insights from Training Gopher' lists a benchmark result of 81.4 and 86.5 on SuperGLUE.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "benchmark_result: SuperGLUE 81.4",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Scaling Language Models: Methods, Analysis & Insights from Training Gopher' indicates that the model was trained and evaluated using standard fine-tuning procedures for the tasks included in SuperGLUE.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "fine-tuning data: SuperGLUE",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper 'Scaling Language Models: Methods, Analysis & Insights from Training Gopher' does not provide further details about individual task scores on SuperGLUE.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "benchmark_result: SuperGLUE 81.4",
+     "quote_ok": true,
+     "label": "U"
+    }
+   ],
+   "labels": [
+    "S",
+    "S",
+    "S",
+    "U",
+    "U"
+   ],
+   "faithfulness": 0.6
+  },
+  "openai/gpt-oss-20b|Q40": {
+   "model": "openai/gpt-oss-20b",
+   "qid": "Q40",
+   "query_type": "dataset_search",
+   "claims": [
+    {
+     "claim": "The paper *Integrating Pre‑trained Language Model into Neural Machine Translation* uses the WMT14 dataset for machine translation experiments.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "Benchmark Iwslt2014 german-english result: Bleu score_40.43",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper *Unsupervised Statistical Machine Translation* uses the WMT14 dataset for machine translation experiments.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark WMT2014 German-English result: BLEU score_14.08",
+     "quote_ok": false,
+     "label": "U"
+    },
+    {
+     "claim": "The paper *An Effective Approach to Unsupervised Machine Translation* uses the WMT14 dataset for machine translation experiments.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark WMT2014 English-German result: BLEU_22.5",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Exploring the Limits of Transfer Learning with a Unified Text‑to‑Text Transformer* uses the WMT14 dataset for machine translation experiments.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark WMT2014 English-French result: BLEU score_43.4",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Google's Neural Machine Translation System: Bridging the Gap between Human and Machine Translation* uses the WMT14 dataset for machine translation experiments.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark WMT2014 English-French result: BLEU score_39.9",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Weighted Transformer Network for Machine Translation* uses the WMT14 dataset for machine translation experiments.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark WMT2014 English-French result: BLEU score_41.4",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Phrase‑Based & Neural Unsupervised Machine Translation* uses the WMT14 dataset for machine translation experiments.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark WMT2014 English-French result: BLEU score_28.11",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Integrating Pre‑trained Language Model into Neural Machine Translation* applies the Pinmt method to the WMT14 dataset.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "Benchmark Iwslt2014 german-english result: Bleu score_40.43",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper *Unsupervised Statistical Machine Translation* applies the SMT iterative back‑translation method to the WMT14 dataset.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark WMT2014 German-English result: BLEU score_17.43",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *An Effective Approach to Unsupervised Machine Translation* applies the SMT + NMT tuning and joint refinement method to the WMT14 dataset.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark WMT2014 English-German result: BLEU_22.5",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Exploring the Limits of Transfer Learning with a Unified Text‑to‑Text Transformer* applies the Unified text‑to‑text transformer (T5‑style) method to the WMT14 dataset.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark WMT2014 English-French result: BLEU score_43.4",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Google's Neural Machine Translation System: Bridging the Gap between Human and Machine Translation* applies the GNMT with reinforcement learning (RL) method to the WMT14 dataset.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark WMT2014 English-French result: BLEU score_39.9",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Weighted Transformer Network for Machine Translation* applies the Weighted transformer (large) method to the WMT14 dataset.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark WMT2014 English-French result: BLEU score_41.4",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Phrase‑Based & Neural Unsupervised Machine Translation* applies the PBSMT + NMT (unsupervised transformer) method to the WMT14 dataset.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark WMT2014 English-French result: BLEU score_28.11",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The WMT14 dataset includes the English‑French language pair.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark WMT2014 English-French result: BLEU score_14.36",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The WMT14 dataset includes the English‑German language pair.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark WMT2014 English-German result: BLEU score_14.08",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The WMT14 dataset includes the French‑English language pair.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark WMT2014 French-English result: BLEU_25.87",
+     "quote_ok": false,
+     "label": "U"
+    },
+    {
+     "claim": "The WMT14 dataset includes the German‑English language pair.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark WMT2014 English-German result: BLEU score_14.08",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Integrating Pre‑trained Language Model into Neural Machine Translation* reports BLEU scores ranging from 26.3 to 43.4 on the English‑French language pair of the WMT14 dataset.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "Benchmark WMT2014 English-French result: BLEU score_43.4",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper *Unsupervised Statistical Machine Translation* reports BLEU scores ranging from 26.3 to 43.4 on the English‑French language pair of the WMT14 dataset.",
+     "kind": "fact",
+     "judge_label": "C",
+     "quote": "Benchmark WMT2014 English-French result: BLEU score_14.08",
+     "quote_ok": false,
+     "label": "U"
+    },
+    {
+     "claim": "The paper *An Effective Approach to Unsupervised Machine Translation* reports BLEU scores ranging from 26.3 to 43.4 on the English‑French language pair of the WMT14 dataset.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "Benchmark WMT2014 English-French result: BLEU_36.2",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper *Exploring the Limits of Transfer Learning with a Unified Text‑to‑Text Transformer* reports BLEU scores ranging from 26.3 to 43.4 on the English‑French language pair of the WMT14 dataset.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark WMT2014 English-French result: BLEU score_43.4",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Google's Neural Machine Translation System: Bridging the Gap between Human and Machine Translation* reports BLEU scores ranging from 26.3 to 43.4 on the English‑French language pair of the WMT14 dataset.",
+     "kind": "fact",
+     "judge_label": "C",
+     "quote": "Benchmark WMT2014 English-French result: BLEU score_39.9",
+     "quote_ok": true,
+     "label": "C"
+    },
+    {
+     "claim": "The paper *Weighted Transformer Network for Machine Translation* reports BLEU scores ranging from 26.3 to 43.4 on the English‑French language pair of the WMT14 dataset.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "Benchmark WMT2014 English-French result: BLEU score_41.4",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper *Phrase‑Based & Neural Unsupervised Machine Translation* reports BLEU scores ranging from 26.3 to 43.4 on the English‑French language pair of the WMT14 dataset.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "Benchmark WMT2014 English-French result: BLEU score_28.11",
+     "quote_ok": true,
+     "label": "U"
+    }
+   ],
+   "labels": [
+    "U",
+    "U",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "U",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "U",
+    "S",
+    "U",
+    "U",
+    "U",
+    "S",
+    "C",
+    "U",
+    "U"
+   ],
+   "faithfulness": 0.6
+  },
+  "openai/gpt-oss-20b|Q41": {
+   "model": "openai/gpt-oss-20b",
+   "qid": "Q41",
+   "query_type": "claim_verification",
+   "claims": [
+    {
+     "claim": "In *An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling*, the LSTM model achieved a test perplexity of 78.93 on Penn Treebank (Word Level).",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Penn Treebank (Word Level) result: Test perplexity_78.93",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "In *An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling*, the GRU model achieved a test perplexity of 92.48 on Penn Treebank (Word Level).",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "model: Gru bai et al 2018\n  Benchmark Penn Treebank (Word Level) result: Test perplexity_92.48",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "In *An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling*, the GRU model obtained a lower NLL of 3.46 on the Nottingham music dataset than the LSTM model (3.29).",
+     "kind": "fact",
+     "judge_label": "C",
+     "quote": "Benchmark Nottingham result: NLL_3.29",
+     "quote_ok": true,
+     "label": "C"
+    },
+    {
+     "claim": "*Recurrent Neural Networks for Colluded Applications Attack Detection in Android OS Devices* reports an accuracy of 95 % for the GRU classifier.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "metric results: Accuracy=95% in GRU",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "*Enhanced LSTM for Natural Language Inference* presents only LSTM‑based models; no GRU results are given for comparison.",
+     "kind": "fact",
+     "judge_label": "C",
+     "quote": "Benchmark SNLI result: % Test Accuracy_88.6",
+     "quote_ok": true,
+     "label": "C"
+    },
+    {
+     "claim": "*Dilated Recurrent Neural Networks* reports a permuted accuracy of 94.6 % for a Dilated GRU on Sequential MNIST.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Sequential MNIST result: Permuted Accuracy_94.6",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "*An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling* reports a permuted accuracy of 97.2 % for a standard GRU on Sequential MNIST.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Sequential MNIST result: Permuted Accuracy_97.2",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "*Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling* reports a JSB Chorales NLL of 8.54 for a GRU.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark JSB Chorales result: NLL_8.54",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "*How much complexity does an RNN architecture need to learn syntax‑sensitive dependencies?* reports validation perplexities of 52.73 for an LSTM and 53.78 for a GRU on WikiText‑103.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "model: Lstm\n  research problem: Language modelling\n  Benchmark WikiText-103 result: Validation perplexity_52.73\n  model: Gru\n  research problem: Language modelling\n  Benchmark WikiText-103 result: Validation perplexity_53.78",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "*Fast‑Slow Recurrent Neural Networks* and *Multiplicative LSTM for sequence modelling* provide results only for LSTM‑based variants; no GRU results are presented for direct comparison.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: Language modelling\n  model: Fs-lstm-4\n  Benchmark Hutter Prize result: Number of params_27.0\n  Benchmark Penn Treebank (Character Level) result: Number of params_27.0\n  Benchmark Penn Treebank (Character Level) result: Bit per Character (BPC)_1.19\n  Benchmark Hutter Prize result: Bit per Character (BPC)_1.277\n  research problem: Language modelling\n  model: Large fs-lstm-4\n  Benchmark enwik8 result: Number of params_47.0\n  Benchmark Hutter Prize result: Number of params_47.0\n  Benchmark Hutter Prize result: Bit per Character (BPC)_1.245\n  Benchmark enwik8 result: Bit per Character (BPC)_ 1.25\n  model: Fs-lstm-2\n  Benchmark Penn Treebank (Character Level) result: Number of params_27.0\n  Benchmark Penn Treebank (Character Level) result: Bit per Character (BPC)_1.193",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "Long Short‑Term Memory (LSTM) is a type of recurrent neural network.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "NONE",
+     "quote_ok": false,
+     "label": "U"
+    },
+    {
+     "claim": "Gated Recurrent Unit (GRU) is a type of recurrent neural network.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "classifier: a simple RNN, a Long short-term memory (LSTM) RNN, and a Gated Recurrent Unit (GRU) RNN.",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "Dilated GRU is a variant of the Gated Recurrent Unit.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "model: Dilated gru",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "Fast‑Slow LSTM variants are a type of LSTM architecture.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: Language modelling\n  model: Fs-lstm-4",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "Multiplicative LSTM is a type of LSTM architecture.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: Language modelling\nmodel: Large mlstm emb wn vd\nBenchmark Text8 result: Bit per Character (BPC)_1.27\nBenchmark Hutter Prize result: Bit per Character (BPC)_1.24\nBenchmark Hutter Prize result: Number of params_46.0\nBenchmark Text8 result: Number of params_45.0",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "Penn Treebank (Word Level) is a dataset used for sequence modeling tasks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Penn Treebank (Word Level) result: Test perplexity_78.93",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "Penn Treebank (Character Level) is a dataset used for sequence modeling tasks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Penn Treebank (Character Level) result: Bit per Character (BPC)_1.19",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "WikiText‑103 is a dataset used for sequence modeling tasks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "model: Lstm\n  research problem: Language modelling\n  Benchmark WikiText-103 result: Validation perplexity_52.73",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "Nottingham (music) is a dataset used for sequence modeling tasks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Nottingham result: NLL_3.29",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "Sequential MNIST (unpermuted & permuted) is a dataset used for sequence modeling tasks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Sequential MNIST result: Unpermuted Accuracy_99.0",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "JSB Chorales is a dataset used for sequence modeling tasks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark JSB Chorales result: NLL_8.1",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "Hutter Prize is a dataset used for sequence modeling tasks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Hutter Prize result: Bit per Character (BPC)_1.245",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "enwik8 is a dataset used for sequence modeling tasks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark enwik8 result: Bit per Character (BPC)_1.25",
+     "quote_ok": false,
+     "label": "U"
+    },
+    {
+     "claim": "Text8 is a dataset used for sequence modeling tasks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: Language modelling\n  model: Large mlstm emb wn vd\n  Benchmark Text8 result: Bit per Character (BPC)_1.27",
+     "quote_ok": true,
+     "label": "S"
+    }
+   ],
+   "labels": [
+    "S",
+    "S",
+    "C",
+    "S",
+    "C",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "U",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "U",
+    "S"
+   ],
+   "faithfulness": 0.8333
+  },
+  "openai/gpt-oss-20b|Q42": {
+   "model": "openai/gpt-oss-20b",
+   "qid": "Q42",
+   "query_type": "claim_verification",
+   "claims": [
+    {
+     "claim": "The paper \\\"Feature Selection: Key to Enhance Node Classification with Graph Neural Networks\\\" reports results for graph neural network (GNN) models on various node‑classification benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: Node classification",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper \\\"Node-oriented Spectral Filtering for Graph Neural Networks\\\" reports results for graph neural network (GNN) models on various node‑classification benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: Node classification",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper \\\"NodeNet: A Graph Regularised Neural Network for Node Classification\\\" reports results for graph neural network (GNN) models on various node‑classification benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: Node classification",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper \\\"A Simple and Scalable Graph Neural Network for Large Directed Graphs\\\" reports results for graph neural network (GNN) models on various node‑classification benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Paper: Title: A Simple and Scalable Graph Neural Network for Large Directed Graphs Evidence: research problem: Node classification model: A2dug Benchmark Wiki result: Accuracy_65.13",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper \\\"Improving Graph Neural Networks by Learning Continuous Edge Directions\\\" reports results for graph neural network (GNN) models on various node‑classification benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: Node classification",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper \\\"Combining Label Propagation and Simple Models Out-performs Graph Neural Networks\\\" reports results for graph neural network (GNN) models on various node‑classification benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: Node classification",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper \\\"Bag of Tricks for Node Classification with Graph Neural Networks\\\" reports results for graph neural network (GNN) models on various node‑classification benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Ogbn-arxiv result: Test accuracy_0.7391",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "None of the listed papers present comparative results against traditional, non‑GNN baselines such as label propagation, logistic regression, or other classical machine‑learning methods.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "Benchmark Penn94 result: Accuracy_78.4",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper \\\"Combining Label Propagation and Simple Models Out-performs Graph Neural Networks\\\" presents a baseline of label propagation combined with simple models.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "research problem: Node classification",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper \\\"Dual-net GNN\\\" is a graph neural network model.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: Node classification\n  model: Dual-net gnn",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper \\\"Nfgnn\\\" is a graph neural network model.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "research problem: Node classification",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper \\\"Nodenet\\\" is a graph neural network model.\", \" \"kind\": \"fact\"}, {\"claim\": \"The paper \\\"A2dug\\\" is a graph neural network model.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: Node classification",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper \\\"Coed\\\" is a graph neural network model.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: Node classification\n  model: Coed",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper \\\"Simple-hgn (heterogeneous GNN)\\\" is a graph neural network model.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: Heterogeneous node classification",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper \\\"Label propagation + simple models\\\" is a baseline in one study.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "research problem: Node classification on non-homophilic heterophilic graphs",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The dataset \\\"Twitch-gamers\\\" is used in node classification benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Twitch-gamers result: Accuracy_66.36",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The dataset \\\"Pokec\\\" is used in node classification benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Pokec result: Accuracy_81.55",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The dataset \\\"Penn94\\\" is used in node classification benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Penn94 result: Accuracy_78.4",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The dataset \\\"Genius\\\" is used in node classification benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Genius result: Accuracy_84.94",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The dataset \\\"Arxiv-year\\\" is used in node classification benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Arxiv-year result: Accuracy_62.65",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The dataset \\\"Texas\\\" is used in node classification benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Texas 60% 20% 20% random splits result: 1:1 accuracy_94.03",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The dataset \\\"Squirrel\\\" is used in node classification benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Squirrel 60% 20% 20% random splits result: 1:1 accuracy_58.9",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The dataset \\\"Chameleon\\\" is used in node classification benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Chameleon 60% 20% 20% random splits result: 1:1 accuracy_72.52",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The dataset \\\"Pubmed\\\" is used in node classification benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Pubmed result: Accuracy_90.21",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The dataset \\\"Cora\\\" is used in node classification benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Cora result: Accuracy_86.8",
+     "quote_ok": true,
+     "label": "S"
+    }
+   ],
+   "labels": [
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "U",
+    "U",
+    "S",
+    "U",
+    "S",
+    "S",
+    "S",
+    "U",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S"
+   ],
+   "faithfulness": 0.84
+  },
+  "openai/gpt-oss-20b|Q43": {
+   "model": "openai/gpt-oss-20b",
+   "qid": "Q43",
+   "query_type": "claim_verification",
+   "claims": [
+    {
+     "claim": "The paper *Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks* reports a frame-rate of 7.0 FPS on the PASCAL VOC 2007 dataset.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark PASCAL VOC 2007 result: FPS_7.0",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *YOLO9000: Better, Faster, Stronger* provides detection accuracy metrics (mAP, MAE, RMSE) for various datasets but does not report any frame-rate or speed measurement for YOLO.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "Benchmark UA-DETRAC result: mAP_57.72",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "No other cited paper in the provided evidence supplies a speed comparison between YOLO and Faster R-CNN for real-time object detection.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "Benchmark UA-DETRAC result: mAP_57.72",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "Faster R-CNN (region proposal networks)",
+     "kind": "absence",
+     "judge_label": "U",
+     "quote": "research problem: Real-time object detection",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "YOLO9000 (YOLOv2 variant)",
+     "kind": "absence",
+     "judge_label": "U",
+     "quote": "research problem: Object detection",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "PASCAL VOC 2007 (used for FPS measurement of Faster R-CNN)",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark PASCAL VOC 2007 result: FPS_7.0",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "No dataset in the evidence provides FPS data for YOLO.",
+     "kind": "absence",
+     "judge_label": "U",
+     "quote": "Benchmark UA-DETRAC result: mAP_57.72",
+     "quote_ok": true,
+     "label": "U"
+    }
+   ],
+   "labels": [
+    "S",
+    "U",
+    "U",
+    "U",
+    "U",
+    "S",
+    "U"
+   ],
+   "faithfulness": 0.2857
+  },
+  "openai/gpt-oss-20b|Q44": {
+   "model": "openai/gpt-oss-20b",
+   "qid": "Q44",
+   "query_type": "method_usage",
+   "claims": [
+    {
+     "claim": "U‑Net: Convolutional Networks for Biomedical Image Segmentation employs a classic U‑Net encoder-decoder CNN with skip connections.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "NONE",
+     "quote_ok": false,
+     "label": "U"
+    },
+    {
+     "claim": "U‑Net: Convolutional Networks for Biomedical Image Segmentation is applied to semantic segmentation of biomedical images such as lesions and organs.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Anatomical Tracings of Lesions After Stroke (ATLAS) result: Dice_0.4606",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "U‑Net: Convolutional Networks for Biomedical Image Segmentation is trained on annotated medical images and evaluated on standard benchmark datasets.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark CVC-ClinicDB result: mean Dice_0.823",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "U‑Net: Convolutional Networks for Biomedical Image Segmentation uses datasets including CVC‑ClinicDB, RITE, ISBI 2012 EM, Kvasir‑SEG, ATLAS, PhC‑C2DH‑U373, DIC‑C2DH‑HeLa, and STARE.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark CVC-ClinicDB result: mean Dice_0.823",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "U‑Net: Convolutional Networks for Biomedical Image Segmentation achieves Dice scores ranging from 0.4606 (ATLAS) to 0.9239 (CVC‑ClinicDB).",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "Benchmark CVC-ClinicDB result: mean Dice_0.823",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "DoubleU‑Net: A Deep Convolutional Neural Network for Medical Image Segmentation uses a two-stage U‑Net (DoubleU‑Net) that cascades two U‑Net modules for refined segmentation.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "research problem: Lesion segmentation",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "DoubleU‑Net: A Deep Convolutional Neural Network for Medical Image Segmentation is applied to lesion segmentation and polyp detection.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: Lesion segmentation",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "DoubleU‑Net: A Deep Convolutional Neural Network for Medical Image Segmentation uses datasets including CVC‑ClinicDB, 2015 MICCAI Polyp Detection, 2018 Data Science Bowl, Kvasir‑Instrument, and ISIC 2018.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark CVC-ClinicDB result: mean Dice_0.9239",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "DoubleU‑Net: A Deep Convolutional Neural Network for Medical Image Segmentation achieves Dice scores up to 0.9239 (CVC‑ClinicDB) and 0.8962 (ISIC 2018).",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark CVC-ClinicDB result: mean Dice_0.9239",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "Roto‑Translation Equivariant Convolutional Networks uses group-equivariant CNNs (G‑CNN) with 12‑ and 8‑fold rotational symmetry (G‑cnn c12, G‑cnn c8).",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "model: G-cnn c12",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "Roto‑Translation Equivariant Convolutional Networks is applied to breast tumour classification in histopathology images.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: Breast tumour classification",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "Roto‑Translation Equivariant Convolutional Networks uses datasets including PCam, CRAG, and Kumar.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark PCam result: AUC_0.962",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "Roto‑Translation Equivariant Convolutional Networks achieves an AUC up to 0.968 (PCam) and a Dice score up to 0.866 (CRAG).",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark PCam result: AUC_0.968",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "Magnification Invariant Medical Image Analysis uses WaveMix-lite and WaveMix CNNs (token-mixing architecture).",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "model: Wavemixlite-224 10",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "Magnification Invariant Medical Image Analysis is applied to breast cancer histology image classification across magnifications.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "model: Wavemixlite-224 10\nresearch problem: Breast cancer histology image classification\nBenchmark Breakhis result: Accuracy_91.72\nmodel: Wavemix-224 10\nresearch problem: Image classification\nBenchmark Breakhis result: Average test accuracy over all magnifications_91.72",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "Magnification Invariant Medical Image Analysis uses the BreakHis dataset.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "model: Wavemixlite-224 10\nresearch problem: Breast cancer histology image classification\nBenchmark Breakhis result: Accuracy_91.72",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "Magnification Invariant Medical Image Analysis achieves an accuracy of 91.72 % across all magnifications.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Breakhis result: Average test accuracy over all magnifications_91.72",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "MULAN: Multitask Universal Lesion Analysis Network uses a multi-task CNN that jointly detects, tags, and segments lesions.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "research problem: Medical object detection",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "MULAN: Multitask Universal Lesion Analysis Network is applied to lesion detection in CT scans.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "model: Mulan",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "MULAN: Multitask Universal Lesion Analysis Network uses the DeepLesion dataset.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark DeepLesion result: Sensitivity_85.22",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "MULAN: Multitask Universal Lesion Analysis Network achieves a sensitivity of 85.22 %.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark DeepLesion result: Sensitivity_85.22",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "Segmentation of Ocular Pathologies Using Deep Convolutional Neural Network uses a deep CNN for simultaneous delineation of multiple retinal pathologies.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: simultaneous delineation of retinal pathologies (hard exudates, soft exudates, hemorrhages, microaneurysms)",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "Segmentation of Ocular Pathologies Using Deep Convolutional Neural Network is applied to segmentation of hard exudates, soft exudates, hemorrhages, and microaneurysms.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: simultaneous delineation of retinal pathologies (hard exudates, soft exudates, hemorrhages, microaneurysms)",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "Segmentation of Ocular Pathologies Using Deep Convolutional Neural Network does not specify a dataset in the provided triples.",
+     "kind": "absence",
+     "judge_label": "U",
+     "quote": "research problem: simultaneous delineation of retinal pathologies (hard exudates, soft exudates, hemorrhages, microaneurysms)",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "MedNeXt: Transformer-driven Scaling of ConvNets for Medical Image Segmentation uses a transformer-augmented CNN (MedNeXt-l 5x5x5) that scales convolutional backbones.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: Medical image segmentation",
+     "quote_ok": true,
+     "label": "S"
+    }
+   ],
+   "labels": [
+    "U",
+    "S",
+    "S",
+    "S",
+    "U",
+    "U",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "U",
+    "U",
+    "S",
+    "S",
+    "S",
+    "S",
+    "U",
+    "S"
+   ],
+   "faithfulness": 0.76
+  },
+  "openai/gpt-oss-20b|Q45": {
+   "model": "openai/gpt-oss-20b",
+   "qid": "Q45",
+   "query_type": "method_usage",
+   "claims": [
+    {
+     "claim": "Variational Autoencoders (VAEs) are employed in the retrieved papers primarily as a framework for learning compact, latent representations of complex data.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: Topic models",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The retrieved papers include Recent Advances In Variational Autoencoders With Representation Learning For Biomedical Informatics: A Survey.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Paper: Title: Recent Advances In Variational Autoencoders With Representation Learning For Biomedical Informatics: A Survey",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The retrieved papers include Biophysical modeling with variational autoencoders for bimodal, single‑cell RNA sequencing data.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Title: Biophysical modeling with variational autoencoders for bimodal, single-cell RNA sequencing data",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "Variational Autoencoder (VAE) is the core probabilistic encoder–decoder architecture trained with a reconstruction loss plus a Kullback–Leibler divergence term that regularises the latent distribution.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "NONE",
+     "quote_ok": false,
+     "label": "U"
+    },
+    {
+     "claim": "Representation Learning is discussed in the survey paper as a general tool for learning latent representations that capture underlying biological signals in biomedical datasets.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Title: Recent Advances In Variational Autoencoders With Representation Learning For Biomedical Informatics: A Survey",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "Bimodal VAE is an extension of the VAE that handles two modalities by jointly learning a shared latent space that captures correlations across modalities.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "NONE",
+     "quote_ok": false,
+     "label": "U"
+    },
+    {
+     "claim": "The survey paper does not report a specific experimental dataset; it reviews a range of biomedical datasets used in the literature.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "NONE",
+     "quote_ok": false,
+     "label": "U"
+    },
+    {
+     "claim": "The biophysical modeling paper applies the bimodal VAE to single‑cell RNA‑sequencing data, specifically a bimodal dataset that contains both transcriptomic and proteomic measurements from the same cells.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "NONE",
+     "quote_ok": false,
+     "label": "U"
+    },
+    {
+     "claim": "The exact dataset name is not provided in the context for the biophysical modeling paper.",
+     "kind": "absence",
+     "judge_label": "S",
+     "quote": "NONE",
+     "quote_ok": false,
+     "label": "S"
+    }
+   ],
+   "labels": [
+    "S",
+    "S",
+    "S",
+    "U",
+    "S",
+    "U",
+    "U",
+    "U",
+    "S"
+   ],
+   "faithfulness": 0.5556
+  },
+  "openai/gpt-oss-20b|Q46": {
+   "model": "openai/gpt-oss-20b",
+   "qid": "Q46",
+   "query_type": "method_usage",
+   "claims": [
+    {
+     "claim": "The paper *Feature Selection and Machine Learning Algorithms for an Improved Credit Card Fraud Detection System* uses correlation matrix for feature selection.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "material: application of the correlation matrix as a feature selection technique and implemented Random Forest and Logistic Regression classifiers",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Feature Selection and Machine Learning Algorithms for an Improved Credit Card Fraud Detection System* applies the resulting features to a Random Forest classifier.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "material: application of the correlation matrix as a feature selection technique and implemented Random Forest and Logistic Regression classifiers",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *UNMASKING FRAUDSTERS: Ensemble Features Selection to Enhance Random Forest Fraud Detection* uses an ensemble of Recursive Feature Elimination (RFE), Information Gain (IG), and Chi-Squared (Chi2) for feature selection.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "material: Combination of ensemble feature selection techniques, Recursive Feature Elimination (RFE), Information Gain (IG), and Chi-Squared (Chi2), with the Random Forest (RF)",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *UNMASKING FRAUDSTERS: Ensemble Features Selection to Enhance Random Forest Fraud Detection* applies the resulting features to a Random Forest classifier.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "method: The methodology involves applying RFE, IG, and Chi2 for feature selection, followed by training an RF classifier to detect fraudulent transactions",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Hybrid bio-inspired model for fraud detection with correlation based feature selection* uses correlation-based selection and firefly bio-inspired algorithm for feature selection.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: hybrid model based on the feature selection method, firefly bio-inspired algorithm, and random forest ensemble classifier (namely HBRF) for fraud detection and overcomes the imbalanced dataset issue in the banking domain",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Hybrid bio-inspired model for fraud detection with correlation based feature selection* applies the resulting features to a hybrid bio-inspired model (firefly algorithm + RF ensemble).",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: hybrid model based on the feature selection method, firefly bio-inspired algorithm, and random forest ensemble classifier (namely HBRF) for fraud detection and overcomes the imbalanced dataset issue in the banking domain",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Adaptive Credit Card Fraud Detection Techniques Based on Feature Selection Method* uses various feature selection methods (J48, AdaBoost, Naive Bayes, PART).",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "method: Application of J48 decision tree, AdaBoost, Random Forest, Naive Bayes, and PART machine learning techniques",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Adaptive Credit Card Fraud Detection Techniques Based on Feature Selection Method* applies the resulting features to a Random Forest classifier.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "method: Application of J48 decision tree, AdaBoost, Random Forest, Naive Bayes, and PART machine learning techniques",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper *Feature Selection and Machine Learning Algorithms for an Improved Credit Card Fraud Detection System* uses a synthetic dataset from IBM TJ Watson Research Centre.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "dataset_repository: The study utilized a synthetic dataset created by a researcher at the IBM TJ Watson Research Centre",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *UNMASKING FRAUDSTERS: Ensemble Features Selection to Enhance Random Forest Fraud Detection* uses the CIC-IDS-2017 dataset.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "dataset_repository: CIC-IDS-2017 dataset",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Hybrid bio-inspired model for fraud detection with correlation based feature selection* uses the Brazilian credit card dataset.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "dataset_repository: Brazilian credit card dataset",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Adaptive Credit Card Fraud Detection Techniques Based on Feature Selection Method* uses the German credit dataset.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "dataset_repository: German credit dataset",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Feature Selection and Machine Learning Algorithms for an Improved Credit Card Fraud Detection System* compares the accuracy of the Random Forest classifier with models without feature selection.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "The methodology involved comparing the performance of machine learning models with and without feature selection to assess the impact on detection accuracy",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *UNMASKING FRAUDSTERS: Ensemble Features Selection to Enhance Random Forest Fraud Detection* evaluates the performance of the Random Forest classifier after feature pruning.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "result: Experimental results demonstrate that the ensemble feature selection approach significantly improved the performance of the RF classifier in detecting fraudulent transactions",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Hybrid bio-inspired model for fraud detection with correlation based feature selection* applies a hybrid bio-inspired model (firefly algorithm + RF ensemble) to detect fraud.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: hybrid model based on the feature selection method, firefly bio-inspired algorithm, and random forest ensemble classifier (namely HBRF) for fraud detection and overcomes the imbalanced dataset issue in the banking domain",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Adaptive Credit Card Fraud Detection Techniques Based on Feature Selection Method* compares the performance of Random Forest with other techniques (J48, AdaBoost, Naive Bayes, PART).",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "result: The study compares the performance of different machine learning techniques, providing insights into their effectiveness for credit card fraud detection based on various evaluation metrics",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Feature Selection and Machine Learning Algorithms for an Improved Credit Card Fraud Detection System* is about credit card fraud detection using feature selection and machine learning algorithms.",
+     "kind": "absence",
+     "judge_label": "S",
+     "quote": "research problem: The paper addresses the challenge of improving the accuracy of credit card fraud detection systems by evaluating the effectiveness of feature selection techniques.",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *UNMASKING FRAUDSTERS: Ensemble Features Selection to Enhance Random Forest Fraud Detection* is about credit card fraud detection using ensemble feature selection and Random Forest.",
+     "kind": "absence",
+     "judge_label": "S",
+     "quote": "research problem: The paper addresses the challenge of enhancing the performance of Random Forest classifiers in detecting credit card fraud by selecting the most relevant features",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Hybrid bio-inspired model for fraud detection with correlation based feature selection* is about credit card fraud detection using correlation-based feature selection and a hybrid bio-inspired model.",
+     "kind": "absence",
+     "judge_label": "S",
+     "quote": "research problem: hybrid model based on the feature selection method, firefly bio-inspired algorithm, and random forest ensemble classifier (namely HBRF) for fraud detection and overcomes the imbalanced dataset issue in the banking domain",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Adaptive Credit Card Fraud Detection Techniques Based on Feature Selection Method* is about credit card fraud detection using feature selection methods and various classifiers.",
+     "kind": "absence",
+     "judge_label": "S",
+     "quote": "The paper addresses the challenge of detecting credit card fraud at the application level using effective feature selection methods",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Feature Selection and Machine Learning Algorithms for an Improved Credit Card Fraud Detection System* is about credit card fraud detection.",
+     "kind": "absence",
+     "judge_label": "S",
+     "quote": "research problem: The paper addresses the challenge of improving the accuracy of credit card fraud detection systems by evaluating the effectiveness of feature selection techniques.",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *UNMASKING FRAUDSTERS: Ensemble Features Selection to Enhance Random Forest Fraud Detection* is about credit card fraud detection.",
+     "kind": "absence",
+     "judge_label": "S",
+     "quote": "research problem: The paper addresses the challenge of enhancing the performance of Random Forest classifiers in detecting credit card fraud by selecting the most relevant features",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Hybrid bio-inspired model for fraud detection with correlation based feature selection* is about credit card fraud detection.",
+     "kind": "absence",
+     "judge_label": "S",
+     "quote": "research problem: hybrid model based on the feature selection method, firefly bio-inspired algorithm, and random forest ensemble classifier (namely HBRF) for fraud detection and overcomes the imbalanced dataset issue in the banking domain",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Adaptive Credit Card Fraud Detection Techniques Based on Feature Selection Method* is about credit card fraud detection.",
+     "kind": "absence",
+     "judge_label": "S",
+     "quote": "The paper addresses the challenge of detecting credit card fraud at the application level using effective feature selection methods",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper *Feature Selection and Machine Learning Algorithms for an Improved Credit Card Fraud Detection System* is about credit card fraud detection using feature selection and machine learning algorithms.",
+     "kind": "absence",
+     "judge_label": "S",
+     "quote": "research problem: The paper addresses the challenge of improving the accuracy of credit card fraud detection systems by evaluating the effectiveness of feature selection techniques.",
+     "quote_ok": true,
+     "label": "S"
+    }
+   ],
+   "labels": [
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "U",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S"
+   ],
+   "faithfulness": 0.96
+  },
+  "openai/gpt-oss-20b|Q47": {
+   "model": "openai/gpt-oss-20b",
+   "qid": "Q47",
+   "query_type": "method_usage",
+   "claims": [
+    {
+     "claim": "No datasets are specified for paper X",
+     "kind": "absence",
+     "judge_label": "U",
+     "quote": "NONE",
+     "quote_ok": false,
+     "label": "U"
+    },
+    {
+     "claim": "The available papers either employ other embedding techniques (e.g., Glove, Doc2Vec, WordNet-based embeddings) or focus on different research problems",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "research problem: Sentiment analysis",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "No methods involving word2vec embeddings for sentiment analysis are described in the provided context",
+     "kind": "absence",
+     "judge_label": "U",
+     "quote": "UNIMELB at SemEval-2016 Tasks 4A and 4B: An Ensemble of Neural Networks and a Word2Vec Based Model for Sentiment Classification",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "None of the listed papers meet the criterion of 'using word2vec embeddings for sentiment analysis.'",
+     "kind": "fact",
+     "judge_label": "C",
+     "quote": "Paper: Title: Vector of Locally-Aggregated Word Embeddings (VLAWE): A Novel Document-level Representation URI: http://orkg.org/orkg/resource/R496210 Year: 2019 Triples: research problem: Sentiment analysis model: Vlawe Benchmark MR result: Accuracy_93.3 Benchmark SUBJ result: Accuracy_95.0 Benchmark Reuters-21578 result: Micro-F1_89.3 Benchmark TREC-6 result: Error_5.8",
+     "quote_ok": true,
+     "label": "C"
+    }
+   ],
+   "labels": [
+    "U",
+    "U",
+    "U",
+    "C"
+   ],
+   "faithfulness": 0.0
+  },
+  "openai/gpt-oss-20b|Q48": {
+   "model": "openai/gpt-oss-20b",
+   "qid": "Q48",
+   "query_type": "paper_lookup",
+   "claims": [
+    {
+     "claim": "The paper 'Deep contextualized word representations' introduces the ELMo architecture.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "Benchmark SNLI result: % Test Accuracy_88.7",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper 'Deep contextualized word representations' evaluates ELMo on a wide range of NLP benchmarks.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "Benchmark SNLI result: % Test Accuracy_88.7",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper 'Deep contextualized word representations' proposes a two-layer bidirectional LSTM language model that produces context-dependent word representations (ELMo).",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "Benchmark SNLI result: % Test Accuracy_88.7",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper 'Deep contextualized word representations' linearly combines ELMo representations with static word embeddings and uses them as features for downstream tasks.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "NONE",
+     "quote_ok": false,
+     "label": "U"
+    },
+    {
+     "claim": "The paper 'Deep Contextualized Word Embedding for Text-based Online User Profiling to Detect Social Bots on Twitter' applies ELMo embeddings combined with a supervised LSTM to detect fake Twitter accounts.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "method: Supervised multi-layer Long short-term memory (LSTM) model integrated with Embedding from the language model (ELMO)",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Deep Contextualized Word Embedding for Text-based Online User Profiling to Detect Social Bots on Twitter' integrates ELMo embeddings into a supervised multi-layer Long Short-Term Memory (LSTM) model.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "method: Supervised multi-layer Long short-term memory (LSTM) model integrated with Embedding from the language model (ELMO)",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Deep Contextualized Word Embedding for Text-based Online User Profiling to Detect Social Bots on Twitter' extracts ELMo vectors from the language model and concatenates them with the LSTM’s hidden states to classify Twitter accounts as real or fake.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "method: Supervised multi-layer Long short-term memory (LSTM) model integrated with Embedding from the language model (ELMO)",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper 'Deep contextualized word representations' includes the SNLI dataset in its benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark SNLI result: % Test Accuracy_88.7",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Deep contextualized word representations' includes the Senseval 2 dataset in its benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Supervised: result: Senseval 2_71.6",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Deep contextualized word representations' includes the SemEval 2015/2007/2013 dataset in its benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Supervised: result: SemEval 2015_71.3",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Deep contextualized word representations' includes the ACL-ARC dataset in its benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark ACL-ARC result: F1_54.6",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Deep contextualized word representations' includes the SQuAD 1.1/2.0 dataset in its benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark SQuAD1.1 result: EM_81.003",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Deep contextualized word representations' includes the SST-5 dataset in its benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark SST-5 Fine-grained classification result: Accuracy_54.7",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Deep contextualized word representations' includes the CoNLL 2003 (English) dataset in its benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark CoNLL 2003 (English) result: F1_92.22",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Deep contextualized word representations' includes the OntoNotes dataset in its benchmarks.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark OntoNotes result: F1_84.6",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Deep contextualized word representations' includes the CTB5 dataset in its benchmarks.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "Benchmark CTB5 result: F1 score_87.43",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper 'Deep Contextualized Word Embedding for Text-based Online User Profiling to Detect Social Bots on Twitter' uses the CRESCI 2017 dataset (Test Set 1 and Test Set 2) for evaluating fake account detection.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "result: CRESCI 2017 (Test Set 1)",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Deep contextualized word representations' is in the field of Natural Language Processing – Representation Learning.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark SNLI result: % Test Accuracy_88.7",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Deep Contextualized Word Embedding for Text-based Online User Profiling to Detect Social Bots on Twitter' is in the field of Social Network Security and Privacy – Fake Account Detection.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: Social Netwrok Security and Privacy",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Deep contextualized word representations' has the DOI 10.48550/arXiv.1802.05365.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "URI: http://orkg.org/orkg/resource/R130368",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Deep Contextualized Word Embedding for Text-based Online User Profiling to Detect Social Bots on Twitter' has the DOI 10.1109/icdmw51313.2020.00071.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "URI: http://orkg.org/orkg/resource/R191625",
+     "quote_ok": true,
+     "label": "S"
+    }
+   ],
+   "labels": [
+    "U",
+    "U",
+    "U",
+    "U",
+    "S",
+    "S",
+    "U",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "U",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S"
+   ],
+   "faithfulness": 0.7143
+  },
+  "openai/gpt-oss-20b|Q49": {
+   "model": "openai/gpt-oss-20b",
+   "qid": "Q49",
+   "query_type": "paper_lookup",
+   "claims": [
+    {
+     "claim": "The paper 'An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale' applies a vanilla transformer to non-overlapping 16×16 image patches.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "The Vision Transformer (ViT) applies Transformers, typically used in NLP, directly to image patches without image-specific biases.",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper 'An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale' removes convolutional inductive biases.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "The Vision Transformer (ViT) applies Transformers, typically used in NLP, directly to image patches without image-specific biases. It excels when pre-trained on larger datasets, outperforming traditional convolutional models like ResNets. This approach challenges the dominance of convolutional architectures in computer vision, mirroring the Transformer's rise in NLP.",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper 'An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale' uses a large-scale ImageNet-21k pre-training followed by fine-tuning on ImageNet-1k.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "pre-trained on the public ImageNet-21k dataset could be trained using a standard cloud TPUv3 with 8 cores in approximately 30 days.",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Three things everyone should know about Vision Transformers' surveys several ViT variants (e.g., Vit-b-18x2, Vit-b-36x1, Vit-l-384).",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "model: Vit-b-18x2",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Three things everyone should know about Vision Transformers' reports the ImageNet performance of various ViT variants.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark ImageNet result: Top 1 Accuracy_84.1",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Three things everyone should know about Vision Transformers' illustrates how depth, width, and patch size affect accuracy.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "model: Vit-b-18x2",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper 'Global Context Vision Transformers' introduces a hierarchical ViT with local and global self-attention modules.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "extension: hierarchical ViT architecture consisting of local and global self-attention modules",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Global Context Vision Transformers' introduces global query tokens.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "innovation: The Global Context Vision Transformer (GC ViT) introduces a hierarchical structure optimized for compute and parameter efficiency. It employs global query tokens for capturing contextual information and a novel downsampling module with Fused MB-Conv blocks to enhance inter-channel dependencies. These innovations lead to state-of-the-art performance across various computer vision tasks.",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Global Context Vision Transformers' introduces a fused MB-Conv down-sampling block.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "hardware description: For image classification, GC ViT models were trained using four computational nodes with 32 NVIDIA A100 GPUs",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper 'Global Context Vision Transformers' is trained on ImageNet-21k with 32 A100 GPUs.",
+     "kind": "fact",
+     "judge_label": "C",
+     "quote": "hardware description: For image classification, GC ViT models were trained using four computational nodes with 32 NVIDIA A100 GPUs",
+     "quote_ok": true,
+     "label": "C"
+    },
+    {
+     "claim": "The paper 'MaxViT: Multi-Axis Vision Transformer' combines multi-axis attention (spatial, channel, and token) within a transformer block.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "Benchmark ImageNet result: Top 1 Accuracy_89.53",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper 'MaxViT: Multi-Axis Vision Transformer' achieves high accuracy with fewer parameters.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark ImageNet result: Top 1 Accuracy_89.53",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'FasterViT: Fast Vision Transformers with Hierarchical Attention' employs a hierarchical attention scheme.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "Benchmark Imagenet result: Top 1 accuracy_85.8",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper 'FasterViT: Fast Vision Transformers with Hierarchical Attention' reduces FLOPs while maintaining ImageNet accuracy.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Imagenet result: Gflops_18.2",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Not All Images are Worth 16x16 Words: Dynamic Transformers for Efficient Image Recognition' proposes Dynamic Vision Transformers (DVT).",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "research problem: Image classification",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper 'Not All Images are Worth 16x16 Words: Dynamic Transformers for Efficient Image Recognition' adaptively selects token sizes (e.g., t2t-vit-7, t2t-vit-12).",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "model: Dvt t2t-vit-7",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper 'Not All Images are Worth 16x16 Words: Dynamic Transformers for Efficient Image Recognition' is used for efficient image recognition.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: Image classification",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale' reports state-of-the-art ImageNet accuracies.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark ImageNet ReaL result: Accuracy_90.72",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Global Context Vision Transformers' reports state-of-the-art ImageNet accuracies.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "innovation: The Global Context Vision Transformer (GC ViT) introduces a hierarchical structure optimized for compute and parameter efficiency. It employs global query tokens for capturing contextual information and a novel downsampling module with Fused MB-Conv blocks to enhance inter-channel dependencies. These innovations lead to state-of-the-art performance across various computer vision tasks.",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper 'MaxViT: Multi-Axis Vision Transformer' reports state-of-the-art ImageNet accuracies.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark ImageNet result: Top 1 Accuracy_89.53",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'FasterViT: Fast Vision Transformers with Hierarchical Attention' reports state-of-the-art ImageNet accuracies.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "Benchmark Imagenet result: Top 1 accuracy_85.8",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper 'Not All Images are Worth 16x16 Words: Dynamic Transformers for Efficient Image Recognition' reports state-of-the-art ImageNet accuracies.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "Benchmark ImageNet result: Top 1 Accuracy_78.48",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper 'An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale' reports parameter counts and computational budgets.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark ImageNet ReaL result: Params_632.0",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The paper 'Global Context Vision Transformers' reports parameter counts and computational budgets.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "hardware description: For image classification, GC ViT models were trained using four computational nodes with 32 NVIDIA A100 GPUs",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The paper 'MaxViT: Multi-Axis Vision Transformer' reports parameter counts and computational budgets.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark ImageNet result: Number of params_475.0",
+     "quote_ok": true,
+     "label": "S"
+    }
+   ],
+   "labels": [
+    "U",
+    "U",
+    "S",
+    "S",
+    "S",
+    "U",
+    "S",
+    "S",
+    "U",
+    "C",
+    "U",
+    "S",
+    "U",
+    "S",
+    "U",
+    "U",
+    "S",
+    "S",
+    "U",
+    "S",
+    "U",
+    "U",
+    "S",
+    "U",
+    "S"
+   ],
+   "faithfulness": 0.48
+  },
+  "openai/gpt-oss-20b|Q50": {
+   "model": "openai/gpt-oss-20b",
+   "qid": "Q50",
+   "query_type": "paper_lookup",
+   "claims": [
+    {
+     "claim": "The T5 text-to-text transfer transformer was introduced in the 2019 paper *Exploring the limits of transfer learning with a unified text-to-text transformer*.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "research problem: transformer model",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The T5 model casts every NLP task as a text-to-text conversion problem.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "innovation: The main innovation of Google's T5 language model is its \"text-to-text\" framework, where various tasks are formulated as converting input text to output text. This unified approach allows T5 to achieve state-of-the-art performance on diverse tasks without task-specific modifications, simplifying training and deployment. This innovation enhances efficiency and effectiveness in real-world applications of large language models.",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The T5 model uses a span-corruption pre-training objective to learn contextual representations.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "pretraining task: Span Corruption",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The T5 model is fine-tuned on downstream tasks one at a time.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "fine-tuning task: finetuning on downstream tasks one at a time",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The T5 model is trained on a massive, multilingual corpus.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "base_model: T5",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The T5 model uses the WMT 2014 English-German and English-French translation datasets for evaluation.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark WMT2014 English-German result: BLEU score_32.1",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The T5 model uses the SQuAD 1.1 dataset for evaluation.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark SQuAD1.1 dev result: EM_90.06",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The T5 model uses the CNN / Daily Mail dataset for evaluation.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark CNN / Daily Mail result: ROUGE-1_43.52",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The T5 model uses the Multi-News, BigPatent, arXiv, PubMed, and other summarization/translation datasets for evaluation.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Multi-News result: ROUGE-2_19.43",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The T5 model achieves state-of-the-art results across a wide range of benchmarks without task-specific architectural changes.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "innovation: The main innovation of Google's T5 language model is its \"text-to-text\" framework, where various tasks are formulated as converting input text to output text. This unified approach allows T5 to achieve state-of-the-art performance on diverse tasks without task-specific modifications, simplifying training and deployment.",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The T5 model is a large-scale transformer model.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "research problem: Large Language Models (LLMs)",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The T5 model is trained on a large, multilingual text collection, though the exact composition is not specified in the provided context.",
+     "kind": "absence",
+     "judge_label": "U",
+     "quote": "research problem: transformer model",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The T5 model is part of the research field of Natural Language Processing and Large Language Models.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "research problem: Large Language Models (LLMs)",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The T5 model is referenced in the paper *Exploring the limits of transfer learning with a unified text-to-text transformer*.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "research problem: transformer model",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The T5 model is a unified framework that eliminates the need for task-specific heads.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "innovation: The main innovation of Google's T5 language model is its \"text-to-text\" framework, where various tasks are formulated as converting input text to output text. This unified approach allows T5 to achieve state-of-the-art performance on diverse tasks without task-specific modifications, simplifying training and deployment. This innovation enhances efficiency and effectiveness in real-world applications of large language models.",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The T5 model is trained to predict missing tokens in random spans of text.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "pretraining task: Span Corruption",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The T5 model leverages the transformer architecture’s capacity to capture long-range dependencies.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "research problem: transformer model",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The T5 model is fine-tuned separately on each downstream benchmark.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "fine-tuning task: finetuning on downstream tasks one at a time",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The T5 model is trained on a span-corruption pre-training objective.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "pretraining task: Span Corruption",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The T5 model is used for translation, summarization, and question answering tasks.",
+     "kind": "fact",
+     "judge_label": "U",
+     "quote": "research problem: transformer model",
+     "quote_ok": true,
+     "label": "U"
+    },
+    {
+     "claim": "The T5 model is evaluated on the WMT 2014 English-German and English-French translation datasets.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark WMT2014 English-German result: BLEU score_32.1",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The T5 model is evaluated on the SQuAD 1.1 dataset.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark SQuAD1.1 dev result: EM_90.06",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The T5 model is evaluated on the CNN / Daily Mail dataset.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark CNN / Daily Mail result: ROUGE-1_43.52",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The T5 model is evaluated on the Multi-News, BigPatent, arXiv, PubMed, and other summarization/translation datasets.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "Benchmark Multi-News result: ROUGE-2_19.43",
+     "quote_ok": true,
+     "label": "S"
+    },
+    {
+     "claim": "The T5 model is a text-to-text transfer transformer.",
+     "kind": "fact",
+     "judge_label": "S",
+     "quote": "The main innovation of Google's T5 language model is its \"text-to-text\" framework, where various tasks are formulated as converting input text to output text. This unified approach allows T5 to achieve state-of-the-art performance on diverse tasks without task-specific modifications, simplifying training and deployment. This innovation enhances efficiency and effectiveness in real-world applications of large language models.",
+     "quote_ok": true,
+     "label": "S"
+    }
+   ],
+   "labels": [
+    "U",
+    "S",
+    "S",
+    "S",
+    "U",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S",
+    "U",
+    "U",
+    "S",
+    "U",
+    "S",
+    "S",
+    "U",
+    "S",
+    "S",
+    "U",
+    "S",
+    "S",
+    "S",
+    "S",
+    "S"
+   ],
+   "faithfulness": 0.72
   }
  }
 }

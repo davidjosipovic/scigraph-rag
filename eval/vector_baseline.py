@@ -270,10 +270,12 @@ def retrieve_eval(split: str | None, k: int) -> None:
 
 # ── answer: full runs in the benchmark format ────────────────────
 
-async def answer(models: list[str], delay: float) -> None:
+async def answer(models: list[str], delay: float, only: list[str] | None = None) -> None:
     from eval.benchmark import QUESTIONS_FILE, run_model, load_questions
 
     questions = load_questions(QUESTIONS_FILE)
+    if only:
+        questions = [q for q in questions if q["id"] in only]
     results = []
     for spec in models:
         provider, model = spec.split(":", 1)
@@ -297,6 +299,7 @@ def main() -> None:
     a = sub.add_parser("answer")
     a.add_argument("--models", nargs="+", required=True, metavar="PROVIDER:MODEL")
     a.add_argument("--delay", type=float, default=30.0, help="pause between questions for cloud models")
+    a.add_argument("--questions", nargs="+", metavar="QID", help="only these question ids (e.g. to re-run failures)")
     args = p.parse_args()
 
     if args.cmd == "build":
@@ -306,7 +309,7 @@ def main() -> None:
     elif args.cmd == "retrieve":
         retrieve_eval(args.split, args.k)
     else:
-        asyncio.run(answer(args.models, args.delay))
+        asyncio.run(answer(args.models, args.delay, args.questions))
 
 
 if __name__ == "__main__":
