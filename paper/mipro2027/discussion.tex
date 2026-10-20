@@ -29,11 +29,10 @@ always become a better answer. On claim questions graph retrieval supplies far
 more deciding papers, but verdict accuracy does not improve, because the
 models often decide from prior knowledge. Answer quality thus also depends
 on whether the model uses the evidence it is given. The answer metrics are
-also noisier than the retrieval metrics. With almost identical context, a
-repeated run moved the mean strict score by 0.05 and reversed the sign of the
-graph--dense difference. Comparisons of RAG configurations based on a single
-run per system and differences of a few points should therefore be treated
-with caution. Repeated runs and paired intervals are cheap with local models.
+also noisier than the retrieval metrics (Section~\ref{sec:results}), so
+single-run comparisons of RAG configurations that differ by a few points
+should be treated with caution; repeated runs and paired intervals are cheap
+with local models.
 
 \textbf{The LLM judge (RQ3).} A judge that sees only source titles cannot
 measure what distinguishes the retrievers, namely which papers are cited and

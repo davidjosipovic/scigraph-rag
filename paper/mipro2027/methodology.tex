@@ -112,10 +112,8 @@ the two reflect the evaluation protocol rather than the judge model.
 
 The two retrieval systems share the whole pipeline except the choice of the 8
 papers (Section~\ref{sec:system}): the same full ORKG records, context rows,
-prompt and LLM. Dense retrieval embeds one text card per paper (title, research
-field and contribution values, at most 1,500 characters) for all 68,806 papers
-in the ORKG RDF dump of 18 October 2026 with \texttt{mxbai-embed-large}
-\cite{mxbai2024}, and ranks by cosine similarity; to test sensitivity to the
+prompt and LLM. Dense retrieval indexes the ORKG RDF dump of 18 October 2026 with
+\texttt{mxbai-embed-large} \cite{mxbai2024}; to test sensitivity to the
 embedder we repeat retrieval with \texttt{nomic-embed-text} \cite{nussbaum2024nomic}.
 A reciprocal rank fusion (RRF, $k = 60$) \cite{cormack2009rrf} of the two ranked lists
 is computed at the retrieval level only.
