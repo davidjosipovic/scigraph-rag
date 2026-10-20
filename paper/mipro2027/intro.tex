@@ -17,9 +17,9 @@ RAG is promoted for exactly this kind of relational question
 \cite{peng2024graphragsurvey}.
 
 Whether graph retrieval actually beats dense retrieval is hard to tell from
-the literature, for two reasons. First, the two are rarely compared under
-equal conditions: they usually differ in data, context format and prompt as
-well as in retrieval. Second, such systems are typically evaluated by an LLM
+the literature, for two reasons. First, retrieval is rarely isolated: compared
+systems often differ in data, context format and prompt as well as in the
+retriever. Second, such systems are typically evaluated by an LLM
 judge \cite{liu2023geval}, which scores fluency and apparent groundedness but
 does not know which papers are relevant. When the judge sees only the titles
 of the retrieved sources, it cannot tell whether an answer cites the right
@@ -54,5 +54,5 @@ retrieval is better on structured questions such as method comparisons, and
 dense retrieval on topical and title lookups. Their combination outperforms
 both. In the answers, the overall difference is smaller than the variance
 between repeated runs, while the LLM judge mainly separates cloud models from
-local ones by style. All code, questions, gold labels and results are
+local ones. All code, questions, gold labels and results are
 available.\footnote{TODO: repository URL.}

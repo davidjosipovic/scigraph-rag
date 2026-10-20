@@ -33,11 +33,12 @@ questions over the Open Research Knowledge Graph (ORKG) and answer metrics that
 need no LLM judge, and use them to compare two retrieval strategies inside one
 pipeline: graph-native SPARQL retrieval and dense retrieval over text cards of
 all 68,806 ORKG papers. With context construction, prompt and LLM held fixed,
-both reach similar retrieval quality (nDCG@8 0.75 vs.\ 0.71 on the test split),
+both reach similar retrieval quality (nDCG@8 0.72 vs.\ 0.73 on all questions,
+0.75 vs.\ 0.71 on the test split),
 but they retrieve largely different papers, and a rank fusion of the two
 reaches 0.79. Graph retrieval is better on method comparisons and claim
 verification, where it supplies the deciding evidence; dense retrieval is
-better on topical and title lookups. End-to-end answer quality is equal for two
+better on topical questions, method usage and title lookups. End-to-end answer quality is equal for two
 LLMs, and the difference is smaller than the variance between repeated runs.
 Across nine LLMs, an LLM judge correlates only moderately with the gold metrics
 ($\rho = 0.45$) and overstates the gap between cloud and local models.

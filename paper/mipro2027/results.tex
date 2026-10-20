@@ -38,8 +38,8 @@ the parity is with a tuned graph retriever.
 The per-type results are not on par. Graph retrieval is better where the
 question has structure that maps onto graph relations: datasets used by a
 paper, papers reporting both compared methods, and benchmark results that
-decide a claim. Dense retrieval is better on broad topics and on finding a paper
-by its title, where textual similarity is sufficient and graph retrieval
+decide a claim. Dense retrieval is better on broad topics, on method usage and on finding a
+paper by its title, where textual similarity is sufficient and graph retrieval
 depends on how an entity is spelled in ORKG.
 
 The two systems retrieve largely different papers: on average only 0.42 of the
@@ -54,7 +54,7 @@ strong one.
 \subsection{Answers: Graph versus Dense}
 
 \begin{table}[t]
-\caption{Answers with the same LLM and only the retriever changed (all 50 questions). E2E: strict end-to-end score; Cl.: grade-2 papers cited per claim question; MC: E2E on method comparison. For \texttt{qwen2.5:7b}, run 1 / run 2.}
+\caption{Answers with the same LLM and only the retriever changed (all 50 questions). E2E: strict end-to-end score; Cl.: grade-2 papers cited per claim question; MC: E2E on method comparison. For \texttt{qwen2.5:7b}, run 1 / run 2. Faithful for \texttt{gpt-oss-20b} on the 49 answers judged with both retrievers.}
 \label{tab:answers}
 \centering
 \setlength{\tabcolsep}{3pt}

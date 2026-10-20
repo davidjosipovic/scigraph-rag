@@ -70,8 +70,9 @@ papers into it. Per answer we compute:
 \end{itemize}
 
 The \textbf{gold Score} of an answer is $F_1$(CitePrec, CiteUtil) when the
-context contains a grade-2 paper, 1 for a correct abstention otherwise, and the
-verdict accuracy for claim questions, where INSUFFICIENT is also accepted when
+context contains a grade-2 paper; otherwise it is 1 for an abstention and
+CitePrec (at most 0.5) for an answer. Claim questions are scored by the
+verdict, where INSUFFICIENT is also accepted when
 none of the deciding papers was retrieved. This score is appropriate for
 comparing LLMs on the same retrieval, but it rewards abstention when retrieval
 fails, so a weaker retriever can obtain a higher Score. To compare retrieval

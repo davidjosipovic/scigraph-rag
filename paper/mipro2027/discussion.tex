@@ -19,7 +19,7 @@ depends on the surface form under which an entity is stored in ORKG and on
 the LLM extracting it correctly.
 
 \textbf{Complementarity.} The two systems share fewer than one of eight
-papers and do not fail on the same questions, which is why their fusion
+papers and succeed on different question types, which is why their fusion
 outperforms both. We kept the system itself graph-only, since every retrieved
 paper can then be traced to the query path that found it. A hybrid is the
 natural next step, but we evaluated it only at the retrieval level.
@@ -40,8 +40,8 @@ measure what distinguishes the retrievers, namely which papers are cited and
 whether they support the answer. It tracked the gold metrics only moderately
 and ranked models largely by whether they were cloud or local models. The
 same judge model applied to claims with the full context, and required to
-quote the context, gave usable per-model estimates. The protocol matters more
-than the judge model.
+quote the context, gave usable per-model estimates. The evaluation protocol matters at
+least as much as the judge model.
 
 \textbf{Practical implications.} With good retrieval, a local 7B model came
 within 0.07 of the best cloud model. The whole pipeline, including both
