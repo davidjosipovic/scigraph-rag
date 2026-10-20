@@ -17,7 +17,7 @@ Glavni rezultati na 9 modela i 50 pitanja, nakon poboljšanja dohvata (`RETRIEVA
 
 Na istim odgovorima stari sudac daje cloud modelima 4,3–4,6, a lokalnima 3,3–3,5 (od 5). To je razlika od oko 22 % skale. Gold Score između najboljeg cloud i najboljeg lokalnog modela razlikuje se za 7 postotnih bodova. Unutar lokalnih modela sudac gotovo ne razlikuje kvalitetu: Spearman ρ s gold Scoreom je 0,25.
 
-U usporedbi s vektorskim RAG-om (`mxbai-embed-large`, isti pipeline, mijenja se samo izbor radova) graf ima jednak ukupni dohvat (nDCG@8 0,716 prema 0,725). Graf je bolji kod dataseta, usporedbi metoda i provjere tvrdnji, a vektor kod tema i traženja rada. Dohvaćeni skupovi gotovo se ne preklapaju, pa hibrid doseže 0,79. U odgovorima ukupne razlike nema (strogi E2E: razlika oko 0 ± 0,1 za dva modela), a raspršenje između runova jednako je velikoj razlici između sustava. Graf je dosljedno bolji kod usporedbi metoda i malo vjerniji kontekstu.
+U usporedbi s vektorskim RAG-om (`mxbai-embed-large`, isti pipeline, mijenja se samo izbor radova) graf ima jednak ukupni dohvat (nDCG@8 0,716 prema 0,725). Graf je bolji kod dataseta, usporedbi metoda i provjere tvrdnji, a vektor kod tema i traženja rada. Dohvaćeni skupovi gotovo se ne preklapaju, pa hibrid doseže 0,79; u stvarnom pipelineu hibrid značajno poboljšava dohvat u odnosu na graf (0,746 prema 0,682), ali ne i odgovore. U odgovorima ukupne razlike nema (strogi E2E: razlika oko 0 ± 0,1 za dva modela), a raspršenje između runova jednako je velikoj razlici između sustava. Graf je dosljedno bolji kod usporedbi metoda i malo vjerniji kontekstu.
 
 ---
 
@@ -206,7 +206,7 @@ Sustav ostaje čisti GraphRAG, bez embeddinga. Vektorski RAG ovdje služi samo k
 
 - **Ukupno su graf i jak vektorski dohvat izjednačeni.** Upareni bootstrap interval razlike uključuje 0.
 - **Prednosti su komplementarne.** Graf je bolji gdje pitanje ima strukturu, poput dataseta, para metoda ili tvrdnje o rezultatu. Tada SPARQL strategije pogađaju točne veze u grafu. Vektor je bolji na temama i traženju rada po naslovu, gdje je dovoljna tekstualna sličnost.
-- **Sustavi dohvaćaju gotovo disjunktne skupove:** u prosjeku se u 8 dohvaćenih radova poklapa 0,42 rada. Zato hibrid s RRF-om (0,792) nadmašuje oba. To je procjena na razini dohvata; hibrid nije pokretan u pipelineu.
+- **Sustavi dohvaćaju gotovo disjunktne skupove:** u prosjeku se u 8 dohvaćenih radova poklapa 0,42 rada. Zato hibrid s RRF-om (0,792) nadmašuje oba. To je procjena nad listama (graf oracle); hibrid pokrenut u pipelineu opisan je u poglavlju "Hibrid u pipelineu".
 - **Vektorski rezultat jako ovisi o embedding modelu.** S `nomic-embed-text` nDCG pada za 0,3. Prednost vektora na temama ostaje (0,866), ali na usporedbama metoda pada na 0,166. Kao usporedna točka uzet je jači model, mxbai.
 - **Gubitak end-to-end** (0,754 → 0,695) dolazi od toga što LLM pogrešno klasificira upit ili izvuče krive entitete. Vektorski dohvat te korake ne koristi, pa taj gubitak nema.
 
@@ -250,6 +250,32 @@ Faithful za gpt-oss-20b računat je na 49 odgovora (Q01 na vektorskoj strani sud
 - **Kod traženja konkretnog rada vektor je bolji** i u dohvatu i u odgovorima.
 - **Faithfulness je viši s grafom u sva tri mjerenja**, za +0,02 do +0,05. Pojedinačno nijedna razlika nije značajna. Moguće objašnjenje je da graf donosi radove čiji zapisi izravno odgovaraju na pitanje, pa model manje dodaje iz vlastitog znanja. Ovo nije provjereno.
 
+
+### Hibrid u pipelineu
+
+`HybridPipeline` (`eval/vector_baseline.py`, `answer --hybrid`) spaja top 8 grafa (end-to-end, entitete izvlači qwen2.5:7b) i top 8 vektora (mxbai) RRF-om (k = 60) i uzima 8 radova. Radovi iz grafa zadržavaju retke koje im je dao graf, a radovi koje je našao samo vektor dobivaju retke iz svog ORKG zapisa, kao u vektorskom pipelineu. qwen2.5:7b pokrenut je dvaput; u oba runa dohvaćeni su isti radovi i svi su ocijenjeni.
+
+| qwen2.5:7b | nDCG@8 izvora (svih 50 / test) | E2E (run 1 / 2) | Gold Score | Faithful |
+|---|---|---|---|---|
+| Graf | 0,682 / 0,695 | 0,748 / 0,696 | 0,758 / 0,726 | 0,771 / 0,758 |
+| Vektor | 0,711 / 0,701 | 0,731 / 0,733 | 0,809 / 0,811 | 0,739 / 0,733 |
+| **Hibrid** | **0,746 / 0,743** | 0,736 / 0,752 | 0,766 / 0,782 | 0,714 / 0,725 |
+
+nDCG je ovdje računat iz 8 izvora u kontekstu stvarnog odgovora, pa se za vektor malo razlikuje od `retrieval_vector_*` (0,725 / 0,712).
+
+| Razlika, upareni bootstrap 95 % | |
+|---|---|
+| Hibrid − graf, nDCG | **+0,064 [+0,016; +0,113]** |
+| Hibrid − vektor, nDCG | +0,034 [−0,027; +0,098] |
+| Hibrid − graf, E2E (oba runa) | +0,022 [−0,058; +0,102] |
+| Hibrid − vektor, E2E (oba runa) | +0,012 [−0,049; +0,079] |
+| Hibrid − graf, faithful (oba runa, n = 46) | −0,039 [−0,084; +0,004] |
+| Hibrid − vektor, faithful (oba runa, n = 46) | −0,014 [−0,069; +0,044] |
+
+- **Dohvat:** hibrid je jedini sustav koji je značajno bolji od drugoga (od grafa end-to-end). Ispod je procjene od 0,792 jer graf ovdje radi s entitetima koje izvlači LLM, a ne s oracle entitetima.
+- **Odgovori:** E2E je najviši u prosjeku dva runa (0,744), ali unutar šuma. Na `claim_verification` hibrid ima 0,75 u oba runa (graf 0,50–0,62, vektor 0,62), a kod `method_comparison` pada na 0,47–0,51 (graf 0,60–0,64) jer vektorski radovi istiskuju dio radova koje graf nalazi za usporedbe.
+- **Faithfulness** je na razini vektora i nešto ispod grafa; razlika prema grafu nije značajna, ali je graf ostao najvjerniji u svim runovima.
+
 ---
 
 ## Analiza i zaključci
@@ -287,7 +313,7 @@ Udio C u svim modelima je 1–3 %, ali je podcijenjen jer sudac pogrešna pripis
 - **Fabr je heuristika** (sličnost naslova > 0,8), pa može dati lažno pozitivne rezultate.
 - **Faithfulness sudac ima κ = 0,51.** Pouzdan je za prosjeke po modelu, ali ne za pojedinačne tvrdnje. Validaciju je napravio jači model uz ljudski pregled samo za neslaganja.
 - **Jedan run po modelu u općem poretku.** Raspršenje je izmjereno samo za qwen2.5:7b, s dva runa (vidi "GraphRAG prema vektorskom RAG-u"). Pojedini odgovor se između runova pomakne za 0,08–0,09 E2E, a prosjek za do 0,05. Razlike između susjednih modela u općem poretku (npr. 0,798 i 0,790) zato su unutar šuma.
-- **Usporedba s vektorskim RAG-om ima jedan graf, jedan korpus i dva embedding modela.** Hibrid je procijenjen samo na razini dohvata.
+- **Usporedba s vektorskim RAG-om ima jedan graf, jedan korpus i dva embedding modela.** Hibrid je u pipelineu pokrenut samo s qwen2.5:7b.
 - **Ovo je Groq free tier.** Dostupnost modela se mijenja (`llama-3.3-70b` i `llama-4-scout` su povučeni), pa usporedba s `BENCHMARK_REPORT.md` nije potpuna.
 
 ---
@@ -319,6 +345,7 @@ VECTOR_EMBED_MODEL=nomic-embed-text python -m eval.vector_baseline embed   # dru
 | `eval/results/benchmark_20261020_000036.json` | qwen2.5:7b, graf, run 2 |
 | `eval/results/benchmark_vector_20261019_220522.json` | vektor (mxbai): qwen2.5:7b run 1 i gpt-oss-20b |
 | `eval/results/benchmark_vector_20261020_002631.json` | vektor (mxbai): qwen2.5:7b run 2 |
+| `eval/results/benchmark_hybrid_20261020_*.json` | hibrid (RRF): qwen2.5:7b run 1 i 2 |
 | `eval/results/faithfulness_benchmark_*2026102*.json`, `faithfulness_benchmark_vector_*.json` | faithfulness za gornje runove |
 | `eval/results/retrieval_vector_*.json`, `retrieval_vector_nomic_*.json`, `retrieval_oracle_20261019_*.json` | nDCG po pitanju za vektor i graf |
 | `eval/results/gold_kappa_sample_labelled.json` | 120 parova koje je autor naslijepo ocijenio |
