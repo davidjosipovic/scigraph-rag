@@ -90,6 +90,7 @@ scigraph-rag/
 │   ├── retrieval_eval.py      # nDCG / recall of retrieval against the graded gold set
 │   ├── answer_eval.py         # Gold-based answer metrics (citations, abstention, verdicts)
 │   ├── faithfulness.py        # Claim-level faithfulness judge (local qwen3:8b) + kappa check
+│   ├── vector_baseline.py     # Vector-RAG and hybrid (RRF) baselines, evaluation only
 │   ├── ANSWER_EVAL_REPORT.md  # Current answer-quality results (9 models)
 │   ├── RETRIEVAL_REPORT.md    # Retrieval results (dev/test)
 │   └── results/               # JSON + CSV output from benchmark and ablation runs
@@ -188,15 +189,41 @@ All settings are in `.env` (loaded by `pydantic-settings`):
 | `MAX_CONTEXT_PAPERS` | `8` | Max papers fed to LLM |
 | `CORS_ORIGINS` | `http://localhost:3000,...` | Allowed CORS origins |
 
-## Why GraphRAG vs Vector RAG?
+## Evaluation
 
-| | Vector RAG | This project (KG-RAG) |
+All evaluation runs locally (Ollama), with optional cloud models via Groq. 50 questions in 6 types, split into dev (odd IDs) and test (even IDs); a graded relevance gold set (0/1/2, 2,633 judgments) and gold verdicts for claim questions are in `data/gold/`.
+
+```bash
+# retrieval: nDCG@8 etc. against the gold set (oracle or end-to-end)
+python -m eval.retrieval_eval [--split test] [--model ollama:qwen2.5:7b]
+
+# answers: run models, then score without an LLM judge
+python -m eval.benchmark --models ollama:qwen2.5:7b --skip-judge
+python -m eval.answer_eval --results eval/results/benchmark_<ts>.json [--split test] [--by-type]
+python -m eval.faithfulness --results eval/results/benchmark_<ts>.json   # resumes where it stopped
+
+# baselines (evaluation only; the system itself stays pure GraphRAG)
+python -m eval.vector_baseline build --dump data/orkg_dump_<date>.nt   # ORKG RDF dump
+python -m eval.vector_baseline embed                                   # mxbai-embed-large via Ollama
+python -m eval.vector_baseline retrieve [--split test]
+python -m eval.vector_baseline answer [--hybrid] --models ollama:qwen2.5:7b
+```
+
+Results and methodology: [`eval/RETRIEVAL_REPORT.md`](eval/RETRIEVAL_REPORT.md) and [`eval/ANSWER_EVAL_REPORT.md`](eval/ANSWER_EVAL_REPORT.md).
+
+## GraphRAG vs Vector RAG: measured
+
+Same pipeline, only the choice of the 8 papers differs (`eval/vector_baseline.py`):
+
+| nDCG@8, all 50 questions | Graph (oracle) | Vector (mxbai) |
 |---|---|---|
-| Retrieval | Approximate (cosine similarity) | Exact (SPARQL triples) |
-| Hallucination risk | Medium–high | Low (cites exact KG nodes) |
-| Reasoning | Text context only | Graph traversal (multi-hop) |
-| Traceability | Text chunk | Paper URI + DOI |
-| Index maintenance | Re-embed on update | ORKG is live |
+| Dataset search / method comparison / claim verification | **0.82 / 0.66 / 0.66** | 0.69 / 0.54 / 0.56 |
+| Method usage / paper lookup / topic search | 0.71 / 0.58 / 0.85 | **0.82 / 0.72 / 0.98** |
+| All | 0.72 | 0.73 |
+
+- Overall the two are on par, but they retrieve largely different papers (0.42 of 8 shared). An RRF hybrid run in the pipeline retrieves significantly better than graph retrieval alone (0.746 vs 0.682, end-to-end).
+- Answer quality (strict end-to-end score) is equal within the variance between repeated runs; graph retrieval leads on method comparisons and its answers stay slightly closer to the context.
+- Graph retrieval's real advantage is traceability: every paper comes from an explicit SPARQL path, and the context shows each value's role (method, baseline, dataset, result).
 
 ## Running Tests
 
