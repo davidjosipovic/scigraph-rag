@@ -11,6 +11,7 @@
 \caption{Retrieval quality, nDCG@8. Graph retrieval in oracle mode; best of graph and \texttt{mxbai} in bold.}
 \label{tab:retrieval}
 \centering
+\setlength{\tabcolsep}{4pt}
 \begin{tabular}{lrccc}
 \hline
 Question type & $n$ & Graph & Dense (mxbai) & Dense (nomic) \\
@@ -57,7 +58,7 @@ strong one.
 \caption{Answers with the same LLM and only the retriever changed (all 50 questions). E2E: strict end-to-end score; Cl.: grade-2 papers cited per claim question; MC: E2E on method comparison. For \texttt{qwen2.5:7b}, run 1 / run 2. Faithful for \texttt{gpt-oss-20b} on the 49 answers judged with both retrievers.}
 \label{tab:answers}
 \centering
-\setlength{\tabcolsep}{3pt}
+\setlength{\tabcolsep}{2.5pt}
 \begin{tabular}{llccccc}
 \hline
 Model & Retr. & E2E & Score & Faithful & Cl. & MC \\
