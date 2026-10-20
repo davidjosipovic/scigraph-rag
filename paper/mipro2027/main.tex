@@ -46,30 +46,13 @@ Across nine LLMs, an LLM judge correlates only moderately with the gold metrics
 retrieval-augmented generation, knowledge graphs, ORKG, dense retrieval, evaluation, LLM-as-a-judge
 \end{IEEEkeywords}
 
-\section{Introduction}
-\label{sec:intro}
-% TODO (0.6 p.): KG-RAG over scholarly graphs as an alternative to vector RAG;
-% such systems are evaluated with LLM judges that do not see the retrieved
-% content; RQ1 is graph retrieval better than dense retrieval over the same
-% data, RQ2 where do they differ, RQ3 does an LLM judge measure the
-% difference; contributions.
-
+\input{intro}
 \input{related}
 \input{system}
 \input{methodology}
 \input{results}
 
-\section{Discussion and Limitations}
-\label{sec:discussion}
-% TODO (0.6 p.): why graph wins comparisons (SPARQL finds papers with both
-% methods and benchmark scores) and dense wins topics and lookups; run-to-run
-% variance as a methodological point; limitations: 50 questions (25 test),
-% LLM-proposed relevance grades with author review, repeated run only for
-% qwen2.5, hybrid only at retrieval level, ORKG coverage, Groq free tier.
-
-\section{Conclusion}
-\label{sec:conclusion}
-% TODO (0.2 p.)
+\input{discussion}
 
 % \section*{Acknowledgment}
 

@@ -1,0 +1,74 @@
+% Sections VI–VII — Discussion and Limitations, Conclusion
+% Draft 2026-10-20.
+
+\section{Discussion and Limitations}
+\label{sec:discussion}
+
+\textbf{Where the graph helps (RQ1, RQ2).} Graph retrieval is better where
+the question names entities whose relations are recorded in ORKG. A comparison
+query directly returns contributions that contain both methods. The retrieved values
+keep their predicate, so a method a paper proposes is distinguishable from one
+it uses as a baseline, and benchmark traversal brings in the reported scores. Dense retrieval has no
+access to this structure. A paper's card lists many values, and its similarity
+to a question about two methods is dominated by the topic, so dense retrieval
+tends to return papers about only one of the methods. We attribute the
+collapse of the weaker embedder on comparisons (0.166) to this. Conversely,
+dense retrieval is better on broad topics and on finding a paper from words of
+its title. In these cases text similarity is enough, while graph retrieval
+depends on the surface form under which an entity is stored in ORKG and on
+the LLM extracting it correctly.
+
+\textbf{Complementarity.} The two systems share fewer than one of eight
+papers and do not fail on the same questions, which is why their fusion
+outperforms both. We kept the system itself graph-only, since every retrieved
+paper can then be traced to the query path that found it. A hybrid is the
+natural next step, but we evaluated it only at the retrieval level.
+
+\textbf{Retrieval differences shrink in the answers.} Better evidence does not
+always become a better answer. On claim questions graph retrieval supplies far
+more deciding papers, but verdict accuracy does not improve, because the
+models often decide from prior knowledge. Answer quality thus also depends
+on whether the model uses the evidence it is given. The answer metrics are
+also noisier than the retrieval metrics. With almost identical context, a
+repeated run moved the mean strict score by 0.05 and reversed the sign of the
+graph--dense difference. Comparisons of RAG configurations based on a single
+run per system and differences of a few points should therefore be treated
+with caution. Repeated runs and paired intervals are cheap with local models.
+
+\textbf{The LLM judge (RQ3).} A judge that sees only source titles cannot
+measure what distinguishes the retrievers, namely which papers are cited and
+whether they support the answer. It tracked the gold metrics only moderately
+and ranked models largely by whether they were cloud or local models. The
+same judge model applied to claims with the full context, and required to
+quote the context, gave usable per-model estimates. The protocol matters more
+than the judge model.
+
+\textbf{Practical implications.} With good retrieval, a local 7B model came
+within 0.07 of the best cloud model. The whole pipeline, including both
+judges, runs locally, which matters when cloud free tiers change or withdraw
+models.
+
+\textbf{Limitations.}
+\begin{itemize}
+\item The question set is small (50 questions, 25 in the test split, 8--9 per
+  type), so per-type results rest on few questions.
+\item Relevance grades were proposed by an LLM and reviewed by the author. The
+  blind check ($\kappa = 0.78$) was done by an annotator who had seen part of
+  the grades before.
+\item Run-to-run variance was measured for one model only, and the hybrid only
+  at the retrieval level.
+\item The results concern one graph, whose coverage and curation vary across
+  fields. Cloud models were used through a free tier whose model offer changes.
+\end{itemize}
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+In a controlled comparison over ORKG, graph-native and dense retrieval reached
+the same overall quality but succeeded on different questions. The graph was
+better for structured questions, embeddings for topical and title lookups, and
+their fusion was best. At the answer level the difference was within the
+variance between runs, and an LLM judge that does not see the evidence could
+not measure it. Graded relevance gold sets and claim-level checks against the
+context are a feasible alternative, and the evaluation should report repeated
+runs.

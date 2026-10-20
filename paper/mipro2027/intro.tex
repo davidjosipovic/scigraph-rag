@@ -1,0 +1,58 @@
+% Section I — Introduction
+% Draft 2026-10-20.
+
+\section{Introduction}
+\label{sec:intro}
+
+Researchers increasingly ask LLMs about the literature: which papers apply a
+method to a dataset, how two methods compare, whether a claim is supported.
+Retrieval-augmented generation (RAG) grounds such answers in retrieved
+documents \cite{lewis2020rag}, usually found by dense vector similarity
+\cite{karpukhin2020dpr}. Scholarly knowledge graphs such as the Open Research
+Knowledge Graph (ORKG) \cite{jaradeh2019orkg} offer an alternative source of
+evidence. They describe papers by structured contributions (research problem,
+method, dataset, results), so a question about two methods on a benchmark can
+be answered by following graph relations instead of matching text. Graph-based
+RAG is promoted for exactly this kind of relational question
+\cite{peng2024graphragsurvey}.
+
+Whether graph retrieval actually beats dense retrieval is hard to tell from
+the literature, for two reasons. First, the two are rarely compared under
+equal conditions: they usually differ in data, context format and prompt as
+well as in retrieval. Second, such systems are typically evaluated by an LLM
+judge \cite{liu2023geval}, which scores fluency and apparent groundedness but
+does not know which papers are relevant. When the judge sees only the titles
+of the retrieved sources, it cannot tell whether an answer cites the right
+papers or misuses them.
+
+We study three research questions on a GraphRAG system over ORKG:
+\begin{itemize}
+\item \textbf{RQ1}: Is graph-native retrieval better than dense retrieval over
+  the same data, with everything else held fixed?
+\item \textbf{RQ2}: For which kinds of questions do the two differ, in
+  retrieval and in the final answers?
+\item \textbf{RQ3}: Does a typical LLM judge measure these differences?
+\end{itemize}
+
+Our contributions are:
+\begin{enumerate}
+\item an evaluation resource for 50 questions in six types: a graded
+  relevance gold set (2,633 judgments, checked against blind re-grading,
+  $\kappa = 0.78$), gold verdicts for claim questions, and answer metrics
+  that need no LLM judge, including a strict end-to-end score for comparing
+  retrievers;
+\item a controlled comparison of graph and dense retrieval in one pipeline,
+  where only the choice of papers differs, with two LLMs, two embedding
+  models and repeated runs;
+\item a benchmark of nine local and cloud LLMs with a claim-level
+  faithfulness judge validated against reference labels;
+\item an analysis of how far an LLM judge agrees with the gold metrics.
+\end{enumerate}
+
+In brief, the two retrievers are equal overall but complementary: graph
+retrieval is better on structured questions such as method comparisons, and
+dense retrieval on topical and title lookups. Their combination outperforms
+both. In the answers, the overall difference is smaller than the variance
+between repeated runs, while the LLM judge mainly separates cloud models from
+local ones by style. All code, questions, gold labels and results are
+available.\footnote{TODO: repository URL.}
