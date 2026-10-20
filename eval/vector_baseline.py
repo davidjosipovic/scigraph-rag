@@ -27,6 +27,7 @@ Usage:
     python -m eval.vector_baseline embed
     python -m eval.vector_baseline retrieve [--split test]     # nDCG vs gold
     python -m eval.vector_baseline answer --models ollama:qwen2.5:7b groq:openai/gpt-oss-20b
+    python -m eval.vector_baseline answer --hybrid --models ollama:qwen2.5:7b   # graph + vector, RRF
 
 Another embedding model: VECTOR_EMBED_MODEL=nomic-embed-text (see EMBEDDERS).
 """
@@ -210,7 +211,6 @@ class VectorPipeline(RAGPipeline):
         from backend.rag.entity_normalization import expand_entities
         from backend.rag.query_builder import RetrievalResult
         from backend.rag.query_classifier import classify_query
-        from backend.rag.ranking import select_detail_rows
 
         if VectorPipeline.index is None:
             VectorPipeline.index = VectorIndex()
@@ -227,18 +227,73 @@ class VectorPipeline(RAGPipeline):
         expanded = expand_entities(entities)
 
         uris = self.index.search(question, settings.max_context_papers)
-        details = await self._fetch_details(uris)
-        rows = select_detail_rows(details, expanded, settings.max_detail_pairs)
-        # A paper whose record has no key rows still reaches the context by title.
-        present = {r["paper"] for r in rows}
-        rows += [next(r for r in details if r["paper"] == u) | {"predLabel": "", "valueLabel": ""}
-                 for u in uris if u not in present and any(r["paper"] == u for r in details)]
+        rows = await self._record_rows(uris, expanded)
         rank = {u: i for i, u in enumerate(uris)}
         rows.sort(key=lambda r: rank.get(r.get("paper"), len(uris)))
 
         retrieval = RetrievalResult()
         retrieval.add(rows, f"vector top-{len(uris)}", "vector")
         return {"query_type": base["query_type"], "entities": base["entities"],
+                "retrieval": retrieval, "rows": rows}
+
+    async def _record_rows(self, uris, expanded):
+        """Context rows for papers found without graph queries: the key rows of their full record."""
+        from backend.rag.ranking import select_detail_rows
+
+        details = await self._fetch_details(uris)
+        rows = select_detail_rows(details, expanded, settings.max_detail_pairs)
+        # A paper whose record has no key rows still reaches the context by title.
+        present = {r["paper"] for r in rows}
+        rows += [next(r for r in details if r["paper"] == u) | {"predLabel": "", "valueLabel": ""}
+                 for u in uris if u not in present and any(r["paper"] == u for r in details)]
+        return rows
+
+
+RRF_K = 60
+
+
+def rrf(rankings: list[list[str]], k: int) -> list[str]:
+    """Reciprocal rank fusion (Cormack et al., 2009) of ranked URI lists, top k."""
+    score: dict[str, float] = defaultdict(float)
+    for ranking in rankings:
+        for r, uri in enumerate(ranking, start=1):
+            score[uri] += 1 / (RRF_K + r)
+    first = {u: i for i, u in enumerate(u for ranking in rankings for u in ranking)}
+    return sorted(score, key=lambda u: (-score[u], first[u]))[:k]
+
+
+class HybridPipeline(VectorPipeline):
+    """
+    Graph and vector retrieval fused by RRF; evaluation only.
+
+    Both retrievers return their top 8 papers, RRF picks 8 of the union.
+    Papers from the graph keep exactly the rows graph retrieval gave them;
+    papers found only by the vector index get their record rows as in
+    VectorPipeline. Classification and entities are those of the graph run.
+    """
+
+    async def retrieve(self, question, query_type=None, entities=None):
+        from backend.rag.entity_normalization import expand_entities
+        from backend.rag.query_builder import RetrievalResult
+
+        if VectorPipeline.index is None:
+            VectorPipeline.index = VectorIndex()
+        k = settings.max_context_papers
+        graph = await RAGPipeline.retrieve(self, question, query_type, entities)
+        graph_uris = list(dict.fromkeys(r["paper"] for r in graph["rows"] if r.get("paper")))
+        vector_uris = self.index.search(question, k)
+        fused = rrf([graph_uris, vector_uris], k)
+
+        rows = [r for r in graph["rows"] if r.get("paper") in fused]
+        vector_only = [u for u in fused if u not in graph_uris]
+        if vector_only:
+            rows += await self._record_rows(vector_only, expand_entities(graph["entities"]))
+        rank = {u: i for i, u in enumerate(fused)}
+        rows.sort(key=lambda r: rank.get(r.get("paper"), k))
+
+        retrieval = graph["retrieval"]
+        retrieval.add([], f"rrf(graph top-{len(graph_uris)}, vector top-{k})", "hybrid_rrf")
+        return {"query_type": graph["query_type"], "entities": graph["entities"],
                 "retrieval": retrieval, "rows": rows}
 
 
@@ -270,7 +325,8 @@ def retrieve_eval(split: str | None, k: int) -> None:
 
 # ── answer: full runs in the benchmark format ────────────────────
 
-async def answer(models: list[str], delay: float, only: list[str] | None = None) -> None:
+async def answer(models: list[str], delay: float, only: list[str] | None = None,
+                 hybrid: bool = False) -> None:
     from eval.benchmark import QUESTIONS_FILE, run_model, load_questions
 
     questions = load_questions(QUESTIONS_FILE)
@@ -281,8 +337,9 @@ async def answer(models: list[str], delay: float, only: list[str] | None = None)
         provider, model = spec.split(":", 1)
         results += await run_model(provider, model, questions,
                                    delay=delay if provider != "ollama" else 0.0,
-                                   pipeline_cls=VectorPipeline)
-    path = PROJECT_ROOT / "eval" / "results" / f"benchmark_vector_{datetime.now():%Y%m%d_%H%M%S}.json"
+                                   pipeline_cls=HybridPipeline if hybrid else VectorPipeline)
+    name = "hybrid" if hybrid else "vector"
+    path = PROJECT_ROOT / "eval" / "results" / f"benchmark_{name}_{datetime.now():%Y%m%d_%H%M%S}.json"
     path.write_text(json.dumps([asdict(r) for r in results], indent=2, ensure_ascii=False))
     print(f"Saved → {path}")
 
@@ -299,6 +356,7 @@ def main() -> None:
     a = sub.add_parser("answer")
     a.add_argument("--models", nargs="+", required=True, metavar="PROVIDER:MODEL")
     a.add_argument("--delay", type=float, default=30.0, help="pause between questions for cloud models")
+    a.add_argument("--hybrid", action="store_true", help="RRF of graph and vector retrieval instead of vector only")
     a.add_argument("--questions", nargs="+", metavar="QID", help="only these question ids (e.g. to re-run failures)")
     args = p.parse_args()
 
@@ -309,7 +367,7 @@ def main() -> None:
     elif args.cmd == "retrieve":
         retrieve_eval(args.split, args.k)
     else:
-        asyncio.run(answer(args.models, args.delay, args.questions))
+        asyncio.run(answer(args.models, args.delay, args.questions, args.hybrid))
 
 
 if __name__ == "__main__":
