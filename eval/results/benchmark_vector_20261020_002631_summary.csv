@@ -1,0 +1,2 @@
+model,questions_total,questions_answered,questions_failed,avg_latency_s,avg_kg_results,avg_sources,avg_groundedness,avg_relevance,avg_completeness,avg_overall_score,questions_scored
+ollama:qwen2.5:7b,50,50,0,15.139,63.520,7.780,4.020,4.620,3.500,4.047,50

@@ -167,6 +167,8 @@ Na Groq modele promjena `num_ctx` ne utječe, pa je njihov porast od +0,05 do +0
 - **Na razini pojedinog odgovora slaganje je umjereno (ρ = 0,45).** Na runovima od 21. 6., sa starim dohvatom, bilo je praktički nula (ρ = 0,04, n = 747). Sudac je dakle nepouzdan upravo kad se ocjenjuje pojedini odgovor.
 - **Gold Score i Faithful mjere različite stvari.** Gold Score mjeri koje radove odgovor citira, a Faithful mjeri drži li se tekst odgovora konteksta. Na razini odgovora gotovo ne koreliraju (0,15), a na razini modela umjereno (0,67). Primjer je gpt-oss-20b: najbolje bira radove, ali četvrtina njegovih tvrdnji nije u kontekstu.
 
+**Sudac i usporedba dohvata.** Isti sudac (qwen3:8b, vidi samo naslove izvora) naknadno je ocijenio i vektorske, hibridne i drugi run grafa (`eval/rejudge.py`). Za qwen2.5:7b daje vektorskim odgovorima 0,57 [0,35; 0,79] boda više nego odgovorima s grafom (graf 3,46 / 3,45, vektor 4,00 / 4,05, hibrid 3,98 / 3,99), i to čak i kod `method_comparison` (vektor 3,7–3,9, graf 3,0–3,2), gdje gold metrike daju prednost grafu (E2E 0,60–0,64 prema 0,37–0,51). Za gpt-oss-20b razlika je −0,12 [−0,28; 0,02]. Evaluacija samo ovim sucem zaključila bi da je vektorski dohvat jasno bolji.
+
 > Napomena: raniji preliminarni nalaz (ρ = 0,31; groundedness 3,27 za lažna odbijanja odgovora) izračunat je prije proširenja gold seta i bodovanja presuda. Na sadašnjim podacima se ne ponavlja: lažna odbijanja dobivaju prosječni groundedness 1,6–1,9. Zato ga ne treba citirati.
 
 ---

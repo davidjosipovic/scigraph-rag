@@ -92,11 +92,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 4,
+    "relevance": 5,
+    "completeness": 4,
+    "overall_score": 4.33,
+    "judge_reasoning": "The answer is grounded in the retrieved sources, addresses the question about papers on graph neural networks, and covers most key aspects like GNN applications, methods, and datasets, though it includes some inferred information about methods not explicitly stated in the sources."
   },
   {
     "question_id": "Q02",
@@ -194,11 +194,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 4,
+    "relevance": 5,
+    "completeness": 3,
+    "overall_score": 4.0,
+    "judge_reasoning": "The answer is grounded in the retrieved sources and directly addresses the question about finding papers on federated learning. However, it only partially covers the expected key aspects (distributed training, data privacy, local model updates) and includes some inferred information not explicitly s"
   },
   {
     "question_id": "Q03",
@@ -311,11 +311,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 4,
+    "relevance": 4,
+    "completeness": 3,
+    "overall_score": 3.67,
+    "judge_reasoning": "The answer is grounded in the retrieved sources and addresses the question about knowledge distillation research, but it lacks explicit mention of key aspects like teacher model, student model, and model compression, which were expected."
   },
   {
     "question_id": "Q04",
@@ -414,11 +414,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 5,
+    "relevance": 5,
+    "completeness": 5,
+    "overall_score": 5.0,
+    "judge_reasoning": "The answer is fully grounded in the retrieved sources, directly addresses the question about papers on neural architecture search, and covers all expected key aspects (NAS, AutoML, architecture optimization) through detailed paper listings and methods."
   },
   {
     "question_id": "Q05",
@@ -510,11 +510,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 3,
+    "relevance": 4,
+    "completeness": 2,
+    "overall_score": 3.0,
+    "judge_reasoning": "The answer is partially grounded in the retrieved sources, but only mentions one paper and misses several relevant ones. It addresses the question but lacks completeness in covering key aspects like self-supervised methods and specific models like SimCLR or MoCo."
   },
   {
     "question_id": "Q06",
@@ -628,11 +628,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 5,
+    "relevance": 5,
+    "completeness": 4,
+    "overall_score": 4.67,
+    "judge_reasoning": "The answer is fully grounded in the provided sources, directly addresses the question about comparing CNN and RNN for text classification, and covers relevant methods and datasets, though it does not explicitly mention accuracy or sequence modeling as expected aspects."
   },
   {
     "question_id": "Q07",
@@ -761,11 +761,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 3,
+    "relevance": 4,
+    "completeness": 3,
+    "overall_score": 3.33,
+    "judge_reasoning": "The answer is partially grounded in the sources, but includes some unsupported claims like 'IMDb Movie Reviews' and 'GPT-3.5-turbo-instruct' which are not mentioned in the retrieved papers. It addresses the question about BERT and GPT comparison but misses some key aspects like fine-tuning and bench"
   },
   {
     "question_id": "Q08",
@@ -865,11 +865,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 1,
+    "relevance": 2,
+    "completeness": 2,
+    "overall_score": 1.67,
+    "judge_reasoning": "The answer fabricates papers and results not present in the retrieved sources, and it does not address the specific question about comparing ResNet and VGG on image classification."
   },
   {
     "question_id": "Q09",
@@ -992,11 +992,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 3,
+    "relevance": 3,
+    "completeness": 2,
+    "overall_score": 2.67,
+    "judge_reasoning": "The answer is partially grounded in the sources but makes unsupported claims about LSTM and Transformer comparisons. It addresses the question but lacks specific details on sequence-to-sequence, attention, and BLEU score, which were expected."
   },
   {
     "question_id": "Q10",
@@ -1107,11 +1107,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 2,
+    "relevance": 3,
+    "completeness": 2,
+    "overall_score": 2.33,
+    "judge_reasoning": "The answer lists papers that mention SVM or Random Forest but does not explicitly compare them. It lacks direct references to the key aspects (kernel, ensemble, feature importance, accuracy) and only partially addresses the question."
   },
   {
     "question_id": "Q11",
@@ -1210,11 +1210,11 @@
       "ImageNet"
     ],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 2,
+    "relevance": 3,
+    "completeness": 2,
+    "overall_score": 2.33,
+    "judge_reasoning": "The answer includes some relevant papers but makes unsupported claims about specific methods and datasets not mentioned in the sources. It partially addresses the question but lacks detailed grounding in the provided sources."
   },
   {
     "question_id": "Q12",
@@ -1316,11 +1316,11 @@
       "SQuAD"
     ],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 3,
+    "relevance": 4,
+    "completeness": 3,
+    "overall_score": 3.33,
+    "judge_reasoning": "The answer is partially grounded in the sources, but some claims are not directly supported. It addresses the question but lacks specific details like F1 score and exact match metrics expected in the key aspects."
   },
   {
     "question_id": "Q13",
@@ -1414,11 +1414,11 @@
       "MNIST"
     ],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 5,
+    "relevance": 5,
+    "completeness": 4,
+    "overall_score": 4.67,
+    "judge_reasoning": "The answer is fully grounded in the retrieved sources, directly addresses the question about papers using MNIST, and covers most key aspects (papers, methods, datasets), though it lacks explicit mention of classification accuracy as expected."
   },
   {
     "question_id": "Q14",
@@ -1513,11 +1513,11 @@
       "CIFAR-10"
     ],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 1,
+    "relevance": 3,
+    "completeness": 2,
+    "overall_score": 2.0,
+    "judge_reasoning": "The answer fabricates claims about papers using CIFAR-10, as none of the retrieved sources mention CIFAR-10. It also includes irrelevant details like 'test accuracy' and '10 classes' without supporting evidence from the sources."
   },
   {
     "question_id": "Q15",
@@ -1617,11 +1617,11 @@
       "CoNLL-2003"
     ],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 4,
+    "relevance": 5,
+    "completeness": 3,
+    "overall_score": 4.0,
+    "judge_reasoning": "The answer is mostly grounded in the sources, addressing the question about papers using the CoNLL-2003 dataset. It is highly relevant but lacks detailed mention of F1 scores and sequence labeling, which were expected key aspects."
   },
   {
     "question_id": "Q16",
@@ -1736,11 +1736,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 4,
+    "relevance": 5,
+    "completeness": 3,
+    "overall_score": 4.0,
+    "judge_reasoning": "The answer is grounded in the provided sources and directly addresses the question, but it only partially covers the expected key aspects (F1, exact match) and focuses more on accuracy metrics than other evaluation measures."
   },
   {
     "question_id": "Q17",
@@ -1866,11 +1866,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 5,
+    "relevance": 5,
+    "completeness": 4,
+    "overall_score": 4.67,
+    "judge_reasoning": "The answer is fully grounded in the provided sources, directly addresses the question about transformer vs LSTM performance, and covers BLEU scores and model architectures, though it does not explicitly mention the attention mechanism or parallelization as expected."
   },
   {
     "question_id": "Q18",
@@ -1992,11 +1992,11 @@
       "ImageNet"
     ],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 5,
+    "relevance": 5,
+    "completeness": 4,
+    "overall_score": 4.67,
+    "judge_reasoning": "The answer is fully grounded in the provided sources, directly addresses the question about ResNet and VGG accuracy on ImageNet, and covers most key aspects (top-1 accuracy, residual connections, depth, vanishing gradient) but does not explicitly mention vanishing gradient in the context of the comp"
   },
   {
     "question_id": "Q19",
@@ -2087,11 +2087,11 @@
       "small datasets"
     ],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 3,
+    "relevance": 4,
+    "completeness": 2,
+    "overall_score": 3.0,
+    "judge_reasoning": "The answer is partially grounded in the sources, but some claims are not directly supported. It addresses the question but lacks coverage of key aspects like overfitting and generalization."
   },
   {
     "question_id": "Q20",
@@ -2201,11 +2201,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 5,
+    "relevance": 5,
+    "completeness": 3,
+    "overall_score": 4.33,
+    "judge_reasoning": "The answer is fully grounded in the provided sources, directly addresses the question, but only partially covers the expected key aspects (accuracy, feature extraction, TF-IDF, benchmark comparison) by focusing on the lack of direct comparisons between Random Forest and SVM."
   },
   {
     "question_id": "Q21",
@@ -2338,11 +2338,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 4,
+    "relevance": 5,
+    "completeness": 3,
+    "overall_score": 4.0,
+    "judge_reasoning": "The answer is grounded in the retrieved sources and directly addresses the question, but it only partially covers the expected key aspects (self-attention, sequence-to-sequence, transformer), focusing more on specific applications rather than explicitly mentioning all key terms."
   },
   {
     "question_id": "Q22",
@@ -2429,11 +2429,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 2,
+    "relevance": 2,
+    "completeness": 2,
+    "overall_score": 2.0,
+    "judge_reasoning": "The answer mentions only two papers that are not related to medical imaging, and it does not address the key aspects of ImageNet pre-training, fine-tuning, or radiology. The methods and datasets described are not supported by the retrieved sources."
   },
   {
     "question_id": "Q23",
@@ -2526,11 +2526,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 3,
+    "relevance": 4,
+    "completeness": 3,
+    "overall_score": 3.33,
+    "judge_reasoning": "The answer is partially grounded in the sources, mentioning some papers that use BERT for NER but not all relevant papers. It addresses the question but misses some key aspects like F1 score and fine-tuning details."
   },
   {
     "question_id": "Q24",
@@ -2617,11 +2617,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 5,
+    "relevance": 5,
+    "completeness": 3,
+    "overall_score": 4.33,
+    "judge_reasoning": "The answer is fully grounded in the provided sources and directly addresses the question about papers using GAN for image generation. However, it does not mention the expected key aspects (generator, discriminator, adversarial training, FID score), which reduces its completeness."
   },
   {
     "question_id": "Q25",
@@ -2697,11 +2697,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 4,
+    "relevance": 5,
+    "completeness": 3,
+    "overall_score": 4.0,
+    "judge_reasoning": "The answer is grounded in the retrieved sources and directly addresses the question, but it only partially covers the expected key aspects (sequence modeling, opinion, accuracy, review classification) by focusing more on methods and datasets than on sentiment analysis outcomes."
   },
   {
     "question_id": "Q26",
@@ -2771,11 +2771,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 3,
+    "relevance": 4,
+    "completeness": 3,
+    "overall_score": 3.33,
+    "judge_reasoning": "The answer is partially grounded in the sources, mentioning the correct paper title and some related works, but it lacks specific details like Vaswani, multi-head attention, and encoder-decoder from the expected key aspects. It addresses the question but misses some key elements."
   },
   {
     "question_id": "Q27",
@@ -2854,11 +2854,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 3,
+    "relevance": 5,
+    "completeness": 3,
+    "overall_score": 3.67,
+    "judge_reasoning": "The answer is relevant to the question but contains some unsupported claims (e.g., the DOI and specific datasets) and omits key aspects like the year 2018 and author Devlin."
   },
   {
     "question_id": "Q28",
@@ -2969,11 +2969,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 3,
+    "relevance": 4,
+    "completeness": 3,
+    "overall_score": 3.33,
+    "judge_reasoning": "The answer is partially grounded in the sources, mentioning some relevant papers but including unsupported claims like DenseNet being residual networks. It addresses the question but misses key aspects like He et al. and skip connections."
   },
   {
     "question_id": "Q29",
@@ -3067,11 +3067,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 1,
+    "relevance": 2,
+    "completeness": 2,
+    "overall_score": 1.67,
+    "judge_reasoning": "The answer fails to identify the paper that introduced word2vec, despite the retrieved source 'Efficient estimation of word representations in vector space' being the actual paper. It makes unsupported claims and does not address the question directly."
   },
   {
     "question_id": "Q30",
@@ -3153,11 +3153,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 5,
+    "relevance": 5,
+    "completeness": 5,
+    "overall_score": 5.0,
+    "judge_reasoning": "The answer is fully grounded in the retrieved sources, directly addresses the question, and covers all key aspects including Goodfellow, generator, discriminator, adversarial, and 2014."
   },
   {
     "question_id": "Q31",
@@ -3225,11 +3225,11 @@
     "entities_methods": [],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 3,
+    "relevance": 5,
+    "completeness": 3,
+    "overall_score": 3.67,
+    "judge_reasoning": "The answer is relevant to the question but includes some unsupported claims (e.g., HEAD-QA, MedQA, NLPEC, and other datasets not mentioned in the retrieved sources). It covers some key aspects like biomedical NLP and methods but misses explicit mention of clinical text, PubMed, and entity recognitio"
   },
   {
     "question_id": "Q32",
@@ -3297,11 +3297,11 @@
     "entities_methods": [],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 2,
+    "relevance": 3,
+    "completeness": 2,
+    "overall_score": 2.33,
+    "judge_reasoning": "The answer is partially grounded in the sources but includes many unsupported claims about methods and datasets not mentioned in the retrieved papers. It addresses the question but lacks specific details on key aspects like word error rate (WER), end-to-end models, and acoustic models."
   },
   {
     "question_id": "Q33",
@@ -3395,11 +3395,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 3,
+    "relevance": 4,
+    "completeness": 3,
+    "overall_score": 3.33,
+    "judge_reasoning": "The answer is partially grounded in the sources, mentioning the relevant paper and some methods, but includes unsupported claims about datasets and methods not explicitly stated in the sources. It addresses the question but misses key aspects like user/item embeddings and click-through rate."
   },
   {
     "question_id": "Q34",
@@ -3494,11 +3494,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 4,
+    "relevance": 5,
+    "completeness": 3,
+    "overall_score": 4.0,
+    "judge_reasoning": "The answer is grounded in the retrieved sources and directly addresses the question, but it lacks explicit mention of the key aspects (unseen classes, semantic embeddings, generalization, attribute vectors) expected in the answer."
   },
   {
     "question_id": "Q35",
@@ -3623,11 +3623,11 @@
       "GLUE"
     ],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 3,
+    "relevance": 4,
+    "completeness": 2,
+    "overall_score": 3.0,
+    "judge_reasoning": "The answer is partially grounded in the sources, mentioning ELECTRA and Big bird, but does not directly compare BERT and RoBERTa on GLUE as required. It covers some aspects but misses key details like fine-tuning, pre-training data, and training steps."
   },
   {
     "question_id": "Q36",
@@ -3738,11 +3738,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 3,
+    "relevance": 4,
+    "completeness": 3,
+    "overall_score": 3.33,
+    "judge_reasoning": "The answer addresses the comparison between U-Net and DeepLabv3, mentions encoder-decoder and atrous convolutions, and includes mean IoU, but some claims are not directly supported by the listed sources, and the answer lacks specific citations for key aspects like IoU metrics."
   },
   {
     "question_id": "Q37",
@@ -3843,11 +3843,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 5,
+    "relevance": 5,
+    "completeness": 4,
+    "overall_score": 4.67,
+    "judge_reasoning": "The answer is fully grounded in the provided sources, directly addresses the question, and covers most key aspects (methods, datasets), though it does not explicitly mention gradient boosting or structured data in the context of tabular data."
   },
   {
     "question_id": "Q38",
@@ -3957,11 +3957,11 @@
       "MS COCO"
     ],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 5,
+    "relevance": 5,
+    "completeness": 3,
+    "overall_score": 4.33,
+    "judge_reasoning": "The answer is fully grounded in the provided sources and directly addresses the question, but it only covers a subset of the expected key aspects (mean average precision, mAP, bounding box, instance segmentation)."
   },
   {
     "question_id": "Q39",
@@ -4060,11 +4060,11 @@
       "SuperGLUE"
     ],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 2,
+    "relevance": 3,
+    "completeness": 2,
+    "overall_score": 2.33,
+    "judge_reasoning": "The answer partially addresses the question by listing some papers, but it fabricates methods and datasets not present in the sources, and does not explicitly mention the expected key aspects like natural language understanding or reading comprehension."
   },
   {
     "question_id": "Q40",
@@ -4147,11 +4147,11 @@
       "WMT14"
     ],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 2,
+    "relevance": 3,
+    "completeness": 3,
+    "overall_score": 2.67,
+    "judge_reasoning": "The answer partially addresses the question by listing some papers that may use WMT14, but it fabricates claims about specific datasets and BLEU scores not present in the sources. It also includes methods and datasets not mentioned in the retrieved papers."
   },
   {
     "question_id": "Q41",
@@ -4269,11 +4269,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 5,
+    "relevance": 5,
+    "completeness": 4,
+    "overall_score": 4.67,
+    "judge_reasoning": "The answer is fully grounded in the provided sources, directly addresses the question, and covers most key aspects (gating mechanism, memory cell, parameter count are not explicitly discussed, but the answer correctly identifies insufficient evidence)."
   },
   {
     "question_id": "Q42",
@@ -4362,11 +4362,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 3,
+    "relevance": 4,
+    "completeness": 3,
+    "overall_score": 3.33,
+    "judge_reasoning": "The answer is partially grounded in the sources but lacks direct comparisons between GNNs and traditional methods. It is relevant to the question but incomplete as it does not address the key aspects of semi-supervised learning, node embeddings, graph structure, and accuracy."
   },
   {
     "question_id": "Q43",
@@ -4461,11 +4461,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 4,
+    "relevance": 5,
+    "completeness": 4,
+    "overall_score": 4.33,
+    "judge_reasoning": "The answer is grounded in the provided sources, addresses the question directly, and covers most key aspects (FPS, speed-accuracy tradeoff), though it lacks explicit mention of mAP for YOLO in comparison to Faster R-CNN."
   },
   {
     "question_id": "Q44",
@@ -4551,11 +4551,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 3,
+    "relevance": 2,
+    "completeness": 2,
+    "overall_score": 2.33,
+    "judge_reasoning": "The answer is partially grounded in the sources, but includes some unsupported claims (e.g., FNDNet being relevant to medical image analysis). It addresses the question but only partially, and misses key aspects like segmentation, X-ray, MRI, and classification accuracy."
   },
   {
     "question_id": "Q45",
@@ -4651,11 +4651,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 3,
+    "relevance": 4,
+    "completeness": 3,
+    "overall_score": 3.33,
+    "judge_reasoning": "The answer lists relevant papers using variational autoencoders but includes some papers not in the retrieved sources (e.g., the Android malware paper). It addresses the question but lacks detailed coverage of key aspects like latent space, encoder, decoder, ELBO, and generative model."
   },
   {
     "question_id": "Q46",
@@ -4751,11 +4751,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 2,
+    "relevance": 3,
+    "completeness": 2,
+    "overall_score": 2.33,
+    "judge_reasoning": "The answer mentions papers that use random forest but does not explicitly state how they use it for feature selection. It lacks direct references to feature importance, Gini impurity, ensemble, or variable selection as requested, and some claims are not directly supported by the sources."
   },
   {
     "question_id": "Q47",
@@ -4834,11 +4834,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 2,
+    "relevance": 3,
+    "completeness": 2,
+    "overall_score": 2.33,
+    "judge_reasoning": "The answer partially addresses the question by listing some papers, but many claims are not directly supported by the sources. It mentions word embeddings and sentiment analysis but lacks specific details on how word2vec was used for sentiment analysis in the listed papers."
   },
   {
     "question_id": "Q48",
@@ -4932,11 +4932,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 1,
+    "relevance": 1,
+    "completeness": 1,
+    "overall_score": 1.0,
+    "judge_reasoning": "The answer fabricates papers, results, and authors not present in the retrieved sources, and does not mention the expected key aspects (Peters, contextual embeddings, bidirectional language model, 2018)."
   },
   {
     "question_id": "Q49",
@@ -5030,11 +5030,11 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 5,
+    "relevance": 5,
+    "completeness": 4,
+    "overall_score": 4.67,
+    "judge_reasoning": "The answer is fully grounded in the provided sources, directly addresses the question about ViT papers, and covers most key aspects like methods and datasets, though it misses mentioning Dosovitskiy and patch embeddings explicitly."
   },
   {
     "question_id": "Q50",
@@ -5104,10 +5104,10 @@
     ],
     "entities_datasets": [],
     "error": null,
-    "groundedness": null,
-    "relevance": null,
-    "completeness": null,
-    "overall_score": null,
-    "judge_reasoning": null
+    "groundedness": 4,
+    "relevance": 5,
+    "completeness": 3,
+    "overall_score": 4.0,
+    "judge_reasoning": "The answer is grounded in the retrieved sources and directly addresses the question, but it misses key aspects like mentioning Raffel, C4 dataset, and 2019 as expected."
   }
 ]

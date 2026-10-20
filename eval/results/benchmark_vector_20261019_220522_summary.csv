@@ -1,0 +1,3 @@
+model,questions_total,questions_answered,questions_failed,avg_latency_s,avg_kg_results,avg_sources,avg_groundedness,avg_relevance,avg_completeness,avg_overall_score,questions_scored
+groq:openai/gpt-oss-20b,50,50,0,1.810,63.400,7.780,4.840,5.000,4.220,4.688,50
+ollama:qwen2.5:7b,50,50,0,14.879,63.520,7.780,3.920,4.680,3.400,3.999,50
