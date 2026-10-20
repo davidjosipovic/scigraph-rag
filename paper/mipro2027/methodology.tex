@@ -1,0 +1,128 @@
+% Section IV — Evaluation Methodology
+% Draft 2026-10-20. Numbers: eval/ANSWER_EVAL_REPORT.md, eval/RETRIEVAL_REPORT.md.
+% \cite{TODO-*} keys are placeholders; references still have to be collected and checked.
+
+\section{Evaluation Methodology}
+\label{sec:method}
+
+\subsection{Questions}
+
+We use 50 natural-language questions over ORKG in six types:
+topic search (9), method usage (9), dataset search (8), method comparison (8),
+claim verification (8) and paper lookup (8); 14 are easy, 20 medium and 16 hard.
+Questions with odd IDs form the development split and those with even IDs
+the test split (25 each). All retrieval development (strategies, ranking,
+query-classification rules) was done on the development split only; we report
+results on all 50 questions and on the test split.
+
+\subsection{Relevance Gold Set}
+
+For every question we wrote a grading criterion and graded candidate papers
+on a three-level scale: 2 (the paper answers the question, e.g.\ it reports
+both compared methods on the named task), 1 (partially relevant, e.g.\ one of
+the two methods, or the right method on another task) and 0 (not relevant).
+Candidates were pooled from every retrieval variant run during development,
+from both systems compared in this paper (including a second embedding model),
+and from all papers cited in generated answers. The final set contains 2,633
+judgments (757 of grade 2, 890 of grade 1, 986 of grade 0); every paper in the
+top 8 of every reported system is judged.
+
+Grades were proposed by an LLM (Claude) from each paper's ORKG record and
+reviewed by the author. To estimate their reliability, the author re-graded a
+stratified sample of 120 question--paper pairs (40 per grade) without seeing
+the proposed grades. Agreement was 0.85 (Cohen's $\kappa = 0.78$, quadratic-weighted
+$\kappa = 0.85$; $\kappa = 0.91$ for the binary decision ``grade 2 or not''),
+and $\kappa = 0.91$ on the pairs retrieved only by the dense baseline, so the
+added grades do not favour either system. The author had seen some of the
+original grades before, so this is not a fully independent annotation.
+
+For the eight claim-verification questions we additionally fixed a gold
+verdict (SUPPORTED, REFUTED or INSUFFICIENT) from the ORKG records, with the
+set of verdicts accepted as correct; one question whose evidence is mixed is
+excluded from verdict scoring.
+
+\subsection{Retrieval Metrics}
+
+Each system returns 8 papers. We report nDCG@8 with linear gains (2/1/0) and the
+ideal ranking computed from all judged papers of the question, together with
+precision, recall of grade-2 papers and hit rate at 8. Differences between
+systems are tested with a paired bootstrap over questions (5,000 resamples,
+95\,\% percentile intervals).
+
+Graph retrieval depends on the LLM that classifies the question and extracts
+entities. We therefore report it in two modes: \emph{oracle}, with the gold
+question type and hand-written entities, which isolates the retrieval
+strategies, and \emph{end-to-end}, with entities extracted by \texttt{qwen2.5:7b}.
+Dense retrieval does not use these steps.
+
+\subsection{Answer Metrics without an LLM Judge}
+
+Answers follow a fixed template and name papers by their exact title. A context
+paper counts as \emph{cited} when its title appears in the answer body; the
+final list of sources is ignored, because models tend to copy all context
+papers into it. Per answer we compute:
+
+\begin{itemize}
+\item \textbf{CitePrec}: mean gold grade of the cited papers divided by 2;
+\item \textbf{CiteUtil}: share of the grade-2 papers in the context that the answer cites;
+\item \textbf{False abstention}: the answer cites nothing (or returns INSUFFICIENT)
+  although the context contains a grade-2 paper.
+\end{itemize}
+
+The \textbf{gold Score} of an answer is $F_1$(CitePrec, CiteUtil) when the
+context contains a grade-2 paper, 1 for a correct abstention otherwise, and the
+verdict accuracy for claim questions, where INSUFFICIENT is also accepted when
+none of the deciding papers was retrieved. This score is appropriate for
+comparing LLMs on the same retrieval, but it rewards abstention when retrieval
+fails, so a weaker retriever can obtain a higher Score. To compare retrieval
+systems we therefore use a \textbf{strict end-to-end score} (E2E): no credit for
+abstention, claim questions scored only by the gold verdict, and $F_1$(CitePrec,
+CiteUtil) otherwise.
+
+\subsection{Claim-Level Faithfulness}
+
+Following claim-decomposition approaches \cite{TODO-factscore,TODO-ragas}, a
+local judge (\texttt{qwen3:8b} via Ollama, not one of the evaluated models)
+splits each answer body into at most 25 atomic claims and checks every claim
+separately against the full context the model saw, labelling it supported (S),
+unsupported (U) or contradicted (C). For S and C the judge must quote the
+deciding context line verbatim; if the quote is not found in the context the
+label becomes U. Faithfulness is the share of S claims per answer, averaged per
+model.
+
+The judge was validated on 100 random claims labelled blind by a stronger
+model, with all 21 disagreements reviewed by the author. Accuracy was 0.79
+($\kappa = 0.51$) for S/U/C and 0.84 ($\kappa = 0.60$) for supported versus not
+supported. Errors were balanced (7 too strict, 7 too lenient), so per-model
+means are unbiased, but single labels are only moderately reliable. The judge
+rarely uses C and labels misattributions as U, so we report U and C together as
+\emph{unsupported}.
+
+\subsection{LLM-Judge Baseline}
+
+For comparison with common practice \cite{TODO-geval,TODO-llm-as-judge}, every
+answer was also scored by an LLM judge on groundedness, relevance and
+completeness (0--5). The judge receives the question, the answer, the titles of
+the retrieved papers and answer hints, but not the context itself. It is the
+same \texttt{qwen3:8b} model as the faithfulness judge, so differences between
+the two reflect the evaluation protocol rather than the judge model.
+
+\subsection{Experimental Setup}
+
+The two retrieval systems share the whole pipeline except the choice of the 8
+papers (Section~\ref{sec:system}): the same full ORKG records, context rows,
+prompt and LLM. Dense retrieval embeds one text card per paper (title, research
+field and contribution values, at most 1,500 characters) for all 68,806 papers
+in the ORKG RDF dump of 18 October 2026 with \texttt{mxbai-embed-large}
+\cite{TODO-mxbai}, and ranks by cosine similarity; to test sensitivity to the
+embedder we repeat retrieval with \texttt{nomic-embed-text} \cite{TODO-nomic}.
+A reciprocal rank fusion (RRF, $k = 60$) \cite{TODO-rrf} of the two ranked lists
+is computed at the retrieval level only.
+
+Nine LLMs answer with graph retrieval: five local models via Ollama
+(\texttt{qwen2.5:7b}, \texttt{llama3}, \texttt{llama3.2}, \texttt{mistral},
+\texttt{phi3:mini}; context window 8,192 tokens) and four cloud models via the
+Groq free tier (\texttt{gpt-oss-20b}, \texttt{gpt-oss-120b}, \texttt{qwen3.8-27b},
+\texttt{allam-2-7b}). The graph--dense comparison of answers uses one local and
+one cloud model (\texttt{qwen2.5:7b} and \texttt{gpt-oss-20b}); \texttt{qwen2.5:7b}
+was run twice with each retriever to measure run-to-run variance.
