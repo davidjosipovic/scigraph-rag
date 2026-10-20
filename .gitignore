@@ -11,3 +11,4 @@ dist/
 build/
 logs/
 data/vector/
+paper/*/build/
