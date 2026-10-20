@@ -17,6 +17,8 @@ Glavni rezultati na 9 modela i 50 pitanja, nakon poboljšanja dohvata (`RETRIEVA
 
 Na istim odgovorima stari sudac daje cloud modelima 4,3–4,6, a lokalnima 3,3–3,5 (od 5). To je razlika od oko 22 % skale. Gold Score između najboljeg cloud i najboljeg lokalnog modela razlikuje se za 7 postotnih bodova. Unutar lokalnih modela sudac gotovo ne razlikuje kvalitetu: Spearman ρ s gold Scoreom je 0,25.
 
+U usporedbi s vektorskim RAG-om (`mxbai-embed-large`, isti pipeline, mijenja se samo izbor radova) graf ima jednak ukupni dohvat (nDCG@8 0,716 prema 0,725). Graf je bolji kod dataseta, usporedbi metoda i provjere tvrdnji, a vektor kod tema i traženja rada. Dohvaćeni skupovi gotovo se ne preklapaju, pa hibrid doseže 0,79. U odgovorima ukupne razlike nema (strogi E2E: razlika oko 0 ± 0,1 za dva modela), a raspršenje između runova jednako je velikoj razlici između sustava. Graf je dosljedno bolji kod usporedbi metoda i malo vjerniji kontekstu.
+
 ---
 
 ## Zašto nova metrika
@@ -169,6 +171,87 @@ Na Groq modele promjena `num_ctx` ne utječe, pa je njihov porast od +0,05 do +0
 
 ---
 
+## GraphRAG prema vektorskom RAG-u
+
+Sustav ostaje čisti GraphRAG, bez embeddinga. Vektorski RAG ovdje služi samo kao usporedna točka za evaluaciju (`eval/vector_baseline.py`), da se vidi što graf donosi u odnosu na standardni pristup.
+
+### Postav
+
+`VectorPipeline` nasljeđuje `RAGPipeline` i mijenja samo izbor 8 radova. Sve ostalo je isto: klasifikacija upita, ORKG zapisi radova koji ulaze u kontekst, odabir redaka, prompt i model. Razlika u odgovorima zato dolazi isključivo od dohvata.
+
+- **Indeks:** svih 68 806 radova iz javnog ORKG RDF dumpa (`data/orkg_dump_20261018.nt`). Svaki rad ima jednu karticu teksta od najviše 1 500 znakova: naslov, istraživačko polje i oznake vrijednosti iz doprinosa, s istraživačkim problemima na početku.
+- **Embedding:** `mxbai-embed-large` (1 024 dimenzije) preko Ollame, s instrukcijskim prefiksom na strani upita. Rangiranje je kosinusnom sličnošću.
+- **Gold set:** vektor je dohvatio 298 radova koji nisu bili ocijenjeni. Claude ih je ocijenio prema kriterijima pitanja (`found_by: vector_baseline`). Za drugi model, `nomic-embed-text`, ocijenjeno je još 310 radova (`found_by: vector_nomic`). Nakon toga nema neocijenjenih radova ni u jednom dohvatu.
+- **Provjera gold seta:** autor je naslijepo ocijenio 120 parova pitanje–rad, po 40 za svaku ocjenu (`gold_kappa_sample_labelled.json`). Slaganje s gold setom je κ = 0,78, a kvadratno ponderirani κ 0,85. Na radovima koje je donio vektor κ je 0,91, pa nove ocjene nisu pristrane u korist ijednog sustava.
+
+### Dohvat (nDCG@8)
+
+| Sustav | Svih 50 | Test (25) |
+|---|---|---|
+| Graf, prvotni dohvat (A) | 0,496 | 0,527 |
+| Graf, konačni (oracle tip i entiteti) | 0,716 | **0,754** |
+| Graf, konačni (end-to-end, qwen2.5:7b) | – | 0,695 |
+| Vektor, `mxbai-embed-large` | **0,725** | 0,712 |
+| Vektor, `nomic-embed-text` | 0,413 | 0,435 |
+| Hibrid RRF (graf oracle + mxbai), procjena | – | **0,792** |
+
+| Tip upita (svih 50) | Graf (oracle) | Vektor (mxbai) |
+|---|---|---|
+| `dataset_search` | **0,817** | 0,688 |
+| `claim_verification` | **0,657** | 0,563 |
+| `method_comparison` | **0,660** | 0,535 |
+| `method_usage` | 0,710 | **0,817** |
+| `paper_lookup` | 0,583 | **0,724** |
+| `topic_search` | 0,850 | **0,979** |
+
+- **Ukupno su graf i jak vektorski dohvat izjednačeni.** Upareni bootstrap interval razlike uključuje 0.
+- **Prednosti su komplementarne.** Graf je bolji gdje pitanje ima strukturu, poput dataseta, para metoda ili tvrdnje o rezultatu. Tada SPARQL strategije pogađaju točne veze u grafu. Vektor je bolji na temama i traženju rada po naslovu, gdje je dovoljna tekstualna sličnost.
+- **Sustavi dohvaćaju gotovo disjunktne skupove:** u prosjeku se u 8 dohvaćenih radova poklapa 0,42 rada. Zato hibrid s RRF-om (0,792) nadmašuje oba. To je procjena na razini dohvata; hibrid nije pokretan u pipelineu.
+- **Vektorski rezultat jako ovisi o embedding modelu.** S `nomic-embed-text` nDCG pada za 0,3. Prednost vektora na temama ostaje (0,866), ali na usporedbama metoda pada na 0,166. Kao usporedna točka uzet je jači model, mxbai.
+- **Gubitak end-to-end** (0,754 → 0,695) dolazi od toga što LLM pogrešno klasificira upit ili izvuče krive entitete. Vektorski dohvat te korake ne koristi, pa taj gubitak nema.
+
+### Odgovori
+
+Za usporedbu dohvata blagi gold Score nije prikladan. Na claim pitanjima prihvaća INSUFFICIENT kad ključni radovi nisu dohvaćeni, a kontekst bez relevantnih radova nagrađuje odbijanje odgovora. Lošiji dohvat zato može dobiti *viši* Score. Primjer je qwen2.5:7b: vektor 0,809 prema grafu 0,758, iako vektor rjeđe dohvaća ključne radove.
+
+Zato se koristi **strogi end-to-end Score (E2E)**:
+- odbijanje odgovora ne donosi bodove
+- claim pitanja boduju se samo točnom presudom, INSUFFICIENT se ne prihvaća
+- ostala pitanja boduju se s F1(CitePrec, CiteUtil)
+
+qwen2.5:7b pokrenut je dvaput, da se izmjeri raspršenje između runova.
+
+| Model, run | E2E graf | E2E vektor | Faithful graf | Faithful vektor |
+|---|---|---|---|---|
+| qwen2.5:7b, run 1 | 0,748 | 0,731 | 0,771 | 0,739 |
+| qwen2.5:7b, run 2 | 0,696 | 0,733 | 0,758 | 0,733 |
+| gpt-oss-20b | 0,745 | 0,745 | 0,688 | 0,640 |
+| **Razlika graf − vektor, upareni bootstrap 95 % CI** | | | | |
+| qwen2.5:7b, oba runa zajedno | −0,01 [−0,10; 0,08] | | +0,03 [−0,03; 0,09] | |
+| gpt-oss-20b | 0,00 [−0,11; 0,11] | | +0,05 [−0,04; 0,13] | |
+
+Faithful za gpt-oss-20b računat je na 49 odgovora (Q01 na vektorskoj strani sudac nije ocijenio), a za qwen2.5:7b na 46 zajedničkih odgovora.
+
+| Tip upita, E2E | qwen2.5 graf (run 1 / 2) | qwen2.5 vektor (run 1 / 2) | gpt-oss-20b graf | gpt-oss-20b vektor |
+|---|---|---|---|---|
+| `method_comparison` | **0,64 / 0,60** | 0,37 / 0,51 | **0,68** | 0,42 |
+| `claim_verification` | 0,62 / 0,50 | 0,62 / 0,62 | 0,62 | 0,62 |
+| `paper_lookup` | 0,74 / 0,65 | **0,82 / 0,84** | 0,61 | **0,80** |
+| `topic_search` | 0,87 / 0,87 | 0,93 / 0,99 | 0,97 | 0,99 |
+
+| Citirani radovi ocjene 2 po pitanju | qwen2.5 graf (run 1 / 2) | qwen2.5 vektor (run 1 / 2) | gpt-oss-20b graf | gpt-oss-20b vektor |
+|---|---|---|---|---|
+| `claim_verification` | **2,25 / 2,38** | 0,38 / 1,25 | **2,12** | 1,38 |
+| `method_comparison` | **2,00 / 1,88** | 0,75 / 1,00 | **2,25** | 1,00 |
+
+- **Ukupna kvaliteta odgovora ne razlikuje se.** Kod oba modela razlika u E2E je oko 0, uz interval od ±0,1.
+- **Raspršenje između runova jednako je velikoj razlici između sustava.** Kod qwen2.5 dohvaćeni izvori su u oba runa gotovo isti (49 od 50 pitanja za graf, 50 od 50 za vektor). Ipak se E2E grafa pomaknuo s 0,748 na 0,696, a predznak razlike graf − vektor se promijenio. Pojedini odgovor se između runova u prosjeku pomakne za 0,08–0,09. Razlike od nekoliko postotnih bodova iz jednog runa zato ne treba tumačiti.
+- **Prednost grafa na strukturiranim pitanjima prenosi se u odgovore.** Kod usporedbe metoda graf vodi po E2E u sva tri mjerenja. Kod usporedbe metoda i provjere tvrdnji odgovori s grafom citiraju 1,5 do 6 puta više ključnih radova (ocjena 2). Točnost presude na claim pitanjima ipak nije veća, jer modeli presudu donose iz općeg znanja (vidi zaključak 4).
+- **Kod traženja konkretnog rada vektor je bolji** i u dohvatu i u odgovorima.
+- **Faithfulness je viši s grafom u sva tri mjerenja**, za +0,02 do +0,05. Pojedinačno nijedna razlika nije značajna. Moguće objašnjenje je da graf donosi radove čiji zapisi izravno odgovaraju na pitanje, pa model manje dodaje iz vlastitog znanja. Ovo nije provjereno.
+
+---
+
 ## Analiza i zaključci
 
 ### 1. Dohvat je važniji od izbora modela
@@ -203,7 +286,8 @@ Udio C u svim modelima je 1–3 %, ali je podcijenjen jer sudac pogrešna pripis
 - **Verdict počiva na 7 pitanja**, a na test skupu na 3. Te brojke su orijentacijske.
 - **Fabr je heuristika** (sličnost naslova > 0,8), pa može dati lažno pozitivne rezultate.
 - **Faithfulness sudac ima κ = 0,51.** Pouzdan je za prosjeke po modelu, ali ne za pojedinačne tvrdnje. Validaciju je napravio jači model uz ljudski pregled samo za neslaganja.
-- **Jedan run po modelu.** Generacija nije potpuno deterministička, a dohvat ovisi o tome kako model klasificira upit. Raspršenje između runova nije mjereno.
+- **Jedan run po modelu u općem poretku.** Raspršenje je izmjereno samo za qwen2.5:7b, s dva runa (vidi "GraphRAG prema vektorskom RAG-u"). Pojedini odgovor se između runova pomakne za 0,08–0,09 E2E, a prosjek za do 0,05. Razlike između susjednih modela u općem poretku (npr. 0,798 i 0,790) zato su unutar šuma.
+- **Usporedba s vektorskim RAG-om ima jedan graf, jedan korpus i dva embedding modela.** Hibrid je procijenjen samo na razini dohvata.
 - **Ovo je Groq free tier.** Dostupnost modela se mijenja (`llama-3.3-70b` i `llama-4-scout` su povučeni), pa usporedba s `BENCHMARK_REPORT.md` nije potpuna.
 
 ---
@@ -215,6 +299,12 @@ python -m eval.answer_eval --results eval/results/benchmark_20261019_105454.json
 python -m eval.answer_eval --results ... --split test --by-type
 python -m eval.faithfulness --results eval/results/benchmark_20261019_121003.json   # nastavlja gdje je stao
 python -m eval.faithfulness --agreement eval/results/faithfulness_benchmark_20261019_121003_sample.json
+
+# vektorski RAG
+python -m eval.vector_baseline build --dump data/orkg_dump_20261018.nt && python -m eval.vector_baseline embed
+python -m eval.vector_baseline retrieve [--split test]
+python -m eval.vector_baseline answer --models ollama:qwen2.5:7b [--questions Q38 Q39 ...]
+VECTOR_EMBED_MODEL=nomic-embed-text python -m eval.vector_baseline embed   # drugi embedding model
 ```
 
 ## Datoteke rezultata
@@ -226,5 +316,11 @@ python -m eval.faithfulness --agreement eval/results/faithfulness_benchmark_2026
 | `eval/results/faithfulness_benchmark_20261019_*.json` | tvrdnje i S/U/C oznake po odgovoru |
 | `eval/results/faithfulness_benchmark_20261019_*_sample.json` | uzorak za validaciju (`judge_label`, `claude_label`, `human_label`) |
 | `eval/results/faithfulness_20261019_review.md` | 21 neslaganje s obrazloženjem |
-| `data/gold/retrieval_gold.json` | graded gold set (uključuje ocjene `benchmark_20261019`) |
+| `eval/results/benchmark_20261020_000036.json` | qwen2.5:7b, graf, run 2 |
+| `eval/results/benchmark_vector_20261019_220522.json` | vektor (mxbai): qwen2.5:7b run 1 i gpt-oss-20b |
+| `eval/results/benchmark_vector_20261020_002631.json` | vektor (mxbai): qwen2.5:7b run 2 |
+| `eval/results/faithfulness_benchmark_*2026102*.json`, `faithfulness_benchmark_vector_*.json` | faithfulness za gornje runove |
+| `eval/results/retrieval_vector_*.json`, `retrieval_vector_nomic_*.json`, `retrieval_oracle_20261019_*.json` | nDCG po pitanju za vektor i graf |
+| `eval/results/gold_kappa_sample_labelled.json` | 120 parova koje je autor naslijepo ocijenio |
+| `data/gold/retrieval_gold.json` | graded gold set (uključuje ocjene `benchmark_20261019`, `vector_baseline`, `vector_nomic`) |
 | `data/gold/claim_verdicts.json` | gold presude za claim pitanja |
