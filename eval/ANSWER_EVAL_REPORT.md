@@ -273,7 +273,7 @@ nDCG je ovdje računat iz 8 izvora u kontekstu stvarnog odgovora, pa se za vekto
 | Hibrid − vektor, faithful (oba runa, n = 46) | −0,014 [−0,069; +0,044] |
 
 - **Dohvat:** hibrid je jedini sustav koji je značajno bolji od drugoga (od grafa end-to-end). Ispod je procjene od 0,792 jer graf ovdje radi s entitetima koje izvlači LLM, a ne s oracle entitetima.
-- **Odgovori:** E2E je najviši u prosjeku dva runa (0,744), ali unutar šuma. Na `claim_verification` hibrid ima 0,75 u oba runa (graf 0,50–0,62, vektor 0,62), a kod `method_comparison` pada na 0,47–0,51 (graf 0,60–0,64) jer vektorski radovi istiskuju dio radova koje graf nalazi za usporedbe.
+- **Odgovori:** E2E je najviši u prosjeku dva runa (0,744), ali unutar šuma. Na `claim_verification` hibrid ima 0,75 u oba runa (graf 0,50–0,62, vektor 0,62), a kod `method_comparison` pada na 0,47–0,51 (graf 0,60–0,64). To nije zbog dohvata: hibridni kontekst ima jednako ključnih radova kao graf (3,0 prema 2,9 po pitanju; vektorski radovi nadoknade 7 od 23 izgubljena rada iz grafa), ali odgovori ih citiraju manje (1,5–1,6 prema 1,9–2,0). Zašto, nije istraženo.
 - **Faithfulness** je na razini vektora i nešto ispod grafa; razlika prema grafu nije značajna, ali je graf ostao najvjerniji u svim runovima.
 
 ---
