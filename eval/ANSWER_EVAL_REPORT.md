@@ -278,6 +278,25 @@ nDCG je ovdje računat iz 8 izvora u kontekstu stvarnog odgovora, pa se za vekto
 - **Odgovori:** E2E je najviši u prosjeku dva runa (0,744), ali unutar šuma. Na `claim_verification` hibrid ima 0,75 u oba runa (graf 0,50–0,62, vektor 0,62), a kod `method_comparison` pada na 0,47–0,51 (graf 0,60–0,64). To nije zbog dohvata: hibridni kontekst ima jednako ključnih radova kao graf (3,0 prema 2,9 po pitanju; vektorski radovi nadoknade 7 od 23 izgubljena rada iz grafa), ali odgovori ih citiraju manje (1,5–1,6 prema 1,9–2,0). Zašto, nije istraženo.
 - **Faithfulness** je na razini vektora i nešto ispod grafa; razlika prema grafu nije značajna, ali je graf ostao najvjerniji u svim runovima.
 
+**gpt-oss-20b** (jedan run, `benchmark_hybrid_20261020_121456.json`; Q35–Q50 ponovljeni 21. 10. nakon Groq limita):
+
+| gpt-oss-20b | E2E | Gold Score | Faithful (n = 49) | Cl. (radovi ocjene 2) | E2E `method_comparison` | E2E `claim_verification` |
+|---|---|---|---|---|---|---|
+| Graf | 0,745 | 0,830 | 0,688 | 2,12 | **0,68** | 0,62 |
+| Vektor | 0,745 | 0,841 | 0,640 | 1,38 | 0,42 | 0,62 |
+| Hibrid | 0,737 | 0,800 | 0,672 | 1,75 | 0,54 | 0,50 |
+
+| Razlika, upareni bootstrap 95 % | |
+|---|---|
+| Hibrid − graf, E2E | −0,008 [−0,096; +0,078] |
+| Hibrid − vektor, E2E | −0,008 [−0,095; +0,081] |
+| Hibrid − graf, faithful (n = 49) | −0,016 [−0,076; +0,043] |
+| Hibrid − vektor, faithful (n = 49) | +0,032 [−0,037; +0,103] |
+
+- Ni kod gpt-oss-20b hibrid ne poboljšava odgovore; sve su razlike unutar šuma.
+- Prednost hibrida na `claim_verification` (0,75 kod qwen2.5) ovdje se ne ponavlja (0,50), pa je vjerojatno slučajna (8 pitanja).
+- Kod `method_comparison` hibrid je opet između grafa i vektora, a faithfulness također.
+
 ---
 
 ## Analiza i zaključci
