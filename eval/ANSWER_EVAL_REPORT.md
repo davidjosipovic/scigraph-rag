@@ -284,12 +284,12 @@ nDCG je ovdje računat iz 8 izvora u kontekstu stvarnog odgovora, pa se za vekto
 |---|---|---|---|---|---|---|
 | Graf | 0,745 | 0,830 | 0,688 | 2,12 | **0,68** | 0,62 |
 | Vektor | 0,745 | 0,841 | 0,640 | 1,38 | 0,42 | 0,62 |
-| Hibrid | 0,737 | 0,800 | 0,672 | 1,75 | 0,54 | 0,50 |
+| Hibrid | 0,739 | 0,802 | 0,672 | 1,75 | 0,54 | 0,50 |
 
 | Razlika, upareni bootstrap 95 % | |
 |---|---|
-| Hibrid − graf, E2E | −0,008 [−0,096; +0,078] |
-| Hibrid − vektor, E2E | −0,008 [−0,095; +0,081] |
+| Hibrid − graf, E2E | −0,007 [−0,095; +0,079] |
+| Hibrid − vektor, E2E | −0,006 [−0,092; +0,083] |
 | Hibrid − graf, faithful (n = 49) | −0,016 [−0,076; +0,043] |
 | Hibrid − vektor, faithful (n = 49) | +0,032 [−0,037; +0,103] |
 

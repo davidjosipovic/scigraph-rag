@@ -728,6 +728,14 @@
      "found_by": [
       "vector_nomic"
      ]
+    },
+    {
+     "uri": "http://orkg.org/orkg/resource/R549475",
+     "title": "Personalized Federated Learning using Hypernetworks",
+     "grade": 2,
+     "found_by": [
+      "hybrid_gptoss"
+     ]
     }
    ]
   },
